@@ -1,0 +1,8 @@
+<%= simple_form_for @project_type do |f| %>    
+ 
+  <%= f.input :name, :label => "TypeName:" %> 
+  <%= f.input :active, :collection => yes_no_cn(), :label => 'Active:' %> 
+  <%= f.input :brief_note, :label => "BriefNote:" %>  
+  
+  <%= f.button :submit, 'Save' %>  
+<% end %> 

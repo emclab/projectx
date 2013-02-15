@@ -1,0 +1,9 @@
+<%= simple_form_for @project_status do |f| %>    
+ 
+  <%= f.input :id, :label => '#:', :readonly => true, :required => false %>
+  <%= f.input :name, :label => "StatusName:" %>  
+  <%= f.input :brief_note, :label => "Brief Note:", :placeholder => 'ex, for customers who have placed order' %> 
+  <%= f.input :active, :label => 'Active?:', :collection => yes_no_cn() %>
+  <%= f.input :ranking_order, :label => 'Ranking Index', :placehoder => 'ex, 1, 2, 3 ...'%> 
+  <%= f.button :submit, 'Save' %>  
+<% end %> 

@@ -1,0 +1,29 @@
+<div id="main_body">
+  <h1>Project Types</h1>
+  <table>
+    <tr>
+      <th>CreateDate</th>
+      <th>TypeName</th>
+      <th>Active</th>     
+      <th>UpdatedBy</th>
+      <th>BriefNote</th>
+      <th></th>
+    </tr>
+
+    <% @project_types.each do |r| %>
+        <tr>
+          <td><%= (r.created_at + 8.hours).strftime("%Y/%m/%d")%></td>
+          <td><%= r.name %></td>
+          <td><%= r.active %></td>
+          <td><%= r.last_updated_by.name %></td>
+          <td><%= r.brief_note %></td>
+          <td><%= link_to 'Edit', edit_project_type_path(r, :format => :js), :remote => true if has_update_right?('projectx_project_types') %></td>
+        </tr>
+    <% end %>
+
+  </table>
+
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>&nbsp; |&nbsp;
+  <%= link_to "New Project Type", new_project_type_path(:format => :js), :remote => true, :id => 'new_log_link' if has_create_right?('projectx_project_types') %>
+
+</div>
