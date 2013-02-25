@@ -33,6 +33,8 @@ module Projectx
           flash.now[:error] = 'Data Error. Not Saved!'
           render 'new'
         end
+      else
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Right!")     
       end
     end
   
@@ -55,6 +57,8 @@ module Projectx
           flash.now[:error] = 'Data Error. Not Updated!'
           render 'edit'
         end
+      else
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Right!")     
       end
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130215172100) do
+ActiveRecord::Schema.define(:version => 20130213213967) do
 
   create_table "authentify_engine_configs", :force => true do |t|
     t.string   "engine_name"
@@ -114,25 +114,6 @@ ActiveRecord::Schema.define(:version => 20130215172100) do
     t.integer  "ranking_order"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
-  end
-
-  create_table "projectx_project_statuses", :force => true do |t|
-    t.string   "name"
-    t.string   "brief_note"
-    t.boolean  "active",             :default => true
-    t.integer  "last_updated_by_id"
-    t.integer  "ranking_order"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-  end
-
-  create_table "projectx_project_types", :force => true do |t|
-    t.string   "name"
-    t.boolean  "active",             :default => true
-    t.string   "brief_note"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.integer  "last_updated_by_id"
   end
 
   create_table "sessions", :force => true do |t|
