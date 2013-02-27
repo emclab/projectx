@@ -1,16 +1,14 @@
 Projectx::Engine.routes.draw do
  
-  get "type_definitions/index"
-
-  get "type_definitions/new"
-
-  get "type_definitions/create"
-
-  get "type_definitions/edit"
-
-  get "type_definitions/update"
-
-  resources :project_types
-  resources :project_statuses
+  resources :type_definitions
+  resources :status_definitions  
+  resources :task_for_project_types
+  resources :contracts, :only => [:index]
+  resources :projects do
+    resources :skip_task_for_projects
+    resources :contracts
+    resources :task_executions
+  end
+  
 
 end
