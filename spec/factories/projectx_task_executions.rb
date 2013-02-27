@@ -14,7 +14,7 @@ FactoryGirl.define do
     started false
     start_date "2013-02-25"
     end_date "2013-02-25"
-    status_id 1
+    status_definition_id 1
     assigned_to_id 1
   end
 end

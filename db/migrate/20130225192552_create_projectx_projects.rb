@@ -10,11 +10,13 @@ class CreateProjectxProjects < ActiveRecord::Migration
       t.date :start_date
       t.date :end_date
       t.date :delivery_date
+      t.date :estimated_delivery_date
       t.text :project_instruction
       t.integer :project_manager_id
       t.boolean :cancelled, :default => false
       t.boolean :completed, :default => false
       t.integer :last_updated_by_id
+      t.boolean :expedite, :default => false
 
       t.timestamps
     end
