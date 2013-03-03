@@ -3,12 +3,13 @@
 FactoryGirl.define do
   factory :contract, :class => 'Projectx::Contract' do
     project_id 1
-    contract_total "9.99"
+    contract_amount "9.99"
     other_charge "9.99"
     payment_term "MyString"
     paid_out false
-    contract_signed false
+    signed false
     sign_date "2013-02-25"
     contract_on_file false
+    last_updated_by_id 1
   end
 end

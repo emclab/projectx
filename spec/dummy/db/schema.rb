@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213213967) do
+ActiveRecord::Schema.define(:version => 20130228184158) do
 
   create_table "authentify_engine_configs", :force => true do |t|
     t.string   "engine_name"
@@ -114,6 +114,112 @@ ActiveRecord::Schema.define(:version => 20130213213967) do
     t.integer  "ranking_order"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+  end
+
+  create_table "projectx_contracts", :force => true do |t|
+    t.integer  "project_id"
+    t.decimal  "other_charge",       :precision => 10, :scale => 2
+    t.string   "payment_term"
+    t.boolean  "paid_out",                                          :default => false
+    t.boolean  "signed",                                            :default => false
+    t.date     "sign_date"
+    t.integer  "signed_by_id"
+    t.boolean  "contract_on_file",                                  :default => false
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
+    t.decimal  "contract_amount",    :precision => 10, :scale => 2
+  end
+
+  create_table "projectx_projects", :force => true do |t|
+    t.string   "name"
+    t.string   "project_num"
+    t.integer  "customer_id"
+    t.integer  "type_id"
+    t.integer  "zone_id"
+    t.text     "project_desp"
+    t.integer  "sales_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.date     "delivery_date"
+    t.date     "estimated_delivery_date"
+    t.text     "project_instruction"
+    t.integer  "project_manager_id"
+    t.boolean  "cancelled",               :default => false
+    t.boolean  "completed",               :default => false
+    t.integer  "last_updated_by_id"
+    t.boolean  "expedite",                :default => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  create_table "projectx_skip_task_for_projects", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "task_definition_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "projectx_status_definitions", :force => true do |t|
+    t.string   "name"
+    t.string   "brief_note"
+    t.integer  "last_updated_by_id"
+    t.string   "for_what"
+    t.integer  "ranking_order"
+    t.boolean  "active",             :default => true
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  create_table "projectx_task_definitions", :force => true do |t|
+    t.string   "name"
+    t.string   "task_desp"
+    t.text     "task_instruction"
+    t.integer  "last_updated_by_id"
+    t.integer  "ranking_order"
+    t.boolean  "active",             :default => true
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  create_table "projectx_task_executions", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "task_definition_id"
+    t.boolean  "expedite",             :default => false
+    t.date     "expedite_finish_date"
+    t.string   "brief_note"
+    t.boolean  "skipped",              :default => false
+    t.boolean  "completed",            :default => false
+    t.boolean  "cancelled",            :default => false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "status_definition_id"
+    t.integer  "assigned_to_id"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+  end
+
+  create_table "projectx_task_for_project_types", :force => true do |t|
+    t.integer  "task_definition_id"
+    t.integer  "project_type_id"
+    t.integer  "last_updated_by_id"
+    t.integer  "execution_order"
+    t.integer  "execution_sub_order"
+    t.boolean  "start_before_previous_completed", :default => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+  end
+
+  create_table "projectx_type_definitions", :force => true do |t|
+    t.string   "name"
+    t.string   "brief_note"
+    t.integer  "last_updated_by_id"
+    t.string   "for_what"
+    t.integer  "ranking_order"
+    t.boolean  "active",             :default => true
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "sessions", :force => true do |t|
