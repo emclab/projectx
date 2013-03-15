@@ -18,6 +18,26 @@ Projectx::Engine.routes.draw do
     resources :skip_task_for_projects
     resources :contracts
     resources :task_executions
+    resources :sales
+    resources :customer
+    resources :project_manager
+    collection do
+      get :search
+      put :search_results
+      get :autocomplete
+    end
+  end
+  
+  resources :customers do
+    resources :sales_leads
+    resources :customer_comm_records
+    collection do
+      get :search
+      put :search_results
+      get :stats
+      put :stats_results 
+      get :autocomplete
+    end
   end
   
 

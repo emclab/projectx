@@ -1,0 +1,42 @@
+<div id="main_body">
+<h1>Projects</h1>
+<div class="pagination"><%= will_paginate @projects %></div>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Number</th>
+    <th>StartDate</th>
+    <th>Manager</th>
+    <th>Sales</th>
+    <th>Completion %%</th>
+    <th>Payment Percent</th>
+    <th></th>
+    <th></th>
+ 
+  </tr>
+
+<% @projects.each do |prj| %>
+  <tr>
+  	<% if grant_access?('show','projectx_projects') %>
+  	  <td><%= link_to prj.customer_id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{customer_path(customer_id)}"  %></td>
+  	<% else %>
+  	  <td><%= prj.customer_id %></td>
+  	<% end %>
+    <td><%= prj.name %></td>
+    <td><%= prj.project_num %></td>
+    <td><%= prj.start_date.strftime("%Y/%m/%d") %></td>
+    <td><%= prj.project_manager_id %></td>
+    <td><%= prj.sales.name %></td>    
+    <td><%= prj.completion_percent %></td>    
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if grant_access?('update', 'projectx_projects') %></td>
+    <td><%= link_to 'Show', SUBURI + "/authentify/view_handler?index=1&url=#{show_project_path(prj)}" if grant_access?('show', 'projectx_projects') %></td>
+  </tr>
+<% end %>
+</table>
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+  &nbsp;&nbsp;<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if grant_access?('create','projectx_projects') %>
+  &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>
+
+</div>
+

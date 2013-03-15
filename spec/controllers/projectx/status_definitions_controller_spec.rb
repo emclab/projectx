@@ -20,6 +20,8 @@ module Projectx
         ur = FactoryGirl.create(:sys_user_right, :sys_user_group_id => ug.id, :sys_action_on_table_id => ua.id)
         ul = FactoryGirl.build(:user_level, :sys_user_group_id => ug.id)
         u = FactoryGirl.create(:user, :user_levels => [ul])
+        session[:user_id] = u.id
+        session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(u.id)
         cate = FactoryGirl.create(:status_definition, :active => true, :last_updated_by_id => u.id, :for_what => 'project')
         get 'index' , {:use_route => :projectx, :for_what => 'project'}
         response.should be_success
@@ -71,7 +73,7 @@ module Projectx
         session[:user_id] = u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(u.id)
         get 'new', {:use_route => :projectx, :for_what => 'project'}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Right!")       
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Access Right!")
       end
     end
   
@@ -135,7 +137,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(u.id)
         cate = FactoryGirl.create(:status_definition)
         get 'edit', {:use_route => :projectx, :id => cate.id, :for_what => 'project'}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Right!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Access Right!")
       end
     end
   
