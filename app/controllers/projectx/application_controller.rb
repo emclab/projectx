@@ -12,6 +12,7 @@ module Projectx
 
 
     def check_access_right
+      return false if session[:user_privilege].nil? 
       actionsMap = {'new' => 'create', 'edit' => 'update'}
       #here we need to use our new access control framework. For now le's re-use what we currently have
       if !checkAndUpdateParam(params['controller'].sub('/', '_'), params['action'], actionsMap)
