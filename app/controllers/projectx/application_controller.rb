@@ -12,11 +12,7 @@ module Projectx
       [['是',true ],['否', false]]
     end
   
-    def has_index_right?(table_name)
-      grant_access?('index', table_name)  
-    end
-    
-    def has_show_right?(table_name)
+     def has_show_right?(table_name)
       grant_access?('show', table_name)  
     end
     
