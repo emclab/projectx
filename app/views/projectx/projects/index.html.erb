@@ -1,0 +1,44 @@
+<div id="main_body">
+<h1>Projects</h1>
+<div class="pagination"><%= will_paginate @projects %></div>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Number</th>
+    <th>StartDate</th>
+    <th>Manager</th>
+    <th>Sales</th>
+    <th>Completion %%</th>
+    <th>Payment Percent</th>
+    <th></th>
+    <th></th>
+ 
+  </tr>
+
+
+
+<% @projects.each do |prj| %>
+  <tr>
+  	<% if has_action_right?('show','customerx_customers', :id => prj.customer.id, :zone_id => prj.customer.zone_id ) %>
+  	  <td><%= link_to prj.customer_id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{customer_path(prj.customer_id)}"  %></td>
+  	<% else %>
+  	  <td><%= print_attribute(prj, 'customer_id') %></td>
+  	<% end %>
+    <td><%= print_attribute(prj, :name) %></td>
+    <td><%= print_attribute(prj, :project_num) %></td>
+    <td><%= print_attribute(prj, :start_date) %></td>
+    <td><%= print_attribute(prj, :project_manager_id) %></td>
+    <td><%= print_attribute(prj, 'sales.name') %></td>
+    <td><%= print_attribute(prj, :completion_percent) %></td>
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_projects' ) %></td>
+    <td><%= link_to 'Show', SUBURI + "/authentify/view_handler?index=1&url=#{project_path(prj)}" if has_action_right?('show', 'projectx_projects') %></td>
+  </tr>
+<% end %>
+</table>
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+  &nbsp;&nbsp;<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_projects') %>
+  &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>
+
+</div>
+

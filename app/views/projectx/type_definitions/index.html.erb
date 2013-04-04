@@ -1,2 +1,8 @@
-<h1>TypeDefinitions#index</h1>
-<p>Find me in app/views/projectx/type_definitions/index.html.erb</p>
+<div id="main_body">
+	<h1>Type Definition</h1>
+	<div class="pagination"><%= will_paginate @type_definitions %></div>
+ 
+	<%= render 'form_list', :locals => { :type_definitions => @type_definitions} %>
+ 
+</div>
+

@@ -1,0 +1,8 @@
+<div id="main_body">
+	<h1>Contract</h1>
+	<div class="pagination"><%= will_paginate @contracts %></div>
+ 
+	<%= render 'form_list', :locals => { :contracts => @contracts} %>
+ 
+</div>
+

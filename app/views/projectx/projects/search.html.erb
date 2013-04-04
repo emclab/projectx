@@ -1,0 +1,19 @@
+<div id="main_body">
+<h1>搜索客户</h1>
+
+<%= simple_form_for @project,  :method => :put, :url => search_results_projects_path  do |f| %>
+  <%= f.input :start_date_s, :label => "Start Date ：", :as => :string, :input_html => {:size => 40} %>
+  <%= f.input :end_date_s, :label => "End Date ：", :as => :string, :input_html => {:size => 40} %>
+  <%= f.input :keyword, :label => "Keyword:" %>
+  <%= f.input :zone_id_s, :label =>"Zone：", :collection => Authentify::Zone.where(:active => true).order("ranking_order"),
+              :label_method => :zone_name, :value_method => :id if grant_access?("search", "projectx_projects") %>
+  <%= f.input :sales_id_s, :collection => sales(), :label_method => :name, :value_method => :id, :prompt => "选业务员", 
+              :label => "业务员:" if grant_access?('search', 'projectx_projects') || grant_access?('search', 'projectx_projects') %>
+  <%= f.input :customer_id_s, :collection => return_customers(), :label_method => :name, :value_method => :id, :prompt => "Choose Customer",
+                  :label => "Customer:" if grant_access?("search", "projectx_projects") || grant_access?("search", "projectx_projects") %>
+
+  <%= f.button :submit, "Submit" %>
+<% end %> 
+<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+
+</div>

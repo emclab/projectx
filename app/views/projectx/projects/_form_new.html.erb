@@ -1,0 +1,21 @@
+<%= simple_form_for @project do |f| %>    
+ 
+  <%= f.input :name, :label => 'Project Name:' %>  
+  <%= f.input :project_num, :label => 'Project Number:', :placeholder => '4-8字' %>
+  <%= f.input :start_date, :label => 'Start Date:', :as => :string %>
+  <%= f.input :estimated_delivery_date, :label => 'Estimated End Date:', :as => :string %>
+  <%= f.input :project_type_id, :label => 'Project Type:' %>
+  <%= f.input :project_desp, :label => 'Project Description:' %>
+  <%= f.input :project_instruction, :label => 'Project Instruction', :input_html => { :rows => 4} %>
+  <%= f.input :sales_id, :label => 'Sales:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_projects') %>        
+  <%= f.input :project_manager_id, :label => 'Project Manager:' %>
+  <%= f.input :expedite, :label => 'Expedite:', :as => :boolean %>
+  <%= f.input :customer_id, :label => 'Customer:', :collection => return_customers %>
+  <%= f.input :zone_id, :label => 'Zone:', :collection => return_zone, :label_method => :zone_name, :value_method => :id,
+              :include_blank => true  %> 
+  <%= f.input :sales_id, :label => 'Sales:', :collection => Authentify::UsersHelper.return_users('create', 'customerx_customers') %>        
+  
+  <%= f.button :submit, 'Save' %>  
+<% end %>  
+
+

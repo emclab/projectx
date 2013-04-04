@@ -10,6 +10,17 @@ gem "jquery-rails"
 gem 'will_paginate'
 
 gem 'authentify', :path => '../authentify'  #for rspec test
+gem 'customerx', :path => '../customerx'
+
+group :test do
+  gem "rspec-rails", ">= 2.0.0"
+  gem "factory_girl_rails" #, '~>3.0'
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+end
+
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or

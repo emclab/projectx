@@ -4,7 +4,7 @@ class CreateProjectxProjects < ActiveRecord::Migration
       t.string :name
       t.string :project_num
       t.integer :customer_id
-      t.integer :type_id
+      t.integer :project_type_id
       t.integer :zone_id
       t.text :project_desp
       t.integer :sales_id

@@ -1,0 +1,47 @@
+<div id="main_body">
+<h1>Projects</h1>
+<%=@search_params%>
+<div class="pagination"><%= will_paginate @projects %></div>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>StartDate</th>
+    <th>Status</th>
+    <th>Sales</th>
+    <th>LastContactDate</th>
+    <th></th>
+    <th></th>
+    <th></th>
+ 
+  </tr>
+
+<% @customers.each do |cust| %>
+  <tr>
+  	<% if has_show_right?('customerx_customers') %>
+  	  <td><%= link_to cust.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{customer_path(cust)}"  %></td>
+  	<% else %>
+  	  <td><%= cust.id %></td>
+  	<% end %>
+    <td><%= cust.short_name %></td>
+    <td><%= cust.since_date.strftime("%Y/%m/%d") %></td>
+    <% if has_create_right?('customerx_customers') %>
+      
+      <td><%= cust.phone %></td>
+      <td><%= cust.active %></td>
+    <% end %>
+    <td><%= cust.customer_status_category.cate_name %></td>
+    <td><%= cust.sales.name %></td>    
+    <td><%= return_last_contact_date(cust.id).strftime("%Y/%m/%d") if return_last_contact_date(cust.id).present? %></td> 
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_customer_path(cust)}" if grant_access?('update','customerx_customers') %></td>
+    <td><%= link_to 'CommRecords', SUBURI + "/authentify/view_handler?index=1&url=#{customer_customer_comm_records_path(cust)}" if has_comm_record_index_right? %></td>
+    <td><%= link_to 'SalesLeads', SUBURI + "/authentify/view_handler?index=1&url=#{customer_sales_leads_path(cust)}" if has_lead_index_right? %></td>
+  </tr>
+<% end %>
+</table>
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+  &nbsp;&nbsp;<%= link_to '输入客户', SUBURI + "/authentify/view_handler?index=1&url=#{new_customer_path}" if has_create_right?('customerx_customers') %>
+  &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_customers_path}" %>
+
+</div>
+

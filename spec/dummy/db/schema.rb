@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228184158) do
+ActiveRecord::Schema.define(:version => 20130329180408) do
 
   create_table "authentify_engine_configs", :force => true do |t|
     t.string   "engine_name"
@@ -29,15 +29,22 @@ ActiveRecord::Schema.define(:version => 20130228184158) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "authentify_sys_action_on_tables", :force => true do |t|
-    t.string   "action"
-    t.string   "table_name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "authentify_restriction_details", :force => true do |t|
+    t.integer  "user_access_id"
+    t.string   "match_against"
+    t.string   "restriction_type"
+    t.string   "brief_note"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
-  add_index "authentify_sys_action_on_tables", ["action"], :name => "index_authentify_sys_action_on_tables_on_action"
-  add_index "authentify_sys_action_on_tables", ["table_name"], :name => "index_authentify_sys_action_on_tables_on_table_name"
+  create_table "authentify_role_definitions", :force => true do |t|
+    t.string   "name"
+    t.string   "brief_note"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "authentify_sys_logs", :force => true do |t|
     t.datetime "log_date"
@@ -71,24 +78,34 @@ ActiveRecord::Schema.define(:version => 20130228184158) do
     t.integer  "manager_group_id"
   end
 
-  create_table "authentify_sys_user_rights", :force => true do |t|
-    t.integer  "sys_action_on_table_id"
-    t.integer  "sys_user_group_id"
-    t.string   "matching_column_name"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
-    t.string   "accessible_col"
+  create_table "authentify_user_accesses", :force => true do |t|
+    t.string   "right"
+    t.string   "action"
+    t.string   "resource"
+    t.string   "resource_type"
+    t.string   "brief_note"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "role_definition_id"
+    t.text     "sql_code"
+    t.text     "masked_attrs"
+    t.integer  "rank"
   end
-
-  add_index "authentify_sys_user_rights", ["accessible_col"], :name => "index_authentify_sys_user_rights_on_accessible_col"
-  add_index "authentify_sys_user_rights", ["sys_action_on_table_id"], :name => "index_authentify_sys_user_rights_on_sys_action_on_table_id"
-  add_index "authentify_sys_user_rights", ["sys_user_group_id"], :name => "index_authentify_sys_user_rights_on_sys_user_group_id"
 
   create_table "authentify_user_levels", :force => true do |t|
     t.integer  "user_id"
     t.integer  "sys_user_group_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "authentify_user_roles", :force => true do |t|
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "role_definition_id"
+    t.integer  "user_id"
   end
 
   create_table "authentify_users", :force => true do |t|
@@ -116,6 +133,146 @@ ActiveRecord::Schema.define(:version => 20130228184158) do
     t.datetime "updated_at",                      :null => false
   end
 
+  create_table "customerx_addresses", :force => true do |t|
+    t.string   "province"
+    t.string   "city_county_district"
+    t.string   "add_line"
+    t.integer  "customer_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "customerx_comm_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "brief_note"
+    t.boolean  "active",             :default => true
+    t.integer  "ranking_order"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  create_table "customerx_comm_record_logs", :force => true do |t|
+    t.integer  "customer_comm_record_id"
+    t.text     "log"
+    t.integer  "last_updated_by_id"
+    t.boolean  "void",                    :default => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  create_table "customerx_contacts", :force => true do |t|
+    t.integer  "customer_id"
+    t.string   "name"
+    t.string   "position"
+    t.string   "phone"
+    t.string   "cell_phone"
+    t.string   "email"
+    t.text     "brief_note"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "customerx_customer_comm_records", :force => true do |t|
+    t.integer  "customer_id"
+    t.string   "via"
+    t.string   "subject"
+    t.text     "contact_info"
+    t.text     "content"
+    t.integer  "last_updated_by_id"
+    t.integer  "comm_category_id"
+    t.integer  "reported_by_id"
+    t.date     "comm_date"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.boolean  "void",               :default => false
+  end
+
+  create_table "customerx_customer_status_categories", :force => true do |t|
+    t.string   "cate_name"
+    t.string   "brief_note"
+    t.boolean  "active",             :default => true
+    t.integer  "ranking_order"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  create_table "customerx_customers", :force => true do |t|
+    t.string   "name"
+    t.string   "short_name"
+    t.date     "since_date"
+    t.integer  "zone_id"
+    t.integer  "customer_status_category_id"
+    t.string   "phone"
+    t.string   "fax"
+    t.integer  "sales_id"
+    t.boolean  "active",                      :default => true
+    t.integer  "last_updated_by_id"
+    t.integer  "quality_system_id"
+    t.string   "employee_num"
+    t.string   "revenue"
+    t.text     "customer_eval"
+    t.text     "main_biz"
+    t.text     "customer_taste"
+    t.text     "note"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "web"
+    t.text     "shipping_instruction"
+  end
+
+  create_table "customerx_lead_logs", :force => true do |t|
+    t.integer  "sales_lead_id"
+    t.text     "log"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.boolean  "void",               :default => false
+  end
+
+  create_table "customerx_lead_sources", :force => true do |t|
+    t.string   "name"
+    t.boolean  "active",             :default => true
+    t.integer  "ranking_order"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "brief_note"
+  end
+
+  create_table "customerx_quality_systems", :force => true do |t|
+    t.string   "name"
+    t.string   "brief_note"
+    t.boolean  "active"
+    t.integer  "last_updated_by_id"
+    t.integer  "ranking_order"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "customerx_sales_leads", :force => true do |t|
+    t.integer  "customer_id"
+    t.integer  "last_updated_by_id"
+    t.integer  "provider_id"
+    t.text     "lead_info"
+    t.text     "contact_instruction"
+    t.string   "lead_status"
+    t.boolean  "sale_success"
+    t.boolean  "close_lead"
+    t.datetime "close_lead_date"
+    t.integer  "close_lead_by_id"
+    t.integer  "lead_quality"
+    t.integer  "lead_accuracy"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.text     "lead_eval"
+    t.string   "subject"
+    t.integer  "lead_source_id"
+    t.date     "lead_date"
+    t.integer  "initial_order_total"
+  end
+
   create_table "projectx_contracts", :force => true do |t|
     t.integer  "project_id"
     t.decimal  "other_charge",       :precision => 10, :scale => 2
@@ -135,7 +292,7 @@ ActiveRecord::Schema.define(:version => 20130228184158) do
     t.string   "name"
     t.string   "project_num"
     t.integer  "customer_id"
-    t.integer  "type_id"
+    t.integer  "project_type_id"
     t.integer  "zone_id"
     t.text     "project_desp"
     t.integer  "sales_id"
@@ -211,6 +368,11 @@ ActiveRecord::Schema.define(:version => 20130228184158) do
     t.datetime "updated_at",                                         :null => false
   end
 
+  create_table "projectx_tasks", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "projectx_type_definitions", :force => true do |t|
     t.string   "name"
     t.string   "brief_note"
@@ -221,15 +383,5 @@ ActiveRecord::Schema.define(:version => 20130228184158) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
-
-  create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
 end

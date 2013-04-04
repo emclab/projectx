@@ -1,0 +1,30 @@
+	<div class="pagination"><%= will_paginate status_definitions %></div>
+	<table>
+		<tr>
+			<th>#</th>
+			<th>Definition For</th>
+			<th>Name</th>
+			<th>Notes</th>
+			<th>Ranking Order</th>
+			<th>Active</th>
+			<th>Last updated by</th>
+			<th></th>
+			<th></th> 
+		</tr>
+		<% status_definitions.each do |defi| %>
+		  <tr>
+			<td><%= defi.for_what %></td>
+			<td><%= defi.name %></td>
+			<td><%= defi.notes %></td>
+			<td><%= defi.ranking_order %></td>
+			<td><%= defi.active %></td>
+			<td><%= defi.last_updated_by.id %></td>    
+			<td><%= prj.completion_percent %></td>    
+			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if grant_access?('update', 'projectx_status_definitions') %></td>
+			<td><%= link_to 'Show', SUBURI + "/authentify/view_handler?index=1&url=#{show_project_path(prj)}" if grant_access?('show', 'projectx_status_definitions') %></td>
+		  </tr>
+		<% end %>
+	</table>
+	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+	&nbsp;&nbsp;<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if grant_access?('create','projectx_status_definitions') %>
+	&nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>

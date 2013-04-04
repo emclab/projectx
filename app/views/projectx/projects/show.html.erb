@@ -1,0 +1,36 @@
+<div id="main_body">
+
+<h1>Project Info</h1>
+
+<p>
+  <b>Name:</b>
+  <%= @project.name %>
+</p>
+<p>
+  <b>Number:</b>
+  <%= @project.project_num %>
+</p>
+<p>
+  <b>Customer Name:</b>
+  <%= @project.customer.name %>
+</p>
+<p>
+  <b>Zone:</b>
+  <%= @project.zone.zone_name %>
+</p>
+<p>
+  <b>Type:</b>:</b>
+  <%= @project.project_type_id %>
+</p>
+<p>
+  <b>Sales:</b>
+  <%= @project.sales.name %>
+</p>
+<p>
+  <b>Last Updated By:</b>
+  <%= @project.last_updated_by.name %>
+</p>
+
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+
+</div>
