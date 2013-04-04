@@ -11,7 +11,8 @@ Projectx::Engine.routes.draw do
   get "status_definitions/update"
 
   resources :type_definitions
-  resources :status_definitions  
+  resources :task_definitions
+  resources :status_definitions
   resources :task_for_project_types
   resources :contracts, :only => [:index]
   resources :projects do

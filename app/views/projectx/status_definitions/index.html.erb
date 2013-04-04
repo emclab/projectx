@@ -1,2 +1,8 @@
-<h1>StatusDefinitions#index</h1>
-<p>Find me in app/views/projectx/status_definitions/index.html.erb</p>
+<div id="main_body">
+	<h1>Status Definition</h1>
+	<div class="pagination"><%= will_paginate @status_definitions %></div>
+ 
+	<%= render 'form_list', :locals => { :status_definitions => @status_definitions} %>
+ 
+</div>
+

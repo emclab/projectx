@@ -8,8 +8,7 @@ module Projectx
 
     def index
       @title = 'Projects'
-      project = Projectx::Project.new(params[:project], :as => :role_search_stats)
-      @projects = find_projects(project)
+      @projects = find_projects(@model_ar_r)
     end
 
 
@@ -95,8 +94,9 @@ module Projectx
     end
     
     def find_projects(project)
-      projects = project.find_projects.page(params[:page]).per_page(30).order("expedite DESC, zone_id, id DESC, start_date DESC")
-      return projects if projects.blank?  
+      #projects = Projectx::Project.find_projects(project, params).page(params[:page]).per_page(30).order("expedite DESC, zone_id, id DESC, start_date DESC")
+      projects = @model.find_projects(project, params).page(params[:page]).per_page(30).order("expedite DESC, zone_id, id DESC, start_date DESC")
+      return projects if projects.blank?
       projects = projects.all()
     end
     

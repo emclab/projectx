@@ -2,6 +2,20 @@ module Projectx
   module ProjectsHelper
     include Authentify::SessionsHelper
 
+    def print_attribute(object, method, title = nil)
+      if object.has_attribute?(method)
+        return object.send(method)
+      else
+        return ""
+      end
+    end
+
+=begin
+    def has_action_right?(action, table, type)
+      return session[:user_privilege].has_action_right?(action, table, type)
+    end
+=end
+
     def return_customers
       #return [] if action.blank or table_name.blank
 

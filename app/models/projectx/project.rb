@@ -1,5 +1,7 @@
 module Projectx
   class Project < ActiveRecord::Base
+
+
       attr_accessible :name, :project_num, :customer_id, :project_type_id, :zone_id, :project_desp, :sales_id, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
@@ -36,21 +38,21 @@ module Projectx
       validates_presence_of :zone_id, :sales_id, :customer_id, :project_manager_id, :project_type_id, :start_date,
                             :end_date, :delivery_date
 
-    def find_projects
+    def self.find_projects(projects, params)
       #return all qualified projects
-      projects = Projectx::Project.scoped  #In Rails < 4 .all makes database call immediately, loads records and returns array. 
+      #projects = Projectx::Project.scoped  #In Rails < 4 .all makes database call immediately, loads records and returns array.
       #Instead use "lazy" scoped method which returns chainable ActiveRecord::Relation object
-      projects = projects.where("id = ?", project_id_s) if project_id_s.present?
-      projects = projects.where("name like ? ", "%#{keyword}%") if keyword.present?
-      projects = projects.where('created_at > ?', start_date_s) if start_date_s.present?
-      projects = projects.where('created_at < ?', end_date_s) if end_date_s.present?
-      projects = projects.where("customer_id = ?", customer_id_s) if customer_id_s.present?
-      projects = projects.where(:status => status_s) if status_s.present?
-      projects = projects.where(:expedite => expedite_s) if expedite_s.present?
-      projects = projects.where(:completion_percent => completion_percent_s) if completion_percent_s.present?
-      projects = projects.where(:zone_id => zone_id_s) if zone_id_s.present?
-      projects = projects.where("sales_id = ?", sales_id_s) if sales_id_s.present?
-      projects = projects.where("payment_percent = ?", payment_percent_s) if payment_percent_s.present?
+      projects = projects.where("id = ?", params[:projectx_projects][:project_id_s]) if params[:projectx_projects][:project_id_s].present?
+      projects = projects.where("name like ? ", "%#{params[:projectx_projects][:keyword]}%") if params[:projectx_projects][:keyword].present?
+      projects = projects.where('created_at > ?', params[:projectx_projects][:start_date_s]) if params[:projectx_projects][:start_date_s].present?
+      projects = projects.where('created_at < ?', params[:projectx_projects][:end_date_s]) if params[:projectx_projects][:end_date_s].present?
+      projects = projects.where("customer_id = ?", params[:projectx_projects][:customer_id_s] ) if params[:projectx_projects][:customer_id_s].present?
+      projects = projects.where(:status => params[:projectx_projects][:status_s]) if params[:projectx_projects][:status_s].present?
+      projects = projects.where(:expedite => params[:projectx_projects][:expedite_s]) if params[:projectx_projects][:expedite_s].present?
+      projects = projects.where(:completion_percent => params[:projectx_projects][:completion_percent_s]) if params[:projectx_projects][:completion_percent_s].present?
+      projects = projects.where(:zone_id => params[:projectx_projects][:zone_id_s]) if params[:projectx_projects][:zone_id_s].present?
+      #projects = projects.where("sales_id = ?", params[:projectx_projects][:sales_id_s]) if params[:projectx_projects][:sales_id_s].present?
+      #projects = projects.where("payment_percent = ?", params[:projectx_projects][:payment_percent_s]) if params[:projectx_projects][:payment_percent_s].present?
       projects
     end
 

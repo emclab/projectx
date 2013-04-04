@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :task_execution, :class => 'Projectx::TaskExecution' do
+  factory :projectx_task, :class => 'Projectx::Task' do
     project_id 1
     task_definition_id 1
     expedite false
@@ -16,5 +16,6 @@ FactoryGirl.define do
     end_date "2013-02-25"
     status_definition_id 1
     assigned_to_id 1
+
   end
 end

@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :customer1, :class => 'Customerx::Customer' do
+  factory :customer, :class => 'Customerx::Customer' do
     name "Customer1"
     short_name "Customer1"
     since_date "2013-01-12"

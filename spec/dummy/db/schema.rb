@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307033332) do
+ActiveRecord::Schema.define(:version => 20130329180408) do
 
   create_table "authentify_engine_configs", :force => true do |t|
     t.string   "engine_name"
@@ -29,15 +29,22 @@ ActiveRecord::Schema.define(:version => 20130307033332) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "authentify_sys_action_on_tables", :force => true do |t|
-    t.string   "action"
-    t.string   "table_name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "authentify_restriction_details", :force => true do |t|
+    t.integer  "user_access_id"
+    t.string   "match_against"
+    t.string   "restriction_type"
+    t.string   "brief_note"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
-  add_index "authentify_sys_action_on_tables", ["action"], :name => "index_authentify_sys_action_on_tables_on_action"
-  add_index "authentify_sys_action_on_tables", ["table_name"], :name => "index_authentify_sys_action_on_tables_on_table_name"
+  create_table "authentify_role_definitions", :force => true do |t|
+    t.string   "name"
+    t.string   "brief_note"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "authentify_sys_logs", :force => true do |t|
     t.datetime "log_date"
@@ -71,24 +78,34 @@ ActiveRecord::Schema.define(:version => 20130307033332) do
     t.integer  "manager_group_id"
   end
 
-  create_table "authentify_sys_user_rights", :force => true do |t|
-    t.integer  "sys_action_on_table_id"
-    t.integer  "sys_user_group_id"
-    t.string   "matching_column_name"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
-    t.string   "accessible_col"
+  create_table "authentify_user_accesses", :force => true do |t|
+    t.string   "right"
+    t.string   "action"
+    t.string   "resource"
+    t.string   "resource_type"
+    t.string   "brief_note"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "role_definition_id"
+    t.text     "sql_code"
+    t.text     "masked_attrs"
+    t.integer  "rank"
   end
-
-  add_index "authentify_sys_user_rights", ["accessible_col"], :name => "index_authentify_sys_user_rights_on_accessible_col"
-  add_index "authentify_sys_user_rights", ["sys_action_on_table_id"], :name => "index_authentify_sys_user_rights_on_sys_action_on_table_id"
-  add_index "authentify_sys_user_rights", ["sys_user_group_id"], :name => "index_authentify_sys_user_rights_on_sys_user_group_id"
 
   create_table "authentify_user_levels", :force => true do |t|
     t.integer  "user_id"
     t.integer  "sys_user_group_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "authentify_user_roles", :force => true do |t|
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "role_definition_id"
+    t.integer  "user_id"
   end
 
   create_table "authentify_users", :force => true do |t|
@@ -349,6 +366,11 @@ ActiveRecord::Schema.define(:version => 20130307033332) do
     t.boolean  "start_before_previous_completed", :default => false
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
+  end
+
+  create_table "projectx_tasks", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "projectx_type_definitions", :force => true do |t|
