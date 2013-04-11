@@ -10,19 +10,19 @@
 			<th></th>
 			<th></th> 
 		</tr>
-		<% task_definitions.each do |defi| %>
+		<% @task_definitions.each do |defi| %>
 		  <tr>
+		  	<td><%= defi.id %><td>
 			<td><%= defi.name %></td>
-			<td><%= defi.task_desp %></td>
-			<td><%= defi.task_instruction %></td>
-			<td><%= defi.active %></td>
-			<td><%= defi.ranking_order %></td>
-			<td><%= defi.last_updated_by.id %></td>    
-			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if grant_access?('update', 'projectx_task_definitions') %></td>
-			<td><%= link_to 'Show', SUBURI + "/authentify/view_handler?index=1&url=#{show_project_path(prj)}" if grant_access?('show', 'projectx_task_definitions') %></td>
+			<td><%= prt(defi, :task_desp) %></td>
+			<td><%= prt(defi, :task_instruction) %></td>
+			<td><%= prt(defi, :active) %></td>
+			<td><%= prt(defi, :ranking_order) %></td>
+			<td><%= prt(defi, 'last_updated_by.name') %></td>    
+			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
 		  </tr>
 		<% end %>
 	</table>
 	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-	&nbsp;&nbsp;<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if grant_access?('create','projectx_task_definitions') %>
+	&nbsp;&nbsp;<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_task_definitions') %>
 	&nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>

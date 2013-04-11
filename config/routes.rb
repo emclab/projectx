@@ -1,6 +1,7 @@
 Projectx::Engine.routes.draw do
 
   resources :misc_definitions
+  resources :task_definitions
   resources :task_for_project_types
   resources :contracts, :only => [:index]
   resources :projects do

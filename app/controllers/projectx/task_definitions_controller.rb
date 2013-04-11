@@ -1,14 +1,14 @@
+# encoding: utf-8
 require_dependency "projectx/application_controller"
 
 module Projectx
   class TaskDefinitionsController < ApplicationController
     
-    prepend_before_filter :require_signin, :require_employee
+    prepend_before_filter :require_employee
 
     def index
       @title = 'Task Definition'
-      @task_definitions = Projectx::TaskDefinition.order('active DESC, ranking_order')
-      @task_definitions = paginate(@task_definitions)
+      @task_definitions = params[:projectx_task_definitions][:model_ar_r].page(params[:page]).per_page(30)     
     end
   
     def new
@@ -36,7 +36,7 @@ module Projectx
       @task_definition = Projectx::TaskDefinition.find_by_id(params[:id])
       @task_definition.last_updated_by_id = session[:user_id]
       if @task_definition.update_attributes(params[:task_definition], :as => :role_update)
-        redirect_to task_definitions_path, :notice => 'Update Task Definition Updated!'
+        redirect_to task_definitions_path, :notice => 'Task Definition Updated!'
       else
         flash.now[:error] = 'Data Error. Not Updated!'
         render 'edit'
