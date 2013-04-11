@@ -2,13 +2,13 @@ module Projectx
   module ProjectsHelper
     include Authentify::SessionsHelper
 
-    def print_attribute(object, method, title = nil)
-      if object.has_attribute?(method)
-        return object.send(method)
-      else
-        return ""
-      end
-    end
+    #def print_attribute(object, method, title = nil)
+    #  if object.has_attribute?(method)
+     #   return object.send(method)
+    #  else
+     #   return ""
+     # end
+    #end
 
 =begin
     def has_action_right?(action, table, type)

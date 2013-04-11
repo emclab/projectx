@@ -8,6 +8,7 @@ module Projectx
 
     helper_method :has_action_right?, :print_attribute, :readonly?
 
+    before_filter :require_signin
     before_filter :check_access_right
 
     protected

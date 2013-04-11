@@ -1,0 +1,9 @@
+<div id='main_body'>
+
+<% if @for_which == 'project_status' %>
+  <%= render 'index_project_status' %>
+<% elsif @for_which == 'project_type' %>
+  <%= render 'index_project_type' %>
+<% end %>
+ 
+</div>

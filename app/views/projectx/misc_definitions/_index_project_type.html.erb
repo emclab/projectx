@@ -1,0 +1,33 @@
+
+  <h1>Quality System</h1>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Create Date</th>
+      <th>Type</th>
+      <th>Brief Note</th>
+      <th>Ranking Order</th>
+      <th>Entered By</th>
+      <th></th>
+    </tr>
+
+    <% @misc_definitions.each do |qs| %>
+        <tr>
+          <td><%= qs.id %></td>
+          <td><%= (qs.created_at + 8.hours).strftime("%Y/%m/%d")%></td>
+          <td><%= qs.name %></td>
+          <td><%= qs.brief_note %></td>
+          <td><%= qs.ranking_order %></td>
+          <td><%= qs.last_updated_by.name %></td>
+          <td><%= link_to 'Edit', edit_misc_definition_path(qs, :subaction => 'project_type', :format => :js), 
+                  :remote => true %></td>
+        </tr>
+    <% end %>
+
+  </table>
+
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+  <%= link_to "New Project type", new_misc_definition_path(:for_which => 'project_type', :subaction => 'project_type', :format => :js), :remote => true, 
+             :id => 'new_log_link'  %>
+
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130329180408) do
+ActiveRecord::Schema.define(:version => 20130410175539) do
 
   create_table "authentify_engine_configs", :force => true do |t|
     t.string   "engine_name"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130329180408) do
     t.integer  "last_updated_by_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "manager_role_id"
   end
 
   create_table "authentify_sys_logs", :force => true do |t|
@@ -241,6 +242,27 @@ ActiveRecord::Schema.define(:version => 20130329180408) do
     t.string   "brief_note"
   end
 
+  create_table "customerx_logs", :force => true do |t|
+    t.integer  "sales_lead_id"
+    t.integer  "customer_comm_record_id"
+    t.integer  "last_updated_by_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "which_table"
+    t.text     "log"
+  end
+
+  create_table "customerx_misc_definitions", :force => true do |t|
+    t.string   "name"
+    t.text     "brief_note"
+    t.boolean  "active",             :default => true
+    t.integer  "ranking_order"
+    t.integer  "last_updated_by_id"
+    t.string   "for_which"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
   create_table "customerx_quality_systems", :force => true do |t|
     t.string   "name"
     t.string   "brief_note"
@@ -286,6 +308,17 @@ ActiveRecord::Schema.define(:version => 20130329180408) do
     t.datetime "created_at",                                                           :null => false
     t.datetime "updated_at",                                                           :null => false
     t.decimal  "contract_amount",    :precision => 10, :scale => 2
+  end
+
+  create_table "projectx_misc_definitions", :force => true do |t|
+    t.string   "name"
+    t.boolean  "active",             :default => true
+    t.text     "brief_note"
+    t.integer  "last_updated_by_id"
+    t.integer  "ranking_order"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "for_which"
   end
 
   create_table "projectx_projects", :force => true do |t|
