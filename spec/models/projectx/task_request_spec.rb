@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Projectx
-  describe TaskExecution do
+  describe TaskRequest do
     pending "add some examples to (or delete) #{__FILE__}"
   end
 end

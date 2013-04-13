@@ -8,9 +8,8 @@ module Projectx
     
     belongs_to :last_updated_by, :class_name => 'Authentify::User'
     
-    validates_presence_of :name, :for_which
+    validates_presence_of :for_which
     validates :name, :uniqueness => {:case_sensitive => false, :message => '重名！'}
-    validates :last_updated_by_id, :presence => true,
-                                   :numericality => {:greater_than => 0}
+  
   end
 end

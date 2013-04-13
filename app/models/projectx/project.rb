@@ -22,11 +22,11 @@ module Projectx
 
                     
       belongs_to :customer, :class_name => 'Customerx::Customer'
-      belongs_to :zone, :class_name => 'Authentify::Zone'
+      #belongs_to :zone, :class_name => 'Authentify::Zone'
       belongs_to :sales, :class_name => 'Authentify::User'
       belongs_to :last_updated_by, :class_name => 'Authentify::User'
       belongs_to :project_manager, :class_name => 'Authentify::User'
-      belongs_to :project_type, :class_name => 'Projectx::TypeDefinition'
+      belongs_to :project_type, :class_name => 'Projectx::MiscDefinition'
 
       has_many :contracts, :class_name => "Projectx::Contract"
       accepts_nested_attributes_for :contracts, :allow_destroy => true
@@ -35,8 +35,12 @@ module Projectx
                        :uniqueness => {:case_sensitive => false, :message => 'Duplicate project name'}
       validates :project_num, :presence => true, 
                               :uniqueness => {:case_sensitive => false, :message => 'Duplicated project num'}
-      validates_presence_of :zone_id, :sales_id, :customer_id, :project_manager_id, :project_type_id, :start_date,
+      validates_presence_of :zone_id, :project_manager_id, :project_type_id, :start_date,
                             :end_date, :delivery_date
+      validates :customer_id, :presence => true,
+                              :numericality => {:greater_than => 0}
+      validates :sales_id, :presence => true,
+                           :numericality => {:greater_than => 0}
 
     def self.find_projects(projects, params)
       #return all qualified projects
