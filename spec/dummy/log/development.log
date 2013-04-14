@@ -1,0 +1,504 @@
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateSysLogs (20130321020236)
+Migrating to CreateUserLevels (20130321020237)
+Migrating to CreateUsers (20130321020238)
+Migrating to CreateSysUserGroups (20130321020239)
+Migrating to CreateSysModules (20130321020240)
+Migrating to CreateSysModuleMappings (20130321020241)
+Migrating to AddZoneToAuthentifySysUserGroups (20130321020242)
+Migrating to RemoveZoneFromAuthentifySysUserGroup (20130321020243)
+Migrating to AddZoneIdToAuthentifySysUserGroup (20130321020244)
+Migrating to CreateAuthentifyZones (20130321020245)
+Migrating to CreateAuthentifyGroupTypes (20130321020246)
+Migrating to RemoveManageerIdFromAuthentifyUserLevels (20130321020247)
+Migrating to RemoveUserTypeCodeFromAuthentifySysUserGroups (20130321020248)
+Migrating to RemoveUserTypeDespFromAuthentifySysUserGroups (20130321020249)
+Migrating to AddGroupTypeIdToAuthentifySysUserGroups (20130321020250)
+Migrating to AddManagerGroupIdToAuthentifySysUserGroups (20130321020251)
+Migrating to CreateAuthentifyEngineConfigs (20130321020252)
+Migrating to CreateAuthentifyUserAccesses (20130321020253)
+Migrating to CreateAuthentifyRestrictionDetails (20130321020254)
+Migrating to CreateAuthentifyUserRoles (20130321020255)
+Migrating to AddRoleDefinitionIdToUserRoles (20130321020256)
+Migrating to AddUserIdToUserRoles (20130321020257)
+Migrating to RemoveNameFromUserRoles (20130321020258)
+Migrating to RemoveBriefNoteFromUserRoles (20130321020259)
+Migrating to CreateAuthentifyRoleDefinitions (20130321020260)
+Migrating to AddRoleDefinitionIdToAuthentifyUserAccesses (20130321020261)
+Migrating to RemoveUserRoleIdFromAuthentifyUserAccesses (20130321020262)
+Migrating to CreateCustomerxCustomerStatusCategories (20130321020306)
+Migrating to CreateCustomerxCustomers (20130321020307)
+Migrating to CreateCustomerxQualitySystems (20130321020308)
+Migrating to AddWebToCustomerxCustomers (20130321020309)
+Migrating to CreateCustomerxSalesLeads (20130321020310)
+Migrating to CreateCustomerxLeadLogs (20130321020311)
+Migrating to RemoveLeadEvelFromCustomerxSalesLeads (20130321020312)
+Migrating to AddLeadEvalToCustomerxSalesLeads (20130321020313)
+Migrating to AddSubjectToCustomerxSalesLeads (20130321020314)
+Migrating to CreateCustomerxLeadSources (20130321020315)
+Migrating to RemoveLeadSourceFromCustomerxSalesLeads (20130321020316)
+Migrating to AddLeadSourceIdToCustomerxSalesLeads (20130321020317)
+Migrating to AddBriefNoteToCustomerxLeadSources (20130321020318)
+Migrating to AddVoidToCustomerxLeadLogs (20130321020319)
+Migrating to CreateCustomerxCustomerCommRecords (20130321020320)
+Migrating to CreateCustomerxCommCategories (20130321020321)
+Migrating to AddVoidToCustomerxCustomerCommRecords (20130321020322)
+Migrating to CreateCustomerxCommRecordLogs (20130321020323)
+Migrating to AddLeadDateToCustomerxSalesLeads (20130321020324)
+Migrating to AddInitialOrderTotalToCustomerxSalesLeads (20130321020325)
+Migrating to CreateCustomerxAddresses (20130321020326)
+Migrating to RemoveAddressFromCustomerxCustomers (20130321020327)
+Migrating to RemoveShippingAddressFromCustomerxCustomers (20130321020328)
+Migrating to AddShippingInstructionToCustomerxCustomers (20130321020329)
+Migrating to RemoveEmailContactInfoFromCustomerxCustomers (20130321020330)
+Migrating to CreateCustomerxContacts (20130321020331)
+Migrating to CreateProjectxProjects (20130321020428)
+Migrating to CreateProjectxContracts (20130321020429)
+Migrating to CreateProjectxTaskDefinitions (20130321020430)
+Migrating to CreateProjectxTaskForProjectTypes (20130321020431)
+Migrating to CreateProjectxSkipTaskForProjects (20130321020432)
+Migrating to CreateProjectxTaskExecutions (20130321020433)
+Migrating to CreateProjectxTypeDefinitions (20130321020434)
+Migrating to CreateProjectxStatusDefinitions (20130321020435)
+Migrating to RemoveContractTotalFromProjectxContract (20130321020436)
+Migrating to AddContractAmountToProjectxContract (20130321020437)
+Migrating to CreateProjectxTasks (20130321020438)
+Migrating to AddSqlCodeToAuthentifyUserAccess (20130329180407)
+Migrating to AddMaskedAttrsAndRankToAuthentifyUserAccess (20130329180408)
+Migrating to AddManagerRoleIdToAuthentifyRoleDefinitions (20130407005226)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  ALTER TABLE "authentify_role_definitions" ADD "manager_role_id" integer
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130407005226')[0m
+  [1m[35m (63.0ms)[0m  commit transaction
+  [1m[36m (1.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (1.0ms)[0m  select sqlite_version(*)
+  [1m[36m (8.0ms)[0m  [1mCREATE TABLE "authentify_engine_configs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "engine_name" varchar(255), "engine_version" varchar(255), "argument_name" varchar(255), "argument_value" varchar(255), "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (8.0ms)[0m  CREATE TABLE "authentify_group_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (8.0ms)[0m  [1mCREATE TABLE "authentify_restriction_details" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_access_id" integer, "match_against" varchar(255), "restriction_type" varchar(255), "brief_note" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (50.0ms)[0m  CREATE TABLE "authentify_role_definitions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brief_note" varchar(255), "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "manager_role_id" integer) 
+  [1m[36m (16.0ms)[0m  [1mCREATE TABLE "authentify_sys_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "log_date" datetime, "user_id" integer, "user_name" varchar(255), "user_ip" varchar(255), "action_logged" varchar(255)) [0m
+  [1m[35m (13.0ms)[0m  CREATE TABLE "authentify_sys_module_mappings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "sys_module_id" integer, "sys_user_group_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (16.0ms)[0m  [1mCREATE TABLE "authentify_sys_modules" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "module_name" varchar(255), "module_group_name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (13.0ms)[0m  CREATE TABLE "authentify_sys_user_groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_group_name" varchar(255), "short_note" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "zone_id" integer, "group_type_id" integer, "manager_group_id" integer) 
+  [1m[36m (15.0ms)[0m  [1mCREATE TABLE "authentify_user_accesses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "right" varchar(255), "action" varchar(255), "resource" varchar(255), "resource_type" varchar(255), "brief_note" varchar(255), "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "role_definition_id" integer, "sql_code" text, "masked_attrs" text, "rank" integer) [0m
+  [1m[35m (14.0ms)[0m  CREATE TABLE "authentify_user_levels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "sys_user_group_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (15.0ms)[0m  [1mCREATE TABLE "authentify_user_roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "role_definition_id" integer, "user_id" integer) [0m
+  [1m[35m (14.0ms)[0m  CREATE TABLE "authentify_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "login" varchar(255), "encrypted_password" varchar(255), "salt" varchar(255), "status" varchar(255) DEFAULT 'active', "last_updated_by_id" integer, "customer_id" integer, "auth_token" varchar(255), "password_reset_token" varchar(255), "password_reset_sent_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (8.0ms)[0m  [1mCREATE TABLE "authentify_zones" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "zone_name" varchar(255), "brief_note" varchar(255), "active" boolean DEFAULT 't', "ranking_order" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (10.0ms)[0m  CREATE TABLE "customerx_addresses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "province" varchar(255), "city_county_district" varchar(255), "add_line" varchar(255), "customer_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (12.0ms)[0m  [1mCREATE TABLE "customerx_comm_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brief_note" varchar(255), "active" boolean DEFAULT 't', "ranking_order" integer, "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (12.0ms)[0m  CREATE TABLE "customerx_comm_record_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "customer_comm_record_id" integer, "log" text, "last_updated_by_id" integer, "void" boolean DEFAULT 'f', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (10.0ms)[0m  [1mCREATE TABLE "customerx_contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "customer_id" integer, "name" varchar(255), "position" varchar(255), "phone" varchar(255), "cell_phone" varchar(255), "email" varchar(255), "brief_note" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (10.0ms)[0m  CREATE TABLE "customerx_customer_comm_records" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "customer_id" integer, "via" varchar(255), "subject" varchar(255), "contact_info" text, "content" text, "last_updated_by_id" integer, "comm_category_id" integer, "reported_by_id" integer, "comm_date" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "void" boolean DEFAULT 'f') 
+  [1m[36m (10.0ms)[0m  [1mCREATE TABLE "customerx_customer_status_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "cate_name" varchar(255), "brief_note" varchar(255), "active" boolean DEFAULT 't', "ranking_order" integer, "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (12.0ms)[0m  CREATE TABLE "customerx_customers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "short_name" varchar(255), "since_date" date, "zone_id" integer, "customer_status_category_id" integer, "phone" varchar(255), "fax" varchar(255), "sales_id" integer, "active" boolean DEFAULT 't', "last_updated_by_id" integer, "quality_system_id" integer, "employee_num" varchar(255), "revenue" varchar(255), "customer_eval" text, "main_biz" text, "customer_taste" text, "note" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "web" varchar(255), "shipping_instruction" text) 
+  [1m[36m (9.0ms)[0m  [1mCREATE TABLE "customerx_lead_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "sales_lead_id" integer, "log" text, "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "void" boolean DEFAULT 'f') [0m
+  [1m[35m (11.0ms)[0m  CREATE TABLE "customerx_lead_sources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "active" boolean DEFAULT 't', "ranking_order" integer, "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "brief_note" varchar(255)) 
+  [1m[36m (9.0ms)[0m  [1mCREATE TABLE "customerx_quality_systems" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brief_note" varchar(255), "active" boolean, "last_updated_by_id" integer, "ranking_order" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (13.0ms)[0m  CREATE TABLE "customerx_sales_leads" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "customer_id" integer, "last_updated_by_id" integer, "provider_id" integer, "lead_info" text, "contact_instruction" text, "lead_status" varchar(255), "sale_success" boolean, "close_lead" boolean, "close_lead_date" datetime, "close_lead_by_id" integer, "lead_quality" integer, "lead_accuracy" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "lead_eval" text, "subject" varchar(255), "lead_source_id" integer, "lead_date" date, "initial_order_total" integer) 
+  [1m[36m (10.0ms)[0m  [1mCREATE TABLE "projectx_contracts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "other_charge" decimal(10,2), "payment_term" varchar(255), "paid_out" boolean DEFAULT 'f', "signed" boolean DEFAULT 'f', "sign_date" date, "signed_by_id" integer, "contract_on_file" boolean DEFAULT 'f', "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "contract_amount" decimal(10,2)) [0m
+  [1m[35m (11.0ms)[0m  CREATE TABLE "projectx_projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "project_num" varchar(255), "customer_id" integer, "project_type_id" integer, "zone_id" integer, "project_desp" text, "sales_id" integer, "start_date" date, "end_date" date, "delivery_date" date, "estimated_delivery_date" date, "project_instruction" text, "project_manager_id" integer, "cancelled" boolean DEFAULT 'f', "completed" boolean DEFAULT 'f', "last_updated_by_id" integer, "expedite" boolean DEFAULT 'f', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (9.0ms)[0m  [1mCREATE TABLE "projectx_skip_task_for_projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "task_definition_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (11.0ms)[0m  CREATE TABLE "projectx_status_definitions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brief_note" varchar(255), "last_updated_by_id" integer, "for_what" varchar(255), "ranking_order" integer, "active" boolean DEFAULT 't', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (55.0ms)[0m  [1mCREATE TABLE "projectx_task_definitions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "task_desp" varchar(255), "task_instruction" text, "last_updated_by_id" integer, "ranking_order" integer, "active" boolean DEFAULT 't', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (12.0ms)[0m  CREATE TABLE "projectx_task_executions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "task_definition_id" integer, "expedite" boolean DEFAULT 'f', "expedite_finish_date" date, "brief_note" varchar(255), "skipped" boolean DEFAULT 'f', "completed" boolean DEFAULT 'f', "cancelled" boolean DEFAULT 'f', "start_date" date, "end_date" date, "status_definition_id" integer, "assigned_to_id" integer, "last_updated_by_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (13.0ms)[0m  [1mCREATE TABLE "projectx_task_for_project_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "task_definition_id" integer, "project_type_id" integer, "last_updated_by_id" integer, "execution_order" integer, "execution_sub_order" integer, "start_before_previous_completed" boolean DEFAULT 'f', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (13.0ms)[0m  CREATE TABLE "projectx_tasks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (13.0ms)[0m  [1mCREATE TABLE "projectx_type_definitions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "brief_note" varchar(255), "last_updated_by_id" integer, "for_what" varchar(255), "ranking_order" integer, "active" boolean DEFAULT 't', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (13.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (51.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (10.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130407005226')[0m
+  [1m[35m (9.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020236')
+  [1m[36m (9.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020237')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020238')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020239')[0m
+  [1m[35m (10.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020240')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020241')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020242')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020243')[0m
+  [1m[35m (10.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020244')
+  [1m[36m (12.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020245')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020246')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020247')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020248')
+  [1m[36m (12.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020249')[0m
+  [1m[35m (10.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020250')
+  [1m[36m (10.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020251')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020252')
+  [1m[36m (12.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020253')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020254')
+  [1m[36m (10.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020255')[0m
+  [1m[35m (10.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020256')
+  [1m[36m (51.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020257')[0m
+  [1m[35m (13.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020258')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020259')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020260')
+  [1m[36m (14.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020261')[0m
+  [1m[35m (14.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020262')
+  [1m[36m (12.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020306')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020307')
+  [1m[36m (13.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020308')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020309')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020310')[0m
+  [1m[35m (10.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020311')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020312')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020313')
+  [1m[36m (18.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020314')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020315')
+  [1m[36m (14.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020316')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020317')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020318')[0m
+  [1m[35m (11.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020319')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020320')[0m
+  [1m[35m (15.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020321')
+  [1m[36m (13.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020322')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020323')
+  [1m[36m (47.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020324')[0m
+  [1m[35m (13.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020325')
+  [1m[36m (15.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020326')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020327')
+  [1m[36m (12.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020328')[0m
+  [1m[35m (13.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020329')
+  [1m[36m (90.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020330')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020331')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020428')[0m
+  [1m[35m (10.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020429')
+  [1m[36m (15.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020430')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020431')
+  [1m[36m (14.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020432')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020433')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020434')[0m
+  [1m[35m (14.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020435')
+  [1m[36m (13.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020436')[0m
+  [1m[35m (47.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130321020437')
+  [1m[36m (16.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130321020438')[0m
+  [1m[35m (12.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130329180407')
+  [1m[36m (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130329180408')[0m
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-04-12 06:24:27 -0500
+
+ActiveRecord::StatementInvalid (Could not find table 'authentify_sessions'):
+  activerecord (3.2.12) lib/active_record/connection_adapters/sqlite_adapter.rb:472:in `table_structure'
+  activerecord (3.2.12) lib/active_record/connection_adapters/sqlite_adapter.rb:346:in `columns'
+  activerecord (3.2.12) lib/active_record/connection_adapters/schema_cache.rb:12:in `block in initialize'
+  activerecord (3.2.12) lib/active_record/model_schema.rb:228:in `yield'
+  activerecord (3.2.12) lib/active_record/model_schema.rb:228:in `default'
+  activerecord (3.2.12) lib/active_record/model_schema.rb:228:in `columns'
+  activerecord (3.2.12) lib/active_record/model_schema.rb:243:in `column_defaults'
+  activerecord (3.2.12) lib/active_record/base.rb:482:in `initialize'
+  activerecord (3.2.12) lib/active_record/session_store.rb:132:in `initialize'
+  activerecord (3.2.12) lib/active_record/session_store.rb:312:in `new'
+  activerecord (3.2.12) lib/active_record/session_store.rb:312:in `block in get_session'
+  activesupport (3.2.12) lib/active_support/benchmarkable.rb:50:in `silence'
+  activerecord (3.2.12) lib/active_record/session_store.rb:307:in `get_session'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:251:in `load_session'
+  actionpack (3.2.12) lib/action_dispatch/middleware/session/abstract_store.rb:49:in `block in load_session'
+  actionpack (3.2.12) lib/action_dispatch/middleware/session/abstract_store.rb:57:in `stale_session_check!'
+  actionpack (3.2.12) lib/action_dispatch/middleware/session/abstract_store.rb:49:in `load_session'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:135:in `load!'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:131:in `load_for_write!'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:120:in `merge!'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:243:in `prepare_session'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:209:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.5) lib/rack/etag.rb:23:in `call'
+  rack (1.4.5) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.12) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.12) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:405:in `_run__770761703__call__456186931__callbacks'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.12) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.12) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.12) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.12) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.12) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.12) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.12) lib/rails/engine.rb:479:in `call'
+  railties (3.2.12) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.12) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (3.0ms)
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (48.0ms)
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (251.0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-04-12 06:31:16 -0500
+
+ActiveRecord::StatementInvalid (Could not find table 'authentify_sessions'):
+  activerecord (3.2.12) lib/active_record/connection_adapters/sqlite_adapter.rb:472:in `table_structure'
+  activerecord (3.2.12) lib/active_record/connection_adapters/sqlite_adapter.rb:346:in `columns'
+  activerecord (3.2.12) lib/active_record/connection_adapters/schema_cache.rb:12:in `block in initialize'
+  activerecord (3.2.12) lib/active_record/model_schema.rb:228:in `yield'
+  activerecord (3.2.12) lib/active_record/model_schema.rb:228:in `default'
+  activerecord (3.2.12) lib/active_record/model_schema.rb:228:in `columns'
+  activerecord (3.2.12) lib/active_record/model_schema.rb:243:in `column_defaults'
+  activerecord (3.2.12) lib/active_record/base.rb:482:in `initialize'
+  activerecord (3.2.12) lib/active_record/session_store.rb:132:in `initialize'
+  activerecord (3.2.12) lib/active_record/session_store.rb:312:in `new'
+  activerecord (3.2.12) lib/active_record/session_store.rb:312:in `block in get_session'
+  activesupport (3.2.12) lib/active_support/benchmarkable.rb:50:in `silence'
+  activerecord (3.2.12) lib/active_record/session_store.rb:307:in `get_session'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:251:in `load_session'
+  actionpack (3.2.12) lib/action_dispatch/middleware/session/abstract_store.rb:49:in `block in load_session'
+  actionpack (3.2.12) lib/action_dispatch/middleware/session/abstract_store.rb:57:in `stale_session_check!'
+  actionpack (3.2.12) lib/action_dispatch/middleware/session/abstract_store.rb:49:in `load_session'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:135:in `load!'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:131:in `load_for_write!'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:120:in `merge!'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:243:in `prepare_session'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:209:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.5) lib/rack/etag.rb:23:in `call'
+  rack (1.4.5) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.12) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.12) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:405:in `_run__21610885__call__561437542__callbacks'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.12) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.12) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.12) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.12) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.12) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.12) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.12) lib/rails/engine.rb:479:in `call'
+  railties (3.2.12) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.12) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (31.0ms)
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (98.0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateSysLogs (20130321020236)
+Migrating to CreateUserLevels (20130321020237)
+Migrating to CreateUsers (20130321020238)
+Migrating to CreateSysUserGroups (20130321020239)
+Migrating to CreateSysModules (20130321020240)
+Migrating to CreateSysModuleMappings (20130321020241)
+Migrating to AddZoneToAuthentifySysUserGroups (20130321020242)
+Migrating to RemoveZoneFromAuthentifySysUserGroup (20130321020243)
+Migrating to AddZoneIdToAuthentifySysUserGroup (20130321020244)
+Migrating to CreateAuthentifyZones (20130321020245)
+Migrating to CreateAuthentifyGroupTypes (20130321020246)
+Migrating to RemoveManageerIdFromAuthentifyUserLevels (20130321020247)
+Migrating to RemoveUserTypeCodeFromAuthentifySysUserGroups (20130321020248)
+Migrating to RemoveUserTypeDespFromAuthentifySysUserGroups (20130321020249)
+Migrating to AddGroupTypeIdToAuthentifySysUserGroups (20130321020250)
+Migrating to AddManagerGroupIdToAuthentifySysUserGroups (20130321020251)
+Migrating to CreateAuthentifyEngineConfigs (20130321020252)
+Migrating to CreateAuthentifyUserAccesses (20130321020253)
+Migrating to CreateAuthentifyRestrictionDetails (20130321020254)
+Migrating to CreateAuthentifyUserRoles (20130321020255)
+Migrating to AddRoleDefinitionIdToUserRoles (20130321020256)
+Migrating to AddUserIdToUserRoles (20130321020257)
+Migrating to RemoveNameFromUserRoles (20130321020258)
+Migrating to RemoveBriefNoteFromUserRoles (20130321020259)
+Migrating to CreateAuthentifyRoleDefinitions (20130321020260)
+Migrating to AddRoleDefinitionIdToAuthentifyUserAccesses (20130321020261)
+Migrating to RemoveUserRoleIdFromAuthentifyUserAccesses (20130321020262)
+Migrating to CreateCustomerxCustomerStatusCategories (20130321020306)
+Migrating to CreateCustomerxCustomers (20130321020307)
+Migrating to CreateCustomerxQualitySystems (20130321020308)
+Migrating to AddWebToCustomerxCustomers (20130321020309)
+Migrating to CreateCustomerxSalesLeads (20130321020310)
+Migrating to CreateCustomerxLeadLogs (20130321020311)
+Migrating to RemoveLeadEvelFromCustomerxSalesLeads (20130321020312)
+Migrating to AddLeadEvalToCustomerxSalesLeads (20130321020313)
+Migrating to AddSubjectToCustomerxSalesLeads (20130321020314)
+Migrating to CreateCustomerxLeadSources (20130321020315)
+Migrating to RemoveLeadSourceFromCustomerxSalesLeads (20130321020316)
+Migrating to AddLeadSourceIdToCustomerxSalesLeads (20130321020317)
+Migrating to AddBriefNoteToCustomerxLeadSources (20130321020318)
+Migrating to AddVoidToCustomerxLeadLogs (20130321020319)
+Migrating to CreateCustomerxCustomerCommRecords (20130321020320)
+Migrating to CreateCustomerxCommCategories (20130321020321)
+Migrating to AddVoidToCustomerxCustomerCommRecords (20130321020322)
+Migrating to CreateCustomerxCommRecordLogs (20130321020323)
+Migrating to AddLeadDateToCustomerxSalesLeads (20130321020324)
+Migrating to AddInitialOrderTotalToCustomerxSalesLeads (20130321020325)
+Migrating to CreateCustomerxAddresses (20130321020326)
+Migrating to RemoveAddressFromCustomerxCustomers (20130321020327)
+Migrating to RemoveShippingAddressFromCustomerxCustomers (20130321020328)
+Migrating to AddShippingInstructionToCustomerxCustomers (20130321020329)
+Migrating to RemoveEmailContactInfoFromCustomerxCustomers (20130321020330)
+Migrating to CreateCustomerxContacts (20130321020331)
+Migrating to CreateProjectxProjects (20130321020428)
+Migrating to CreateProjectxContracts (20130321020429)
+Migrating to CreateProjectxTaskDefinitions (20130321020430)
+Migrating to CreateProjectxTaskForProjectTypes (20130321020431)
+Migrating to CreateProjectxSkipTaskForProjects (20130321020432)
+Migrating to CreateProjectxTaskExecutions (20130321020433)
+Migrating to CreateProjectxTypeDefinitions (20130321020434)
+Migrating to CreateProjectxStatusDefinitions (20130321020435)
+Migrating to RemoveContractTotalFromProjectxContract (20130321020436)
+Migrating to AddContractAmountToProjectxContract (20130321020437)
+Migrating to CreateProjectxTasks (20130321020438)
+Migrating to AddSqlCodeToAuthentifyUserAccess (20130329180407)
+Migrating to AddMaskedAttrsAndRankToAuthentifyUserAccess (20130329180408)
+Migrating to AddManagerRoleIdToAuthentifyRoleDefinitions (20130407005226)
+Migrating to AddSessionsTable (20130412113645)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "authentify_sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (17.0ms)[0m  [1mCREATE INDEX "index_authentify_sessions_on_session_id" ON "authentify_sessions" ("session_id")[0m
+  [1m[35m (0.0ms)[0m  CREATE INDEX "index_authentify_sessions_on_updated_at" ON "authentify_sessions" ("updated_at")
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130412113645')[0m
+  [1m[35m (15.0ms)[0m  commit transaction
+  [1m[36m (1.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-04-12 06:39:28 -0500
+Processing by Authentify::SessionsController#new as HTML
+  [1m[36mAuthentify::Session Load (0.0ms)[0m  [1mSELECT "authentify_sessions".* FROM "authentify_sessions" LIMIT 1[0m
+Completed 500 Internal Server Error in 4ms
+
+NoMethodError (undefined method `action_rights_top' for nil:NilClass):
+  C:/apps/authentify/app/custom/authentify/user_privilege_helper.rb:41:in `access_right_finder'
+  C:/apps/authentify/app/custom/authentify/user_privilege_helper.rb:25:in `check_access_right'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:451:in `_run__1021503018__process_action__582366028__callbacks'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.12) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.12) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.12) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.12) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.12) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.12) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.12) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.12) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.12) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.12) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.12) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.12) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.12) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.12) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.12) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.12) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.12) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.12) lib/action_dispatch/routing/route_set.rb:601:in `call'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.5) lib/rack/etag.rb:23:in `call'
+  rack (1.4.5) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.12) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.12) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:405:in `_run__104834329__call__807932377__callbacks'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.12) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.12) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.12) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.12) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.12) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.12) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.12) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.12) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.12) lib/rails/engine.rb:479:in `call'
+  railties (3.2.12) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.12) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/apps/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (68.0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml

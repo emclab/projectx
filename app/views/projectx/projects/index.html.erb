@@ -20,19 +20,19 @@
 
 <% @projects.each do |prj| %>
   <tr>
-  	<% if has_action_right?('show','customerx_customers', :id => prj.customer.id, :zone_id => prj.customer.zone_id ) %>
-  	  <td><%= link_to prj.customer_id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{customer_path(prj.customer_id)}"  %></td>
+  	<% if has_action_right?('show','customerx_customers', prj.customer ) %>
+  	  <td><%= link_to prj.customer.short_name, SUBURI + "/authentify/view_handler?index=1&url=#{customer_path(prj.customer_id)}"  %></td>
   	<% else %>
-  	  <td><%= print_attribute(prj, 'customer_id') %></td>
+  	  <td><%= prt(prj, 'customer.short_name') %></td>
   	<% end %>
-    <td><%= print_attribute(prj, :name) %></td>
-    <td><%= print_attribute(prj, :project_num) %></td>
-    <td><%= print_attribute(prj, :start_date) %></td>
-    <td><%= print_attribute(prj, :project_manager_id) %></td>
-    <td><%= print_attribute(prj, 'sales.name') %></td>
-    <td><%= print_attribute(prj, :completion_percent) %></td>
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_projects' ) %></td>
-    <td><%= link_to 'Show', SUBURI + "/authentify/view_handler?index=1&url=#{project_path(prj)}" if has_action_right?('show', 'projectx_projects') %></td>
+    <td><%= prt(prj, :name) %></td>
+    <td><%= prt(prj, :project_num) %></td>
+    <td><%= prt(prj, :start_date) %></td>
+    <td><%= prt(prj, :project_manager_id) %></td>
+    <td><%= prt(prj, 'sales.name') %></td>
+    <td><%= prt(prj, :completion_percent) %></td>
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_projects', prj ) %></td>
+    <td><%= link_to 'Show', SUBURI + "/authentify/view_handler?index=1&url=#{project_path(prj)}" if has_action_right?('show', 'projectx_projects', prj) %></td>
   </tr>
 <% end %>
 </table>

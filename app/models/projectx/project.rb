@@ -5,11 +5,13 @@ module Projectx
       attr_accessible :name, :project_num, :customer_id, :project_type_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
+                      :customer_name_autocomplete,
                       :as => :role_new
                       
       attr_accessible :name, :project_num, :customer_id, :project_type_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
-                      :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes, 
+                      :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
+                      :customer_name_autocomplete,
                       :as => :role_update
 
 
@@ -42,6 +44,17 @@ module Projectx
                               :numericality => {:greater_than => 0}
       #validates :sales_id, :presence => true,
         #                   :numericality => {:greater_than => 0}
+
+
+      def customer_name_autocomplete
+        self.customer.try(:name)
+      end
+
+      def customer_name_autocomplete=(name)
+        self.customer = Customerx::Customer.find_by_name(name) if name.present?
+      end
+
+
 
     def self.find_projects(projects, params)
       #return all qualified projects
