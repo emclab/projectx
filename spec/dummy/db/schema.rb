@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130329180408) do
+ActiveRecord::Schema.define(:version => 20130412113645) do
 
   create_table "authentify_engine_configs", :force => true do |t|
     t.string   "engine_name"
@@ -44,7 +44,18 @@ ActiveRecord::Schema.define(:version => 20130329180408) do
     t.integer  "last_updated_by_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "manager_role_id"
   end
+
+  create_table "authentify_sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "authentify_sessions", ["session_id"], :name => "index_authentify_sessions_on_session_id"
+  add_index "authentify_sessions", ["updated_at"], :name => "index_authentify_sessions_on_updated_at"
 
   create_table "authentify_sys_logs", :force => true do |t|
     t.datetime "log_date"

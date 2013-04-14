@@ -12,10 +12,5 @@ module Projectx
 
     protected
 
-    def page(models)
-      return models if models.blank?
-      return models.page(params[:page]).per_page(30)
-    end
-
   end
 end

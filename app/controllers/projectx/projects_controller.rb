@@ -8,7 +8,7 @@ module Projectx
 
     def index
       @title = 'Projects'
-      @projects = find_projects(@model_ar_r)
+      @projects = find_projects(params[:projectx_projects][:model_ar_r])
     end
 
 
@@ -18,11 +18,12 @@ module Projectx
       @project.contracts.build
     end
 
+
     def create
       @project = Projectx::Project.new(params[:project], :as => :role_new)
       @project.last_updated_by_id = session[:user_id]
       if @project.save
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Saved!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Saved!")
       else
         flash[:notice] = 'Data error. NOT Saved!'
         render 'new'
@@ -38,7 +39,7 @@ module Projectx
         @project = Projectx::Project.find(params[:id])
         @project.last_updated_by_id = session[:user_id]
         if @project.update_attributes(params[:project], :as => :role_update)
-          redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Update Saved!")
+          redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Updated!")
         else
           flash[:notice] = 'Data error. NOT Saved!'
           render 'edit'
@@ -60,45 +61,31 @@ module Projectx
     end
 
     def search_results
-      @projects = Projectx::Project.new(params[:project], :as => :role_search_stats)
-      @projects = @projects.find_projects()
-        @projects = sort_projects(@projects)
-        #seach params
-        @search_params = search_params()
+      @title = 'Project Search Results'
+      @projects = find_projects(params[:projectx_projects][:model_ar_r])
+      #seach params
+      @search_params = search_params()
     end
     
     protected
     
-    def sort_projects(projects)
-      if grant_access?('search_global', 'projectx_projects')
-        projects
-      elsif grant_access?('search_regional', 'projectx_projects')
-        user_zone_ids = session[:user_priviledge].user_zones
-        projects = projects.where(:project => {:zone_id => user_zone_ids})
-      elsif grant_access?('search_individual', 'projectx_projects')
-        projects = projects.where("projectx_projects.sales_id = ?", session[:user_id])
-      else
-        projects = []
-      end
-      projects.page(params[:page]).per_page(30)
-    end
-    
     def search_params
       search_params = "参数："
-      search_params += ' 开始日期：' + params[:project][:start_date_s] if params[:project][:start_date_s].present?
-      search_params += ', 结束日期：' + params[:project][:end_date_s] if params[:project][:end_date_s].present?
-      search_params += ', 关键词 ：' + params[:project][:keyword] if params[:project][:keyword].present?
-      search_params += ', 片区 ：' + Authentify::Zone.find_by_id(params[:project][:zone_id_s].to_i).zone_name if params[:project][:zone_id_s].present?
-      search_params += ', 业务员 ：' + Authentify::User.find_by_id(params[:project][:sales_id_s].to_i).name if params[:project][:sales_id_s].present?
+      search_params += ' 开始日期：' + params[:start_date_s] if params[:start_date_s].present?
+      search_params += ', 结束日期：' + params[:end_date_s] if params[:end_date_s].present?
+      search_params += ', 关键词 ：' + params[:keyword] if params[:keyword].present?
+      search_params += ', 片区 ：' + Authentify::Zone.find_by_id(params[:zone_id_s].to_i).zone_name if params[:zone_id_s].present?
+      search_params += ', 业务员 ：' + Authentify::User.find_by_id(params[:sales_id_s].to_i).name if params[:sales_id_s].present?
       search_params
     end
     
-    def find_projects(project)
-      #projects = Projectx::Project.find_projects(project, params).page(params[:page]).per_page(30).order("expedite DESC, zone_id, id DESC, start_date DESC")
-      projects = @model.find_projects(project, params).page(params[:page]).per_page(30).order("expedite DESC, zone_id, id DESC, start_date DESC")
-      return projects if projects.blank?
-      projects = projects.all()
+    def find_projects(projects)
+      max_page = find_const('pagination').argument_value
+      projects = projects.page(params[:page]).per_page(max_page).order("expedite DESC, zone_id, id DESC, start_date DESC")
+      projects.all()
     end
     
   end
+
+
 end
