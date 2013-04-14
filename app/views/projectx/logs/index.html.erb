@@ -1,0 +1,13 @@
+<div id='main_body'>
+
+<% if @which_table == 'project' %>
+  <%= render 'index_project' %>
+<% elsif @which_table == 'task' %>
+  <%= render 'index_task' %>
+<% elsif @which_table == 'task_request' %>
+  <%= render 'index_task_request' %>
+<% else %>
+  <h2>Parent object NOT correct</h2>
+<% end %>
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+</div>

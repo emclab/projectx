@@ -1,6 +1,7 @@
 class CreateProjectxTaskRequests < ActiveRecord::Migration
   def change
     create_table :projectx_task_requests do |t|
+      t.string :name
       t.integer :task_id
       t.date :request_date
       t.boolean :expedite, :default => false

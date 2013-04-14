@@ -1,0 +1,15 @@
+<div id='main_body'>
+<h1>新Log</h1>
+<% if @which_table == 'project' %>
+  <%= render :partial => 'form_new', :locals => {:parent_obj => @project} %>
+  <%= link_to 'Back', project_path(@project) %>
+<% elsif @which_table == 'task' %>
+  <%= render :partial => 'form_new', :locals => {:parent_obj => @task} %>
+  <%= link_to 'Back', project_task_path(@task.project, @task) %>
+<% elsif @which_table == 'task_request' %>
+  <%= render :partial => 'form_new', :locals => {:parent_obj => @task_request} %>
+  <%= link_to 'Back', task_task_reqeust_path(@task_request.task, @task_request) %>
+<% else %>
+  <h2>Parent object name NOT correct!</h2>
+<% end %>
+</div>

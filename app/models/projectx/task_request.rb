@@ -10,7 +10,7 @@ module Projectx
     
     validates_presence_of :request_date
     validates :request_content, :presence => true,
-                                :uniquness => {:scope => :task_id, :case_sensitive => false}
+                                :uniqueness => {:scope => :task_id, :case_sensitive => false}
     validates :task_id, :presence => true,
                         :numericality => {:greater_than => 0}
   end

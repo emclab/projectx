@@ -7,6 +7,7 @@ class CreateProjectxTasks < ActiveRecord::Migration
       t.boolean :cancelled, :default => false
       t.boolean :completed, :default => false
       t.boolean :expedite, :default => false
+      t.boolean :skipped, :default => false
       t.date :finish_date
       t.date :start_date
       t.integer :last_updated_by_id

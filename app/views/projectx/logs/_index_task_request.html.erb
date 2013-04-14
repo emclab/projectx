@@ -1,0 +1,32 @@
+
+  <h1>Log for Task Requests</h1>
+  <div class="pigination"><%= will_paginate @logs %></div>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Date</th>
+      <th>ProjectName</th>
+      <th>TaskName</th>
+      <th>TaskRequestName</th>
+      <th>Log</th>
+      <th>Entered By</th>
+      <th></th>
+    </tr>
+
+    <% @logs.each do |r| %>
+        <tr>
+          <td><%= r.id %></td>
+          <td><%= (r.created_at + 8.hours).strftime("%Y/%m/%d")%></td>
+          <td><%= Projectx::Project.find_by_id(r.task_request.task.project.id).name %></td>
+          <td><%= prt(r, 'task_request.task.task_definition.name') %></td>
+          <td><%= prt(r, 'task_request.name')%></td>
+          <td><%= prt(r, :log) %></td>
+          <td><%= prt(r, 'last_updated_by.name') %></td>
+          
+        </tr>
+    <% end %>
+
+  </table>
+
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+

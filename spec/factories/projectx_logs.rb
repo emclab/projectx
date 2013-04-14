@@ -3,7 +3,8 @@
 FactoryGirl.define do
   factory :log, :class => 'Projectx::Log' do
     task_id 1
-    task_request_id 1
+    task_request_id nil
+    project_id nil
     log "MyText"
     last_updated_by_id 1
    

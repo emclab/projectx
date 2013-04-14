@@ -1,0 +1,27 @@
+
+  <h1>Log for Projects</h1>
+  <div class="pigination"><%= will_paginate @logs %></div>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>ProjectName</th>
+      <th>Date</th>
+      <th>Log</th>
+      <th>Entered By</th>
+    </tr>
+
+    <% @logs.each do |r| %>
+        <tr>
+          <td><%= r.id %></td>
+          <td><%= Projectx::Project.find_by_id(r.project.id).name %></td>
+          <td><%= (r.created_at + 8.hours).strftime("%Y/%m/%d")%></td>
+          <td><%= prt(r, :log) %></td>
+          <td><%= prt(r, 'last_updated_by.name') %></td>
+          
+        </tr>
+    <% end %>
+
+  </table>
+
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+

@@ -1,0 +1,5 @@
+<%= simple_form_for([parent_obj, @log]) do |f| %>    
+ 
+  <%= f.input :log, :label => "内容 ：", :input_html => {:rows => 2} %> 
+  <%= f.button :submit, '保存' %>  
+<% end %> 

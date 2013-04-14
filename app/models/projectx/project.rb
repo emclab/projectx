@@ -2,12 +2,12 @@ module Projectx
   class Project < ActiveRecord::Base
 
 
-      attr_accessible :name, :project_num, :customer_id, :project_type_id, :zone_id, :project_desp, :sales_id, :start_date,
+      attr_accessible :name, :project_num, :customer_id, :project_type_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
                       :as => :role_new
                       
-      attr_accessible :name, :project_num, :customer_id, :project_type_id, :zone_id, :project_desp, :sales_id, :start_date,
+      attr_accessible :name, :project_num, :customer_id, :project_type_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes, 
                       :as => :role_update
@@ -23,11 +23,12 @@ module Projectx
                     
       belongs_to :customer, :class_name => 'Customerx::Customer'
       #belongs_to :zone, :class_name => 'Authentify::Zone'
-      belongs_to :sales, :class_name => 'Authentify::User'
+      #belongs_to :sales, :class_name => 'Authentify::User'
       belongs_to :last_updated_by, :class_name => 'Authentify::User'
       belongs_to :project_manager, :class_name => 'Authentify::User'
       belongs_to :project_type, :class_name => 'Projectx::MiscDefinition'
-
+      has_many :logs, :class_name => 'Projectx::Log'
+      has_many :tasks, :class_name => 'Projectx::Task'
       has_many :contracts, :class_name => "Projectx::Contract"
       accepts_nested_attributes_for :contracts, :allow_destroy => true
     
@@ -35,12 +36,12 @@ module Projectx
                        :uniqueness => {:case_sensitive => false, :message => 'Duplicate project name'}
       validates :project_num, :presence => true, 
                               :uniqueness => {:case_sensitive => false, :message => 'Duplicated project num'}
-      validates_presence_of :zone_id, :project_manager_id, :project_type_id, :start_date,
+      validates_presence_of :project_manager_id, :project_type_id, :start_date,
                             :end_date, :delivery_date
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}
-      validates :sales_id, :presence => true,
-                           :numericality => {:greater_than => 0}
+      #validates :sales_id, :presence => true,
+        #                   :numericality => {:greater_than => 0}
 
     def self.find_projects(projects, params)
       #return all qualified projects
@@ -54,7 +55,7 @@ module Projectx
       projects = projects.where(:status => params[:projectx_projects][:status_s]) if params[:projectx_projects][:status_s].present?
       projects = projects.where(:expedite => params[:projectx_projects][:expedite_s]) if params[:projectx_projects][:expedite_s].present?
       projects = projects.where(:completion_percent => params[:projectx_projects][:completion_percent_s]) if params[:projectx_projects][:completion_percent_s].present?
-      projects = projects.where(:zone_id => params[:projectx_projects][:zone_id_s]) if params[:projectx_projects][:zone_id_s].present?
+      #projects = projects.where(:zone_id => params[:projectx_projects][:zone_id_s]) if params[:projectx_projects][:zone_id_s].present?
       #projects = projects.where("sales_id = ?", params[:projectx_projects][:sales_id_s]) if params[:projectx_projects][:sales_id_s].present?
       #projects = projects.where("payment_percent = ?", params[:projectx_projects][:payment_percent_s]) if params[:projectx_projects][:payment_percent_s].present?
       projects

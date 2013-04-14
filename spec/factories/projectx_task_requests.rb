@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :task_request, :class => 'Projectx::TaskRequest' do
+    name 'printing a copy'
     task_id 1
     request_date "2013-04-12"
     expedite false

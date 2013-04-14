@@ -4,18 +4,26 @@ Projectx::Engine.routes.draw do
   resources :task_definitions
   resources :task_for_project_types
   resources :contracts, :only => [:index]
+  resources :logs, :only => [:index]
   resources :projects do
-    resources :skip_task_for_projects
     resources :contracts
-    resources :task_executions
-    resources :sales
-    resources :customer
-    resources :project_manager
+    resources :task
+    resources :logs
+ 
     collection do
       get :search
       put :search_results
       get :autocomplete
     end
+  end
+  
+  resources :tasks do
+    resources :task_requests
+    resources :logs
+  end
+  
+  resources :task_requests do
+    resources :logs
   end
 
 end
