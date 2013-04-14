@@ -1,9 +1,13 @@
-<%= simple_form_for task_definition do |f| %>    
-	  <%= f.input :name, :label => 'Task Name:' %>  
-	  <%= f.input :task_desp, :label => 'Description:' %>
-	  <%= f.input :task_instruction, :label => 'Instructions:' %>
-	  <%= f.input :ranking_order, :label => 'Ranking Order:' %>
-	  <%= f.input :active, :label => 'Active:' %>
+<%= simple_form_for @task_definition do |f| %>    
+	  <%= f.input :name, :label => 'Task Name:', :readonly => readonly?(@task_definition, 'name') %>  
+	  <%= f.input :task_desp, :label => 'Description:', :readonly => readonly?(@task_definition, 'task_desp') %>
+	  <%= f.input :task_instruction, :label => 'Instructions:', :readonly => readonly?(@task_definition, 'task_instruction') %>
+	  <%= f.input :ranking_order, :label => 'Ranking Order:', :readonly => readonly?(@task_definition, 'ranking_order') %>
+	  <% if readonly?(@task_definition, 'active')%>
+        <%= f.input :active_noupdate, :label => 'Active:', :readonly => true, :required => false, :input_html => {:value => @task_definition.active} %>
+      <% else %>
+        <%= f.input :active, :label => 'Active:', :collection => [['是', true], ['否', false]]%>
+      <% end %>
 	  
 	  <%= f.button :submit, 'Save' %>  
 <% end %>  

@@ -44,9 +44,9 @@ module Projectx
     
     protected
     def require_for_what
-      return true if params[:for_what].present?
-      flash.now[:error] = 'Missing Data (for_what)!'
-      return false
+      unless params[:for_what].present?
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Missing Data!") 
+      end
     end
   end
 end
