@@ -3,11 +3,11 @@ namespace :db do
   task :integration => :environment do
     require 'factory_girl'
     #require File.dirname(__FILE__) + '/../../spec/integrationfactories.rb'
-    require File.expand_path("/../../spec/factories", __FILE__)
-    require File.dirname(__FILE__) + '/../../spec/factories'
+    #require File.expand_path("/../../spec/factories", __FILE__)
+    #require File.dirname(__FILE__) + '/../../spec/factories'
 
-      @engine_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'Pagination', :argument_value => 30)
       @type_of_user = FactoryGirl.create(:group_type, :name => 'employee')
+      @engine_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
       @z1 = FactoryGirl.create(:zone, :zone_name => 'zone1: hq')
       @z2 = FactoryGirl.create(:zone, :zone_name => 'zone2: regional')
       @z3 = FactoryGirl.create(:zone, :zone_name => 'zone3')

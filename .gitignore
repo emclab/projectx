@@ -1,0 +1,15 @@
+.bundle/
+log/*.log
+/tmp
+/db/*.sqllite3
+*.swp
+*~
+.project
+.DS_Store
+.idea/
+pkg/
+test/dummy/db/*.sqlite3
+test/dummy/log/*.log
+test/dummy/tmp/
+test/dummy/.sass-cache
+
