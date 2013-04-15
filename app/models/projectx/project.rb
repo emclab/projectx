@@ -31,8 +31,8 @@ module Projectx
       belongs_to :project_type, :class_name => 'Projectx::MiscDefinition'
       has_many :logs, :class_name => 'Projectx::Log'
       has_many :tasks, :class_name => 'Projectx::Task'
-      has_many :contracts, :class_name => "Projectx::Contract"
-      accepts_nested_attributes_for :contracts, :allow_destroy => true
+      has_one :contract, :class_name => "Projectx::Contract"
+      accepts_nested_attributes_for :contract, :allow_destroy => true
     
       validates :name, :presence => true,
                        :uniqueness => {:case_sensitive => false, :message => 'Duplicate project name'}
