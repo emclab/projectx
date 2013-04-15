@@ -86,15 +86,18 @@ module Projectx
     end
   
     def load_project
-      @project = Projectx::Project.find_by_id(params[:project_id]) if params[:project_id].present?
+      @project = Projectx::Project.find_by_id(params[:project_id]) if params[:project_id].present? &&
+                                                                      params[:project_id].to_i > 0
     end
     
     def load_task
-      @task = Projectx::Task.find_by_id(params[:task_id]) if params[:task_id].present?
+      @task = Projectx::Task.find_by_id(params[:task_id]) if params[:task_id].present? &&
+                                                             params[:task_id].to_i > 0
     end
     
     def load_task_request
-      @task_request = Projectx::TaskRequest.find_by_id(params[:task_request_id]) if params[:task_request_id].present?
+      @task_request = Projectx::TaskRequest.find_by_id(params[:task_request_id]) if params[:task_request_id].present? &&
+                                                                                    params[:task_request_id].to_i > 0
     end
   end
 end

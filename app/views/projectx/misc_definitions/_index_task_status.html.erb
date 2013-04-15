@@ -1,10 +1,10 @@
 
-  <h1>Quality System</h1>
+  <h1>Task Status</h1>
   <table>
     <tr>
       <th>#</th>
       <th>Create Date</th>
-      <th>Type</th>
+      <th>TaskStatus</th>
       <th>Brief Note</th>
       <th>Ranking Order</th>
       <th>Entered By</th>
@@ -19,15 +19,15 @@
           <td><%= qs.brief_note %></td>
           <td><%= qs.ranking_order %></td>
           <td><%= qs.last_updated_by.name %></td>
-          <td><%= link_to 'Edit', edit_misc_definition_path(qs, :subaction => 'project_type', :format => :js), 
-                  :remote => true %></td>
+          <td><%= link_to 'Edit', edit_misc_definition_path(qs, :subaction => 'task_status', :format => :js), 
+                  :remote => true if has_action_right?('update_task_status', 'projectx_misc_definitions', qs) %></td>
         </tr>
     <% end %>
 
   </table>
 
   <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
-  <%= link_to "New Project type", new_misc_definition_path(:for_which => 'project_type', :subaction => 'project_type', :format => :js), :remote => true, 
-             :id => 'new_log_link'  %>
+  <%= link_to "New Task Status", new_misc_definition_path(:for_which => 'task_status', :subaction => 'task_status', :format => :js), :remote => true, 
+             :id => 'new_log_link' if has_action_right?('create_task_status', 'projectx_misc_definitions') %>
 
 

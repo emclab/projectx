@@ -61,7 +61,7 @@ module Projectx
     def require_for_which     
       @for_which = params[:for_which] if params[:for_which].present?
       @for_which = Projectx::MiscDefinition.find_by_id(params[:id]).for_which if params[:id].present?
-      unless @for_which == 'project_status' || @for_which == 'project_type' 
+      unless @for_which == 'project_status' || @for_which == 'task_status' 
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Initial Params Error!") 
       end
     end
@@ -69,13 +69,13 @@ module Projectx
     def title(action, for_which)
       if action == 'index'
         return "项目状态" if for_which == 'project_status'
-        return "项目类型" if for_which == 'project_type'
+        return "项目任务状态" if for_which == 'task_status'
       elsif action == 'new'
         return "新项目状态" if for_which == 'project_status'
-        return "新项目类型" if for_which == 'project_type'
+        return "新项目任务状态" if for_which == 'task_status'
       elsif action == 'edit'
         return "更新项目状态" if for_which == 'project_status'
-        return "更新项目类型" if for_which == 'project_type'
+        return "更新项目任务状态" if for_which == 'task_status'
       end
     end
   end
