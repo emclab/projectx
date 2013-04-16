@@ -1,8 +1,46 @@
 <div id="main_body">
-	<h1>Contract</h1>
-	<div class="pagination"><%= will_paginate @contracts %></div>
- 
-	<%= render 'form_list', :locals => { :contracts => @contracts} %>
- 
+  <h1>Contracts</h1>
+  <div class="pagination"><%= will_paginate @contracts %></div>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Id</th>
+      <th>Project Name</th>
+      <th>Signed By</th>
+      <th>SignedDate</th>
+      <th>Sales</th>
+      <th>Payment Term</th>
+      <th>Contract Amount</th>
+      <th>Payout?</th>
+      <th></th>
+
+    </tr>
+
+    <% @contracts.each do |contr| %>
+        <tr>
+          <% if has_action_right?('show','projectx_contracts', contr ) %>
+              <td><%= link_to contr.id, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_path(contr.id)}"  %></td>
+          <% else %>
+              <td><%= prt(contr, 'project.name') %></td>
+          <% end %>
+          <% if has_action_right?('show','projectx_projects', contr.project ) %>
+              <td><%= link_to contr.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_path(contr.project_id)}"  %></td>
+          <% else %>
+              <td><%= prt(contr, 'project.name') %></td>
+          <% end %>
+          <td><%= prt(contr, :signed_by_id) %></td>
+          <td><%= prt(contr, :sign_date) %></td>
+          <td><%= prt(contr, 'project.customer.sales.name') %></td>
+          <td><%= prt(contr, :payment_term) %></td>
+          <td><%= prt(contr, :contract_amount) %></td>
+          <td><%= prt(contr, :paid_out) %></td>
+          <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_path(contr)}" if has_action_right?('update', 'projectx_contracts', contr ) %></td>
+        </tr>
+    <% end %>
+  </table>
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+  &nbsp;&nbsp;<%= link_to 'New Contract', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_contracts') %>
+  &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_contracts_path}" %>
+
 </div>
 
