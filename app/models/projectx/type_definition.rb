@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Projectx
   class TypeDefinition < ActiveRecord::Base
     attr_accessor :active_noupdate

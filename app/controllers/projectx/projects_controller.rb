@@ -58,7 +58,7 @@ module Projectx
 
     def search
       @title = 'Project Search'
-        @project = Projectx::Project.new()
+      @project = Projectx::Project.new()
     end
 
     def search_results

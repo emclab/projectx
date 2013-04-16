@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Projectx
   class Task < ActiveRecord::Base
     attr_accessible :assigned_to_id, :brief_note, :cancelled, :completed, :expedite, :finish_date, :last_updated_by_id, :project_id, 

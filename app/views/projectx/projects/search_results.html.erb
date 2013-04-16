@@ -1,40 +1,7 @@
 <div id="main_body">
-<h1>Projects</h1>
-<%=@search_params%>
-<div class="pagination"><%= will_paginate @projects %></div>
-  <table>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Number</th>
-      <th>StartDate</th>
-      <th>Manager</th>
-      <th>Sales</th>
-      <th>Completion %%</th>
-      <th>Payment Percent</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <% @projects.each do |prj| %>
-        <tr>
-          <% if has_action_right?('show','customerx_customers', prj.customer ) %>
-              <td><%= link_to prj.customer.short_name, SUBURI + "/authentify/view_handler?index=1&url=#{customerx.customer_path(prj.customer_id)}"  %></td>
-          <% else %>
-              <td><%= prt(prj, 'customer.short_name') %></td>
-          <% end %>
-          <td><%= prt(prj, :name) %></td>
-          <td><%= prt(prj, :project_num) %></td>
-          <td><%= prt(prj, :start_date) %></td>
-          <td><%= prt(prj, :project_manager_id) %></td>
-          <td><%= prt(prj, 'customer.sales.name') %></td>
-          <td><%= prt(prj, :completion_percent) %></td>
-          <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_projects', prj ) %></td>
-          <td><%= link_to 'Show', SUBURI + "/authentify/view_handler?index=1&url=#{project_path(prj)}" if has_action_right?('show', 'projectx_projects', prj) %></td>
-        </tr>
-    <% end %>
-  </table>
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-  &nbsp;&nbsp;<%= link_to '输入客户', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create', 'projectx_projects') %>
-  &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>
-</div>
+<h1><%= @title %></h1>
 
+<%= render '_form_list', :locals => { :projects => @projects} %>
+
+<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+</div>
