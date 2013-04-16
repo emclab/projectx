@@ -7,7 +7,7 @@ FactoryGirl.define do
     customer_id 1
     type_definition_id 1
     project_desp "this is the desp of the project"
-    #sales_id 1
+    sales_id 1
     start_date "2013-02-25"
     end_date "2013-02-25"
     delivery_date "2013-02-25"
