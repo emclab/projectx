@@ -15,7 +15,7 @@ module Projectx
     def new
       @title = 'New Project'
       @project = Projectx::Project.new
-      @project.contract.build
+      #@project.contract.build
     end
 
 
@@ -25,30 +25,30 @@ module Projectx
       if @project.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Saved!")
       else
-        flash[:notice] = 'Data error. NOT Saved!'
+        flash[:notice] = 'Data error. Project Not Saved!'
         render 'new'
       end
     end
 
     def edit
       @title = 'Edit Project'
-      @project = Projectx::Project.find(params[:id])
+      @project = Projectx::Project.find_by_id(params[:id])
     end
 
     def update
-        @project = Projectx::Project.find(params[:id])
+        @project = Projectx::Project.find_by_id(params[:id])
         @project.last_updated_by_id = session[:user_id]
         if @project.update_attributes(params[:project], :as => :role_update)
           redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Updated!")
         else
-          flash[:notice] = 'Data error. NOT Saved!'
+          flash[:notice] = 'Data error. Project No Saved!'
           render 'edit'
         end
     end
 
     def show
       @title = 'Project Info'
-      @project = Projectx::Project.find(params[:id])
+      @project = Projectx::Project.find_by_id(params[:id])
     end
 
     def autocomplete
@@ -57,6 +57,7 @@ module Projectx
     end
 
     def search
+      @title = 'Project Search'
         @project = Projectx::Project.new()
     end
 

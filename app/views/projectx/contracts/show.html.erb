@@ -1,29 +1,29 @@
 <div id="main_body">
-<h1>Status Definition Info</h1>
+
+<h1>Contract Info</h1>
 
 <p>
-  <b>Type:</b>
-  <%= @status_definition.for_what %>
+  <b>Id:</b>
+  <%= @contract.name %>
+</p>
+  <b>Project Name:</b>
+  <%= @contract.project.name %>
 </p>
 <p>
-  <b>Name:</b>
-  <%= @status_definition.name %>
+  <b>Ccontract Amount</b>
+  <%= @contract.contract_amount %>
 </p>
 <p>
-  <b>Note:</b>
-  <%= @status_definition.brief_note %>
+  <b>Customer Name:</b>
+  <%= @contract.project.customer.name %>
 </p>
 <p>
-  <b>Ranking:</b>
-  <%= @status_definition.ranking_order %>
-</p>
-<p>
-  <b>Active:</b>:</b>
-  <%= @status_definition.active %>
+  <b>Sales:</b>
+  <%= @contract.customer.sales.name %>
 </p>
 <p>
   <b>Last Updated By:</b>
-  <%= @status_definition.last_updated_by.name %>
+  <%= @contract.last_updated_by.name %>
 </p>
 
   <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>

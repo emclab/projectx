@@ -190,6 +190,8 @@ module Projectx
           cust3 = FactoryGirl.create(:customer, :active => true, :name => 'cust name3', :short_name => 'short name3', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
           cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
           cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
+
+          @contract1 = FactoryGirl.create(:contract)
         end
 
         it "should allow for new project with proper right" do

@@ -1,9 +1,16 @@
-<%= simple_form_for status_definitions do |f| %>    
-	  <%= f.input :name, :label => 'Status Name:' %>  
-	  <%= f.input :for_what, :label => 'Definition For:' %>
-	  <%= f.input :brief_note, :label => 'Brief Notes:' %>
-	  <%= f.input :ranking_order, :label => 'Ranking Order:' %>
-	  <%= f.input :active, :label => 'Active:' %>
+<%= simple_form_for @contract do |f| %>    
+	  <%= f.input :name, :label => 'Project Name:' %>  
+	  <%= f.input :project_num, :label => 'Project Number:', :placeholder => '4-8字' %>
+	  <%= f.input :start_date, :label => 'Start Date:', :as => :string %>
+	  <%= f.input :estimated_delivery_date, :label => 'Estimated End Date:', :as => :string %>
+	  <%= f.input :project_desp, :label => 'Project Description:' %>
+	  <%= f.input :project_instruction, :label => 'Project Instruction', :input_html => { :rows => 4} %>
+	  <%= f.input :sales_id, :label => 'Sales:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_projects') %>        
+	  <%= f.input :project_manager, :label => 'Project Manager:' %>
+	  <%= f.input :expedite, :label => 'Expedite:', :as => :boolean %>
+	  <%= f.input :customer_id, :label => 'Customer:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_projects') %>        
+	  <%= f.input :zone_id, :label => 'Zone:', :collection => return_zone, :label_method => :zone_name, :value_method => :id %>
+	  <%= f.input :sales_id, :label => 'Sales:', :collection => Authentify::UsersHelper::return_users('create', 'customerx_customers') %>        
 	  
 	  <%= f.button :submit, 'Save' %>  
 <% end %>  

@@ -31,7 +31,7 @@ module Projectx
       belongs_to :project_type, :class_name => 'Projectx::MiscDefinition'
       has_many :logs, :class_name => 'Projectx::Log'
       has_many :tasks, :class_name => 'Projectx::Task'
-      has_one :contract, :class_name => "Projectx::Contract"
+      has_one :contract, :class_name => 'Projectx::Contract'
       accepts_nested_attributes_for :contract, :allow_destroy => true
     
       validates :name, :presence => true,
@@ -55,7 +55,7 @@ module Projectx
       end
 
 
-
+=begin
     def self.find_projects(projects, params)
       #return all qualified projects
       #projects = Projectx::Project.scoped  #In Rails < 4 .all makes database call immediately, loads records and returns array.
@@ -73,6 +73,7 @@ module Projectx
       #projects = projects.where("payment_percent = ?", params[:projectx_projects][:payment_percent_s]) if params[:projectx_projects][:payment_percent_s].present?
       projects
     end
+=end
 
   end
 end
