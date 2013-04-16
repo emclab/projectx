@@ -2,9 +2,9 @@
 <% if @for_which == 'project_status' %>
   <h1>Update Project Status</h1>
   <% name_label = 'ProjectStatus' %>  
-<% elsif @for_which == 'project_type' %>
-  <h1>Update Project Type</h1>
-  <% name_label = 'ProjectType' %>  
+<% elsif @for_which == 'task_status' %>
+  <h1>Update Task Status</h1>
+  <% name_label = 'TaskStatus' %>  
 <% end %>
 <%= simple_form_for @misc_definition do |f| %>     
   <%= f.input :name, :label => name_label, :readonly => readonly?(@misc_definition, 'name') %>

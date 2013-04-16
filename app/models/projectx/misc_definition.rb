@@ -7,9 +7,11 @@ module Projectx
     attr_accessible :active, :brief_note, :for_which, :name, :ranking_order, :last_updated_by_id, :as => :role_update
     
     belongs_to :last_updated_by, :class_name => 'Authentify::User'
+    #has_many :project_templates, :class_name => 'Projectx::ProjectTemplate'
     
     validates_presence_of :for_which
-    validates :name, :uniqueness => {:case_sensitive => false, :message => '重名！'}
+    validates :name, :presence => true,
+                     :uniqueness => {:case_sensitive => false, :message => '重名！'}
   
   end
 end

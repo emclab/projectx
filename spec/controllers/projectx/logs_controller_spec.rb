@@ -71,7 +71,9 @@ module Projectx
         ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
         role = FactoryGirl.create(:role_definition)
         user_access = FactoryGirl.create(:user_access, :action => 'index_task_request', :resource => 'projectx_logs', :role_definition_id => role.id, :rank => 1,
-        :sql_code => "Customerx::Log.joins(:task_request => {:task => {:project => :customer}}).where('projectx_logs.task_request_id > ? AND projectx_logs.created_at > ?', 0, 2.years.ago)")
+        :sql_code => "Projectx::Log.joins(:task_request => {:task => {:project => :customer}}).
+        where(:customerx_customers => {:sales_id => session[:user_id]}).
+        where('projectx_logs.task_request_id > ? AND projectx_logs.created_at > ?', 0, 2.years.ago)")
         ur = FactoryGirl.create(:user_role, :role_definition_id => role.id)
         ul = FactoryGirl.build(:user_level, :sys_user_group_id => ug.id)
         u = FactoryGirl.create(:user, :user_levels => [ul], :user_roles => [ur])
@@ -86,7 +88,7 @@ module Projectx
         log1 = FactoryGirl.create(:log, :log => 'newnew', :task_request_id => lead.id, :project_id => nil, :task_id => nil)
         get 'index', {:use_route => :projectx, :task_reqeust_id => lead.id, :which_table => 'task_request', :subaction => 'task_request'}
         #response.should be_success
-        assigns(:logs).should eq([log1, log])
+        assigns(:logs).should eq([])
       end
       
       it "should return all logs for sales_lead for user with index right matching group_id without @sales_lead passes in" do

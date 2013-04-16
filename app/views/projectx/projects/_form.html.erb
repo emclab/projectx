@@ -5,11 +5,11 @@
 	  <%= f.input :estimated_delivery_date, :label => 'Estimated End Date:', :as => :string %>
 	  <%= f.input :project_desp, :label => 'Project Description:' %>
 	  <%= f.input :project_instruction, :label => 'Project Instruction', :input_html => { :rows => 4} %>
-	  <%= f.input :sales_id, :label => 'Sales:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_projects') %>        
+	         
 	  <%= f.input :project_manager, :label => 'Project Manager:' %>
 	  <%= f.input :expedite, :label => 'Expedite:', :as => :boolean %>
 	  <%= f.input :customer_id, :label => 'Customer:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_projects') %>        
-	  <%= f.input :zone_id, :label => 'Zone:', :collection => return_zone, :label_method => :zone_name, :value_method => :id %>
+	  
 	  <%= f.input :sales_id, :label => 'Sales:', :collection => Authentify::UsersHelper::return_users('create', 'customerx_customers') %>        
 	  
 	  <%= f.button :submit, 'Save' %>  
