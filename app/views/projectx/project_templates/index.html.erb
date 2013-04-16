@@ -10,9 +10,7 @@
     <th>Action</th>
     <th>LastUpdatedBy</th>
     <th></th>
-    <th></th>
-    <th></th>
- 
+    
   </tr>
 
 <% @project_templates.each do |r| %>
@@ -22,9 +20,9 @@
   	<td><%= (r.created_at + 8.hours).strftime("%Y/%m/%d") %></td>
     <td><%= prt(r, :name) %></td>   
     <td><%= prt(r, 'type_definition.name' ) %></td>
-    <td><%= prt(r, :active %></td>
+    <td><%= prt(r, :active) %></td>
     <td><%= prt(r, 'last_updated_by.name') %></td>  
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_type_definition_project_template_path(r.type_definition, r)}" if has_action_right?('update', 'projectx_project_templates', r) %></td>
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_type_definition_project_template_path(r.type_definition, r)}" if has_action_right?('update', 'projectx_project_templates', r) %> </td>
 
   </tr>
 <% end %>
