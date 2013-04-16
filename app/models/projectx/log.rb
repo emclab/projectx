@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Projectx
   class Log < ActiveRecord::Base
     attr_accessible :last_updated_by_id, :log, :task_request_id, :task_id, :project_id,

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Projectx
   class Project < ActiveRecord::Base
 

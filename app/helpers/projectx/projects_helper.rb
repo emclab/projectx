@@ -19,6 +19,10 @@ module Projectx
       end
       sales
     end
+    
+    def return_task_definitions
+      Projectx::TaskDefinition.where(:active => true).order('ranking_order')
+    end
 
   end
 end

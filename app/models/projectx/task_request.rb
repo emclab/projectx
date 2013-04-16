@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Projectx
   class TaskRequest < ActiveRecord::Base
     attr_accessible :request_content, :request_date, :requested_by_id, :delivery_instruction, :expected_finish_date, :expedite, 
@@ -8,9 +9,9 @@ module Projectx
     belongs_to :requested_by, :class_name => 'Authentify::User'
     has_many :logs, :class_name => 'Projectx::Log'
     
-    validates_presence_of :request_date
-    validates :request_content, :presence => true,
-                                :uniqueness => {:scope => :task_id, :case_sensitive => false}
+    validates_presence_of :request_date, :expected_finish_date
+    validates :request_content, :presence => true
+                                #:uniqueness => {:scope => :task_id, :case_sensitive => false}
     validates :task_id, :presence => true,
                         :numericality => {:greater_than => 0}
   end

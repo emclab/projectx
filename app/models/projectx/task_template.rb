@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Projectx
   class TaskTemplate < ActiveRecord::Base
     attr_accessible :brief_note, :execution_order, :execution_sub_order, :need_request, :project_template_id, :start_before_previous_completed, 

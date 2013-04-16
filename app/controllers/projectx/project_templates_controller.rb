@@ -18,6 +18,7 @@ module Projectx
     def new
       @title = '新项目样板'
       @project_template = @type_definition.project_templates.new()
+      @project_template.task_templates.build()
     end
   
     def create
