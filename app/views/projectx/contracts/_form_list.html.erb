@@ -1,40 +1,40 @@
-      t.integer :project_id
-      t.decimal :contract_total, :precision => 10, :scale => 2
-      t.decimal :other_charge, :precision => 10, :scale => 2
-      t.string :payment_term
-      t.boolean :paid_out, :default => false
-      t.boolean :signed, :default => false
-      t.date :sign_date
-      t.integer :signed_by_id   #recorded by program
-      t.boolean :contract_on_file, :default => false
-      t.integer :last_updated_by_id
+  <div class="pagination"><%= will_paginate @contracts %></div>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Id</th>
+      <th>Project Name</th>
+      <th>Signed By</th>
+      <th>Signed Date</th>
+      <th>Sales</th>
+      <th>Payment Term</th>
+      <th>Contract Amount</th>
+      <th>Payout?</th>
+      <th></th>
+    </tr>
 
-	<div class="pagination"><%= will_paginate contracts %></div>
-	<table>
-		<tr>
-			<th>#</th>
-			<th>Project Name</th>
-			<th>Contract Total</th>
-			<th>Other Charges</th>
-			<th>Payment Term</th>
-			<th>Last updated by</th>
-			<th></th>
-			<th></th> 
-		</tr>
-		<% contracts.each do |contr| %>
-		  <tr>
-			<td><%= contr.project.name %></td>
-			<td><%= defi.name %></td>
-			<td><%= defi.notes %></td>
-			<td><%= defi.ranking_order %></td>
-			<td><%= defi.active %></td>
-			<td><%= defi.last_updated_by.id %></td>    
-			<td><%= prj.completion_percent %></td>    
-			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if grant_access?('update', 'projectx_status_definitions') %></td>
-			<td><%= link_to 'Show', SUBURI + "/authentify/view_handler?index=1&url=#{show_project_path(prj)}" if grant_access?('show', 'projectx_status_definitions') %></td>
-		  </tr>
-		<% end %>
-	</table>
-	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-	&nbsp;&nbsp;<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if grant_access?('create','projectx_status_definitions') %>
-	&nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>
+    <% @contracts.each do |contr| %>
+        <tr>
+          <% if has_action_right?('show','projectx_contracts', contr ) %>
+              <td><%= link_to contr.id, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_path(contr.id)}"  %></td>
+          <% else %>
+              <td><%= prt(contr, 'project.name') %></td>
+          <% end %>
+          <% if has_action_right?('show','projectx_projects', contr.project ) %>
+              <td><%= link_to contr.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_path(contr.project_id)}"  %></td>
+          <% else %>
+              <td><%= prt(contr, 'project.name') %></td>
+          <% end %>
+          <td><%= prt(contr, 'signed_by.name') %></td>
+          <td><%= prt(contr, :sign_date) %></td>
+          <td><%= prt(contr, 'project.customer.sales.name') %></td>
+          <td><%= prt(contr, :payment_term) %></td>
+          <td><%= prt(contr, :contract_amount) %></td>
+          <td><%= prt(contr, :paid_out) %></td>
+          <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_path(contr)}" if has_action_right?('update', 'projectx_contracts', contr ) %></td>
+        </tr>
+    <% end %>
+  </table>
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+  &nbsp;&nbsp;<%= link_to 'New Contract', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_contracts') %>
+  &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_contracts_path}" %>

@@ -1,5 +1,5 @@
 <div id="main_body">
-<h1>搜索客户</h1>
+<h1><%= @title %></h1>
 
 <%= simple_form_for @project,  :method => :put, :url => search_results_projects_path  do |f| %>
   <%= f.input :start_date_s, :label => "Start Date ：", :as => :string, :input_html => {:size => 40} %>
