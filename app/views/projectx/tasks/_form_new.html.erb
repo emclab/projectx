@@ -1,0 +1,8 @@
+<%= simple_form_for([@project, @task]) do |f| %>    
+ 
+  <%= f.input :project_name, :label => '', :readonly => true, :input_html => {:value => @project.name}%>
+  <%= f.input :customer_name, :label => '', :readonly => true, :input_html => {:value => @project.customer.name} %>
+  <%= f.input :task_definition_id, :label => '', :collection => return_task_definition(@project.project_template_id), include_blank => true %>
+  <%= f.input :log, :label => "内容 ：", :input_html => {:rows => 2} %> 
+  <%= f.button :submit, '保存' %>  
+<% end %> 
