@@ -2,6 +2,26 @@ require 'spec_helper'
 
 module Projectx
   describe ProjectTemplate do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "should be OK" do
+      c = FactoryGirl.build(:project_template)
+      c.should be_valid
+    end
+    
+    it "should reject nil name" do
+      c = FactoryGirl.build(:project_template, :name => nil)
+      c.should_not be_valid
+    end
+    
+    it "should reject nil type_definition id" do
+      c = FactoryGirl.build(:project_template, :type_definition_id => nil)
+      c.should_not be_valid
+    end
+    
+    it "should reject duplicate name " do
+      c1 = FactoryGirl.create(:project_template)
+      c2 = FactoryGirl.build(:project_template, :instruction => 'a dup cate name')
+      c2.should_not be_valid
+    end
+    
   end
 end

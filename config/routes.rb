@@ -1,15 +1,5 @@
 Projectx::Engine.routes.draw do
 
-  get "type_definitions/index"
-
-  get "type_definitions/new"
-
-  get "type_definitions/create"
-
-  get "type_definitions/edit"
-
-  get "type_definitions/update"
-
   resources :misc_definitions
   resources :task_definitions
   resources :contracts, :only => [:index]
@@ -35,7 +25,7 @@ Projectx::Engine.routes.draw do
     resources :logs
   end
   
-  resources :project_types do
+  resources :type_definitions do
     resources :project_templates
   end
   resources :task_templates, :only => [:index]

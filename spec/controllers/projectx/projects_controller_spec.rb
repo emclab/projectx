@@ -62,6 +62,7 @@ module Projectx
         cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
+        @prj0 = FactoryGirl.create(:project) #, :zone_id => @z1.id, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :type_definition_id => @type_of_project.id)
         @prj1 = FactoryGirl.create(:project, :zone_id => @z1.id, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :type_definition_id => @type_of_project.id)
         @prj2 = FactoryGirl.create(:project, :zone_id => @z2.id, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id, :type_definition_id => @type_of_project.id)
         @prj3 = FactoryGirl.create(:project, :zone_id => @z3.id, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :type_definition_id => @type_of_project.id)

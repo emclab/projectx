@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Projectx
   class Project < ActiveRecord::Base
 
@@ -5,13 +6,13 @@ module Projectx
       attr_accessible :name, :project_num, :customer_id, :type_definition_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
-                      :customer_name_autocomplete,
+                      :customer_name_autocomplete, :sales_id,
                       :as => :role_new
                       
       attr_accessible :name, :project_num, :customer_id, :type_definition_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
-                      :customer_name_autocomplete,
+                      :customer_name_autocomplete, :sales_id,
                       :as => :role_update
 
 
@@ -25,7 +26,7 @@ module Projectx
                     
       belongs_to :customer, :class_name => 'Customerx::Customer'
       #belongs_to :zone, :class_name => 'Authentify::Zone'
-      #belongs_to :sales, :class_name => 'Authentify::User'
+      belongs_to :sales, :class_name => 'Authentify::User'
       belongs_to :last_updated_by, :class_name => 'Authentify::User'
       belongs_to :project_manager, :class_name => 'Authentify::User'
       belongs_to :type_definition, :class_name => 'Projectx::TypeDefinition'
@@ -42,8 +43,8 @@ module Projectx
                             :end_date, :delivery_date
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}
-      #validates :sales_id, :presence => true,
-        #                   :numericality => {:greater_than => 0}
+      validates :sales_id, :presence => true,
+                           :numericality => {:greater_than => 0}
 
 
       def customer_name_autocomplete

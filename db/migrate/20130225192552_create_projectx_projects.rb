@@ -7,7 +7,7 @@ class CreateProjectxProjects < ActiveRecord::Migration
       t.integer :type_definition_id
       #t.integer :zone_id
       t.text :project_desp
-      #t.integer :sales_id
+      t.integer :sales_id
       t.date :start_date
       t.date :end_date
       t.date :delivery_date

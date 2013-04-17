@@ -1,0 +1,8 @@
+<div class="fields">
+  <%= f.input :task_definition_id, :collection => return_task_definitions, :prompt => "选任务", :label_method => :name, :value_method => :id,
+                      :label => "任务：", :include_blank => true %>   
+  <%= f.input :execution_order, :label => '执行序号：', :readonly => true, :input_html => {:value => 1} %> 
+  <%= f.input :execution_sub_order, :label => '执行分序号：', :placeholder => 'ex 1, 2, ...' %> 
+  <%= f.input :need_request, :label => '需要申请：', :as => :boolean %>  
+  <%= f.input :brief_note, :label => '简注：', :input_html => {:rows => 3}%>         
+</div>

@@ -1,0 +1,12 @@
+<%= simple_form_for([@type_definition, @project_template]) do |f| %>
+  <%= f.input :name, :label => '模版名称：' %>
+  <%= f.input :instruction, :label => '模版介绍：', :input_html => {:rows => 3} %>
+  &nbsp;&nbsp;所属任务（按执行先后次序排列。相同序号任务表示同时执行）：
+  <%= f.fields_for :task_templates, @project_template.task_templates.first do |builder| %>
+    <p><%= render('first_task_templates', :f => builder) %>
+    </p>  
+  <% end %>   
+  <p><%= link_to_add_fields "加选任务", f, :task_templates %></p>
+  
+  <p><%= f.button :submit, '保存' %></p>
+<% end %>

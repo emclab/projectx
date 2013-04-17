@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 require_dependency "projectx/application_controller"
 
 module Projectx
