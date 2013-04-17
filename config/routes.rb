@@ -26,10 +26,10 @@ Projectx::Engine.routes.draw do
   end
   
   resources :type_definitions do
-    resources :project_templates
+    resources :project_task_templates
   end
   resources :task_templates, :only => [:index]
-  resources :project_templates do
+  resources :project_task_templates do
     resources :task_templates
   end
 end

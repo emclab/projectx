@@ -16,5 +16,6 @@ FactoryGirl.define do
     cancelled false
     completed false
     last_updated_by_id 1
+    project_task_template_id 1
   end
 end
