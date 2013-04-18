@@ -1,7 +1,7 @@
 <div id="main_body">
 <h1>New Project</h1>
 
-<%= render '_form', :locals => { :project => @project} %>
+  <%= render 'form_new', :locals => { :project => @project} %>
 
 <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
 </div>

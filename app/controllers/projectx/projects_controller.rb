@@ -82,7 +82,7 @@ module Projectx
     
     def find_projects(projects)
       max_page = find_const('pagination').argument_value
-      projects = projects.page(params[:page]).per_page(max_page).order("expedite DESC, zone_id, id DESC, start_date DESC")
+      projects = projects.page(params[:page]).per_page(max_page).order("expedite DESC, id DESC, start_date DESC")
       projects.all()
     end
     

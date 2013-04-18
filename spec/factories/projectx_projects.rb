@@ -5,7 +5,6 @@ FactoryGirl.define do
     name "water inspection"
     project_num "201323123"
     customer_id 1
-    type_definition_id 1
     project_desp "this is the desp of the project"
     sales_id 1
     start_date "2013-02-25"
@@ -16,5 +15,6 @@ FactoryGirl.define do
     cancelled false
     completed false
     last_updated_by_id 1
+    project_template_id 1
   end
 end
