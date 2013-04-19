@@ -1,7 +1,5 @@
 <div id="main_body">
 <h1><%= @title %></h1>
-
-<%= render '_form_list', :locals => { :projects => @projects} %>
-
+  <%= render 'form_list', :locals => { :projects => @projects} %>
 <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
 </div>

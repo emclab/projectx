@@ -77,12 +77,14 @@ module Projectx
       search_params += ', 关键词 ：' + params[:keyword] if params[:keyword].present?
       search_params += ', 片区 ：' + Authentify::Zone.find_by_id(params[:zone_id_s].to_i).zone_name if params[:zone_id_s].present?
       search_params += ', 业务员 ：' + Authentify::User.find_by_id(params[:sales_id_s].to_i).name if params[:sales_id_s].present?
+      search_params += ', Status ：' + Projectx::MiscDefinition.find_by_id(params[:sales_id_s].to_i).name if params[:status_id_s].present?
+      search_params += ', Type ：' + Projectx::ProjectTaskTemplate.find_by_id(params[:project_task_template_id_s].to_i).name if params[:project_task_template_id_s].present?
       search_params
     end
     
     def find_projects(projects)
       max_page = find_const('pagination').argument_value
-      projects = projects.page(params[:page]).per_page(max_page).order("expedite DESC, zone_id, id DESC, start_date DESC")
+      projects = projects.page(params[:page]).per_page(max_page).order("expedite DESC, id DESC, start_date DESC")
       projects.all()
     end
     
