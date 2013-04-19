@@ -15,12 +15,16 @@
   <%= @project.customer.name %>
 </p>
 <p>
+  <b>Status:</b>
+  <%= @project.status.name %>
+</p>
+<p>
   <b>Zone:</b>
   <%= @project.customer.zone.zone_name %>
 </p>
 <p>
   <b>Type:</b>:</b>
-  <%= @project.project_type_id %>
+  <%= @project.project_task_template.name %>
 </p>
 <p>
   <b>Sales:</b>

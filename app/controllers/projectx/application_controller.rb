@@ -5,6 +5,8 @@ module Projectx
     include Authentify::AuthentifyUtility
     include Authentify::UsersHelper
     include Authentify::UserPrivilegeHelper
+    
+    include Projectx::MiscDefinitionsHelper
 
     helper_method :has_action_right?, :print_attribute, :readonly?
 

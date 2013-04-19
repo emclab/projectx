@@ -3,33 +3,35 @@ module Projectx
   class Project < ActiveRecord::Base
 
 
-      attr_accessible :name, :project_num, :customer_id, :project_template_id, :project_desp, :start_date,
+      attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
-                      :customer_name_autocomplete, :sales_id,
+                      :customer_name_autocomplete, :sales_id, :status_id,
                       :as => :role_new
                       
-      attr_accessible :name, :project_num, :customer_id, :project_template_id, :project_desp, :start_date,
+      attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
-                      :customer_name_autocomplete, :sales_id,
+                      :customer_name_autocomplete, :sales_id, :status_id,
                       :as => :role_update
 
 
       attr_accessor :project_id_s, :keyword, :start_date_s, :end_date_s, :customer_id_s, :status_s, :expedite_s,
-                    :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s, :completion_percent
+                    :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s, :completion_percent,
+                    :project_task_template_id_s
 
       attr_accessible :project_id_s, :keyword, :start_date_s, :end_date_s, :customer_id_s, :status_s, :expedite_s,
-                    :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s,
+                    :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s, :project_task_template_id_s,
                     :as => :role_search_stats
 
                     
+      belongs_to :status, :class_name => 'Projectx::MiscDefinition'
       belongs_to :customer, :class_name => 'Customerx::Customer'
       #belongs_to :zone, :class_name => 'Authentify::Zone'
       belongs_to :sales, :class_name => 'Authentify::User'
       belongs_to :last_updated_by, :class_name => 'Authentify::User'
       belongs_to :project_manager, :class_name => 'Authentify::User'
-      belongs_to :project_template, :class_name => 'Projectx::ProjectTemplate'
+      belongs_to :project_task_template, :class_name => 'Projectx::ProjectTaskTemplate'
       has_many :logs, :class_name => 'Projectx::Log'
       has_many :tasks, :class_name => 'Projectx::Task'
       has_one :contract, :class_name => 'Projectx::Contract'
@@ -39,7 +41,7 @@ module Projectx
                        :uniqueness => {:case_sensitive => false, :message => 'Duplicate project name'}
       validates :project_num, :presence => true, 
                               :uniqueness => {:case_sensitive => false, :message => 'Duplicated project num'}
-      validates_presence_of :project_manager_id, :project_template_id, :start_date,
+      validates_presence_of :project_manager_id, :project_task_template_id, :start_date,
                             :end_date, :delivery_date
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}

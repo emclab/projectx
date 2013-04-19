@@ -24,5 +24,9 @@ module Projectx
       Projectx::TaskDefinition.where(:active => true).order('ranking_order')
     end
 
+    def return_project_task_templates
+      Projectx::ProjectTaskTemplate.where(:active => true)
+    end
+
   end
 end

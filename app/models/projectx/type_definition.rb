@@ -8,7 +8,7 @@ module Projectx
                     :as => :role_update
                     
     belongs_to :last_updated_by, :class_name => 'Authentify::User'
-    has_many :project_templates, :class_name => 'Projectx::ProjectTemplate'
+    has_many :project_task_templates, :class_name => 'Projectx::ProjectTaskTemplate'
     
     validates :name, :presence => true,
                      :uniqueness => {:case_sensitive => false, :message => '重名！'}

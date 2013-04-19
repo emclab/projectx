@@ -11,7 +11,9 @@ module Projectx
       @engine_config2 = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => 'Cash,Check,Visa, MasterCard')
       @type_of_user = FactoryGirl.create(:group_type, :name => 'employee')
       @project_type1 = FactoryGirl.create(:type_definition, :name => 'type1', :active=> true, :brief_note => 'looking for a new type')
-      @project_template1 = FactoryGirl.create(:project_template, :name => 'template1', :type_definition_id => @project_type1.id )
+      @project_task_template1 = FactoryGirl.create(:project_task_template, :name => 'template1', :type_definition_id => @project_type1.id )
+      @project_status1 = FactoryGirl.create(:misc_definition, :name => 'started', :for_which => 'project_status' )
+
 
       @z1 = FactoryGirl.create(:zone, :zone_name => 'zone1: hq')
       @z2 = FactoryGirl.create(:zone, :zone_name => 'zone2: regional')
@@ -64,11 +66,11 @@ module Projectx
         cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :project_template_id => @project_template1.id)
-        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id, :project_template_id => @project_template1.id)
-        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :project_template_id => @project_template1.id)
-        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :project_template_id => @project_template1.id)
-        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust2.id, :project_template_id => @project_template1.id)
+        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :project_task_template_id => @project_task_template1.id)
+        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id, :project_task_template_id => @project_task_template1.id)
+        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :project_task_template_id => @project_task_template1.id)
+        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :project_task_template_id => @project_task_template1.id)
+        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust2.id, :project_task_template_id => @project_task_template1.id)
       end
 
       context "Has individual 'index' access right " do
@@ -295,11 +297,11 @@ module Projectx
             cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
             cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-            @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :project_template_id => @project_template1.id )
-            @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id, :project_template_id => @project_template1.id )
-            @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :project_template_id => @project_template1.id )
-            @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :project_template_id => @project_template1.id )
-            @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id, :project_template_id => @project_template1.id )
+            @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :project_task_template_id => @project_task_template1.id )
+            @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id, :project_task_template_id => @project_task_template1.id )
+            @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :project_task_template_id => @project_task_template1.id )
+            @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :project_task_template_id => @project_task_template1.id )
+            @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id, :project_task_template_id => @project_task_template1.id )
       end
 
       context "Should be able to 'edit' project with proper right" do
@@ -373,11 +375,11 @@ module Projectx
         cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @prj1 = FactoryGirl.create(:project, :zone_id => @z1.id, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :project_template_id => @project_template1.id )
-        @prj2 = FactoryGirl.create(:project, :zone_id => @z2.id, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id, :project_template_id => @project_template1.id )
-        @prj3 = FactoryGirl.create(:project, :zone_id => @z3.id, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :project_template_id => @project_template1.id )
-        @prj4 = FactoryGirl.create(:project, :zone_id => @z4.id, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :project_template_id => @project_template1.id )
-        @prj5 = FactoryGirl.create(:project, :zone_id => @z2.id, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id, :project_template_id => @project_template1.id )
+        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :project_task_template_id => @project_task_template1.id )
+        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id, :project_task_template_id => @project_task_template1.id )
+        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :project_task_template_id => @project_task_template1.id )
+        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :project_task_template_id => @project_task_template1.id )
+        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id, :project_task_template_id => @project_task_template1.id )
       end
 
       context "Should be able to 'update' project with proper right" do
@@ -451,11 +453,11 @@ module Projectx
         cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id )
-        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id )
-        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id )
-        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id )
-        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id )
+        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :status_id => @project_status1.id )
+        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust2.id, :status_id => @project_status1.id )
+        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :status_id => @project_status1.id )
+        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :status_id => @project_status1.id )
+        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id, :status_id => @project_status1.id )
       end
 
       context "should show projects for user with proper right" do
@@ -570,17 +572,17 @@ module Projectx
         @individual_4_u = FactoryGirl.create(:user, :name => 'name4', :login => 'login4', :email => 'name4@a.com', :user_levels => [@sales_4_ul], :user_roles => [@sales_user_role4])
         @individual_5_u = FactoryGirl.create(:user, :name => 'name5', :login => 'login5', :email => 'name5@a.com', :user_levels => [@sales_5_ul], :user_roles => [@sales_user_role5])
 
-        cust1 = FactoryGirl.create(:customer, :active => true, :name => 'cust name1', :short_name => 'short name1', :zone_id => @z1.id, :last_updated_by_id => @individual_1_u.id)
+        @cust1 = FactoryGirl.create(:customer, :active => true, :name => 'cust name1', :short_name => 'short name1', :zone_id => @z1.id, :last_updated_by_id => @individual_1_u.id)
         @cust2 = FactoryGirl.create(:customer, :active => true, :name => 'cust name2', :short_name => 'short name2', :zone_id => @z2.id, :last_updated_by_id => @individual_2_u.id)
         @cust3 = FactoryGirl.create(:customer, :active => true, :name => 'cust name3', :short_name => 'short name3', :zone_id => @z3.id, :last_updated_by_id => @individual_3_u.id)
-        cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
-        cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
+        @cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
+        @cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => cust1.id, :project_template_id => @project_template1.id )
-        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id, :project_template_id => @project_template1.id )
-        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id, :project_template_id => @project_template1.id )
-        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :project_template_id => @project_template1.id )
-        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id, :project_template_id => @project_template1.id )
+        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :project_num => 'num1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id, :project_task_template_id => @project_task_template1.id )
+        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :project_num => 'num2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id, :project_task_template_id => @project_task_template1.id )
+        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :project_num => 'num3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id, :project_task_template_id => @project_task_template1.id )
+        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :project_num => 'num4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id, :project_task_template_id => @project_task_template1.id )
+        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :project_num => 'num5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust2.id, :project_task_template_id => @project_task_template1.id )
       end
 
       context "Has individual 'search_results' access right " do

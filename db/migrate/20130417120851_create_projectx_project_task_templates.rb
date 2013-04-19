@@ -1,6 +1,6 @@
-class CreateProjectxProjectTemplates < ActiveRecord::Migration
+class CreateProjectxProjectTaskTemplates < ActiveRecord::Migration
   def change
-    create_table :projectx_project_templates do |t|
+    create_table :projectx_project_task_templates do |t|
       t.string :name
       t.integer :type_definition_id
       t.integer :last_updated_by_id

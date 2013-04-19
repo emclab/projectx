@@ -1,6 +1,5 @@
-# encoding: utf-8
 module Projectx
-  class ProjectTemplate < ActiveRecord::Base
+  class ProjectTaskTemplate < ActiveRecord::Base
     attr_accessible :active, :instruction, :last_updated_by_id, :name, :type_definition_id, :as => :role_new
     attr_accessible :active, :instruction, :last_updated_by_id, :name, :type_definition_id, :as => :role_update
     

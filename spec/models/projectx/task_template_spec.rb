@@ -7,6 +7,11 @@ module Projectx
       c.should be_valid
     end
     
+    it "should reject nil project_task_template_id" do
+      c = FactoryGirl.build(:task_template, :project_task_template_id => nil)
+      c.should_not be_valid
+    end
+    
     it "should reject nil task_definition" do
       c = FactoryGirl.build(:task_template, :task_definition_id => nil)
       c.should_not be_valid

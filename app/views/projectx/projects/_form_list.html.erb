@@ -2,8 +2,10 @@
 <table>
   <tr>
     <th>#</th>
+    <th>Customer</th>
     <th>Name</th>
     <th>ProjectNumber</th>
+    <th>Status</th>
     <th>StartDate</th>
     <th>Manager</th>
     <th>Sales</th>
@@ -14,8 +16,6 @@
  
   </tr>
 
-
-
 <% @projects.each do |prj| %>
   <tr>
   	<% if has_action_right?('show','customerx_customers', prj.customer ) %>
@@ -23,10 +23,15 @@
   	<% else %>
   	  <td><%= prt(prj, 'customer.short_name') %></td>
   	<% end %>
+  	
     <% if has_action_right?('show','projectx_projects', prj) %>
+  	  <td><%= link_to prj.name, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_path(prj.id)}"  %></td>
+  	<% else %>
         <td><%= prt(prj, :name) %></td>
-    <% end %>
+  	<% end %>
+    
     <td><%= prt(prj, :project_num) %></td>
+    <td><%= prt(prj, 'status.name') %></td>
     <td><%= prt(prj, :start_date) %></td>
     <td><%= prt(prj, :project_manager_id) %></td>
     <td><%= prt(prj, 'customer.sales.name') %></td>

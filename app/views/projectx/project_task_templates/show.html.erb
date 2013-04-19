@@ -3,7 +3,7 @@
 
 <p>
   <b>名称:</b>
-  <%= @project_template.name %>
+  <%= @project_task_template.name %>
 </p>
 <p>
   <b>项目类型:</b>
@@ -11,15 +11,15 @@
 </p>  
 <p>
   <b>生成日期:</b>
-  <%= (@project_template.created_at + 8.hours).strftime("%Y/%m/%d") %>
+  <%= (@project_task_template.created_at + 8.hours).strftime("%Y/%m/%d") %>
 </p> 
 <p>
   <b>输入/更新:</b>
-  <%= @project_template.last_updated_by.name %>
+  <%= @project_task_template.last_updated_by.name %>
 </p>
 <p>
   <b>所属任务：</b>
-  <% @project_template.task_templates.order("execution_order, execution_sub_order").each do |t| %>
+  <% @project_task_template.task_templates.order("execution_order, execution_sub_order").each do |t| %>
     <%= t.execution_order %>.<%= t.execution_sub_order if t.execution_sub_order.present? %>
     <p><%= t.task_definition.name %></p>
     <p><%= t.brief_note %></p>
@@ -30,5 +30,5 @@
 
 
 <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-  &nbsp;&nbsp;<%= link_to 'New Project Template', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_type_definition_project_template_path(@type_definition)}" if has_action_right?('create', 'projectx_project_templates') %>
+  &nbsp;&nbsp;<%= link_to 'New Project Template', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_type_definition_project_task_template_path(@type_definition)}" if has_action_right?('create', 'projectx_project_task_templates') %>
 </div>
