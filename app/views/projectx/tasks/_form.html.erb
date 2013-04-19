@@ -3,13 +3,16 @@
   <%= f.input :project_name, :label => '项目名称：', :readonly => true, :input_html => {:value => @project.name}%>
   <%= f.input :project_task_template_name, :label => '任务模板：', :readonly => true, :input_html => {:value => @project.project_task_template.name} %>
   <%= f.input :customer_name, :label => '客户名称：', :readonly => true, :input_html => {:value => @project.customer.name} %>
+  <%= f.input :start_date, :label => '开始日期：', :as => :string %>
+  <%= f.input :finish_date, :label => '结束日期', :as => :string %>
   <%= f.input :task_template_id, :label => '任务名称：', :collection => return_task_template(@project.project_task_template_id), :label_method => lambda {|r| "#{r.task_definition.name}" }, 
               :value_method => :id, :include_blank => true %>
   <%= f.input :brief_note, :label => "简注 ：", :input_html => {:rows => 2} %> 
   <%= f.input :expedite, :label => '加急：', :as => :boolean %>
-  <%= f.input :start_date, :label => '开始日期：', :as => :string %>
-  <%= f.input :finish_date, :label => '结束日期', :as => :string %>
-  <%= f.input :task_status_definition_id, :label => '任务状态：', :collection => return_task_status(), :include_blank => true %>
+  <%= f.input :cancelled, :label => '取消：', :as => :boolean %>
+  <%= f.input :skipped, :label => '跳过：', :as => :boolean %>
+  <%= f.input :completed, :label => '完成：', :as => :boolean %>
+  <%= f.input :task_status_definition_id, :label => '任务状态：', :collection => return_task_status() %>
   
   <%= f.button :submit, '保存' %>  
 <% end %> 

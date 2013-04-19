@@ -6,7 +6,7 @@ Projectx::Engine.routes.draw do
   resources :logs, :only => [:index]
   resources :projects do
     resources :contracts
-    resources :task
+    resources :tasks
     resources :logs
  
     collection do

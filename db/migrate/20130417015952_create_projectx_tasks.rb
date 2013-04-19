@@ -11,7 +11,7 @@ class CreateProjectxTasks < ActiveRecord::Migration
       t.date :finish_date
       t.date :start_date
       t.integer :task_status_definition_id
-      t.integer :task_definition_id
+      t.integer :task_template_id
       t.integer :last_updated_by_id
 
       t.timestamps

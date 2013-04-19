@@ -26,5 +26,17 @@ module Projectx
       c = FactoryGirl.build(:task_request, :task_id => nil)
       c.should_not be_valid
     end
+    
+    it "should reject nil name" do
+      c = FactoryGirl.build(:task_request, :name=> nil)
+      c.should_not be_valid
+    end
+    
+    it "should reject duplicate name for the same task" do
+      c1 = FactoryGirl.create(:task_request, :name=> 'nil')
+      c = FactoryGirl.build(:task_request, :name=> 'Nil')
+      c.should_not be_valid
+    end
+    
   end
 end

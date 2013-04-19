@@ -168,7 +168,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(u.id)
         ls = FactoryGirl.attributes_for(:task_definition, :active => true, :last_updated_by_id => u.id)
         get 'create' , {:use_route => :projectx, :task_definition => ls}
-        response.should redirect_to task_definitions_path
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=New Task Definition Saved!")
       end
       
       it "should display render templdate new if data error" do
@@ -229,7 +229,7 @@ module Projectx
     end
     
     describe "GET update" do
-      it "should create for user with right" do
+      it "should update for user with right" do
         z = FactoryGirl.create(:zone, :zone_name => 'hq')
         type = FactoryGirl.create(:group_type, :name => 'employee')
         ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
@@ -244,10 +244,10 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(u.id)
         ls = FactoryGirl.create(:task_definition, :active => true, :last_updated_by_id => u.id)
         get 'update' , {:use_route => :projectx, :id => ls.id, :task_definition => {:name => 'new new'}}
-        response.should redirect_to task_definitions_path
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Task Definition Updated!")
       end
       
-      it "should display render templdate new if data error" do
+      it "should render templdate new if data error" do
         z = FactoryGirl.create(:zone, :zone_name => 'hq')
         type = FactoryGirl.create(:group_type, :name => 'employee')
         ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)

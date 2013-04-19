@@ -22,9 +22,13 @@ module Projectx
   
     def create
       @task_request = @task.task_requests.new(params[:task_request], :as => :role_new)
-      @task_reqeust.last_updated_by_id = session[:user_id]
+      @task_request.requested_by_id = session[:user_id]
+      @task_request.last_updated_by_id = session[:user_id]  #clean up fields
+      if params[:task_request][:need_delivery] == 'false'
+        params[:task_request][:what_to_deliver] = params[:task_request][:delivery_instruction] = ''       
+      end
       if @task_request.save
-        redirect_to task_requests_path, :notice => '申请已保存!'
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=申请已保存!") 
       else
         flash.now[:error] = 'Data Error. Not Saved!'
         render 'new'
@@ -38,9 +42,12 @@ module Projectx
   
     def update
       @task_request = Projectx::TaskRequest.find_by_id(params[:id])
-      @task_reqeust.last_updated_by_id = session[:user_id]
-      if @task_request.update_attributes(params[:id], :as => :role_update)
-        redirect_to project_task_path(@task.project, @task)
+      @task_request.last_updated_by_id = session[:user_id]
+      if params[:task_request][:need_delivery] == 'false'
+        params[:task_request][:what_to_deliver] = params[:task_request][:delivery_instruction] = ''       
+      end
+      if @task_request.update_attributes(params[:task_request], :as => :role_update)
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=申请已更新!") 
       else
         flash.now[:error] = 'Data Error. Not Updated!'
         render 'edit'

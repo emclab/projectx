@@ -12,7 +12,7 @@ FactoryGirl.define do
     finish_date "2013-04-16"
     start_date "2013-04-16"
     task_status_definition_id 1
-    task_definition_id 1
+    task_template_id 1
     last_updated_by_id 1
   end
 end

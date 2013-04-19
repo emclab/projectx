@@ -15,5 +15,6 @@ FactoryGirl.define do
     cancelled  false
     last_updated_by_id 1
     requested_by_id 1
+    request_status_id 1
   end
 end

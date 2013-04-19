@@ -18,7 +18,7 @@
           <td><%= r.id %></td>
           <td><%= (r.created_at + 8.hours).strftime("%Y/%m/%d")%></td>
           <td><%= Projectx::Project.find_by_id(r.task_request.task.project.id).name %></td>
-          <td><%= prt(r, 'task_request.task.task_definition.name') %></td>
+          <td><%= prt(r, 'task.task_template.task_definition.name') %></td>
           <td><%= prt(r, 'task_request.name')%></td>
           <td><%= prt(r, :log) %></td>
           <td><%= prt(r, 'last_updated_by.name') %></td>

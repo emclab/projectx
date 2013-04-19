@@ -68,7 +68,9 @@ module Projectx
       if data_save  #otherwise @log.save will be executed no matter what.
         @log.last_updated_by_id = session[:user_id]
         if @log.save
-          redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Log Saved!")
+          redirect_to project_path(@project) if @project
+          redirect_to project_task_path(@task.project, @task) if @task
+          redirect_to task_task_request_path(@task_request.task, @task_request) if @task_request
         else
           flash.now[:error] = 'Data Error. Not Saved!'
           render 'new'

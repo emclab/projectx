@@ -1,2 +1,55 @@
-<h1>Tasks#show</h1>
-<p>Find me in app/views/projectx/tasks/show.html.erb</p>
+<div id='main_body'>
+<h1>项目任务内容 </h1>
+
+<p>
+  <b>任务名称:</b>
+  <%= @task.task_template.task_definition.name %>
+</p>
+<p>
+  <b>项目名称:</b>
+  <%= @project.name %>
+</p>  
+<p>
+  <b>开始日期:</b>
+  <%= @task.start_date.strftime("%Y/%m/%d") %>
+</p> 
+<p>
+  <b>结束日期:</b>
+  <%= @task.finish_date.strftime("%Y/%m/%d") %>
+</p> 
+<p>
+  <b>加急:</b>
+  <%= @task.expedite ? '是' : '否' %>
+</p> 
+<p>
+  <b>完成:</b>
+  <%= @task.completed ? '是' : '否' %>
+</p> 
+<p>
+  <b>跳过:</b>
+  <%= @task.skipped ? '是' : '否' %>
+</p> 
+<p>
+  <b>取消:</b>
+  <%= @task.cancelled ? '是' : '否' %>
+</p> 
+<p>
+  <b>输入/更新:</b>
+  <%= @task.last_updated_by.name %>
+</p>
+<p>
+  <b>LOG：</b>
+  <% @task.logs.order("created_at DESC").each do |t| %>
+    <%= t.execution_order %>.<%= t.execution_sub_order if t.execution_sub_order.present? %>
+    <p><%= t.created_at.strftime("%Y/%m/%d") %></p>
+    <p><%= t.last_updated_by.name %></p>
+    <p><%= t.log %></p>
+  <% end %>
+</p>
+
+
+<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+  &nbsp;&nbsp;<%= link_to 'New Request', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_task_task_request_path(@task)}", :id => 'new_request_link' if @task.task_template.need_request %>
+  &nbsp;&nbsp;<%= link_to 'New Log', projectx.new_task_log_path(@task, :which_table => 'task', :format => :js), :remote => true, 
+                          :id => 'new_log_link' if has_action_right?('create_task', 'projectx_logs') %>
+</div>

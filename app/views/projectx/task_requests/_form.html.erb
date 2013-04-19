@@ -1,0 +1,20 @@
+<%= simple_form_for([@task, @task_request]) do |f| %>    
+ 
+  <%= f.input :task_name, :label => '任务名称：', :readonly => true, :input_html => {:value => @task.task_template.task_definition.name}%>
+  <%= f.input :name, :label => '申请名称：' %>
+  <%= f.input :request_date, :label => '申请日期：', :as => :string %>
+  <%= f.input :requested_by_name, :label => '申请人：', :readonly => true, :input_html => {:value => @task_request.requested_by.name} %>
+  <%= f.input :request_content, :label => '任务内容：', :input_html => {:rows => 3} %>
+  <%= f.input :expected_finish_date, :label => '完成日期：', :as => :string %> 
+  <%= f.input :request_status_id, :label => '申请状态：', :collection => return_task_status() %> 
+  <%= f.input :expedite, :label => '加急：', :as => :boolean %>
+  <%= f.input :need_delivery, :label => '需要寄送：', :as => :boolean %>
+  <div id="task_request_delivery">
+  <%= f.input :what_to_deliver, :label => '结束日期', :input_html => {:rows => 4} %>
+  <%= f.input :delivery_instruction, :label => '结束日期', :input_html => {:rows => 4} %>
+  </div>
+  <%= f.input :cancelled, :label => '取消：', :as => :boolean %>
+  <%= f.input :completed, :label => '完成：', :as => :boolean %>
+  
+  <%= f.button :submit, '保存' %>  
+<% end %> 

@@ -9,6 +9,7 @@ module Projectx
                     :as => :role_update
                     
     belongs_to :last_updated_by, :class_name => 'Authentify::User'
+    has_many :tasks, :class_name => 'Projectx::Task'
     
     validates_presence_of :name
     validates :name, :uniqueness => {:case_sensitive => false, :message => 'Duplicate name found!'}

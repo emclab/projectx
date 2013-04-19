@@ -15,7 +15,7 @@ module Projectx
                                 :numericality => {:greater_than => 0, :message => '必须 > 0'}
     validates :task_definition_id, :presence => true,
                                    :numericality => {:greater_than => 0},
-                                   :uniqueness => {:scope => :project_template_id, :message => '项目任务重复！'}
+                                   :uniqueness => {:scope => :project_task_template_id, :message => '项目任务重复！'}
     
   end
 end

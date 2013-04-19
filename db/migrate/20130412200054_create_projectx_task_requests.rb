@@ -14,6 +14,7 @@ class CreateProjectxTaskRequests < ActiveRecord::Migration
       t.integer :last_updated_by_id
       t.boolean :completed, :default => false
       t.boolean :cancelled, :default => false
+      t.integer :request_status_id
 
       t.timestamps
     end

@@ -1,2 +1,35 @@
-<h1>TaskRequests#index</h1>
-<p>Find me in app/views/projectx/task_requests/index.html.erb</p>
+<div id="main_body">
+<h1>任务申请一览</h1>
+<div class="pigination"><%= will_paginate @task_requests %></div>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Task</th>
+    <th>RequestName</th>
+    <th>RequestDate</th>
+    <th>FinishDate</th>   
+    <th>RequestStatus</th>   
+    <th>Completed</th>
+    <th>RequestedBy</th>
+    <th></th>
+    
+  </tr>
+
+<% @task_requests.each do |r| %>
+  <tr>
+  	
+  	<td><%= link_to r.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.task_task_request_path(r.task,r)}" %></td>
+  	<td><%= prt(r, 'task.task_template.task_definition.name') %></td>
+  	<td><%= prt(r, :name) %></td>
+  	<td><%= r.request_date.strftime("%Y/%m/%d") %></td>
+  	<td><%= r.expected_finish_date.strftime("%Y/%m/%d") %></td>
+  	<td><%= prt(r, 'request_status.name') %></td>       
+    <td><%= prt(r, :completed) %></td>
+    <td><%= prt(r, 'requested_by.name') %></td>  
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_task_task_request_path(r.task, r)}" if has_action_right?('update', 'projectx_task_requests', r) %> </td>
+
+  </tr>
+<% end %>
+</table>
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+</div>

@@ -30,7 +30,16 @@
   <b>Last Updated By:</b>
   <%= @project.last_updated_by.name %>
 </p>
+<p>
+  <b>LOG：</b>
+  <% @project.logs.order("created_at DESC").each do |t| %>
+    <p><%= t.created_at.strftime("%Y/%m/%d") %></p>
+    <p><%= t.last_updated_by.name %></p>
+    <p><%= t.log %></p>
+  <% end %>
+</p>
 
   <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
-
+  &nbsp;&nbsp;<%= link_to 'New Log', projectx.new_project_log_path(@project, :which_table => 'project', :format => :js), :remote => true, 
+                  :id => 'new_log_link' if has_action_right?('create_project', 'projectx_logs') %>
 </div>
