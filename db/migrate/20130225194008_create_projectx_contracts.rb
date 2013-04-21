@@ -2,7 +2,7 @@ class CreateProjectxContracts < ActiveRecord::Migration
   def change
     create_table :projectx_contracts do |t|
       t.integer :project_id
-      t.decimal :contract_total, :precision => 10, :scale => 2
+      t.decimal :contract_amount, :precision => 10, :scale => 2
       t.decimal :other_charge, :precision => 10, :scale => 2
       t.string :payment_term
       t.boolean :paid_out, :default => false

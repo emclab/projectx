@@ -11,6 +11,11 @@ module Projectx
       else
         Projectx::ProjectTaskTemplate.order('name')
       end  
-    end   
+    end  
+    
+    def return_task_template(project_task_template_id)
+      Projectx::TaskTemplate.where(:project_task_template_id => project_task_template_id).order('execution_order, execution_sub_order')
+    end 
+    
   end
 end

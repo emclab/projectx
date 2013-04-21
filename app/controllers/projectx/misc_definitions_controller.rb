@@ -21,8 +21,9 @@ module Projectx
   
     def new
       @title = title('new', @for_which)
+      params[:misc_definition] = {}
+      params[:misc_definition][:for_which] = @for_which
       @misc_definition = Projectx::MiscDefinition.new()
-      @misc_definition.for_which = @for_which
     end
   
     def create

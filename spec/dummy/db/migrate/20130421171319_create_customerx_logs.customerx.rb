@@ -5,7 +5,7 @@ class CreateCustomerxLogs < ActiveRecord::Migration
       t.integer :sales_lead_id
       t.integer :customer_comm_record_id
       t.integer :last_updated_by_id
-      t.string :log
+      t.text :log
 
       t.timestamps
     end

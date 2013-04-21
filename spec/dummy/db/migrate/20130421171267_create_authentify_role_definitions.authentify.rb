@@ -5,6 +5,7 @@ class CreateAuthentifyRoleDefinitions < ActiveRecord::Migration
       t.string :name
       t.string :brief_note
       t.integer :last_updated_by_id
+      t.integer :manager_role_id
 
       t.timestamps
     end

@@ -9,7 +9,7 @@
 <%= simple_form_for @misc_definition do |f| %>     
   <%= f.input :name, :label => name_label %>
   <%= f.input :brief_note, :label => "Brief Note:", :input_html => {:rows => 2} %> 
-  <%= f.input :for_which, :input_html => {:value => @for_which}, :as => :hidden %>
+  <%#= f.input :for_which, :input_html => {:value => @for_which}, :as => :hidden %>
   <%= f.input :ranking_order, :label => 'Ranking Index', :placehoder => '1, 2, 3 ...'%> 
   <%= f.button :submit, 'Save' %>  
 <% end %> 

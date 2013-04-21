@@ -4,7 +4,7 @@ class CreateProjectxProjects < ActiveRecord::Migration
       t.string :name
       t.string :project_num
       t.integer :customer_id
-      t.integer :type_definition_id
+      t.integer :project_task_template_id
       #t.integer :zone_id
       t.text :project_desp
       t.integer :sales_id
@@ -18,6 +18,7 @@ class CreateProjectxProjects < ActiveRecord::Migration
       t.boolean :completed, :default => false
       t.integer :last_updated_by_id
       t.boolean :expedite, :default => false
+      t.integer :status_id
 
       t.timestamps
     end

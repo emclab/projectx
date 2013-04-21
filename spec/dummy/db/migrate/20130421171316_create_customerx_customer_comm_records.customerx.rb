@@ -11,6 +11,7 @@ class CreateCustomerxCustomerCommRecords < ActiveRecord::Migration
       t.integer :comm_category_id
       t.integer :reported_by_id
       t.date :comm_date
+      t.boolean :void, :boolean, :default => false
 
       t.timestamps
     end

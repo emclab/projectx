@@ -3,7 +3,7 @@ class CreateProjectxMiscDefinitions < ActiveRecord::Migration
     create_table :projectx_misc_definitions do |t|
       t.string :name
       t.boolean :active, :default => true
-      t.string :for_what
+      t.string :for_which
       t.text :brief_note
       t.integer :last_updated_by_id
       t.integer :ranking_order

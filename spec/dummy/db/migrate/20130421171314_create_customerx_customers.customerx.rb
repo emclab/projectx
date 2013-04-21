@@ -5,14 +5,15 @@ class CreateCustomerxCustomers < ActiveRecord::Migration
       t.string :name
       t.string :short_name
       t.date :since_date
-      t.text :contact_info
-      t.text :address
-      t.text :shipping_address
+      #t.text :contact_info
+      #t.text :address
+      #t.text :shipping_address
+      t.text :shipping_instruction
       t.integer :zone_id
       t.integer :customer_status_category_id
       t.string :phone
       t.string :fax
-      t.string :email
+      #t.string :email
       t.integer :sales_id
       t.boolean :active, :default => true
       t.integer :last_updated_by_id
@@ -23,6 +24,7 @@ class CreateCustomerxCustomers < ActiveRecord::Migration
       t.text :main_biz
       t.text :customer_taste
       t.text :note
+      t.string :web
 
       t.timestamps
     end
