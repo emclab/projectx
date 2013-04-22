@@ -11,7 +11,7 @@ module Projectx
     
     validates_presence_of :for_which
     validates :name, :presence => true,
-                     :uniqueness => {:case_sensitive => false, :message => '重名！'}
+                     :uniqueness => {:scope => :for_which, :case_sensitive => false, :message => '重名！'}
   
   end
 end

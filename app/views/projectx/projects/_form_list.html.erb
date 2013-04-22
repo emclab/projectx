@@ -37,7 +37,7 @@
     <td><%= prt(prj, 'customer.sales.name') %></td>
     <td><%= prt(prj, :completion_percent) %></td>
     <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_projects', prj ) %></td>
-    <td><%= link_to 'Tasks', SUBURI + "/authentify/view_handler?index=1&url=#{project_task_index(prj)}" if has_action_right?('show', 'projectx_tasks', prj) %></td>
+    <td><%= link_to 'Tasks', SUBURI + "/authentify/view_handler?index=1&url=#{project_tasks_path(prj)}" if has_action_right?('show', 'projectx_tasks', prj) %></td>
   </tr>
 <% end %>
 </table>
