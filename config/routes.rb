@@ -3,6 +3,13 @@ Projectx::Engine.routes.draw do
   resources :misc_definitions
   resources :task_definitions
   resources :contracts, :only => [:index]
+  resources :contracts do
+    collection do
+      get :search
+      put :search_results
+      get :autocomplete
+    end
+  end
   resources :logs, :only => [:index]
   resources :projects do
     resources :contracts
