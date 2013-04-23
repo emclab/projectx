@@ -21,7 +21,7 @@
               <td><%= prt(contr, 'project.name') %></td>
           <% end %>
           <% if has_action_right?('show','projectx_projects', contr.project ) %>
-              <td><%= link_to contr.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_path(contr.project_id)}"  %></td>
+              <td><%= link_to contr.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{project_path(contr.project_id)}"  %></td>
           <% else %>
               <td><%= prt(contr, 'project.name') %></td>
           <% end %>
@@ -36,5 +36,5 @@
     <% end %>
   </table>
   <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-  &nbsp;&nbsp;<%= link_to 'New Contract', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_contracts') %>
+  &nbsp;&nbsp;<%= link_to 'New Contract', SUBURI + "/authentify/view_handler?index=1&url=#{new_contract_path}" if has_action_right?('create','projectx_contracts') %>
   &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_contracts_path}" %>

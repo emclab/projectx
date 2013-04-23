@@ -1,6 +1,7 @@
 # encoding: utf-8
 module Projectx
   class Project < ActiveRecord::Base
+    include Authentify::AuthentifyUtility
 
 
       attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
@@ -48,6 +49,24 @@ module Projectx
       validates :sales_id, :presence => true,
                            :numericality => {:greater_than => 0}
 
+
+      def sales_id
+        engine_config_prj_sales = find_config_const('project_has_sales', 'projectx')
+        if engine_config_prj_sales.nil? or engine_config_prj_sales == 'false'
+          customer.sales.id
+        else
+          read_attribute(:sales_id)
+        end
+      end
+
+      def sales_id=(new_sales_id)
+        engine_config_prj_sales = find_config_const('project_has_sales', 'projectx')
+        if engine_config_prj_sales.nil? or engine_config_prj_sales == 'false'
+          customer.sales_id = new_sales_id
+        else
+          write_attribute(:sales_id, new_sales_id)
+        end
+      end
 
       def customer_name_autocomplete
         self.customer.try(:name)

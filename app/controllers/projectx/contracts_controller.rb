@@ -9,7 +9,7 @@ module Projectx
 
     def index
       @title = 'Contract'
-      @contracts = find_contracts(params[:projectx_contracts][:model_ar_r])
+      @contracts = apply_pagination(params[:projectx_contracts][:model_ar_r])
     end
 
 
@@ -62,26 +62,47 @@ module Projectx
 
     def search_results
       @title = 'Contract Search Results'
-      @contracts = find_contracts(params[:projectx_contracts][:model_ar_r])
-      #seach params
+      @contracts = apply_search_criteria(params[:projectx_contracts][:model_ar_r], params)
+      @contracts = apply_pagination(@contracts)
       @search_params = search_params()
     end
 
     protected
 
     def search_params
-      search_params = "参数："
-      search_params += ' 开始日期：' + params[:start_date_s] if params[:start_date_s].present?
-      search_params += ', 结束日期：' + params[:end_date_s] if params[:end_date_s].present?
-      search_params += ', 关键词 ：' + params[:keyword] if params[:keyword].present?
-      search_params += ', 片区 ：' + Authentify::Zone.find_by_id(params[:zone_id_s].to_i).zone_name if params[:zone_id_s].present?
-      search_params += ', 业务员 ：' + Authentify::User.find_by_id(params[:sales_id_s].to_i).name if params[:sales_id_s].present?
+      search_params = 'Search Parameters:'
+      search_params += ', Start Date:' + params[:start_date_s] if params[:start_date_s].present?
+      search_params += ', End Date:' + params[:end_date_s] if params[:end_date_s].present?
+      search_params += ', Zone:' + params[:zone_id_s] if params[:zone_id_s].present?
+      search_params += ', Sales:' +  params[:sales_id_s] if params[:sales_id_s].present?
+      search_params += ', Customer Id:' + params[:customer_id_s] if params[:customer_id_s].present?
+      search_params += ', Paid Out:' + params[:paid_out_s] if params[:paid_out_s].present?
+      search_params += ', Payment Term:' + params[:payment_term_s] if params[:payment_term_s].present?
+      search_params += ', Signed:' + params[:signed_by_id_s] if params[:signed_by_id_s].present?
+      search_params += ', Signed By:' + params[:signed_by_id_s] if params[:signed_by_id_s].present?
+      search_params += ', Signed Date:' + params[:sales_id_s] if params[:sales_id_s].present?
+      search_params += ', Contract On File?:' + params[:contract_on_file_s] if params[:contract_on_file_s].present?
       search_params
     end
 
-    def find_contracts(contracts)
-      max_page = find_const('pagination').argument_value
-      contracts = contracts.page(params[:page]).per_page(max_page).order("expedite DESC, zone_id, id DESC, start_date DESC")
+    def apply_search_criteria(contracts, params)
+      contracts = contracts.where("project_id = ?", params[:project_id_s].to_i) if params[:project_id_s].present?
+      contracts = contracts.where('created_at > ?', params[:start_date_s]) if params[:start_date_s].present?
+      contracts = contracts.where('created_at < ?', params[:end_date_s]) if params[:end_date_s].present?
+      contracts = contracts.joins(:project => :customer).where(:customerx_customers => {:zone_id => params[:zone_id_s]}) if params[:zone_id_s].present?
+      contracts = contracts.where(:paid_out => params[:paid_out_s]) if params[:paid_out_s].present?
+      contracts = contracts.where(:payment_term => params[:payment_term_s]) if params[:payment_term_s].present?
+      contracts = contracts.where(:signed => params[:signed_s]) if params[:signed_s].present?
+      contracts = contracts.where(:signed_by_id => params[:signed_by_id_s]) if params[:signed_by_id_s].present?
+      contracts = contracts.where(:sign_date => params[:sign_date_s]) if params[:sign_date_s].present?
+      contracts = contracts.where(:sign_date => params[:sign_date_s]) if params[:sign_date_s].present?
+      contracts = contracts.where(:contract_on_file => params[:contract_on_file_s]) if params[:contract_on_file_s].present?
+      contracts
+    end
+
+    def apply_pagination(contracts)
+      max_entries_page = find_config_const('pagination')
+      contracts = contracts.page(params[:page]).per_page(max_entries_page).order("paid_out DESC, id DESC, sign_date DESC")
       contracts.all()
     end
 
