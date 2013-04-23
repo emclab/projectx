@@ -1,0 +1,11 @@
+<%= simple_form_for @type_definition do |f| %>
+  <%= f.input :name, :label => '项目类别：', :readonly => readonly?(@type_definition, 'name') %>
+  <%= f.input :brief_note, :label => "Brief Note:", :input_html => {:rows => 2}, :readonly => readonly?(@type_definition, 'brief_note') %>
+  <%= f.input :ranking_order, :label => 'Ranking Index', :readonly => readonly?(@type_definition, 'ranking_order'), :placehoder => '1, 2, 3 ...'%>
+  <% if readonly?(@type_definition, 'active')%>
+    <%= f.input :active_noupdate, :label => 'Active:', :readonly => true, :required => false, :input_html => {:value => @type_definition.active} %>
+  <% else %>
+    <%= f.input :active, :label => 'Active:', :collection => [['是', true], ['否', false]]%>
+  <% end %>
+  <%= f.button :submit, 'Save' %>
+<% end %> 
