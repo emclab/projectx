@@ -1,0 +1,13 @@
+<%= simple_form_for @payment do |f| %>
+    <%= f.input :contract_id, :label => 'Contract Idy:', :readonly => true %>
+    <%= f.input :paid_amount, :label => 'Payment Amount:' %>
+    <%= f.input :received_by_id, :label => 'Received By:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_payments') %>
+    <%= f.input :customer_name_autocomplete,:input_html => { data: {autocomplete_source: customerx.autocomplete_customers_path}},
+                :label => 'Payed By' %>
+    <%= f.input :received_date, :label => 'Received Date:', :as => :string %>
+	<%= f.input :payment_type, :label => 'Payment Type:', :collection => find_config_const('payment_type', 'projectx').split(",") %>
+
+    <%= f.button :submit, 'Save' %>
+<% end %>
+
+

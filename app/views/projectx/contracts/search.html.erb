@@ -2,10 +2,12 @@
 	<h1>Search</h1>
 	
 	<%= simple_form_for @contract,  :method => :put, :url => search_results_contracts_path  do |f| %>
-	  <%= f.input :project_id, :label => "Project Id" %>
-	  <%= f.input :paid_out, :label => "Paid out?" %>
-	  <%= f.input :signed, :label => "Signed?" %>
-	  <%= f.input :signed_by, :label => 'Signed By:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
+	  <%= f.input :project_id_s, :label => "Project Id" %>
+	  <%= f.input :paid_out_s, :label => "Paid out?" %>
+	  <%= f.input :signed_s, :label => "Signed?" %>
+      <%= f.input :signed_by_id_s, :collection => sales(), :label_method => :name, :value_method => :id, :prompt => "Select Signer",
+                  :label => "Signer" if has_action_right?('search', 'projectx_contracts') %>
+      <%= f.input :contract_date_s, :label => "Contract Date" %>
 
 	  <%= f.button :submit, "Submit" %>
 	<% end %> 

@@ -3,26 +3,28 @@ module Projectx
   class Project < ActiveRecord::Base
     include Authentify::AuthentifyUtility
 
+      after_initialize :default_init, :if => :new_record?
 
       attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
-                      :customer_name_autocomplete, :sales_id, :status_id,
+                      :customer_name_autocomplete, :sales_id, :status_id, :completion_percent, :project_date,
                       :as => :role_new
                       
       attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
-                      :customer_name_autocomplete, :sales_id, :status_id,
+                      :customer_name_autocomplete, :sales_id, :status_id, :completion_percent, :project_date,
                       :as => :role_update
 
 
       attr_accessor :project_id_s, :keyword, :start_date_s, :end_date_s, :customer_id_s, :status_s, :expedite_s,
                     :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s, :completion_percent,
-                    :project_task_template_id_s
+                    :project_task_template_id_s, :project_date_s
 
       attr_accessible :project_id_s, :keyword, :start_date_s, :end_date_s, :customer_id_s, :status_s, :expedite_s,
                     :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s, :project_task_template_id_s,
+                    :project_date_s,
                     :as => :role_search_stats
 
                     
@@ -68,34 +70,19 @@ module Projectx
         end
       end
 
-      def customer_name_autocomplete
+      def default_init
+        project_num_increment = find_config_const('project_num_increment', 'projectx')
+        new_project_num = Projectx::Project.last.nil? ? project_num_increment : (Projectx::Project.last.id + project_num_increment.to_i)
+        self.project_num = new_project_num.to_s
+      end
+
+    def customer_name_autocomplete
         self.customer.try(:name)
       end
 
       def customer_name_autocomplete=(name)
         self.customer = Customerx::Customer.find_by_name(name) if name.present?
       end
-
-
-=begin
-    def self.find_projects(projects, params)
-      #return all qualified projects
-      #projects = Projectx::Project.scoped  #In Rails < 4 .all makes database call immediately, loads records and returns array.
-      #Instead use "lazy" scoped method which returns chainable ActiveRecord::Relation object
-      projects = projects.where("id = ?", params[:projectx_projects][:project_id_s]) if params[:projectx_projects][:project_id_s].present?
-      projects = projects.where("name like ? ", "%#{params[:projectx_projects][:keyword]}%") if params[:projectx_projects][:keyword].present?
-      projects = projects.where('created_at > ?', params[:projectx_projects][:start_date_s]) if params[:projectx_projects][:start_date_s].present?
-      projects = projects.where('created_at < ?', params[:projectx_projects][:end_date_s]) if params[:projectx_projects][:end_date_s].present?
-      projects = projects.where("customer_id = ?", params[:projectx_projects][:customer_id_s] ) if params[:projectx_projects][:customer_id_s].present?
-      projects = projects.where(:status => params[:projectx_projects][:status_s]) if params[:projectx_projects][:status_s].present?
-      projects = projects.where(:expedite => params[:projectx_projects][:expedite_s]) if params[:projectx_projects][:expedite_s].present?
-      projects = projects.where(:completion_percent => params[:projectx_projects][:completion_percent_s]) if params[:projectx_projects][:completion_percent_s].present?
-      #projects = projects.where(:zone_id => params[:projectx_projects][:zone_id_s]) if params[:projectx_projects][:zone_id_s].present?
-      #projects = projects.where("sales_id = ?", params[:projectx_projects][:sales_id_s]) if params[:projectx_projects][:sales_id_s].present?
-      #projects = projects.where("payment_percent = ?", params[:projectx_projects][:payment_percent_s]) if params[:projectx_projects][:payment_percent_s].present?
-      projects
-    end
-=end
 
   end
 end

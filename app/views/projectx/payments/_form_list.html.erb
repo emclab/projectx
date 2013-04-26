@@ -1,0 +1,57 @@
+<div class="pagination"><%= will_paginate @payments %></div>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Contract Id</th>
+    <th>Paid By</th>
+    <th>Payed Amount</th>
+    <th>Payment Type</th>
+    <th>Received By</th>
+    <th>Received Date</th>
+    <th>Project Name</th>
+    <th>Project Number</th>
+    <th>Project Status</th>
+    <th>Sales</th>
+    <th>Completion %%</th>
+    <th>Payment %%</th>
+    <th>Est. Delivery Date</th>
+    <th>Delivered on</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @payments.each do |paymnt| %>
+  <tr>
+  	<% if has_action_right?('show','projectx_contracts', paymnt.contract ) %>
+  	  <td><%= link_to paymnt.contract, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_path(paymnt.contract_id)}"  %></td>
+  	<% else %>
+  	  <td><%= prt(paymnt, 'contract_id') %></td>
+  	<% end %>
+    
+  	<% if has_action_right?('show','customerx_customers', paymnt.contract.project.customer ) %>
+  	  <td><%= link_to paymnt.contract.project.customer.short_name, SUBURI + "/authentify/view_handler?index=1&url=#{customerx.customer_path(paymnt.contract.project.customer_id)}"  %></td>
+  	<% else %>
+  	  <td><%= prt(paymnt, 'contract.project.customer.short_name') %></td>
+  	<% end %>
+    <td><%= prt(paymnt, :paid_amount) %></td>
+    <td><%= prt(paymnt, :payment_type) %></td>
+    <td><%= prt(paymnt, :received_by_id) %></td>
+    <td><%= prt(paymnt, :received_date) %></td>
+    <% if has_action_right?('show','projectx_projects', paymnt.contract.project) %>
+  	  <td><%= link_to paymnt.contract.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_path(paymnt.contra.project.id)}"  %></td>
+  	<% else %>
+        <td><%= prt(paymnt, 'contract.project.name') %></td>
+  	<% end %>
+    <td><%= prt(paymnt, 'contract.project.project_num') %></td>
+    <td><%= prt(paymnt, 'contract.project.status.name') %></td>
+    <td><%= prt(paymnt, 'contract.project.customer.sales.name') %></td>
+    <td><%= prt(paymnt, 'contract.project.completion_percent') %></td>
+    <td><%= prt(paymnt, 'contract.payment_percent') %></td>
+    <td><%= prt(paymnt, 'contract.project.estimated_delivery_date') %></td>
+    <td><%= prt(paymnt, 'contract.project.delivery_date') %></td>
+
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_payment_path(paymnt)}" if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
+  </tr>
+<% end %>
+</table>
+  &nbsp;&nbsp;<%= link_to 'New Payment', SUBURI + "/authentify/view_handler?index=1&url=#{new_payment_path}" if has_action_right?('create','projectx_payments') %>
+  &nbsp;&nbsp;<%= link_to 'Search Payment', SUBURI + "/authentify/view_handler?index=1&url=#{search_payments_path}" %>

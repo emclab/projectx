@@ -10,7 +10,7 @@
   <%= @contract.project.name %>
 </p>
 <p>
-  <b>Ccontract Amount</b>
+  <b>Contract Amount</b>
   <%= @contract.contract_amount %>
 </p>
 <p>
@@ -26,6 +26,7 @@
   <%= @contract.last_updated_by.name %>
 </p>
 
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+&nbsp;&nbsp;<%= link_to 'New Payment', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_payment_path(:contra_id => @contract.id)}" if has_action_right?('create','projectx_payments') %>
+<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 
 </div>

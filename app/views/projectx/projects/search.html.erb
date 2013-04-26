@@ -2,6 +2,7 @@
 <h1><%= @title %></h1>
 
 <%= simple_form_for @project,  :method => :put, :url => search_results_projects_path  do |f| %>
+  <%= f.input :project_date_s, :label => "Project Date ：", :as => :string, :input_html => {:size => 40} %>
   <%= f.input :start_date_s, :label => "Start Date ：", :as => :string, :input_html => {:size => 40} %>
   <%= f.input :end_date_s, :label => "End Date ：", :as => :string, :input_html => {:size => 40} %>
   <%= f.input :status_s, :label => "Project Status ：", :collection => return_misc_definitions('project_status'), :label_method => :name, :value_method => :id,
@@ -12,8 +13,8 @@
   <%= f.input :keyword, :label => "Keyword:" %>
   <%= f.input :zone_id_s, :label =>"Zone：", :collection => Authentify::Zone.where(:active => true).order("ranking_order"),
               :label_method => :zone_name, :value_method => :id if has_action_right?("search", "projectx_projects") %>
-  <%= f.input :sales_id_s, :collection => sales(), :label_method => :name, :value_method => :id, :prompt => "选业务员", 
-              :label => "业务员:" if has_action_right?('search', 'projectx_projects') %>
+  <%= f.input :sales_id_s, :collection => sales(), :label_method => :name, :value_method => :id, :prompt => "Select Sales:", 
+              :label => "Sales:" if has_action_right?('search', 'projectx_contracts') %>
   <%= f.input :customer_id_s, :collection => return_customers(), :label_method => :name, :value_method => :id, :prompt => "Choose Customer",
                   :label => "Customer:" if has_action_right?("search", "projectx_projects")  %>
 

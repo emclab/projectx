@@ -11,6 +11,11 @@ module Projectx
     end
 
     def sales()
+      access_rights, model, model_ar_r = access_right_finder('index', 'authentify/users')
+      return [] if access_rights.blank?
+      return instance_eval(access_rights.sql_code).present?
+    end
+=begin
       sales = ''
       if has_action_right?('search', 'projectx_projects')
         sales = Authentify::UsersHelper.return_users('create', 'projectx_projects')
@@ -19,7 +24,7 @@ module Projectx
       end
       sales
     end
-    
+=end    
     def return_task_definitions
       Projectx::TaskDefinition.where(:active => true).order('ranking_order')
     end

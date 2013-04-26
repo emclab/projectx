@@ -19,7 +19,7 @@ class CreateProjectxProjects < ActiveRecord::Migration
       t.integer :last_updated_by_id
       t.boolean :expedite, :default => false
       t.integer :status_id
-
+      t.date :project_date
       t.timestamps
     end
   end

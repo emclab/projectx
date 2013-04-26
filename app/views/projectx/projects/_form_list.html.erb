@@ -3,14 +3,19 @@
   <tr>
     <th>#</th>
     <th>Customer</th>
-    <th>Name</th>
-    <th>ProjectNumber</th>
+    <th>Project Name</th>
+    <th>Project Number</th>
     <th>Status</th>
     <th>StartDate</th>
+    <th>ProjectDate</th>
     <th>Manager</th>
+    <th>Contract</th>
     <th>Sales</th>
     <th>Completion %%</th>
-    <th>Payment Percent</th>
+    <th>Payment %%</th>
+    <th>Expedite?</th>
+    <th>Completion Date</th>
+    <th>Delivery Date</th>
     <th></th>
     <th></th>
  
@@ -29,13 +34,23 @@
   	<% else %>
         <td><%= prt(prj, :name) %></td>
   	<% end %>
-    
     <td><%= prt(prj, :project_num) %></td>
     <td><%= prt(prj, 'status.name') %></td>
     <td><%= prt(prj, :start_date) %></td>
+    <td><%= prt(prj, :project_date) %></td>
     <td><%= prt(prj, :project_manager_id) %></td>
+    <% if has_action_right?('show','projectx_contracts', prj.contract) %>
+        <td><%= link_to prj.customer.short_name, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_path(prj.contract)}"  %></td>
+    <% else %>
+        <td><%= prt(prj, 'contract.id') %></td>
+    <% end %>
     <td><%= prt(prj, 'customer.sales.name') %></td>
     <td><%= prt(prj, :completion_percent) %></td>
+    <td><%= prt(prj, 'contract.payment_percent') %></td>
+    <td><%= prt(prj, :expedite) %></td>
+    <td><%= prt(prj, :estimated_delivery_date) %></td>
+    <td><%= prt(prj, :delivery_date) %></td>
+
     <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_projects', prj ) %></td>
     <td><%= link_to 'Tasks', SUBURI + "/authentify/view_handler?index=1&url=#{project_tasks_path(prj)}" if has_action_right?('show', 'projectx_tasks', prj) %></td>
   </tr>

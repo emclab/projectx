@@ -1,0 +1,47 @@
+<div id="main_body">
+<h1>Payment Info</h1>
+
+<p>
+  <b>Customer Name:</b>
+  <%= @payment.contract.project.customer.name %>
+</p>
+<p>
+  <b>Payed Amount:</b>
+  <%= @payment.paid_amount %>
+</p>
+<p>
+  <b>Payment Type:</b>
+  <%= @payment.payment_type %>
+</p>
+<p>
+  <b>Received Date:</b>
+  <%= @payment.received_date %>
+</p>
+<p>
+  <b>Received By:</b>
+  <%= @payment.received_by.name %>
+</p>
+<p>
+  <b>Contract Id:</b>
+  <%= @payment.contract_id %>
+</p>
+<p>
+  <b>Project Number:</b>
+  <%= @payment.contract.project.project_num %>
+</p>
+<p>
+  <b>Project Status:</b>
+  <%= @payment.contract.project.status.name %>
+</p>
+<p>
+  <b>Sales:</b>
+  <%= @payment.contract.project.sales.name %>
+</p>
+<p>
+  <b>Last Updated By:</b>
+  <%= @payment.last_updated_by.name %>
+</p>
+
+<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+
+</div>

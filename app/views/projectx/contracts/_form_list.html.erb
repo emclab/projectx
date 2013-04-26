@@ -1,4 +1,4 @@
-  <div class="pagination"><%= will_paginate @contracts %></div>
+<div class="pagination"><%= will_paginate @contracts %></div>
   <table>
     <tr>
       <th>#</th>
@@ -8,29 +8,34 @@
       <th>Signed Date</th>
       <th>Sales</th>
       <th>Payment Term</th>
+      <th>Payment Agreement</th>
       <th>Contract Amount</th>
-      <th>Payout?</th>
+      <th>Other Charge</th>
+      <th>Paid out?</th>
+      <th>Signed?</th>
+      <th>Contract on file?</th>
       <th></th>
     </tr>
 
     <% @contracts.each do |contr| %>
+        <td><%= prt(contr, :id) %></td>
         <tr>
-          <% if has_action_right?('show','projectx_contracts', contr ) %>
-              <td><%= link_to contr.id, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_path(contr.id)}"  %></td>
-          <% else %>
-              <td><%= prt(contr, 'project.name') %></td>
-          <% end %>
           <% if has_action_right?('show','projectx_projects', contr.project ) %>
               <td><%= link_to contr.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{project_path(contr.project_id)}"  %></td>
           <% else %>
               <td><%= prt(contr, 'project.name') %></td>
           <% end %>
           <td><%= prt(contr, 'signed_by.name') %></td>
+          <td><%= prt(contr, :contract_date) %></td>
           <td><%= prt(contr, :sign_date) %></td>
           <td><%= prt(contr, 'project.customer.sales.name') %></td>
           <td><%= prt(contr, :payment_term) %></td>
+          <td><%= prt(contr, :payment_agreement) %></td>
           <td><%= prt(contr, :contract_amount) %></td>
+          <td><%= prt(contr, :other_charge) %></td>
           <td><%= prt(contr, :paid_out) %></td>
+          <td><%= prt(contr, :signed) %></td>
+          <td><%= prt(contr, :contract_on_file) %></td>
           <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_path(contr)}" if has_action_right?('update', 'projectx_contracts', contr ) %></td>
         </tr>
     <% end %>
