@@ -7,8 +7,12 @@
   <%= f.input :finish_date, :label => '结束日期', :as => :string %>
   <%= f.input :task_template_id, :label => '任务名称：', :collection => return_task_template(@project.project_task_template_id), :label_method => lambda {|r| "#{r.task_definition.name}" }, 
               :value_method => :id, :include_blank => true %>
-  <%= f.input :brief_note, :label => "简注 ：", :input_html => {:rows => 2} %> 
-  <%= f.input :expedite, :label => '加急：', :as => :boolean %>
+  <%= f.input :brief_note, :label => "简注 ：", :input_html => {:rows => 2}, :readonly => readonly?(@task, 'brief_note') %> 
+  <% if readonly?(@task, 'expedite')%>
+    <%= f.input :expedite_noupdate, :label => '加急：', :input_html => {:value => @task.expedite ? '是' : '否'} %>
+  <% else%>
+    <%= f.input :expedite, :label => '加急：', :as => :boolean %>
+  <% end %>
   <%= f.input :cancelled, :label => '取消：', :as => :boolean %>
   <%= f.input :skipped, :label => '跳过：', :as => :boolean %>
   <%= f.input :completed, :label => '完成：', :as => :boolean %>

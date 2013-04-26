@@ -19,10 +19,10 @@
 			<td><%= prt(defi, :active) %></td>
 			<td><%= prt(defi, :ranking_order) %></td>
 			<td><%= prt(defi, 'last_updated_by.name') %></td>    
-			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
+			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(defi)}" if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
 		  </tr>
 		<% end %>
 	</table>
 	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-	&nbsp;&nbsp;<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_task_definitions') %>
-	&nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>
+	&nbsp;&nbsp;<%= link_to 'New Task Definition', SUBURI + "/authentify/view_handler?index=1&url=#{new_task_definition_path}" if has_action_right?('create','projectx_task_definitions') %>
+	

@@ -21,6 +21,8 @@ describe "Integrations" do
            :sql_code => "") 
       ua2 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_tasks', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "Projectx::Task.scoped") 
+      ua2 = FactoryGirl.create(:user_access, :action => 'show_log_new', :resource => 'projectx_tasks', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "") 
       ua3 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'projectx_tasks', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "") 
       ua31 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_tasks', :role_definition_id => @role.id, :rank => 1,
@@ -34,7 +36,33 @@ describe "Integrations" do
       ua311 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_task_requests', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "") 
       ua41 = FactoryGirl.create(:user_access, :action => 'show', :resource => 'projectx_task_requests', :role_definition_id => @role.id, :rank => 1,
-           :sql_code => "record.task.project.sales_id == session[:user_id]")               
+           :sql_code => "record.task.project.sales_id == session[:user_id]")
+      ua41 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_type_definitions', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "Projectx::TypeDefinition.where(:active => true)")  
+      ua41 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'projectx_type_definitions', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
+      ua41 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_type_definitions', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
+      ua41 = FactoryGirl.create(:user_access, :action => 'index_new_project_task_template', :resource => 'projectx_type_definitions', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")           
+      ua41 = FactoryGirl.create(:user_access, :action => 'index_project_task_template_index', :resource => 'projectx_type_definitions', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "") 
+      ua41 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_task_definitions', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")          
+      ua41 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'projectx_task_definitions', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "") 
+      ua41 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_task_definitions', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "Projectx::TaskDefinition.where(:active => true).order('ranking_order')") 
+      ua41 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_project_task_templates', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
+      ua41 = FactoryGirl.create(:user_access, :action => 'show', :resource => 'projectx_project_task_templates', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
+      ua41 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_project_task_templates', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "Projectx::ProjectTaskTemplate.where(:active => true).order('type_definition_id')")  
+      ua41 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")                    
+      ua41 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "Projectx::Log.scoped")                    
       ur = FactoryGirl.create(:user_role, :role_definition_id => @role.id)
       ul = FactoryGirl.build(:user_level, :sys_user_group_id => ug.id)
       @u = FactoryGirl.create(:user, :user_levels => [ul], :user_roles => [ur], :login => 'thistest', :password => 'password', :password_confirmation => 'password')
@@ -50,9 +78,13 @@ describe "Integrations" do
       @proj_temp = FactoryGirl.create(:project_task_template, :type_definition_id => proj_type.id, :task_templates => [@task_temp])     
       @proj = FactoryGirl.create(:project, :last_updated_by_id => @u.id, :customer_id => @cust.id, :sales_id => @u.id, 
                                  :project_task_template_id => @proj_temp.id, :status_id => @proj_status.id)
+      proj_log = FactoryGirl.create(:log, :project_id => @proj.id, :task_id => nil, :task_request_id => nil)
       @contract = FactoryGirl.create(:contract, :project_id => @proj.id)
       @task = FactoryGirl.create(:task, :last_updated_by_id => @u.id, :project_id => @proj.id, :task_template_id => @task_temp.id)
+      task_log = FactoryGirl.create(:log, :task_id => @task.id, :project_id => nil, :task_request_id => nil)
       @task_request = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task.id, :request_status_id => @task_status.id)
+      task_req_log = FactoryGirl.create(:log, :task_request_id => @task_request.id, :project_id => nil, :task_id => nil)
+      
       visit '/'
       #save_and_open_page
       fill_in "login", :with => @u.login
@@ -66,7 +98,7 @@ describe "Integrations" do
       #save_and_open_page
       page.body.should have_content("Projects")
       click_link('Tasks')
-      save_and_open_page
+      #save_and_open_page
       page.body.should have_content("一览")
       visit projects_path
       click_link('Edit')
@@ -85,6 +117,9 @@ describe "Integrations" do
       click_link(@task.id.to_s)
       #save_and_open_page
       page.body.should have_content("任务内容")
+      click_link('New Log')
+      #save_and_open_page
+      page.body.should have_content("新Log")
     end
     
     it "should visit task_request index page and its links" do
@@ -94,10 +129,35 @@ describe "Integrations" do
       page.body.should have_content("更新任务申请")
     end
     
-    it "should visit project_type page" do
+    it "should visit project_type page and related project_task_template page" do
       visit type_definitions_path
+      
+      page.body.should have_content("项目类型一览")
+      click_link('Edit')
+      #save_and_open_page
+      page.body.should have_content("更新项目类型")
+      visit type_definitions_path
+      click_link("新项目任务模版")
+      page.body.should have_content("输入项目任务模版")
+      visit type_definitions_path
+      click_link("项目任务模版一览")
+      #save_and_open_page
+      page.body.should have_content("Project Templates")
+      click_link(@proj_temp.id.to_s)
+      #save_and_open_page
+      page.body.should have_content("项目模版内容")
+      click_link('New Project Task Template')
+      page.body.should have_content("输入项目任务模版")
+            
+    end
+    
+    it "should visit task_definition index page on task" do
+      visit task_definitions_path
       save_and_open_page
-      page.body.should have_content("")
+      page.body.should have_content("Task Definitions")
+      click_link('New Task Definition')
+      save_and_open_page
+      page.body.should have_content("New Task Definition")
     end
   end
 end

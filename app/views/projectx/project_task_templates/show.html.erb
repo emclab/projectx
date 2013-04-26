@@ -20,15 +20,15 @@
 <p>
   <b>所属任务：</b>
   <% @project_task_template.task_templates.order("execution_order, execution_sub_order").each do |t| %>
-    <p><%= t.execution_order %>.<%= t.execution_sub_order if t.execution_sub_order.present? %></p>
-    <p><%= t.task_definition.name %></p>
-    <p><%= t.brief_note %></p>
-    <p><%= t.start_before_previous_completed %></p>
-    <p><%= t.need_request %></p>
+    <p>任务#：<%= t.execution_order %>.<%= t.execution_sub_order if t.execution_sub_order.present? %></p>
+    <p>名称：<%= t.task_definition.name %></p>
+    <p>简注：<%= t.brief_note %></p>
+    <p>前任务完成后方可开始：<%= t.start_before_previous_completed ? '是' : '否' %></p>
+    <p>申请：<%= t.need_request ? '是' : '否'%></p>
   <% end %>
 </p>
 
 
 <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-  &nbsp;&nbsp;<%= link_to 'New Project Template', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_type_definition_project_task_template_path(@type_definition)}" if has_action_right?('create', 'projectx_project_task_templates') %>
+  &nbsp;&nbsp;<%= link_to 'New Project Task Template', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_type_definition_project_task_template_path(@type_definition)}" if has_action_right?('create', 'projectx_project_task_templates') %>
 </div>

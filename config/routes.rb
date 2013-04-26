@@ -40,6 +40,7 @@ Projectx::Engine.routes.draw do
     resources :logs
   end
   
+  resources :project_task_templates, :only => [:index]
   resources :type_definitions do
     resources :project_task_templates
   end
