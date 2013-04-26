@@ -15,7 +15,8 @@ module Projectx
 
     def new
       @title = 'New Contract'
-      @contract = Projectx::Contract.new
+      @contract = Projectx::Contract.new()
+      @contract.project_id = params[:project_id]
     end
 
 

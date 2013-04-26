@@ -202,12 +202,16 @@ module Projectx
 
           cust3 = FactoryGirl.create(:customer, :active => true, :name => 'cust name3', :short_name => 'short name3', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
           cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
+
+          @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_7_u.id,:last_updated_by_id => @individual_7_u.id, :customer_id => cust3.id, :project_task_template_id => @project_task_template1.id)
+          @contract3 = FactoryGirl.create(:contract, :project_id => @prj3.id)
+
         end
 
         it "should allow for new project with proper right" do
           session[:user_id] = @individual_7_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
-          get 'new' , {:use_route => :projectx}
+          get 'new' , {:use_route => :projectx, :project_id => @prj3.id}
           response.should be_success
         end
       end
