@@ -26,7 +26,7 @@ module Projectx
         proj_temp = FactoryGirl.create(:project_task_template, :type_definition_id => proj_type.id, :task_templates => [@task_temp, @task_temp1])
         cust = FactoryGirl.create(:customer)
         @proj = FactoryGirl.create(:project, :project_task_template_id => proj_temp.id, :customer_id => cust.id)
-        @proj1 = FactoryGirl.create(:project, :name => 'newnew', :project_task_template_id => proj_temp.id, :project_num => 'newnew234')
+        @proj1 = FactoryGirl.create(:project, :name => 'newnew', :project_task_template_id => proj_temp.id)
     end
       
     describe "GET 'index'" do
