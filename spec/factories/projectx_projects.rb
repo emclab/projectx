@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :project, :class => 'Projectx::Project' do
     name "water inspection"
-    #project_num "201323123"
     customer_id 1
     project_desp "this is the desp of the project"
     sales_id 1

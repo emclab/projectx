@@ -2,10 +2,6 @@
 <h1>Payment Info</h1>
 
 <p>
-  <b>Customer Name:</b>
-  <%= @payment.contract.project.customer.name %>
-</p>
-<p>
   <b>Payed Amount:</b>
   <%= @payment.paid_amount %>
 </p>
@@ -13,6 +9,10 @@
   <b>Payment Type:</b>
   <%= @payment.payment_type %>
 </p>
+  <p>
+    <b>Payment Description:</b>
+    <%= @payment.payment_desc %>
+  </p>
 <p>
   <b>Received Date:</b>
   <%= @payment.received_date %>

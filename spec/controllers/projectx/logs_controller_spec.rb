@@ -4,6 +4,7 @@ module Projectx
   describe LogsController do
     before(:each) do
       controller.should_receive(:require_signin)
+      @project_num_time_gen = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_num_time_gen', :argument_value => ' Projectx::Project.last.nil? ? (Time.now.strftime("%Y%m%d") + "-"  + 112233.to_s + "-" + rand(100..999).to_s) :  (Time.now.strftime("%Y%m%d") + "-"  + (Projectx::Project.last.project_num.split("-")[-2].to_i + 555).to_s + "-" + rand(100..999).to_s)')
     end
   
     render_views
@@ -56,7 +57,7 @@ module Projectx
         cust1 = FactoryGirl.create(:customer, :active => true, :last_updated_by_id => @u1.id, :sales_id => @u1.id, 
                                   :zone_id => @z.id, :customer_status_category_id => @cate.id, :name => 'newnew', :short_name => 'manman')
         lead = FactoryGirl.create(:project, :customer_id => cust.id)
-        lead1 = FactoryGirl.create(:project, :customer_id => cust1.id, :name => 'newnew', :project_num =>'nodup')
+        lead1 = FactoryGirl.create(:project, :customer_id => cust1.id, :name => 'newnew')
         log = FactoryGirl.create(:log, :project_id => lead.id, :task_id => nil, :task_request_id => nil)
         log1 = FactoryGirl.create(:log, :project_id => lead1.id, :task_id => nil, :task_request_id => nil)
         get 'index', {:use_route => :projectx, :project_id => nil, :which_table => 'project', :subaction => 'project'}

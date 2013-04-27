@@ -71,10 +71,8 @@ module Projectx
       end
 
       def default_init
-        project_num_start = find_config_const('project_num_start', 'projectx')
-        project_num_increment = find_config_const('project_num_increment', 'projectx')
-        new_id = Projectx::Project.last.nil? ? project_num_start : (Projectx::Project.last.project_num.split('-')[1].to_i + project_num_increment.to_i).to_s
-        self.project_num = (Time.now.to_f * 1000.0).to_i.to_s + '-' +  new_id
+        project_num_time_gen = find_config_const('project_num_time_gen', 'projectx')
+        self.project_num = eval(project_num_time_gen)
       end
 
     def customer_name_autocomplete

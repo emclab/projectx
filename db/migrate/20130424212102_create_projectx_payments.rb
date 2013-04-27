@@ -5,7 +5,7 @@ class CreateProjectxPayments < ActiveRecord::Migration
       t.decimal :paid_amount, :precision => 10, :scale => 2
       t.date :received_date
       t.integer :received_by_id
-      t.integer :paid_by_id
+      t.text :payment_desc
       t.string :payment_type
       t.integer :last_updated_by_id
       t.timestamps

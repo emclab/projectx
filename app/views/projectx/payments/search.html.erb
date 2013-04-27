@@ -6,9 +6,7 @@
   <%= f.input :payment_id_s, :label => "Payment Id：" %>
   <%= f.input :received_after_date_s, :label => "Paymnt Received Before Date ：", :as => :string, :input_html => {:size => 40} %>
   <%= f.input :received_before_date_s, :label => "Paymnt Received After Date ：", :as => :string, :input_html => {:size => 40} %>
-  <%= f.input :paid_by_id, :collection => return_customers(), :label_method => :name, :value_method => :id, :prompt => "Choose Customer",
-                  :label => "Customer:" if has_action_right?("search", "projectx_payments")  %>
-  <%= f.input :received_by_id, :collection => sales(), :label_method => :name, :value_method => :id, :prompt => "Choose Sales", 
+  <%= f.input :received_by_id, :collection => sales(), :label_method => :name, :value_method => :id, :prompt => "Choose Sales",
               :label => "Received By:" if has_action_right?('search', 'projectx_payments') %>
   <%= f.input :payment_type_s, :label => "Payment Type：" %>
 
