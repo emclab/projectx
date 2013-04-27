@@ -44,8 +44,7 @@ module Projectx
                        :uniqueness => {:case_sensitive => false, :message => 'Duplicate project name'}
       validates :project_num, :presence => true, 
                               :uniqueness => {:case_sensitive => false, :message => 'Duplicated project num'}
-      validates_presence_of :project_manager_id, :project_task_template_id, :start_date,
-                            :end_date, :delivery_date
+      validates_presence_of :project_manager_id, :project_task_template_id, :start_date, :project_date
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}
       validates :sales_id, :presence => true,
@@ -75,7 +74,7 @@ module Projectx
         self.project_num = eval(project_num_time_gen)
       end
 
-    def customer_name_autocomplete
+      def customer_name_autocomplete
         self.customer.try(:name)
       end
 
