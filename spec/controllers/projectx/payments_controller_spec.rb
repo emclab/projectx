@@ -79,11 +79,11 @@ module Projectx
         @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
         @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
 
-        @paymnt1 = FactoryGirl.create(:projectx_payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
-        @paymnt2 = FactoryGirl.create(:projectx_payment, :contract_id => @contract2.id, :paid_amount => 201.10, :received_by_id => @individual_2_u.id, :payment_type => 'Cash', :received_date => '2013/04/25')
-        @paymnt3 = FactoryGirl.create(:projectx_payment, :contract_id => @contract3.id, :paid_amount => 301.10, :received_by_id => @individual_3_u.id, :payment_type => 'Credit Card', :received_date => '2013/04/25')
-        @paymnt4 = FactoryGirl.create(:projectx_payment, :contract_id => @contract4.id, :paid_amount => 401.10, :received_by_id => @individual_4_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
-        @paymnt5 = FactoryGirl.create(:projectx_payment, :contract_id => @contract5.id, :paid_amount => 501.10, :received_by_id => @individual_2_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt2 = FactoryGirl.create(:payment, :contract_id => @contract2.id, :paid_amount => 201.10, :received_by_id => @individual_2_u.id, :payment_type => 'Cash', :received_date => '2013/04/25')
+        @paymnt3 = FactoryGirl.create(:payment, :contract_id => @contract3.id, :paid_amount => 301.10, :received_by_id => @individual_3_u.id, :payment_type => 'Credit Card', :received_date => '2013/04/25')
+        @paymnt4 = FactoryGirl.create(:payment, :contract_id => @contract4.id, :paid_amount => 401.10, :received_by_id => @individual_4_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt5 = FactoryGirl.create(:payment, :contract_id => @contract5.id, :paid_amount => 501.10, :received_by_id => @individual_2_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
 
       end
 
@@ -325,7 +325,7 @@ module Projectx
         @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
         @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
 
-        @paymnt1 = FactoryGirl.create(:projectx_payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
 
       end
 
@@ -412,7 +412,7 @@ module Projectx
         @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
         @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
 
-        @paymnt1 = FactoryGirl.create(:projectx_payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
       end
 
       context "Should be able to 'update' project with proper right" do
@@ -499,7 +499,7 @@ module Projectx
         @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
         @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
 
-        @paymnt1 = FactoryGirl.create(:projectx_payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25', :last_updated_by_id => @individual_1_u.id)
+        @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25', :last_updated_by_id => @individual_1_u.id)
 
       end
 
@@ -633,11 +633,11 @@ module Projectx
         @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
         @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
 
-        @paymnt1 = FactoryGirl.create(:projectx_payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
-        @paymnt2 = FactoryGirl.create(:projectx_payment, :contract_id => @contract2.id, :paid_amount => 201.10, :received_by_id => @individual_2_u.id, :payment_type => 'Cash', :received_date => '2013/04/25')
-        @paymnt3 = FactoryGirl.create(:projectx_payment, :contract_id => @contract3.id, :paid_amount => 301.10, :received_by_id => @individual_3_u.id, :payment_type => 'Credit Card', :received_date => '2013/04/25')
-        @paymnt4 = FactoryGirl.create(:projectx_payment, :contract_id => @contract4.id, :paid_amount => 401.10, :received_by_id => @individual_4_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
-        @paymnt5 = FactoryGirl.create(:projectx_payment, :contract_id => @contract5.id, :paid_amount => 501.10, :received_by_id => @individual_2_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt2 = FactoryGirl.create(:payment, :contract_id => @contract2.id, :paid_amount => 201.10, :received_by_id => @individual_2_u.id, :payment_type => 'Cash', :received_date => '2013/04/25')
+        @paymnt3 = FactoryGirl.create(:payment, :contract_id => @contract3.id, :paid_amount => 301.10, :received_by_id => @individual_3_u.id, :payment_type => 'Credit Card', :received_date => '2013/04/25')
+        @paymnt4 = FactoryGirl.create(:payment, :contract_id => @contract4.id, :paid_amount => 401.10, :received_by_id => @individual_4_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt5 = FactoryGirl.create(:payment, :contract_id => @contract5.id, :paid_amount => 501.10, :received_by_id => @individual_2_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
       end
 
       context "Has individual 'search_results' access right " do

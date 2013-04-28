@@ -15,5 +15,6 @@ FactoryGirl.define do
     completed false
     last_updated_by_id 1
     project_task_template_id 1   
+    project_date '2013-01-23'
   end
 end

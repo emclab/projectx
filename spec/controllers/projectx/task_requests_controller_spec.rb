@@ -9,10 +9,15 @@ module Projectx
     
     render_views
     before(:each) do
-        z = FactoryGirl.create(:zone, :zone_name => 'hq')
-        type = FactoryGirl.create(:group_type, :name => 'employee')
-        ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
-        @role = FactoryGirl.create(:role_definition)
+       @project_num_time_gen = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_num_time_gen', :argument_value => ' Projectx::Project.last.nil? ? (Time.now.strftime("%Y%m%d") + "-"  + 112233.to_s + "-" + rand(100..999).to_s) :  (Time.now.strftime("%Y%m%d") + "-"  + (Projectx::Project.last.project_num.split("-")[-2].to_i + 555).to_s + "-" + rand(100..999).to_s)')
+       @project_has_sales_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_has_sales', :argument_value => 'true')
+       @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
+       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => 'Cash,Check,Visa, MasterCard')
+
+       z = FactoryGirl.create(:zone, :zone_name => 'hq')
+       type = FactoryGirl.create(:group_type, :name => 'employee')
+       ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
+       @role = FactoryGirl.create(:role_definition)
         #user_access = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_misc_definitions', :role_definition_id => role.id, :rank => 1,
         #:sql_code => "Projectx::MiscDefinition.where(:active => true).order('ranking_order')")
         ur = FactoryGirl.create(:user_role, :role_definition_id => @role.id)

@@ -4,6 +4,11 @@ require 'spec_helper'
 describe "Integrations" do
   describe "GET /projectx_integrations" do
     before(:each) do
+      @project_num_time_gen = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_num_time_gen', :argument_value => ' Projectx::Project.last.nil? ? (Time.now.strftime("%Y%m%d") + "-"  + 112233.to_s + "-" + rand(100..999).to_s) :  (Time.now.strftime("%Y%m%d") + "-"  + (Projectx::Project.last.project_num.split("-")[-2].to_i + 555).to_s + "-" + rand(100..999).to_s)')
+      @project_has_sales_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_has_sales', :argument_value => 'true')
+      @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => 'Cash,Check,Visa, MasterCard')
+      
       qs = Customerx::MiscDefinition.new({:name => 'ISO9000', :for_which => 'customer_quality_system'}, :as => :role_new)
       add = FactoryGirl.create(:address)
       #cate = FactoryGirl.create(:misc_definition, :for_which => 'customer_status', :name => 'order category')
@@ -18,7 +23,9 @@ describe "Integrations" do
       ua1 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "") 
       ua1 = FactoryGirl.create(:user_access, :action => 'show', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
-           :sql_code => "") 
+           :sql_code => "")
+      ua1 = FactoryGirl.create(:user_access, :action => 'show_task', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")      
       ua2 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_tasks', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "Projectx::Task.scoped") 
       ua2 = FactoryGirl.create(:user_access, :action => 'show_log_new', :resource => 'projectx_tasks', :role_definition_id => @role.id, :rank => 1,
@@ -99,7 +106,7 @@ describe "Integrations" do
       page.body.should have_content("Projects")
       click_link('Tasks')
       #save_and_open_page
-      page.body.should have_content("一览")
+      page.body.should have_content("项目任务一览")
       visit projects_path
       click_link('Edit')
       page.body.should have_content("Edit Project")

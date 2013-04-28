@@ -18,21 +18,9 @@ module Projectx
     belongs_to :received_by, :class_name => 'Authentify::User'
 
 
-    accepts_nested_attributes_for :contract, :allow_destroy => true
-
     validates :paid_amount, :presence => true,
               :numericality => {:greater_than => 0}
     validates_presence_of :received_by_id, :received_date, :payment_type, :contract_id
-
-
-    def customer_name_autocomplete
-      #self.contract.project.customer.try(:name)
-    end
-
-    def customer_name_autocomplete=(name)
-      #self.contract.project.customer = Customerx::Customer.find_by_name(name) if name.present?
-    end
-
 
   end
 end
