@@ -18,6 +18,12 @@
     <%= f.input :customer_name_autocomplete,:input_html => { data: {autocomplete_source: customerx.autocomplete_customers_path}},
                 :label => 'Customer:' %>
     <%= f.input :sales_id, :label => 'Sales:', :collection => Authentify::UsersHelper::return_users('create', 'customerx_customers') %>
+	<%= f.simple_fields_for :contract do |builder| %>     
+    	<%= render('contract', :f => builder)%>
+  	<% end %>
+
+
+
 
     <%= f.button :submit, 'Save' %>
 <% end %>

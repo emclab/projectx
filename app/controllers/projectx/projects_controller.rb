@@ -15,7 +15,7 @@ module Projectx
     def new
       @title = 'New Project'
       @project = Projectx::Project.new
-      #@project.contract.build
+      @project.build_contract
     end
 
 
