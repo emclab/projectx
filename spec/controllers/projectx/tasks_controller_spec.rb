@@ -55,7 +55,7 @@ module Projectx
         qs1 = FactoryGirl.create(:task, :last_updated_by_id => @u.id, :project_id => @proj1.id, :task_template_id => @task_temp1.id)
         get 'index' , {:use_route => :projectx}
         #response.should be_success
-        assigns(:tasks).should eq([qs, qs1])  
+        assigns(:tasks).should =~ [qs, qs1]
       end
       
       it "should redirect if no right" do
