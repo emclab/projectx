@@ -16,12 +16,8 @@ module Projectx
         @logs = @task.logs.page(params[:page]).per_page(@max_pagination).order('id DESC')
       elsif @task_request
         @logs = @task_request.logs.page(params[:page]).per_page(@max_pagination).order('id DESC')
-      elsif @which_table == 'task'
-        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.task_id > ?", 0).page(params[:page]).per_page(@max_pagination)
-      elsif @which_table == 'project'
-        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.project_id > ?", 0).page(params[:page]).per_page(@max_pagination)
-      elsif @which_table == 'task_request'
-        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.task_request_id > ?", 0).page(params[:page]).per_page(@max_pagination)
+      elsif @which_table 
+        @logs = params[:projectx_logs][:model_ar_r].page(params[:page]).per_page(@max_pagination)
       else
         #@which_table does not match any
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Parental Object Name Not Match!")
