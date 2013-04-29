@@ -12,7 +12,7 @@ module Projectx
     def index
       @title = title('index', @for_which)
       if @for_which
-        @misc_definitions = params[:projectx_misc_definitions][:model_ar_r].where(:for_which => @for_which).page(params[:page]).per_page(30)
+        @misc_definitions = params[:projectx_misc_definitions][:model_ar_r].where(:for_which => @for_which).page(params[:page]).per_page(@max_pagination)
       else
         #@for_which does not match any
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Table Name Not Match!")

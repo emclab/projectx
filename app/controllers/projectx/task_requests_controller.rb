@@ -9,9 +9,9 @@ module Projectx
     def index
       @title = '申请一览'
       if @task
-        @task_requests = @task.task_requests.page(params[:page]).per_page(30) 
+        @task_requests = @task.task_requests.page(params[:page]).per_page(@max_pagination) 
       else
-        @task_requests = params[:projectx_task_requests][:model_ar_r].page(params[:page]).per_page(30) 
+        @task_requests = params[:projectx_task_requests][:model_ar_r].page(params[:page]).per_page(@max_pagination) 
       end
     end
   

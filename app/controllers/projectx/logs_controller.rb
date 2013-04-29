@@ -11,17 +11,17 @@ module Projectx
     
     def index
       if @project
-        @logs = @project.logs.page(params[:page]).per_page(30).order('id DESC')
+        @logs = @project.logs.page(params[:page]).per_page(@max_pagination).order('id DESC')
       elsif @task
-        @logs = @task.logs.page(params[:page]).per_page(30).order('id DESC')
+        @logs = @task.logs.page(params[:page]).per_page(@max_pagination).order('id DESC')
       elsif @task_request
-        @logs = @task_request.logs.page(params[:page]).per_page(30).order('id DESC')
+        @logs = @task_request.logs.page(params[:page]).per_page(@max_pagination).order('id DESC')
       elsif @which_table == 'task'
-        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.task_id > ?", 0).page(params[:page]).per_page(30)
+        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.task_id > ?", 0).page(params[:page]).per_page(@max_pagination)
       elsif @which_table == 'project'
-        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.project_id > ?", 0).page(params[:page]).per_page(30)
+        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.project_id > ?", 0).page(params[:page]).per_page(@max_pagination)
       elsif @which_table == 'task_request'
-        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.task_request_id > ?", 0).page(params[:page]).per_page(30)
+        @logs = params[:projectx_logs][:model_ar_r].where("projectx_logs.task_request_id > ?", 0).page(params[:page]).per_page(@max_pagination)
       else
         #@which_table does not match any
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Parental Object Name Not Match!")
@@ -98,8 +98,8 @@ module Projectx
     end
     
     def load_task_request
-      @task_request = Projectx::TaskRequest.find_by_id(params[:task_request_id]) if params[:task_request_id].present? &&
-                                                                                    params[:task_request_id].to_i > 0
+      @task_request = Projectx::TaskRequest.find_by_id(params[:task_request_id]) if params[:task_request_id].present? &&                                                                                    params[:task_request_id].to_i > 0
     end
+    
   end
 end

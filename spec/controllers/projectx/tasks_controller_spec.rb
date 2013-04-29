@@ -6,6 +6,7 @@ module Projectx
     before(:each) do
       controller.should_receive(:require_signin)
       @project_num_time_gen = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_num_time_gen', :argument_value => ' Projectx::Project.last.nil? ? (Time.now.strftime("%Y%m%d") + "-"  + 112233.to_s + "-" + rand(100..999).to_s) :  (Time.now.strftime("%Y%m%d") + "-"  + (Projectx::Project.last.project_num.split("-")[-2].to_i + 555).to_s + "-" + rand(100..999).to_s)')
+      @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
     end
     
     render_views
@@ -55,7 +56,7 @@ module Projectx
         qs1 = FactoryGirl.create(:task, :last_updated_by_id => @u.id, :project_id => @proj1.id, :task_template_id => @task_temp1.id)
         get 'index' , {:use_route => :projectx}
         #response.should be_success
-        assigns(:tasks).should eq([qs, qs1])  
+        assigns(:tasks).should =~ [qs1, qs]  
       end
       
       it "should redirect if no right" do

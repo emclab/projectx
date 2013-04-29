@@ -9,11 +9,16 @@ module Projectx
     include Projectx::MiscDefinitionsHelper
 
     helper_method :has_action_right?, :print_attribute, :readonly?
-
-    before_filter :require_signin
+     
+    before_filter :require_signin 
+    before_filter :max_pagination   
     before_filter :check_access_right
 
     protected
-
+  
+    def max_pagination
+      @max_pagination = find_config_const('pagination')
+    end
+    
   end
 end

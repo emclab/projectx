@@ -4,4 +4,6 @@ class ApplicationController < ActionController::Base
   include Authentify::AuthentifyUtility
   include Authentify::UserPrivilegeHelper
   include Authentify::UsersHelper
+
+ 
 end

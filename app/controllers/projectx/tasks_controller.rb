@@ -9,9 +9,9 @@ module Projectx
     def index
       @title = '项目任务一览'
       if @project
-        @tasks = @project.tasks.page(params[:page]).per_page(30) 
+        @tasks = @project.tasks.page(params[:page]).per_page(@max_pagination) 
       else
-        @tasks = params[:projectx_tasks][:model_ar_r].page(params[:page]).per_page(30) 
+        @tasks = params[:projectx_tasks][:model_ar_r].page(params[:page]).per_page(@max_pagination) 
       end
     end
   

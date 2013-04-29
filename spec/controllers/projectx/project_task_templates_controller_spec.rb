@@ -10,6 +10,7 @@ module Projectx
     render_views
     describe "GET 'index'" do
       before(:each) do
+        @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
         z = FactoryGirl.create(:zone, :zone_name => 'hq')
         type = FactoryGirl.create(:group_type, :name => 'employee')
         ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
@@ -33,7 +34,7 @@ module Projectx
         qs1 = FactoryGirl.create(:project_task_template, :active => true, :last_updated_by_id => @u.id, :type_definition_id => @proj_type1.id, :name => 'newnew')
         get 'index' , {:use_route => :projectx}
         #response.should be_success
-        assigns(:project_task_templates).should eq([qs, qs1])       
+        assigns(:project_task_templates).should =~ [qs, qs1]       
       end
       
       it "should return template for the project_type" do
