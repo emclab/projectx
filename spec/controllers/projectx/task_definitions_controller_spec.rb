@@ -5,7 +5,7 @@ module Projectx
 
     before(:each) do
       controller.should_receive(:require_signin)
-      #controller.should_receive(:require_employee)
+      @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
     end
 
     render_views
@@ -73,7 +73,7 @@ module Projectx
         ls = FactoryGirl.create(:task_definition, :active => true, :last_updated_by_id => u.id)
         ls1 = FactoryGirl.create(:task_definition,:name => 'new', :active => false, :last_updated_by_id => u.id)
         get 'index' , {:use_route => :projectx}
-        assigns(:task_definitions).should eq([ls, ls1]) 
+        assigns(:task_definitions).should =~ [ls, ls1] 
       end
       
       it "should index for active definition for manager" do

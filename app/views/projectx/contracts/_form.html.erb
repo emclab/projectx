@@ -1,7 +1,7 @@
 <%= simple_form_for @contract do |f| %>
 
   <%= f.input :project_id, :label => 'Project Id', :readonly => true %>
-  <%= f.input :contract_date, :label => 'Contract Date:', :as => :string %>
+  <%#= f.input :contract_date, :label => 'Contract Date:', :as => :string %>
   <%= f.input :signed, :label => 'Signed?:' %>
   <%= f.input :sign_date, :label => 'Signed Date:', :as => :string %>
   <%= f.input :signed_by, :label => 'Signed By:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
@@ -10,7 +10,7 @@
   <%= f.input :payment_term, :label => 'Payment Terms (Days):', :collection => find_config_const('payment_terms', 'projectx').split(",") %>
   <%= f.input :payment_agreement, :label => 'Payment Agreement:', :input_html => { :rows => 4} %>
   <%= f.input :paid_out, :label => 'Paid out?:' %>
-  <%= f.input :contract_on_file, :label => 'Contract on file?:' %>
+  <%= f.input :contract_on_file, :label => 'Contract on file?:', :as => :boolean %>
 
   <%= f.button :submit, 'Save' %>
 <% end %>  

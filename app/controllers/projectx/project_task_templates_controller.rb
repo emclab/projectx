@@ -9,9 +9,9 @@ module Projectx
     def index
       @title = '项目样板一览'
       if @type_definition
-        @project_task_templates = @type_definition.project_task_templates.page(params[:page]).per_page(30) 
+        @project_task_templates = @type_definition.project_task_templates.page(params[:page]).per_page(@max_pagination) 
       else
-        @project_task_templates = params[:projectx_project_task_templates][:model_ar_r].page(params[:page]).per_page(30) 
+        @project_task_templates = params[:projectx_project_task_templates][:model_ar_r].page(params[:page]).per_page(@max_pagination) 
       end
     end
   

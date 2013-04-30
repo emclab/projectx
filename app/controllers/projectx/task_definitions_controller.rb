@@ -8,7 +8,7 @@ module Projectx
 
     def index
       @title = 'Task Definition'
-      @task_definitions = params[:projectx_task_definitions][:model_ar_r].page(params[:page]).per_page(30)     
+      @task_definitions = params[:projectx_task_definitions][:model_ar_r].page(params[:page]).per_page(@max_pagination)     
     end
   
     def new

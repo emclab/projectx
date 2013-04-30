@@ -46,7 +46,7 @@ module Projectx
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task.id, :request_status_id => status.id)
         qs1 = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task1.id, :request_status_id => status.id)
         get 'index' , {:use_route => :projectx}
-        assigns(:task_requests).should eq([qs,qs1])  
+        assigns(:task_requests).should =~ [qs,qs1] 
       end
       
       it "should only return request for the task" do

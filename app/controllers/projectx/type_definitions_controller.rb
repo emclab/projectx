@@ -7,7 +7,7 @@ module Projectx
     
     def index
     @title = '项目类型一览'
-      @type_definitions = params[:projectx_type_definitions][:model_ar_r].page(params[:page]).per_page(30)     
+      @type_definitions = params[:projectx_type_definitions][:model_ar_r].page(params[:page]).per_page(@max_pagination)     
     end
   
     def new

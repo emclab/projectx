@@ -2,7 +2,6 @@
   <table>
     <tr>
       <th>#</th>
-      <th>Id</th>
       <th>Project Name</th>
       <th>Signed By</th>
       <th>Signed Date</th>
@@ -26,7 +25,6 @@
               <td><%= prt(contr, 'project.name') %></td>
           <% end %>
           <td><%= prt(contr, 'signed_by.name') %></td>
-          <td><%= prt(contr, :contract_date) %></td>
           <td><%= prt(contr, :sign_date) %></td>
           <td><%= prt(contr, 'project.customer.sales.name') %></td>
           <td><%= prt(contr, :payment_term) %></td>
