@@ -1,6 +1,6 @@
-<%= simple_form_for @contract do |f| %>
+<%= simple_form_for([@project, @contract]) do |f| %>
 
-  <%= f.input :project_id, :label => 'Project Id', :readonly => true %>
+  <%= f.input :project_name, :label => 'Project Name', :readonly => true, :input_html => {:value => @project.name} %>
   <%#= f.input :contract_date, :label => 'Contract Date:', :as => :string %>
   <%= f.input :signed, :label => 'Signed?:' %>
   <%= f.input :sign_date, :label => 'Signed Date:', :as => :string %>

@@ -1,5 +1,6 @@
 module Projectx
   class Payment < ActiveRecord::Base
+    attr_accessor :project_name
     attr_accessible :paid_amount, :received_by_id, :payment_desc, :received_date, :payment_type, :contract_id,
                     :last_updated_by_id, :customer_name_autocomplete, :as => :role_new
 

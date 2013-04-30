@@ -17,9 +17,9 @@
     </tr>
 
     <% @contracts.each do |contr| %>
-        <td><%= prt(contr, :id) %></td>
-        <tr>
-          <% if has_action_right?('show','projectx_projects', contr.project ) %>
+      <tr>
+         <td><%= prt(contr, :id) %></td>        
+          <% if has_action_right?('show_project','projectx_contracts', contr ) %>
               <td><%= link_to contr.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{project_path(contr.project_id)}"  %></td>
           <% else %>
               <td><%= prt(contr, 'project.name') %></td>
@@ -34,10 +34,9 @@
           <td><%= prt(contr, :paid_out) %></td>
           <td><%= prt(contr, :signed) %></td>
           <td><%= prt(contr, :contract_on_file) %></td>
-          <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_path(contr)}" if has_action_right?('update', 'projectx_contracts', contr ) %></td>
+          <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_contract_path(contr.project, contr)}" if has_action_right?('update', 'projectx_contracts', contr ) %></td>
         </tr>
     <% end %>
   </table>
   <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-  &nbsp;&nbsp;<%= link_to 'New Contract', SUBURI + "/authentify/view_handler?index=1&url=#{new_contract_path}" if has_action_right?('create','projectx_contracts') %>
   &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_contracts_path}" %>

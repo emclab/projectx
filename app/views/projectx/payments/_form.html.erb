@@ -1,4 +1,5 @@
-<%= simple_form_for @payment do |f| %>
+<%= simple_form_for([@contract, @payment]) do |f| %>
+    <%= f.input :project_name, :label => 'Project Name', :readonly => true, :input_html => {:value => @contract.project.name} %>
     <%= f.input :contract_id, :label => 'Contract Id:', :readonly => true %>
     <%= f.input :paid_amount, :label => 'Payment Amount:' %>
     <%= f.input :received_by_id, :label => 'Received By:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_payments') %>

@@ -2,7 +2,7 @@
 <h1>Payment Info</h1>
 
 <p>
-  <b>Payed Amount:</b>
+  <b>Paid Amount:</b>
   <%= @payment.paid_amount %>
 </p>
 <p>
@@ -23,19 +23,19 @@
 </p>
 <p>
   <b>Contract Id:</b>
-  <%= @payment.contract_id %>
+  <%= @contract.id %>
 </p>
 <p>
   <b>Project Number:</b>
-  <%= @payment.contract.project.project_num %>
+  <%= @contract.project.project_num %>
 </p>
 <p>
   <b>Project Status:</b>
-  <%= @payment.contract.project.status.name %>
+  <%= @contract.project.status.name %>
 </p>
 <p>
   <b>Sales:</b>
-  <%= @payment.contract.project.sales.name %>
+  <%= @contract.project.sales.name %>
 </p>
 <p>
   <b>Last Updated By:</b>

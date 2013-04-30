@@ -4,24 +4,29 @@ require_dependency "projectx/application_controller"
 module Projectx
   class ContractsController < ApplicationController
     
-    prepend_before_filter :require_signin, :require_employee
+    prepend_before_filter :require_employee
+    before_filter :load_project
 
 
     def index
       @title = 'Contract'
-      @contracts = apply_pagination(params[:projectx_contracts][:model_ar_r])
+      if @project
+        @contracts = Projectx::Contract.where(:project_id => @project.id).page(params[:page]).per_page(@max_pagination)  #@project.contract has pagination error
+      else
+        @contracts = params[:projectx_contracts][:model_ar_r].page(params[:page]).per_page(@max_pagination)
+      end
     end
 
-
+=begin
     def new
       @title = 'New Contract'
-      @contract = Projectx::Contract.new()
-      @contract.project_id = params[:project_id]
+      @contract = @project.build_contract()
+      #@contract.project_id = params[:project_id]
     end
 
 
     def create
-      @contract = Projectx::Contract.new(params[:contract], :as => :role_new)
+      @contract = @project.build_contract(params[:contract], :as => :role_new)
       @contract.last_updated_by_id = session[:user_id]
       if @contract.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Contract Successfully Saved!")
@@ -31,7 +36,7 @@ module Projectx
       end
     end
 
-
+=end
     def edit
       @title = 'Edit Contract'
       @contract = Projectx::Contract.find_by_id(params[:id])
@@ -102,8 +107,12 @@ module Projectx
 
     def apply_pagination(contracts)
       max_entries_page = find_config_const('pagination')
-      contracts = contracts.page(params[:page]).per_page(max_entries_page).order("paid_out DESC, id DESC, sign_date DESC")
-      contracts.all()
+      contracts = contracts.page(params[:page]).per_page(max_entries_page)
+      contracts
+    end
+    
+    def load_project
+      @project = Projectx::Project.find_by_id(params[:project_id]) if params[:project_id].present? && params[:project_id].to_i > 0
     end
 
 

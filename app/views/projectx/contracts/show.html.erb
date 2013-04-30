@@ -7,7 +7,7 @@
   <%= @contract.id %>
 </p>
   <b>Project Name:</b>
-  <%= @contract.project.name %>
+  <%= @project.name %>
 </p>
 <p>
   <b>Contract Amount</b>
@@ -15,18 +15,18 @@
 </p>
 <p>
   <b>Customer Name:</b>
-  <%= @contract.project.customer.name %>
+  <%= @project.customer.name %>
 </p>
 <p>
   <b>Sales:</b>
-  <%= @contract.project.sales.name %>
+  <%= @project.sales.name %>
 </p>
 <p>
   <b>Last Updated By:</b>
   <%= @contract.last_updated_by.name %>
 </p>
 
-  &nbsp;&nbsp;<%= link_to 'New Payment', projectx.new_payment_path(:contract_id => @contract.id) %>
+  &nbsp;&nbsp;<%= link_to 'New Payment', projectx.new_contract_payment_path(@contract) %>
   &nbsp;&nbsp;<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 
 </div>

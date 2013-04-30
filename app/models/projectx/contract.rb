@@ -1,5 +1,6 @@
 module Projectx
   class Contract < ActiveRecord::Base
+    attr_accessor :project_name
     attr_accessible :contract_on_file, :signed, :contract_amount, :other_charge, :paid_out, :payment_term, :project_id,
                     :payment_agreement, :sign_date, :signed_by_id, :last_updated_by_id, :contract_date,
                     :as => :role_new

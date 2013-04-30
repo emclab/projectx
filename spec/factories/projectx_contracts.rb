@@ -5,7 +5,7 @@ FactoryGirl.define do
     project_id 1
     contract_amount "9.99"
     other_charge "9.99"
-    payment_term "MyString"
+    payment_term '1'
     paid_out false
     signed false
     sign_date "2013-02-25"

@@ -3,24 +3,30 @@ require_dependency "projectx/application_controller"
 module Projectx
   class PaymentsController < ApplicationController
 
-    prepend_before_filter :require_signin, :require_employee
+    prepend_before_filter :require_employee
+    before_filter :load_contract
 
 
     def index
       @title = 'Payments'
-      @payments = apply_pagination(params[:projectx_payments][:model_ar_r])
+      if @contract
+        @payments = apply_pagination(@contract.payments)
+      else
+        @payments = apply_pagination(params[:projectx_payments][:model_ar_r])
+      end
     end
 
 
     def new
       @title = 'New Payment'
-      @payment = Projectx::Payment.new
-      @payment.contract_id = params[:contract_id]
+      @payment = @contract.payments.new
+      #@payment.contract_id = params[:contract_id]
     end
 
 
     def create
-      @payment = Projectx::Payment.new(params[:payment], :as => :role_new)
+      #@payment = Projectx::Payment.new(params[:payment], :as => :role_new)
+      @payment = @contract.payments.new(params[:payment], :as => :role_new)
       @payment.last_updated_by_id = session[:user_id]
       if @payment.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Payment Successfully Saved!")
@@ -36,14 +42,14 @@ module Projectx
     end
 
     def update
-        @payment = Projectx::Payment.find_by_id(params[:id])
-        @payment.last_updated_by_id = session[:user_id]
-        if @payment.update_attributes(params[:payment], :as => :role_update)
-          redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Payment Successfully Updated!")
-        else
-          flash[:notice] = 'Data error. Payment No Saved!'
-          render 'edit'
-        end
+      @payment = Projectx::Payment.find_by_id(params[:id])
+      @payment.last_updated_by_id = session[:user_id]
+      if @payment.update_attributes(params[:payment], :as => :role_update)
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Payment Successfully Updated!")
+      else
+        flash[:notice] = 'Data error. Payment No Saved!'
+        render 'edit'
+      end
     end
 
     def show
@@ -102,6 +108,10 @@ module Projectx
       max_entries_page = find_config_const('pagination')
       payments = payments.page(params[:page]).per_page(max_entries_page).order("received_date DESC")
       payments.all()
+    end
+    
+    def load_contract
+      @contract = Projectx::Contract.find_by_id(params[:contract_id]) if params[:contract_id].present? && params[:contract_id].to_i > 0
     end
 
   end

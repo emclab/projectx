@@ -1,26 +1,11 @@
 Projectx::Engine.routes.draw do
 
   resources :misc_definitions
-  resources :task_definitions
-  resources :payments, :only => [:index]
-  resources :payments do
-    collection do
-      get :search
-      put :search_results
-      get :autocomplete
-    end
-  end
-  resources :contracts, :only => [:index]
-  resources :contracts do
-    collection do
-      get :search
-      put :search_results
-      get :autocomplete
-    end
-  end
+  resources :task_definitions  
   resources :logs, :only => [:index]
+  resources :contracts, :only => [:index]  
   resources :projects do
-    resources :contracts
+    resources :contracts, :only => [:index, :edit, :update, :show]
     resources :tasks
     resources :logs
  
@@ -30,6 +15,23 @@ Projectx::Engine.routes.draw do
       get :autocomplete
     end
   end
+  resources :payments, :only => [:index] 
+  resources :contracts do
+    resources :payments
+    collection do
+      get :search
+      put :search_results
+      #get :autocomplete
+    end
+  end
+  resources :payments do
+    collection do
+      get :search
+      put :search_results
+      #get :autocomplete
+    end
+  end
+  
   resources :task_requests, :only => [:index]
   resources :tasks do
     resources :task_requests

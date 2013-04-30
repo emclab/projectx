@@ -3,7 +3,7 @@ require_dependency "projectx/application_controller"
 
 module Projectx
   class ProjectsController < ApplicationController
-    prepend_before_filter :require_signin, :require_employee
+    prepend_before_filter :require_employee
 
 
     def index
@@ -15,7 +15,7 @@ module Projectx
     def new
       @title = 'New Project'
       @project = Projectx::Project.new
-      @project.build_contract
+      @project.contract.build
     end
 
 
