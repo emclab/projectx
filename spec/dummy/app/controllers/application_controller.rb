@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   include Authentify::AuthentifyUtility
   include Authentify::UserPrivilegeHelper
   include Authentify::UsersHelper
+  
+  before_filter :company_info
 
- 
+
+    def company_info
+      @company_display_info = company_display_info()
+    end
+
 end

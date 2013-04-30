@@ -5,7 +5,7 @@ class CreateProjectxContracts < ActiveRecord::Migration
       #t.date :contract_date
       t.decimal :contract_amount, :precision => 10, :scale => 2
       t.decimal :other_charge, :precision => 10, :scale => 2
-      t.string :payment_term
+      t.integer :payment_term
       t.text :payment_agreement
       t.boolean :paid_out, :default => false
       t.boolean :signed, :default => false
