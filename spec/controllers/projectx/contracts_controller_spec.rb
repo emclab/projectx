@@ -46,6 +46,7 @@ module Projectx
         sales_access_right2 = FactoryGirl.create(:user_access,  :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_contracts', :sql_code => 'Projectx::Contract.joins(:project => :customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
         sales_access_right3 = FactoryGirl.create(:user_access,  :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_contracts', :sql_code => 'record.project.sales_id  == session[:user_id]', :rank => 1 )
         sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_contracts',  :sql_code => 'record.project.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show_project',  :resource =>'projectx_contracts',  :sql_code => 'record.project.sales_id  == session[:user_id]', :rank => 1 )
         sales_access_right5 = FactoryGirl.create(:user_access,  :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_contracts',  :rank => 1 )
         sales_access_right6 = FactoryGirl.create(:user_access,  :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers', :sql_code => 'record.project.sales_id  == session[:user_id]' )
 
@@ -100,7 +101,7 @@ module Projectx
           session[:user_id] = @individual_2_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_2_u.id)
           get 'index' , {:use_route => :projectx, :project_id => @prj2.id}
-          assigns(:contracts).should =~ [@contract2, @contract5]
+          assigns(:contracts).should =~ [@contract2]
         end
       end
 
@@ -109,11 +110,11 @@ module Projectx
           ceo_group     = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
           ceo_role_def = FactoryGirl.create(:role_definition, :name => "ceo", :brief_note => "ceo role")
 
-          ceo_access_right1 = FactoryGirl.create(:user_access, :action => 'index', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts', :resource_type => 'table' )
-          ceo_access_right2 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts', :resource_type => 'table' )
-          ceo_access_right3 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts', :resource_type => 'table' )
-          ceo_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers', :resource_type => 'table' )
-          ceo_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_contracts', :resource_type => 'table' )
+          ceo_access_right1 = FactoryGirl.create(:user_access, :action => 'index', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts' )
+          ceo_access_right2 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts' )
+          ceo_access_right3 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts' )
+          ceo_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers' )
+          ceo_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_contracts' )
 
           @ceo_ul       = FactoryGirl.build(:user_level, :sys_user_group_id => ceo_group.id)
           @ceo_user_role = FactoryGirl.create(:user_role, :role_definition_id => ceo_role_def.id)
@@ -646,11 +647,11 @@ module Projectx
           ceo_group     = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
           ceo_role_def = FactoryGirl.create(:role_definition, :name => "ceo", :brief_note => "ceo role")
 
-          ceo_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts', :resource_type => 'table' )
-          ceo_access_right2 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts', :resource_type => 'table' )
-          ceo_access_right3 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts', :resource_type => 'table' )
-          ceo_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers', :resource_type => 'table' )
-          ceo_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_contracts', :resource_type => 'table' )
+          ceo_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts' )
+          ceo_access_right2 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts' )
+          ceo_access_right3 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_contracts' )
+          ceo_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers' )
+          ceo_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_contracts' )
 
           @ceo_ul       = FactoryGirl.build(:user_level, :sys_user_group_id => ceo_group.id)
           @ceo_user_role = FactoryGirl.create(:user_role, :role_definition_id => ceo_role_def.id)
