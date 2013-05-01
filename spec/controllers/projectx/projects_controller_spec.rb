@@ -43,13 +43,13 @@ module Projectx
         @sales_5_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_5.id)
 
         sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-        #sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.where(:zone_id =>  session[:user_privilege].user_zone_ids) ', :rank => 2 )
-        sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-        sales_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-        sales_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
-        sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]' )
+        #sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.where(:zone_id =>  session[:user_privilege].user_zone_ids) ', :rank => 2 )
+        sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
+        sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
+        sales_access_right3 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right5 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects',:rank => 1 )
+        sales_access_right6 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
 
         @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
         @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
@@ -98,11 +98,11 @@ module Projectx
           ceo_group     = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
           ceo_role_def = FactoryGirl.create(:role_definition, :name => "ceo", :brief_note => "ceo role")
 
-          ceo_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'index', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects', :resource_type => 'table' )
-          ceo_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects', :resource_type => 'table' )
-          ceo_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects', :resource_type => 'table' )
-          ceo_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers', :resource_type => 'table' )
-          ceo_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_projects', :resource_type => 'table' )
+          ceo_access_right1 = FactoryGirl.create(:user_access, :action => 'index', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
+          ceo_access_right2 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
+          ceo_access_right3 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
+          ceo_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers' )
+          ceo_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_projects' )
 
           @ceo_ul       = FactoryGirl.build(:user_level, :sys_user_group_id => ceo_group.id)
           @ceo_user_role = FactoryGirl.create(:user_role, :role_definition_id => ceo_role_def.id)
@@ -122,12 +122,12 @@ module Projectx
         before :each do
           manager_group = FactoryGirl.create(:sys_user_group, :user_group_name => 'regional_manager', :group_type_id => @type_of_user.id, :zone_id => @z2.id)
           manager_role_def = FactoryGirl.create(:role_definition, :name => 'manager', :brief_note => "manager role")
-          manager_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'index', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-          manager_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'index', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-          manager_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'update', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-          manager_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-          manager_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'create', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
-          manager_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]' )
+          manager_access_right1 = FactoryGirl.create(:user_access, :action => 'index', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
+          manager_access_right2 = FactoryGirl.create(:user_access, :action => 'index', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
+          manager_access_right3 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+          manager_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+          manager_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:rank => 1 )
+          manager_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
 
           @manager_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => manager_group.id)
           @manager_user_role = FactoryGirl.create(:user_role, :role_definition_id => manager_role_def.id)
@@ -148,7 +148,7 @@ module Projectx
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
 
           sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
+          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
 
           @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
@@ -164,7 +164,7 @@ module Projectx
       end
 
     end
-    
+
     describe "GET new" do
       context "Has no access right for 'new' project " do
         before :each do
@@ -172,7 +172,7 @@ module Projectx
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
 
           sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
+          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
 
           @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
@@ -190,7 +190,7 @@ module Projectx
       context "Has access right for 'new' project" do
         before :each do
           sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-          sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'create', :role_definition_id => sales_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
+          sales_access_right1 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => sales_role_def.id, :resource =>'projectx_projects',:rank => 1 )
 
           sales_group_3 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z3.id)
           @sales_3_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_3.id)
@@ -220,7 +220,7 @@ module Projectx
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
 
           sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
+          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
 
           @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
@@ -239,7 +239,7 @@ module Projectx
       context "Has access right for 'create' project" do
         before :each do
           sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-          sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'create', :role_definition_id => sales_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
+          sales_access_right1 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => sales_role_def.id, :resource =>'projectx_projects',:rank => 1 )
 
           sales_group_3 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z3.id)
           @sales_3_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_3.id)
@@ -275,12 +275,12 @@ module Projectx
             @sales_5_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_5.id)
 
             sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-            sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-            sales_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-            sales_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-            sales_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-            sales_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
-            sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]' )
+            sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
+            sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
+            sales_access_right3 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+            sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+            sales_access_right5 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects',:rank => 1 )
+            sales_access_right6 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
 
             @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
             @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
@@ -322,7 +322,7 @@ module Projectx
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
 
           sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
+          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
 
           @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
@@ -353,12 +353,12 @@ module Projectx
         @sales_5_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_5.id)
 
         sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-        sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-        sales_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-        sales_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
-        sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]' )
+        sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
+        sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
+        sales_access_right3 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right5 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects',:rank => 1 )
+        sales_access_right6 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
 
         @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
         @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
@@ -400,7 +400,7 @@ module Projectx
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
 
           sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
+          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
 
           @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
@@ -431,12 +431,12 @@ module Projectx
         @sales_5_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_5.id)
 
         sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-        sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-        sales_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-        sales_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
-        sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]' )
+        sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
+        sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'index', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
+        sales_access_right3 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right5 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects',:rank => 1 )
+        sales_access_right6 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
 
         @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
         @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
@@ -478,7 +478,7 @@ module Projectx
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
 
           sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
+          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
 
           @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
@@ -501,7 +501,7 @@ module Projectx
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
 
           sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
+          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
 
           @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
@@ -519,7 +519,7 @@ module Projectx
       context "Has access right for 'search' project" do
         before :each do
           sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-          sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'search', :role_definition_id => sales_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
+          sales_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => sales_role_def.id, :resource =>'projectx_projects',:rank => 1 )
 
           sales_group_3 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z3.id)
           @sales_3_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_3.id)
@@ -556,12 +556,12 @@ module Projectx
         @sales_5_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_5.id)
 
         sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-        sales_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'search', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-        sales_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'search', :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-        sales_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
-        sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]' )
+        sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'search', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
+        sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'search', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
+        sales_access_right3 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+        sales_access_right5 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects',:rank => 1 )
+        sales_access_right6 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
 
         @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
         @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
@@ -619,11 +619,11 @@ module Projectx
           ceo_group     = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
           ceo_role_def = FactoryGirl.create(:role_definition, :name => "ceo", :brief_note => "ceo role")
 
-          ceo_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'search', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects', :resource_type => 'table' )
-          ceo_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects', :resource_type => 'table' )
-          ceo_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects', :resource_type => 'table' )
-          ceo_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers', :resource_type => 'table' )
-          ceo_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_projects', :resource_type => 'table' )
+          ceo_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
+          ceo_access_right2 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
+          ceo_access_right3 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
+          ceo_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers' )
+          ceo_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_projects' )
 
           @ceo_ul       = FactoryGirl.build(:user_level, :sys_user_group_id => ceo_group.id)
           @ceo_user_role = FactoryGirl.create(:user_role, :role_definition_id => ceo_role_def.id)
@@ -650,12 +650,12 @@ module Projectx
         before :each do
           manager_group = FactoryGirl.create(:sys_user_group, :user_group_name => 'regional_manager', :group_type_id => @type_of_user.id, :zone_id => @z2.id)
           manager_role_def = FactoryGirl.create(:role_definition, :name => 'manager', :brief_note => "manager role")
-          manager_access_right1 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'search', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-          manager_access_right2 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'search', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'table', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-          manager_access_right3 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'update', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-          manager_access_right4 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-          manager_access_right5 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'create', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects', :resource_type => 'record', :rank => 1 )
-          manager_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'record.sales_id  == session[:user_id]' )
+          manager_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
+          manager_access_right2 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
+          manager_access_right3 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+          manager_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
+          manager_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:rank => 1 )
+          manager_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
 
           @manager_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => manager_group.id)
           @manager_user_role = FactoryGirl.create(:user_role, :role_definition_id => manager_role_def.id)
@@ -676,7 +676,7 @@ module Projectx
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
 
           sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :right => 'allow', :action => 'search', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers', :resource_type => 'record', :sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
+          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
 
           @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
