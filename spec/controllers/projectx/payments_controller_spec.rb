@@ -67,18 +67,11 @@ module Projectx
         @cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         @cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @paymnt1 = FactoryGirl.build(:payment, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
-        @paymnt2 = FactoryGirl.build(:payment, :paid_amount => 201.10, :received_by_id => @individual_2_u.id, :payment_type => 'Cash', :received_date => '2013/04/25')
-        @paymnt3 = FactoryGirl.build(:payment, :paid_amount => 301.10, :received_by_id => @individual_3_u.id, :payment_type => 'Credit Card', :received_date => '2013/04/25')
-        @paymnt4 = FactoryGirl.build(:payment, :paid_amount => 401.10, :received_by_id => @individual_4_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
-        @paymnt5 = FactoryGirl.build(:payment, :paid_amount => 501.10, :received_by_id => @individual_2_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
-
-
-        @contract1 = FactoryGirl.build(:contract, :payment => @paymnt1)
-        @contract2 = FactoryGirl.build(:contract, :payment => @paymnt2)
-        @contract3 = FactoryGirl.build(:contract, :payment => @paymnt3)
-        @contract4 = FactoryGirl.build(:contract, :payment => @paymnt4)
-        @contract5 = FactoryGirl.build(:contract, :payment => @paymnt5)
+        @contract1 = FactoryGirl.build(:contract)
+        @contract2 = FactoryGirl.build(:contract)
+        @contract3 = FactoryGirl.build(:contract)
+        @contract4 = FactoryGirl.build(:contract)
+        @contract5 = FactoryGirl.build(:contract)
 
         @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id, :project_task_template_id => @project_task_template1.id, :contract => @contract1)
         @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id, :project_task_template_id => @project_task_template1.id, :contract => @contract2)
@@ -86,6 +79,12 @@ module Projectx
         @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id, :project_task_template_id => @project_task_template1.id, :contract => @contract4)
         @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust2.id, :project_task_template_id => @project_task_template1.id, :contract => @contract5)
 
+
+        @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt2 = FactoryGirl.create(:payment, :contract_id => @contract2.id, :paid_amount => 201.10, :received_by_id => @individual_2_u.id, :payment_type => 'Cash', :received_date => '2013/04/25')
+        @paymnt3 = FactoryGirl.create(:payment, :contract_id => @contract3.id, :paid_amount => 301.10, :received_by_id => @individual_3_u.id, :payment_type => 'Credit Card', :received_date => '2013/04/25')
+        @paymnt4 = FactoryGirl.create(:payment, :contract_id => @contract4.id, :paid_amount => 401.10, :received_by_id => @individual_4_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
+        @paymnt5 = FactoryGirl.create(:payment, :contract_id => @contract5.id, :paid_amount => 501.10, :received_by_id => @individual_2_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
 
       end
 
@@ -264,12 +263,18 @@ module Projectx
           cust3 = FactoryGirl.create(:customer, :active => true, :name => 'cust name3', :short_name => 'short name3', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
           cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
           cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
+
+          @contract3 = FactoryGirl.build(:contract)
+          @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_7_u.id,:last_updated_by_id => @individual_7_u.id, :customer_id => cust3.id, :project_task_template_id => @project_task_template1.id, :contract => @contract3)
+          @paymnt3 = FactoryGirl.create(:payment, :contract_id => @contract3.id, :paid_amount => 301.10, :received_by_id => @individual_7_u.id, :payment_type => 'Credit Card', :received_date => '2013/04/25')
+
+
         end
 
         it "should allow to create project with proper right" do
           session[:user_id] = @individual_7_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
-          get 'create' , {:use_route => :projectx}
+          get 'create' , {:use_route => :projectx, :contract_id => @contract3.id}
           response.should be_success
         end
       end
@@ -315,27 +320,26 @@ module Projectx
         @cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         @cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id )
-        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id )
-        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id )
-        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id )
-        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust5.id )
+        @contract1 = FactoryGirl.build(:contract)
+        @contract2 = FactoryGirl.build(:contract)
+        @contract3 = FactoryGirl.build(:contract)
+        @contract4 = FactoryGirl.build(:contract)
+        @contract5 = FactoryGirl.build(:contract)
 
-        @contract1 = FactoryGirl.create(:contract, :project_id => @prj1.id)
-        @contract2 = FactoryGirl.create(:contract, :project_id => @prj2.id)
-        @contract3 = FactoryGirl.create(:contract, :project_id => @prj3.id)
-        @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
-        @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
+        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id, :contract => @contract1 )
+        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id, :contract => @contract2 )
+        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id, :contract => @contract3 )
+        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id, :contract => @contract4 )
+        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust5.id, :contract => @contract5 )
 
         @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
-
       end
 
       context "Should be able to 'edit' project with proper right" do
         it "should 'edit' project with proper right" do
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
-          get 'edit' , {:use_route => :projectx, :id => @paymnt1.id}
+          get 'edit' , {:use_route => :projectx, :id => @paymnt1.id, :contract_id => @contract1}
           response.should be_success
         end
       end
@@ -402,17 +406,17 @@ module Projectx
         @cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         @cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id )
-        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id )
-        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id )
-        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id )
-        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust5.id )
+        @contract1 = FactoryGirl.build(:contract)
+        @contract2 = FactoryGirl.build(:contract)
+        @contract3 = FactoryGirl.build(:contract)
+        @contract4 = FactoryGirl.build(:contract)
+        @contract5 = FactoryGirl.build(:contract)
 
-        @contract1 = FactoryGirl.create(:contract, :project_id => @prj1.id)
-        @contract2 = FactoryGirl.create(:contract, :project_id => @prj2.id)
-        @contract3 = FactoryGirl.create(:contract, :project_id => @prj3.id)
-        @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
-        @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
+        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id, :contract => @contract1 )
+        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id, :contract => @contract2 )
+        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id, :contract => @contract3 )
+        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id, :contract => @contract4 )
+        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust5.id, :contract => @contract5 )
 
         @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
       end
@@ -489,17 +493,18 @@ module Projectx
         @cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
         @status_prj = FactoryGirl.create(:misc_definition, :name => 'started', :active => true, :for_which => 'project')
-        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id, :status_id => @status_prj.id )
-        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id, :status_id => @status_prj.id )
-        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id, :status_id => @status_prj.id )
-        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id, :status_id => @status_prj.id )
-        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust5.id, :status_id => @status_prj.id )
 
-        @contract1 = FactoryGirl.create(:contract, :project_id => @prj1.id)
-        @contract2 = FactoryGirl.create(:contract, :project_id => @prj2.id)
-        @contract3 = FactoryGirl.create(:contract, :project_id => @prj3.id)
-        @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
-        @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
+        @contract1 = FactoryGirl.build(:contract)
+        @contract2 = FactoryGirl.build(:contract)
+        @contract3 = FactoryGirl.build(:contract)
+        @contract4 = FactoryGirl.build(:contract)
+        @contract5 = FactoryGirl.build(:contract)
+
+        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id, :status_id => @status_prj.id, :contract => @contract1 )
+        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id, :status_id => @status_prj.id, :contract => @contract2 )
+        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id, :status_id => @status_prj.id, :contract => @contract3 )
+        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id, :status_id => @status_prj.id, :contract => @contract4 )
+        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust5.id, :status_id => @status_prj.id, :contract => @contract5 )
 
         @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25', :last_updated_by_id => @individual_1_u.id)
 
@@ -509,7 +514,7 @@ module Projectx
         it "shows projects" do
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
-          get 'show' , {:use_route => :projectx, :id => @paymnt1.id}
+          get 'show' , {:use_route => :projectx, :id => @paymnt1.id, :contract_id => @contract1}
           response.should be_success
         end
       end
@@ -623,17 +628,17 @@ module Projectx
         @cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         @cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id )
-        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id )
-        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id )
-        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust1.id )
-        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust2.id )
+        @contract1 = FactoryGirl.build(:contract)
+        @contract2 = FactoryGirl.build(:contract)
+        @contract3 = FactoryGirl.build(:contract)
+        @contract4 = FactoryGirl.build(:contract)
+        @contract5 = FactoryGirl.build(:contract)
 
-        @contract1 = FactoryGirl.create(:contract, :project_id => @prj1.id)
-        @contract2 = FactoryGirl.create(:contract, :project_id => @prj2.id)
-        @contract3 = FactoryGirl.create(:contract, :project_id => @prj3.id)
-        @contract4 = FactoryGirl.create(:contract, :project_id => @prj4.id)
-        @contract5 = FactoryGirl.create(:contract, :project_id => @prj5.id)
+        @prj1 = FactoryGirl.create(:project, :name => 'project1', :project_desp => 'project1', :sales_id => @individual_1_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust1.id, :contract => @contract1 )
+        @prj2 = FactoryGirl.create(:project, :name => 'project2', :project_desp => 'project2', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_1_u.id, :customer_id => @cust2.id, :contract => @contract2 )
+        @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id, :contract => @contract3 )
+        @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust1.id, :contract => @contract4 )
+        @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust2.id, :contract => @contract5 )
 
         @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25')
         @paymnt2 = FactoryGirl.create(:payment, :contract_id => @contract2.id, :paid_amount => 201.10, :received_by_id => @individual_2_u.id, :payment_type => 'Cash', :received_date => '2013/04/25')
