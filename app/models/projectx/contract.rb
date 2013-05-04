@@ -34,7 +34,7 @@ module Projectx
     def payment_percent
       total_payment = 0
       total_payment = payments.inject(0) {|sum, pay| sum + pay.paid_amount } unless payments.blank?
-      return total_payment / contract_amount
+      return (total_payment / contract_amount).round(2)
     end
 
 
