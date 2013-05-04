@@ -8,6 +8,7 @@ describe "Integrations" do
       @project_has_sales_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_has_sales', :argument_value => 'true')
       @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => 'Cash,Check,Visa, MasterCard')
+      @payment_type = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_type', :argument_value => 'Cash, Check, Coupon, Credit Card, Credit Letter')
       
       qs = Customerx::MiscDefinition.new({:name => 'ISO9000', :for_which => 'customer_quality_system'}, :as => :role_new)
       add = FactoryGirl.create(:address)
@@ -16,6 +17,7 @@ describe "Integrations" do
       type = FactoryGirl.create(:group_type, :name => 'employee')
       ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
       @role = FactoryGirl.create(:role_definition)
+      
       ua1 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "Projectx::Project.scoped") 
       ua1 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
@@ -70,6 +72,26 @@ describe "Integrations" do
            :sql_code => "")                    
       ua41 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "Projectx::Log.scoped")                    
+
+      ua42 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "Projectx::Contract.scoped") 
+      ua42 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "") 
+      ua42 = FactoryGirl.create(:user_access, :action => 'show', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
+
+      ua43 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_payments', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "Projectx::Payment.scoped") 
+      ua43 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_payments', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "") 
+      ua43 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'projectx_payments', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "") 
+      ua43 = FactoryGirl.create(:user_access, :action => 'show', :resource => 'projectx_payments', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "")
+
+
+      contract1 = FactoryGirl.create(:contract)
+
       ur = FactoryGirl.create(:user_role, :role_definition_id => @role.id)
       ul = FactoryGirl.build(:user_level, :sys_user_group_id => ug.id)
       @u = FactoryGirl.create(:user, :user_levels => [ul], :user_roles => [ur], :login => 'thistest', :password => 'password', :password_confirmation => 'password')
@@ -83,14 +105,17 @@ describe "Integrations" do
       @task_temp = FactoryGirl.build(:task_template, :task_definition_id => @task_def.id)
       #@task_temp1 = FactoryGirl.build(:task_template, :task_definition_id => @task_def1.id)    
       @proj_temp = FactoryGirl.create(:project_task_template, :type_definition_id => proj_type.id, :task_templates => [@task_temp])     
+      @contract1 = FactoryGirl.create(:contract)
       @proj = FactoryGirl.create(:project, :last_updated_by_id => @u.id, :customer_id => @cust.id, :sales_id => @u.id, 
-                                 :project_task_template_id => @proj_temp.id, :status_id => @proj_status.id)
+                                 :project_task_template_id => @proj_temp.id, :status_id => @proj_status.id, contract => @contract1)
       proj_log = FactoryGirl.create(:log, :project_id => @proj.id, :task_id => nil, :task_request_id => nil)
-      @contract = FactoryGirl.create(:contract, :project_id => @proj.id)
       @task = FactoryGirl.create(:task, :last_updated_by_id => @u.id, :project_id => @proj.id, :task_template_id => @task_temp.id)
       task_log = FactoryGirl.create(:log, :task_id => @task.id, :project_id => nil, :task_request_id => nil)
       @task_request = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task.id, :request_status_id => @task_status.id)
       task_req_log = FactoryGirl.create(:log, :task_request_id => @task_request.id, :project_id => nil, :task_id => nil)
+
+      @payment = 
+
       
       visit '/'
       #save_and_open_page

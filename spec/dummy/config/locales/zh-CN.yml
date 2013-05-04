@@ -3,10 +3,10 @@
   
 zh-CN:
   home: "Home"
-  user: "user"
-  login: "Login"
-  logout: "Logout"
-  password: "password"
+  user: "CN-user"
+  login: "CN-Login"
+  logout: "CN-Logout"
+  password: "CN-password"
   password_confirmation: "password confirmation"
   forgot_password: "Forgot password?"
   password_reset instructions_email: "Email sent with password reset instructions."
