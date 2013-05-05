@@ -9,7 +9,7 @@ module Projectx
 
 
     def index
-      @title = 'Contract'
+      @title = 'Contracts'
       if @project
         @contracts = Projectx::Contract.where(:project_id => @project.id).page(params[:page]).per_page(@max_pagination)  #@project.contract has pagination error
       else

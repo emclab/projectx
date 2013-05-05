@@ -18,7 +18,11 @@
 
     <% @contracts.each do |contr| %>
       <tr>
-         <td><%= prt(contr, :id) %></td>        
+          <% if has_action_right?('show','projectx_contracts', contr ) %>
+              <td><%= link_to contr.id, SUBURI + "/authentify/view_handler?index=1&url=#{project_contract_path(contr.project, contr)}"  %></td>
+          <% else %>
+              <td><%= prt(contr, :id) %></td>
+          <% end %>
           <% if has_action_right?('show_project','projectx_contracts', contr ) %>
               <td><%= link_to contr.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{project_path(contr.project_id)}"  %></td>
           <% else %>

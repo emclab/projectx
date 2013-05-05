@@ -21,8 +21,14 @@
   </tr>
 <% @payments.each do |paymnt| %>
   <tr>
-  	<% if has_action_right?('show','projectx_contracts', paymnt.contract ) %>
-  	  <td><%= link_to paymnt.contract, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_path(paymnt.contract_id)}"  %></td>
+    <% if has_action_right?('show','projectx_payments', paymnt ) %>
+        <td><%= link_to paymnt.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_payment_path(paymnt.contract, paymnt)}"  %></td>
+    <% else %>
+        <td><%= prt(paymnt, :id) %></td>
+    <% end %>
+
+  	<% if has_action_right?('show_contract','projectx_payments', paymnt.contract ) %>
+  	  <td><%= link_to paymnt.contract.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_contract_path(paymnt.contract.project, paymnt.contract_id)}"  %></td>
   	<% else %>
   	  <td><%= prt(paymnt, 'contract_id') %></td>
   	<% end %>
@@ -33,7 +39,7 @@
     <td><%= prt(paymnt, :received_by_id) %></td>
     <td><%= prt(paymnt, :received_date) %></td>
     <% if has_action_right?('show','projectx_projects', paymnt.contract.project) %>
-  	  <td><%= link_to paymnt.contract.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_path(paymnt.contra.project.id)}"  %></td>
+  	  <td><%= link_to paymnt.contract.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_path(paymnt.contract.project.id)}"  %></td>
   	<% else %>
         <td><%= prt(paymnt, 'contract.project.name') %></td>
   	<% end %>
@@ -45,7 +51,7 @@
     <td><%= prt(paymnt, 'contract.project.estimated_delivery_date') %></td>
     <td><%= prt(paymnt, 'contract.project.delivery_date') %></td>
 
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_payment_path(paymnt)}" if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_payment_path(paymnt.contract, paymnt)}" if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
   </tr>
 <% end %>
 </table>

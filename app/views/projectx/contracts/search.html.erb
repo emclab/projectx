@@ -1,5 +1,5 @@
 <div id="main_body">
-	<h1>Search</h1>
+	<h1><%= @title %></h1>
 	
 	<%= simple_form_for @contract,  :method => :put, :url => search_results_contracts_path  do |f| %>
 	  <%= f.input :project_id_s, :label => "Project Id" %>
