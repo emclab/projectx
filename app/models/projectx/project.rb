@@ -54,7 +54,7 @@ module Projectx
       def sales_id
         engine_config_prj_sales = find_config_const('project_has_sales', 'projectx')
         if engine_config_prj_sales.nil? or engine_config_prj_sales == 'false'
-          sid = !customer.nil? ? customer.sales.id : nil
+          sid = !customer.nil? ? (!customer.sales.nil? ? customer.sales.id : nil) : nil
         else
           sid = read_attribute(:sales_id)
         end
