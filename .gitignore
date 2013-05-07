@@ -17,8 +17,8 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 spec/dummy/db/*.sqlite3
 spec/dummy/db/*.sqlite3-journal
-spec/dummy/log/
-spec/dummy/tmp/
+spec/dummy/log/*
+spec/dummy/tmp/*
 spec/dummy/.sass-cache
 spec/dummy/db/schema.*
 spec/dummy/db/*

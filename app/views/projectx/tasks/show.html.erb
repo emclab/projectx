@@ -1,5 +1,5 @@
 <div id='main_body'>
-<h1>项目任务内容 </h1>
+<h4>项目任务内容 </h4>
 
 <p>
   <b>任务名称:</b>
@@ -44,9 +44,18 @@
   <% end %>
 </p>
 
+<table class="table table-striped">
+  <tr>
+    <th>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<%= link_to 'New Request', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_task_task_request_path(@task)}", :id => 'new_request_link' if @task.task_template.need_request %>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= link_to 'New Log', projectx.new_task_log_path(@task, :which_table => 'task', :format => :js), :remote => true, 
+                          :id => 'new_log_link' if has_action_right?('show_log_new', 'projectx_tasks') %>    	
+    </th>
+  </tr>
+</table>
 
 <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
-  &nbsp;&nbsp;<%= link_to 'New Request', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_task_task_request_path(@task)}", :id => 'new_request_link' if @task.task_template.need_request %>
-  &nbsp;&nbsp;<%= link_to 'New Log', projectx.new_task_log_path(@task, :which_table => 'task', :format => :js), :remote => true, 
-                          :id => 'new_log_link' if has_action_right?('show_log_new', 'projectx_tasks') %>
+
 </div>

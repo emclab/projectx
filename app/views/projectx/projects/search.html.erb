@@ -1,5 +1,5 @@
 <div id="main_body">
-<h1><%= @title %></h1>
+<h4><%= @title %></h4>
 
 <%= simple_form_for @project,  :method => :put, :url => search_results_projects_path  do |f| %>
   <%= f.input :project_date_s, :label => "Project Date ：", :as => :string, :input_html => {:size => 40} %>
@@ -18,7 +18,7 @@
   <%= f.input :customer_id_s, :collection => return_customers(), :label_method => :name, :value_method => :id, :prompt => "Choose Customer",
                   :label => "Customer:" if has_action_right?("search", "projectx_projects")  %>
 
-  <%= f.button :submit, "Submit" %>
+  <%= f.button :submit, "Submit" , :class =>'btn btn-primary' %>
 <% end %> 
 <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
 

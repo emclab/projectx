@@ -5,6 +5,8 @@ module Projectx
   class ProjectTaskTemplatesController < ApplicationController
     before_filter :require_employee
     before_filter :load_project_type
+
+    helper_method :return_task_definitions
     
     def index
       @title = '项目样板一览'

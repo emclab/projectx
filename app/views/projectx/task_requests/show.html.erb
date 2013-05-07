@@ -1,5 +1,5 @@
 <div id='main_body'>
-<h1>任务申请内容 </h1>
+<h4>任务申请内容 </h4>
 
 <p>
   <b>任务名称:</b>
@@ -47,8 +47,15 @@
   <% end %>
 </p>
 
+	<table class="table table-striped">
+	  <tr>
+	    <th>
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<%= link_to 'New Log', projectx.new_task_request_log_path(@task_request, :which_table => 'task_request', :format => :js), :remote => true, 
+	                  :id => 'new_log_link' if has_action_right?('create_task_request', 'projectx_logs') %>
+	    </th>
+	  </tr>
+	</table>
 
-<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
-  &nbsp;&nbsp;<%= link_to 'New Log', projectx.new_task_request_log_path(@task_request, :which_table => 'task_request', :format => :js), :remote => true, 
-                  :id => 'new_log_link' if has_action_right?('create_task_request', 'projectx_logs') %>
+	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 </div>

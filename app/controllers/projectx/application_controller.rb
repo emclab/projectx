@@ -1,14 +1,15 @@
 # encoding: utf-8
 module Projectx
-  class ApplicationController < ActionController::Base
+  class Projectx::ApplicationController < ApplicationController
     include Authentify::SessionsHelper
     include Authentify::AuthentifyUtility
     include Authentify::UsersHelper
     include Authentify::UserPrivilegeHelper
     
     include Projectx::MiscDefinitionsHelper
+    include Projectx::ProjectsHelper
 
-    helper_method :has_action_right?, :print_attribute, :readonly?
+    helper_method :has_action_right?, :print_attribute, :readonly?, :sales, :return_task_definitions, :return_misc_definitions
      
     before_filter :require_signin 
     before_filter :max_pagination   

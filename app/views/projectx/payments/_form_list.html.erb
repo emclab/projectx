@@ -1,5 +1,5 @@
 <div class="pagination"><%= will_paginate @payments %></div>
-<table>
+<table class="table table-striped">
   <tr>
     <th>#</th>
     <th>Contract Id</th>
@@ -51,9 +51,17 @@
     <td><%= prt(paymnt, 'contract.project.estimated_delivery_date') %></td>
     <td><%= prt(paymnt, 'contract.project.delivery_date') %></td>
 
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_payment_path(paymnt.contract, paymnt)}" if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_payment_path(paymnt.contract, paymnt)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
   </tr>
 <% end %>
 </table>
-  &nbsp;&nbsp;<%= link_to 'New Payment', SUBURI + "/authentify/view_handler?index=1&url=#{new_payment_path}" if has_action_right?('create','projectx_payments') %>
-  &nbsp;&nbsp;<%= link_to 'Search Payment', SUBURI + "/authentify/view_handler?index=1&url=#{search_payments_path}" %>
+<table class="table table-striped">
+  <tr>
+    <th>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<%= link_to 'New Payment', SUBURI + "/authentify/view_handler?index=1&url=#{new_payment_path}" if has_action_right?('create','projectx_payments') %>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<%= link_to 'Search Payment', SUBURI + "/authentify/view_handler?index=1&url=#{search_payments_path}" %>
+    </th>
+  </tr>
+</table>

@@ -2,7 +2,6 @@ require_dependency "projectx/application_controller"
 
 module Projectx
   class PaymentsController < ApplicationController
-
     prepend_before_filter :require_employee
     before_filter :load_contract
 

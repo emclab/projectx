@@ -1,9 +1,9 @@
 <div id="main_body">
 <% if @for_which == 'project_status' %>
-  <h1>New Project Status</h1>
+  <h4>New Project Status</h4>
   <% name_label = 'ProjectStatus' %>  
 <% elsif @for_which == 'task_status' %>
-  <h1>New Task Status</h1>
+  <h4>New Task Status</h4>
   <% name_label = 'TaskStatus' %>  
 <% end %>
 <%= simple_form_for @misc_definition do |f| %>     
@@ -11,7 +11,7 @@
   <%= f.input :brief_note, :label => "Brief Note:", :input_html => {:rows => 2} %> 
   <%#= f.input :for_which, :input_html => {:value => @for_which}, :as => :hidden %>
   <%= f.input :ranking_order, :label => 'Ranking Index', :placehoder => '1, 2, 3 ...'%> 
-  <%= f.button :submit, 'Save' %>  
+  <%= f.button :submit, 'Save', :class =>'btn btn-primary' %>  
 <% end %> 
 
 <%= link_to 'Back', misc_definitions_path(:for_which => @for_which) %>

@@ -1,7 +1,7 @@
 <div id="main_body">
-<h1>项目任务一览</h1>
-<div class="pigination"><%= will_paginate @tasks %></div>
-<table>
+<h4>项目任务一览</h4>
+<div class="pagination"><%= will_paginate @tasks %></div>
+<table class="table table-striped">
   <tr>
     <th>#</th>
     <th>Project</th>
@@ -26,7 +26,7 @@
     <td><%= prt(r, 'task_status_definition.name') %></td>       
     <td><%= prt(r, :completed) %></td>
     <td><%= prt(r, 'last_updated_by.name') %></td>  
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_project_task_path(r.project, r)}" if has_action_right?('update', 'projectx_tasks', r) %> </td>
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_project_task_path(r.project, r)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_tasks', r) %> </td>
 
   </tr>
 <% end %>

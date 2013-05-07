@@ -7,7 +7,7 @@
     <%= f.input :received_date, :label => 'Received Date:', :as => :string %>
 	<%= f.input :payment_type, :label => 'Payment Type:', :collection => find_config_const('payment_type', 'projectx').split(",") %>
 
-    <%= f.button :submit, 'Save' %>
+    <%= f.button :submit, 'Save', :class =>'btn btn-primary' %>
 <% end %>
 
 

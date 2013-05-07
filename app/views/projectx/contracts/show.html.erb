@@ -1,6 +1,6 @@
 <div id="main_body">
 
-<h1><%= @title %></h1>
+<h4><%= @title %></h4>
 
 <p>
   <b>Id:</b>
@@ -26,7 +26,15 @@
   <%= @contract.last_updated_by.name %>
 </p>
 
-  &nbsp;&nbsp;<%= link_to 'New Payment', projectx.new_contract_payment_path(@contract) %>
-  &nbsp;&nbsp;<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+<table class="table table-striped">
+  <tr>
+    <th>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<%= link_to 'New Payment', projectx.new_contract_payment_path(@contract) %>
+    </th>
+  </tr>
+</table>
+
+<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 
 </div>

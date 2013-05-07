@@ -1,6 +1,6 @@
 <div id="main_body">
 
-<h1><%= @title %></h1>
+<h4><%= @title %></h4>
 
 <p>
   <b>Name:</b>
@@ -81,10 +81,17 @@
   <% end %>
 </p>
 
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
-  &nbsp;&nbsp;<%= link_to 'New Log', projectx.new_project_log_path(@project, :which_table => 'project', :format => :js), :remote => true, 
+<table class="table table-striped">
+  <tr>
+    <th>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<%= link_to 'New Log', projectx.new_project_log_path(@project, :which_table => 'project', :format => :js), :remote => true, 
                   :id => 'new_log_link' if has_action_right?('create_project', 'projectx_logs') %>
+    </th>
+  </tr>
+</table>
 
+<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 
 
 </div>

@@ -1,6 +1,6 @@
 
-  <h1>项目类型一览</h1>
-  <table>
+  <h4>项目类型一览</h4>
+  <table class="table table-striped">
     <tr>
       <th>#</th>
       <th>Create Date</th>
@@ -32,7 +32,15 @@
 
   </table>
 
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>&nbsp;&nbsp;
-  <%= link_to "新项目类型", new_type_definition_path( :format => :js), :remote => true, 
+	<table class="table table-striped">
+	  <tr>
+	    <th>
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<%= link_to "新项目类型", new_type_definition_path( :format => :js), :remote => true, 
                :id => 'new_log_link' if has_action_right?('create', 'projectx_type_definitions') %>
+	    </th>
+	  </tr>
+	</table>
+
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>&nbsp;&nbsp;
 

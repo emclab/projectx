@@ -1,5 +1,5 @@
 <div id='main_body'>
-<h1>新Log</h1>
+<h4>新Log</h4>
 <% if @which_table == 'project' %>
   <%= render :partial => 'form_new', :locals => {:parent_obj => @project} %>
   <%= link_to 'Back', project_path(@project) %>

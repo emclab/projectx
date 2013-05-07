@@ -1,4 +1,4 @@
-    <table>
+    <table class="table table-striped">
 		<tr>
 			<th>#</th>
 			<th>Name</th>
@@ -19,10 +19,17 @@
 			<td><%= prt(defi, :active) %></td>
 			<td><%= prt(defi, :ranking_order) %></td>
 			<td><%= prt(defi, 'last_updated_by.name') %></td>    
-			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(defi)}" if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
+			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(defi)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
 		  </tr>
 		<% end %>
 	</table>
-	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-	&nbsp;&nbsp;<%= link_to 'New Task Definition', SUBURI + "/authentify/view_handler?index=1&url=#{new_task_definition_path}" if has_action_right?('create','projectx_task_definitions') %>
 	
+	<table class="table table-striped">
+	  <tr>
+	    <th>
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<%= link_to 'New Task Definition', SUBURI + "/authentify/view_handler?index=1&url=#{new_task_definition_path}" if has_action_right?('create','projectx_task_definitions') %>
+	    </th>
+	  </tr>
+	</table>
+	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>

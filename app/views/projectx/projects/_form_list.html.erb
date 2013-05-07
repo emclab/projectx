@@ -1,5 +1,5 @@
 <div class="pagination"><%= will_paginate @projects %></div>
-<table>
+<table class="table table-striped">
   <tr>
     <th>#</th>
     <th>Customer</th>
@@ -56,11 +56,23 @@
     <td><%= prt(prj, :estimated_delivery_date) %></td>
     <td><%= prt(prj, :delivery_date) %></td>
 
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" if has_action_right?('update', 'projectx_projects', prj ) %></td>
-    <td><%= link_to 'Tasks', SUBURI + "/authentify/view_handler?index=1&url=#{project_tasks_path(prj)}" if has_action_right?('show_task', 'projectx_projects', prj) %></td>
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" , :class => 'btn btn-mini btn-primary'   if has_action_right?('update', 'projectx_projects', prj )  %></td>
+    <td><%= link_to 'Tasks', SUBURI + "/authentify/view_handler?index=1&url=#{project_tasks_path(prj)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('show_task', 'projectx_projects', prj ) %></td>
   </tr>
 <% end %>
 </table>
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
-  &nbsp;&nbsp;<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_projects') %>
-  &nbsp;&nbsp;<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>
+
+<table class="table table-striped">
+  <tr>
+    <th>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_projects') %>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>
+    </th>
+  </tr>
+</table>
+
+
+
+
