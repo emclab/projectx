@@ -1,0 +1,33 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+fr:
+  hello: " French Hello world "
+  home: "Home"
+  user: "Nom"
+  login: "Connexion"
+  password: "Mot de passe"
+  password_confirmation: "Confirme mot de passe"
+  logout: "Déconnexion"
+  main_menu: "Home"
+  business_module_name: "Demande de voyage d'affaires"
+  warehouse_module_name: "Warehousing"
+  inventories_module_name: "Inventories"
+  help: "Aide"
+  forgot_password: "Oublier mot de passe?"
+  remember_me: "Remember me"
+  privacy_policy: "Privacy Policy"
+  terms_of_service: "Terms of Service"
+  pending_biz_travels: "En Attente"
+  pending_business_travels: "Pending Business Travels"
+  show_business_travel: "Business Travel"
+  new_business_travel: "New Business Travel"
+  password_reset instructions_email: "un email est envoyer avec des instruction for change le mot-de-pass"
+  reset_password: "Change le mot de pass"
+  reset_password_title: "Changement du mots de pass" 
+  update_password: "Change le mot de pass" 
+  email: "email"
+  
+
+  
+  

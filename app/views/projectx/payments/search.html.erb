@@ -2,17 +2,17 @@
 <h4><%= @title %></h4>
 
 <%= simple_form_for @payment,  :method => :put, :url => search_results_payments_path  do |f| %>
-  <%= f.input :contract_id_s, :label => "Contract Id：" %>
-  <%= f.input :payment_id_s, :label => "Payment Id：" %>
-  <%= f.input :received_after_date_s, :label => "Paymnt Received Before Date ：", :as => :string, :input_html => {:size => 40} %>
-  <%= f.input :received_before_date_s, :label => "Paymnt Received After Date ：", :as => :string, :input_html => {:size => 40} %>
-  <%= f.input :received_by_id, :collection => sales, :label_method => :name, :value_method => :id, :prompt => "Choose Sales",
-              :label => "Received By:" if has_action_right?('search', 'projectx_payments') %>
-  <%= f.input :payment_type_s, :label => "Payment Type：" %>
+  <%= f.input :contract_id_s, :label => t('Contract Id') %>
+  <%= f.input :payment_id_s, :label => t('Payment Id') %>
+  <%= f.input :received_after_date_s, :label => t('Paymnt Received Before Date'), :as => :string, :input_html => {:size => 40} %>
+  <%= f.input :received_before_date_s, :label => t('Paymnt Received After Date'), :as => :string, :input_html => {:size => 40} %>
+  <%= f.input :received_by_id, :collection => sales, :label_method => :name, :value_method => :id, :prompt => t('Choose Sales'),
+              :label => t('Received By') if has_action_right?('search', 'projectx_payments') %>
+  <%= f.input :payment_type_s, :label => t('Payment Type') %>
 
-  <%= f.button :submit, "Submit", :class =>'btn btn-primary' %>
+  <%= f.button :submit, t('Submit'), :class =>'btn btn-primary' %>
 <% end %> 
-<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0" %>
 
 </div>
 

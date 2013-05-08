@@ -2,46 +2,46 @@
 <h4><%= @title %></h4>
 
 <p>
-  <b>Paid Amount:</b>
+  <b><%= t('Paid Amount') %></b>
   <%= @payment.paid_amount %>
 </p>
 <p>
-  <b>Payment Type:</b>
+  <b><%= t('Payment Type') %></b>
   <%= @payment.payment_type %>
 </p>
   <p>
-    <b>Payment Description:</b>
+    <b><%= t('Payment Description') %></b>
     <%= @payment.payment_desc %>
   </p>
 <p>
-  <b>Received Date:</b>
+  <b><%= t('Received Date') %></b>
   <%= @payment.received_date %>
 </p>
 <p>
-  <b>Received By:</b>
+  <b><%= t('Received By') %></b>
   <%= @payment.received_by.name %>
 </p>
 <p>
-  <b>Contract Id:</b>
+  <b><%= t('Contract Id') %></b>
   <%= @contract.id %>
 </p>
 <p>
-  <b>Project Number:</b>
+  <b><%= t('Project Number') %></b>
   <%= @contract.project.project_num %>
 </p>
 <p>
-  <b>Project Status:</b>
+  <b><%= t('Project Status') %></b>
   <%= @contract.project.status.name %>
 </p>
 <p>
-  <b>Sales:</b>
+  <b><%= t('Sales') %></b>
   <%= @contract.project.sales.name %>
 </p>
 <p>
-  <b>Last Updated By:</b>
+  <b><%= t('Last Updated By') %></b>
   <%= @payment.last_updated_by.name %>
 </p>
 
-<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 
 </div>

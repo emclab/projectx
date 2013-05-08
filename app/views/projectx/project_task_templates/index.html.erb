@@ -4,11 +4,11 @@
 <table class="table table-striped">
   <tr>
     <th>#</th>
-    <th>CreateDate</th>
-    <th>Name</th>
-    <th>ProjectType</th>
-    <th>Action</th>
-    <th>LastUpdatedBy</th>
+    <th><%= t('Create Date') %></th>
+    <th><%= t('Name') %></th>
+    <th><%= t('Project Type') %></th>
+    <th><%= t('Action') %></th>
+    <th><%= t('Last Updated By') %></th>
     <th></th>
     
   </tr>
@@ -22,10 +22,10 @@
     <td><%= prt(r, 'type_definition.name' ) %></td>
     <td><%= prt(r, :active) %></td>
     <td><%= prt(r, 'last_updated_by.name') %></td>  
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_type_definition_project_task_template_path(r.type_definition, r)}" if has_action_right?('update', 'projectx_project_task_templates', r) %> </td>
+    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_type_definition_project_task_template_path(r.type_definition, r)}" if has_action_right?('update', 'projectx_project_task_templates', r) %> </td>
 
   </tr>
 <% end %>
 </table>
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0" %>
 </div>

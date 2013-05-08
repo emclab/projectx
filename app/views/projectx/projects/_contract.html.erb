@@ -1,11 +1,11 @@
   
-  <%= f.input :signed, :label => 'Signed?:', :as => :boolean %>
-  <%= f.input :sign_date, :label => 'Signed Date:', :as => :string %>
-  <%= f.input :signed_by, :label => 'Signed By:', :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
-  <%= f.input :contract_amount, :label => 'Contract Amount:' %>
-  <%= f.input :other_charge, :label => 'Other Charges:' %>
-  <%= f.input :payment_term, :label => 'Payment Terms (Days):', :collection => find_config_const('payment_terms', 'projectx').split(",") %>
-  <%= f.input :payment_agreement, :label => 'Payment Agreement:', :input_html => { :rows => 4} %>
-  <%= f.input :paid_out, :label => 'Paid out?:', :as => :boolean %>
-  <%= f.input :contract_on_file, :label => 'Contract on file?:', :as => :boolean %>
+  <%= f.input :signed, :label => t('Signed'), :as => :boolean %>
+  <%= f.input :sign_date, :label => t('Signed Date'), :as => :string %>
+  <%= f.input :signed_by, :label => t('Signed By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
+  <%= f.input :contract_amount, :label => t('Contract Amount') %>
+  <%= f.input :other_charge, :label => t('Other Charges') %>
+  <%= f.input :payment_term, :label => t('Payment Terms (Days)'), :collection => find_config_const('payment_terms', 'projectx').split(",") %>
+  <%= f.input :payment_agreement, :label => t('Payment Agreement'), :input_html => { :rows => 4} %>
+  <%= f.input :paid_out, :label => t('Paid out'), :as => :boolean %>
+  <%= f.input :contract_on_file, :label => t('Contract on file'), :as => :boolean %>
 

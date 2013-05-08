@@ -2,30 +2,30 @@
 <h4>Task Definition Info</h4>
 
 <p>
-  <b>Name:</b>
+  <b><%= t('Name') %></b>
   <%= @task_definition.name %>
 </p>
 <p>
-  <b>Description:</b>
+  <b><%= t('Description') %></b>
   <%= @task_definition.task_desp %>
 </p>
 <p>
-  <b>Instructions:</b>
+  <b><%= t('Instructions') %></b>
   <%= @task_definition.task_instruction %>
 </p>
 <p>
-  <b>Ranking:</b>
+  <b><%= t('Ranking') %></b>
   <%= @task_definition.ranking_order %>
 </p>
 <p>
-  <b>Active:</b>:</b>
+  <b><%= t('Active') %></b>
   <%= @task_definition.active %>
 </p>
 <p>
-  <b>Last Updated By:</b>
+  <b><%= t('Last Updated By') %></b>
   <%= @task_definition.last_updated_by.name %>
 </p>
 
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 
 </div>

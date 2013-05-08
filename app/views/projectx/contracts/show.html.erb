@@ -3,26 +3,26 @@
 <h4><%= @title %></h4>
 
 <p>
-  <b>Id:</b>
+  <b><%= t('Id') %></b>
   <%= @contract.id %>
 </p>
-  <b>Project Name:</b>
+  <b><%= t('Project Name') %></b>
   <%= @project.name %>
 </p>
 <p>
-  <b>Contract Amount</b>
+  <b><%= t('Contract Amount') %></b>
   <%= @contract.contract_amount %>
 </p>
 <p>
-  <b>Customer Name:</b>
+  <b><%= t('Customer Name') %></b>
   <%= @project.customer.name %>
 </p>
 <p>
-  <b>Sales:</b>
+  <b><%= t('Sales') %></b>
   <%= @project.sales.name %>
 </p>
 <p>
-  <b>Last Updated By:</b>
+  <b><%= t('Last Updated By') %></b>
   <%= @contract.last_updated_by.name %>
 </p>
 
@@ -30,7 +30,7 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to 'New Payment', projectx.new_contract_payment_path(@contract) %>
+    	<%= link_to t('New Payment'), projectx.new_contract_payment_path(@contract) %>
     </th>
   </tr>
 </table>

@@ -1,0 +1,107 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  hello: "Hello world"
+  home: "Home"
+  user: "user"
+  login: "Login"
+  password: "password"
+  password_confirmation: "password confirmation"
+  logout: "Logout"
+  main_menu: "Home"
+  business_module_name: "Business Travels"
+  warehouse_module_name: "Warehousing"
+  inventories_module_name: "Inventories"
+  help: "Help"
+  forgot_password: "Forgot password?"
+  remember_me: "Remember me"
+  privacy_policy: "Privacy Policy"
+  terms_of_service: "Terms of Service"
+  pending_biz_travels: "Pending"
+  pending_business_travels: "Pending Business Travels"
+  show_business_travel: "Business Travel"
+  new_business_travel: "New Business Travel"
+  password_reset instructions_email: "Email sent with password reset instructions."
+  reset_password: "Reset Password" 
+  reset_password_title: "Reset Password"  
+  update_password: "Update Password" 
+
+  email: "email"
+  
+  #Projectx
+  Signed                : 'Signed?'
+  Signed Date           : 'Signed Date'
+  Signed By             : 'Signed By' 
+  Contract Amount       : 'Contract Amount'
+  Other Charges         : 'Other Charges'
+  Payment Terms (Days)  : 'Payment Terms (Days)'
+  Payment Agreement     : 'Payment Agreement'
+  Paid out              : 'Paid out?'
+  Contract on file      : 'Contract on file?'
+  Customer              : 'Customer'
+  Project Name          : 'Project Name'
+  Project Number        : 'Project Number'
+  Project Type          : 'Project Type'
+  Project Description   : 'Project Description'
+  Project Instruction   : 'Project Instruction'
+  Status                : 'Status'
+  Date                  : 'Date'
+  Start Date            : 'StartDate'
+  End Date              : 'End Date'
+  Project Date          : 'ProjectDate'
+  Delivery Date         : 'Delivery Date'
+  Estimated End Date    : 'Estimated End Date'
+  Manager               : 'Manager'
+  Contract              : 'Contract'
+  Sales                 : 'Sales'
+  Completion %          : 'Completion %'
+  Payment %             : 'Payment %'
+  Expedite              : 'Expedite'
+  Completion Date       : 'Completion Date'
+  Delivery Date         : 'Delivery Date'
+  Create Date           : 'Create Date'
+  Edit                  : 'Edit'
+  Tasks                 : 'Tasks'
+  Task Name             : 'Task Name'
+  Task Request Name     : 'Task Request Name'
+  New Project           : 'New Project'
+  Search                : 'Search'
+  Keyword               : 'Keyword'
+  Select Sales          : 'Select Sales'
+  Choose Customer       : 'Choose Customer'
+  Submit                : 'Submit'
+  Back                  : 'Back'
+  Name                  : 'Name'
+  Log                   : 'Log'
+  New Log               : 'New Log'
+  Zone                  : 'Zone'
+  Last Updated By       : 'Last Updated By'
+  New Payment           : 'New Payment'
+  Entered By            : 'Entered By' 
+  Status Name           : 'Status Name'  
+  Brief Note            : 'Brief Note'
+  Ranking Order         : 'Ranking Order'
+  New Project Status    : 'New Project Status'
+  Contract Id           : 'Contract Id'
+  Paid Amount           : 'Paid Amount'
+  Payment Type          : 'Payment Type'
+  Payment Id            : 'Payment Id'
+  Payment Description   : 'Payment Description'
+  Received By           : 'Received By'
+  Received Date         : 'Received Date'
+  Project Status        : 'Project Status'
+  Est. Delivery Date    : 'Est. Delivery Date'
+  Delivered on          : 'Delivered on'
+  Search Payment        : 'Search Payment'
+  Choose Sales          : 'Choose Sales'
+  New Task Definition   : 'New Task Definition'
+  Description           : 'Description'
+  Instructions          : 'Instructions'
+  Active                : 'Active'
+  Ranking               : 'Ranking'
+  Ranking Index         : 'Ranking Index'
+  New Project Task Template  : 'New Project Task Template'
+  
+  
+  

@@ -4,11 +4,11 @@
   <table class="table table-striped">
     <tr>
       <th>#</th>
-      <th>Date</th>
-      <th>ProjectName</th>
-      <th>TaskName</th>
-      <th>Log</th>
-      <th>Entered By</th>
+      <th><%= t('Date') %></th>
+      <th><%= t('Project Name') %></th>
+      <th><%= t('Task Name') %></th>
+      <th><%= t('Log') %></th>
+      <th><%= t('Entered By') %></th>
   
     </tr>
 
@@ -26,5 +26,5 @@
 
   </table>
 
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 

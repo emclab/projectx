@@ -2,20 +2,20 @@
 <table class="table table-striped">
   <tr>
     <th>#</th>
-    <th>Contract Id</th>
-    <th>Paid Amount</th>
-    <th>Payment Type</th>
-    <th>Payment Description</th>
-    <th>Received By</th>
-    <th>Received Date</th>
-    <th>Project Name</th>
-    <th>Project Number</th>
-    <th>Project Status</th>
-    <th>Sales</th>
-    <th>Completion %%</th>
-    <th>Payment %%</th>
-    <th>Est. Delivery Date</th>
-    <th>Delivered on</th>
+    <th><%= t('Contract Id') %></th>
+    <th><%= t('Paid Amount') %></th>
+    <th><%= t('Payment Type') %></th>
+    <th><%= t('Payment Description') %></th>
+    <th><%= t('Received By') %></th>
+    <th><%= t('Received Date') %></th>
+    <th><%= t('Project Name') %></th>
+    <th><%= t('Project Number') %></th>
+    <th><%= t('Project Status') %></th>
+    <th><%= t('Sales') %></th>
+    <th><%= t('Completion %') %></th>
+    <th><%= t('Payment %') %></th>
+    <th><%= t('Est. Delivery Date') %></th>
+    <th><%= t('Delivered on') %></th>
     <th></th>
     <th></th>
   </tr>
@@ -51,7 +51,7 @@
     <td><%= prt(paymnt, 'contract.project.estimated_delivery_date') %></td>
     <td><%= prt(paymnt, 'contract.project.delivery_date') %></td>
 
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_payment_path(paymnt.contract, paymnt)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
+    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_payment_path(paymnt.contract, paymnt)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
   </tr>
 <% end %>
 </table>
@@ -59,9 +59,9 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to 'New Payment', SUBURI + "/authentify/view_handler?index=1&url=#{new_payment_path}" if has_action_right?('create','projectx_payments') %>
+    	<%= link_to t('New Payment'), SUBURI + "/authentify/view_handler?index=1&url=#{new_payment_path}" if has_action_right?('create','projectx_payments') %>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to 'Search Payment', SUBURI + "/authentify/view_handler?index=1&url=#{search_payments_path}" %>
+    	<%= link_to t('Search Payment'), SUBURI + "/authentify/view_handler?index=1&url=#{search_payments_path}" %>
     </th>
   </tr>
 </table>

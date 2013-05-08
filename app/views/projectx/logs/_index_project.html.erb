@@ -4,10 +4,10 @@
   <table class="table table-striped">
     <tr>
       <th>#</th>
-      <th>ProjectName</th>
-      <th>Date</th>
-      <th>Log</th>
-      <th>Entered By</th>
+      <th><%= t('Project Name') %></th>
+      <th><%= t('Date') %></th>
+      <th><%= t('Log') %></th>
+      <th><%= t('Entered By') %></th>
     </tr>
 
     <% @logs.each do |r| %>
@@ -23,5 +23,5 @@
 
   </table>
 
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
 

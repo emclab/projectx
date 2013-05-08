@@ -1,12 +1,12 @@
     <table class="table table-striped">
 		<tr>
 			<th>#</th>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Instructions</th>
-			<th>Active</th>
-			<th>Last updated by</th>
-			<th>Ranking</th>
+			<th><%= t('Name') %></th>
+			<th><%= t('Description') %></th>
+			<th><%= t('Instructions') %></th>
+			<th><%= t('Active') %></th>
+			<th><%= t('Last Updated By') %></th>
+			<th><%= t('Ranking') %></th>
 			<th></th>
 			<th></th> 
 		</tr>
@@ -19,7 +19,7 @@
 			<td><%= prt(defi, :active) %></td>
 			<td><%= prt(defi, :ranking_order) %></td>
 			<td><%= prt(defi, 'last_updated_by.name') %></td>    
-			<td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(defi)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
+			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(defi)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
 		  </tr>
 		<% end %>
 	</table>
@@ -28,8 +28,8 @@
 	  <tr>
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    	<%= link_to 'New Task Definition', SUBURI + "/authentify/view_handler?index=1&url=#{new_task_definition_path}" if has_action_right?('create','projectx_task_definitions') %>
+	    	<%= link_to t('New Task Definition'), SUBURI + "/authentify/view_handler?index=1&url=#{new_task_definition_path}" if has_action_right?('create','projectx_task_definitions') %>
 	    </th>
 	  </tr>
 	</table>
-	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0" %>

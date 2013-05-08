@@ -2,20 +2,20 @@
 <table class="table table-striped">
   <tr>
     <th>#</th>
-    <th>Customer</th>
-    <th>Project Name</th>
-    <th>Project Number</th>
-    <th>Status</th>
-    <th>StartDate</th>
-    <th>ProjectDate</th>
-    <th>Manager</th>
-    <th>Contract</th>
-    <th>Sales</th>
-    <th>Completion %</th>
-    <th>Payment %</th>
-    <th>Expedite?</th>
-    <th>Completion Date</th>
-    <th>Delivery Date</th>
+    <th><%= t('Customer') %></th>
+    <th><%= t('Project Name') %></th>
+    <th><%= t('Project Number') %></th>
+    <th><%= t('Status') %></th>
+    <th><%= t('Start Date') %></th>
+    <th><%= t('Project Date') %></th>
+    <th><%= t('Manager') %></th>
+    <th><%= t('Contract') %></th>
+    <th><%= t('Sales') %></th>
+    <th><%= t('Completion %') %></th>
+    <th><%= t('Payment %') %></th>
+    <th><%= t('Expedite') %></th>
+    <th><%= t('Completion Date') %></th>
+    <th><%= t('Delivery Date') %></th>
     <th></th>
     <th></th>
  
@@ -56,8 +56,8 @@
     <td><%= prt(prj, :estimated_delivery_date) %></td>
     <td><%= prt(prj, :delivery_date) %></td>
 
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" , :class => 'btn btn-mini btn-primary'   if has_action_right?('update', 'projectx_projects', prj )  %></td>
-    <td><%= link_to 'Tasks', SUBURI + "/authentify/view_handler?index=1&url=#{project_tasks_path(prj)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('show_task', 'projectx_projects', prj ) %></td>
+    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" , :class => 'btn btn-mini btn-primary'   if has_action_right?('update', 'projectx_projects', prj )  %></td>
+    <td><%= link_to t('Tasks'), SUBURI + "/authentify/view_handler?index=1&url=#{project_tasks_path(prj)}", :class => 'btn btn-mini'  if has_action_right?('show_task', 'projectx_projects', prj ) %></td>
   </tr>
 <% end %>
 </table>
@@ -66,9 +66,9 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to 'New Project', SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}" if has_action_right?('create','projectx_projects') %>
+    	<%= link_to t('New Project'), SUBURI + "/authentify/view_handler?index=1&url=#{new_project_path}", :class =>'btn btn-primary' if has_action_right?('create','projectx_projects') %>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}" %>
+    	<%= link_to t('Search'), SUBURI + "/authentify/view_handler?index=1&url=#{search_projects_path}", :class =>'btn btn-success' %>
     </th>
   </tr>
 </table>

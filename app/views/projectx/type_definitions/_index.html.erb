@@ -3,12 +3,12 @@
   <table class="table table-striped">
     <tr>
       <th>#</th>
-      <th>Create Date</th>
-      <th>Name</th>
-      <th>Brief Note</th>
-      <th>Ranking Order</th>
-      <th>Active</th>
-      <th>Entered By</th>
+      <th><%= t('Create Date') %></th>
+      <th><%= t('Name') %></th>
+      <th><%= t('Brief Note') %></th>
+      <th><%= t('Ranking Order') %></th>
+      <th><%= t('Active') %></th>
+      <th><%= t('Entered By') %></th>
       <th></th>
       <th></th>
       <th></th>
@@ -23,7 +23,7 @@
           <td><%= cate.ranking_order %></td>
           <td><%= cate.active ? '是' : '否' %></td>
           <td><%= cate.last_updated_by.name %></td>
-          <td><%= link_to 'Edit', edit_type_definition_path(cate, :format => :js), 
+          <td><%= link_to t('Edit'), edit_type_definition_path(cate, :format => :js), 
                            :remote => true if has_action_right?('update', 'projectx_type_definitions', cate) %></td>
           <td><%= link_to '新项目任务模版', new_type_definition_project_task_template_path(cate) if has_action_right?('index_new_project_task_template', 'projectx_type_definitions') %></td>
           <td><%= link_to '项目任务模版一览', type_definition_project_task_templates_path(cate) if has_action_right?('index_project_task_template_index', 'projectx_type_definitions') %></td>

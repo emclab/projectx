@@ -2,17 +2,17 @@
   <table class="table table-striped">
     <tr>
       <th>#</th>
-      <th>Project Name</th>
-      <th>Signed By</th>
-      <th>Signed Date</th>
-      <th>Sales</th>
-      <th>Payment Term</th>
-      <th>Payment Agreement</th>
-      <th>Contract Amount</th>
-      <th>Other Charge</th>
-      <th>Paid out?</th>
-      <th>Signed?</th>
-      <th>Contract on file?</th>
+      <th><%= t('Project Name') %></th>
+      <th><%= t('Signed By') %></th>
+      <th><%= t('Signed Date') %></th>
+      <th><%= t('Sales') %></th>
+      <th><%= t('Payment Term') %></th>
+      <th><%= t('Payment Agreement') %></th>
+      <th><%= t('Contract Amount') %></th>
+      <th><%= t('Other Charge') %></th>
+      <th><%= t('Paid out?') %></th>
+      <th><%= t('Signed') %></th>
+      <th><%= t('Contract on file') %></th>
       <th></th>
     </tr>
 
@@ -38,7 +38,7 @@
           <td><%= prt(contr, :paid_out) %></td>
           <td><%= prt(contr, :signed) %></td>
           <td><%= prt(contr, :contract_on_file) %></td>
-          <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_contract_path(contr.project, contr)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_contracts', contr ) %></td>
+          <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_contract_path(contr.project, contr)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_contracts', contr ) %></td>
         </tr>
     <% end %>
   </table>
@@ -46,7 +46,7 @@
 	  <tr>
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<%= link_to 'Search', SUBURI + "/authentify/view_handler?index=1&url=#{search_contracts_path}" %>    
+			<%= link_to t('Search'), SUBURI + "/authentify/view_handler?index=1&url=#{search_contracts_path}" %>    
 		</th>
 	  </tr>
 	</table>
