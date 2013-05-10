@@ -1,7 +1,6 @@
 <%= simple_form_for([@project, @contract]) do |f| %>
 
   <%= f.input :project_name, :label => t('Project Name'), :readonly => true, :input_html => {:value => @project.name} %>
-  <%#= f.input :contract_date, :label => t('Contract Date:', :as => :string %>
   <%= f.input :signed, :label => t('Signed') %>
   <%= f.input :sign_date, :label => t('Signed Date'), :as => :string %>
   <%= f.input :signed_by, :label => t('Signed By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
