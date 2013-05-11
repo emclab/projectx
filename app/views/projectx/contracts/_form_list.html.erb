@@ -39,6 +39,7 @@
           <td><%= prt(contr, :signed) %></td>
           <td><%= prt(contr, :contract_on_file) %></td>
           <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_contract_path(contr.project, contr)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_contracts', contr ) %></td>
+		  <td><%= link_to t('New Payment'), SUBURI + "/authentify/view_handler?index=1&url=#{new_payment_path}", :class => 'btn btn-mini' if has_action_right?('create_payment','projectx_contracts', contr) %></td>
         </tr>
     <% end %>
   </table>
