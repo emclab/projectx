@@ -52,7 +52,7 @@
     <td><%= prt(paymnt, 'contract.project.delivery_date') %></td>
 
     <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_payment_path(paymnt.contract, paymnt)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
-    tr>
+   </tr>
 <% end %>
 </table>
 <table class="table table-striped">
