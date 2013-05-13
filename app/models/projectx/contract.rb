@@ -1,6 +1,6 @@
 module Projectx
   class Contract < ActiveRecord::Base
-    attr_accessor :project_name
+    attr_accessor :project_name, :payment_percent, :payment_total
     attr_accessible :contract_on_file, :signed, :contract_amount, :other_charge, :paid_out, :payment_term, :project_id,
                     :payment_agreement, :sign_date, :signed_by_id, :last_updated_by_id, :contract_date,
                     :payment_attributes,
@@ -30,13 +30,15 @@ module Projectx
     validates_presence_of :payment_term
 
 
-
-    def payment_percent
+    def payment_total
       total_payment = 0
       total_payment = payments.inject(0) {|sum, pay| sum + pay.paid_amount } unless payments.blank?
-      return (total_payment / contract_amount).round(2)
+      return total_payment
     end
 
+    def payment_percent
+      return (payment_total / contract_amount).round(2)
+    end
 
   end
 end
