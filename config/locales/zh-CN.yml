@@ -50,7 +50,7 @@ zh-CN:
   Start Date            : '开始日期'
   End Date              : '结束日期'
   Project Date          : '项目日期'
-  'Delivery Date'         : '送交日期'
+  'Est. Delivery Date'  : '预期送交日期'
   Estimated End Date    : '预期结束日期'
   Manager               : '实施人'
   Contract              : '合同'
