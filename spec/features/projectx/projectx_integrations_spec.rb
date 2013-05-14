@@ -26,8 +26,10 @@ describe "Integrations" do
            :sql_code => "")
       ua1 = FactoryGirl.create(:user_access, :action => 'show', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "")
-      ua1 = FactoryGirl.create(:user_access, :action => 'show_task', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
+      ua1 = FactoryGirl.create(:user_access, :action => 'index_task', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "")
+      ua1 = FactoryGirl.create(:user_access, :action => 'index_payment', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
+                               :sql_code => "")
       ua1 = FactoryGirl.create(:user_access, :action => 'search', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
                                :sql_code => "")
       ua2 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_tasks', :role_definition_id => @role.id, :rank => 1,
@@ -83,6 +85,8 @@ describe "Integrations" do
       ua42 = FactoryGirl.create(:user_access, :action => 'show', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "")
       ua42 = FactoryGirl.create(:user_access, :action => 'show_project', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
+                                :sql_code => "")
+      ua42 = FactoryGirl.create(:user_access, :action => 'index_payment', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
                                 :sql_code => "")
       ua42 = FactoryGirl.create(:user_access, :action => 'search', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
                                 :sql_code => "")
