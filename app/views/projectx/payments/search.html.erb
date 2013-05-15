@@ -1,5 +1,5 @@
 <div id="main_body">
-<h4><%= @title %></h4>
+<h4><%= t(@title) %></h4>
 
 <%= simple_form_for @payment,  :method => :put, :url => search_results_payments_path  do |f| %>
   <%= f.input :contract_id_s, :label => t('Contract Id') %>

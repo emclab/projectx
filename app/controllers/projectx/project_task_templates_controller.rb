@@ -9,7 +9,7 @@ module Projectx
     helper_method :return_task_definitions
     
     def index
-      @title = '项目样板一览'
+      @title = 'Project Task Templates'
       if @type_definition
         @project_task_templates = @type_definition.project_task_templates.page(params[:page]).per_page(@max_pagination) 
       else
@@ -18,7 +18,7 @@ module Projectx
     end
   
     def new
-      @title = '新项目样板'
+      @title = 'New Project Task Template'
       @project_task_template = @type_definition.project_task_templates.new()
       @project_task_template.task_templates.build()
     end
@@ -35,7 +35,7 @@ module Projectx
     end
   
     def edit
-      @title = '更新项目样板'
+      @title = 'Edit Project Task Template'
       @project_task_template = Projectx::ProjectTaskTemplate.find_by_id(params[:id])
     end
   
@@ -51,7 +51,7 @@ module Projectx
     end
   
     def show
-      @title = '项目样板内容'
+      @title = 'Project Task Template Info'
       @project_task_template = Projectx::ProjectTaskTemplate.find_by_id(params[:id])
     end
     

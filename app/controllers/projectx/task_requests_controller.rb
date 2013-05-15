@@ -7,7 +7,7 @@ module Projectx
     before_filter :load_task
     
     def index
-      @title = '申请一览'
+      @title = 'Task Requests'
       if @task
         @task_requests = @task.task_requests.page(params[:page]).per_page(@max_pagination) 
       else
@@ -16,7 +16,7 @@ module Projectx
     end
   
     def new
-      @title = '输入新申请'
+      @title = 'New Task Request'
       @task_request = @task.task_requests.new
     end
   
@@ -36,7 +36,7 @@ module Projectx
     end
   
     def edit
-      @title = '更新申请'
+      @title = 'Edit Task Request'
       @task_request = Projectx::TaskRequest.find_by_id(params[:id])
     end
   
@@ -55,7 +55,7 @@ module Projectx
     end
   
     def show
-      @title = '申请内容'
+      @title = 'Task Request Info'
       @task_request = Projectx::TaskRequest.find_by_id(params[:id])
     end
     

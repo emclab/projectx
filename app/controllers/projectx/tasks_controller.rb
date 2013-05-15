@@ -7,7 +7,7 @@ module Projectx
     before_filter :load_project
     
     def index
-      @title = '项目任务一览'
+      @title = 'Tasks'
       if @project
         @tasks = @project.tasks.page(params[:page]).per_page(@max_pagination) 
       else
@@ -16,7 +16,7 @@ module Projectx
     end
   
     def new
-      @title = '新项目任务'
+      @title = 'New Task'
       @task = @project.tasks.new
     end
   
@@ -32,7 +32,7 @@ module Projectx
     end
   
     def edit
-      @title = '更新任务'
+      @title = 'Edit Task'
       @task = Projectx::Task.find_by_id(params[:id])
     end
   
@@ -48,7 +48,7 @@ module Projectx
     end
   
     def show
-      @title = '项目任务内容'
+      @title = 'Task Info'
       @task = Projectx::Task.find_by_id(params[:id])
     end
     

@@ -28,7 +28,7 @@ module Projectx
     end
   
     def edit
-      @title = 'Update Task Definition'
+      @title = 'Edit Task Definition'
       @task_definition = Projectx::TaskDefinition.find_by_id(params[:id])
     end
   

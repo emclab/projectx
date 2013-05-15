@@ -1,5 +1,5 @@
 <div id="main_body">
-<h4><%= @title %></h4>
+<h4><%= t(@title) %></h4>
 
 <%= simple_form_for @project,  :method => :put, :url => search_results_projects_path  do |f| %>
   <%= f.input :project_date_s, :label => t('Project Date'), :as => :string, :input_html => {:size => 40} %>

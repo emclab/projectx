@@ -6,12 +6,12 @@ module Projectx
     before_filter :require_employee
     
     def index
-    @title = '项目类型一览'
+    @title = 'Type Definitions'  
       @type_definitions = params[:projectx_type_definitions][:model_ar_r].page(params[:page]).per_page(@max_pagination)     
     end
   
     def new
-      @title = '新项目类型'
+      @title = 'New Type Definition'
       @type_definition = Projectx::TypeDefinition.new
     end
   
@@ -27,7 +27,7 @@ module Projectx
     end
   
     def edit
-      @title = '更新项目类型'
+      @title = 'Edit Type Definition'
       @type_definition = Projectx::TypeDefinition.find_by_id(params[:id])
     end
   
