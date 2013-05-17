@@ -108,8 +108,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        qs = FactoryGirl.attributes_for(:misc_definition, :for_which => 'project_status')
-        get 'create', {:use_route => :projectx, :misc_definition => qs, :for_which => 'project_status', :subaction => 'project_status'}
+        session[:for_which] = 'project_status'
+        qs = FactoryGirl.attributes_for(:misc_definition)
+        get 'create', {:use_route => :projectx, :misc_definition => qs, :subaction => 'project_status'}
         response.should redirect_to misc_definitions_path(:for_which => 'project_status')
       end
       
@@ -119,8 +120,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        qs = FactoryGirl.attributes_for(:misc_definition, :for_which => 'task_status')
-        get 'create', {:use_route => :projectx, :misc_definition => qs, :for_which => 'task_status', :subaction => 'task_status'}
+        session[:for_which] = 'task_status'
+        qs = FactoryGirl.attributes_for(:misc_definition)
+        get 'create', {:use_route => :projectx, :misc_definition => qs, :subaction => 'task_status'}
         response.should redirect_to misc_definitions_path(:for_which => 'task_status')
       end
       
