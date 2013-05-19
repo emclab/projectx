@@ -28,6 +28,8 @@ zh-CN:
   email: '电邮' 
   zone: '区域'
   Email: '电邮'
+  true: '是'
+  false: '否'
   
   #Projectx
   Signed                : '已签字？'
