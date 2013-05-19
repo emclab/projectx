@@ -23,12 +23,15 @@ module Projectx
       @title = title('new', @for_which)
       params[:misc_definition] = {}
       session[:for_which] = @for_which
+      session[:subaction] = params[:subaction]
       @misc_definition = Projectx::MiscDefinition.new()
     end
   
     def create
       @misc_definition = Projectx::MiscDefinition.new(params[:misc_definition], :as => :role_new)
       @misc_definition.for_which = session[:for_which] 
+      session.delete(:for_which)
+      session.delete(:subaction)
       @misc_definition.last_updated_by_id = session[:user_id]
       if @misc_definition.save
         redirect_to misc_definitions_path(:for_which => @misc_definition.for_which), :notice => "Definition Saved!"
