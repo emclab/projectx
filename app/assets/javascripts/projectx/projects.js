@@ -3,12 +3,12 @@
 //autocomplete for customers
 
 $(function() {
-    return $('#user_customer_name_autocomplete').autocomplete({
+    return $('#project_customer_name_autocomplete').autocomplete({
         minLength: 1,
-        source: $('#user_customer_name_autocomplete').data('autocomplete-source'),  //'#..' can NOT be replaced with this
+        source: $('#project_customer_name_autocomplete').data('autocomplete-source'),  //'#..' can NOT be replaced with this
         select: function(event, ui) {
             //alert('fired!');
-            $('#user_customer_name_autocomplete').val(ui.item.value);
+            $('#project_customer_name_autocomplete').val(ui.item.value);
         },
     });
 });

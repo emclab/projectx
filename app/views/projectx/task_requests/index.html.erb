@@ -4,13 +4,13 @@
 <table class="table table-striped">
   <tr>
     <th>#</th>
-    <th>Task</th>
-    <th>RequestName</th>
-    <th>RequestDate</th>
-    <th>FinishDate</th>   
-    <th>RequestStatus</th>   
-    <th>Completed</th>
-    <th>RequestedBy</th>
+    <th><%=t('Task') %></th>
+    <th><%=t('RequestName') %></th>
+    <th><%=t('RequestDate') %></th>
+    <th><%=t('FinishDate') %></th>   
+    <th><%=t('RequestStatus') %></th>   
+    <th><%=t('Completed') %></th>
+    <th><%=t('RequestedBy') %></th>
     <th></th>
     
   </tr>
@@ -24,7 +24,7 @@
   	<td><%= r.request_date.strftime("%Y/%m/%d") %></td>
   	<td><%= r.expected_finish_date.strftime("%Y/%m/%d") %></td>
   	<td><%= prt(r, 'request_status.name') %></td>       
-    <td><%= prt(r, :completed) %></td>
+    <td><%= t(prt(r, :completed).to_s) %></td>
     <td><%= prt(r, 'requested_by.name') %></td>  
     <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_task_task_request_path(r.task, r)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_task_requests', r) %> </td>
 

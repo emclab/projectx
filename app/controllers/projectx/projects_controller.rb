@@ -64,13 +64,6 @@ module Projectx
       @search_params = search_params()
     end
 
-
-    def autocomplete
-      @projects = Projectx::Project.where("active = ?", true).order(:name).where("name like ?", "%#{params[:term]}%")
-      render json: @projects.map(&:name)
-    end
-
-
     protected
 
     def search_params

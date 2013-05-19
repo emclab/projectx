@@ -1,5 +1,5 @@
 <div id="main_body">
-<h4>Project Task Templates</h4>
+<h4><%=t('Project Task Templates')%></h4>
 <div class="pigination"><%= will_paginate @project_task_templates %></div>
 <table class="table table-striped">
   <tr>
@@ -7,8 +7,9 @@
     <th><%= t('Create Date') %></th>
     <th><%= t('Name') %></th>
     <th><%= t('Project Type') %></th>
-    <th><%= t('Action') %></th>
+    <th><%= t('Active') %></th>
     <th><%= t('Last Updated By') %></th>
+    <th><%= t('Ranking') %></th>
     <th></th>
     
   </tr>
@@ -21,7 +22,8 @@
     <td><%= prt(r, :name) %></td>   
     <td><%= prt(r, 'type_definition.name' ) %></td>
     <td><%= prt(r, :active) %></td>
-    <td><%= prt(r, 'last_updated_by.name') %></td>  
+    <td><%= prt(r, 'last_updated_by.name') %></td> 
+    <td><%= prt(r, :ranking_order) %></td> 
     <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_type_definition_project_task_template_path(r.type_definition, r)}" if has_action_right?('update', 'projectx_project_task_templates', r) %> </td>
 
   </tr>
