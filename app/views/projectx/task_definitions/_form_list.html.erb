@@ -17,8 +17,8 @@
 			<td><%= prt(defi, :task_desp) %></td>
 			<td><%= prt(defi, :task_instruction) %></td>
 			<td><%= prt(defi, :active) %></td>
-			<td><%= prt(defi, :ranking_order) %></td>
 			<td><%= prt(defi, 'last_updated_by.name') %></td>    
+			<td><%= prt(defi, :ranking_order) %></td>
 			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_task_definition_path(defi)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
 		  </tr>
 		<% end %>
