@@ -30,7 +30,11 @@ module Projectx
     end
 
     def return_project_task_templates
-      Projectx::ProjectTaskTemplate.where(:active => true)
+      Projectx::ProjectTaskTemplate.where(:active => true).order('ranking_order')
+    end
+    
+    def return_project_types
+      Projectx::TypeDefinition.where(:active => true).order('ranking_order')
     end
 
   end
