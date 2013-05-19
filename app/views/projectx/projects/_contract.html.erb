@@ -1,7 +1,7 @@
   
   <%= f.input :signed, :label => t('Signed'), :as => :boolean %>
   <%= f.input :sign_date, :label => t('Signed Date'), :as => :string %>
-  <%= f.input :signed_by, :label => t('Signed By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
+  <%= f.input :signed_by_id, :label => t('Signed By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
   <%= f.input :contract_amount, :label => t('Contract Amount') %>
   <%= f.input :other_charge, :label => t('Other Charges') %>
   <%= f.input :payment_term, :label => t('Payment Terms (Days)'), :collection => find_config_const('payment_terms', 'projectx').split(",") %>

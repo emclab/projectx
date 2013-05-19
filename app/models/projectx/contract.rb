@@ -27,7 +27,7 @@ module Projectx
 
     validates :contract_amount, :presence => true,
                                 :numericality => {:greater_than => 0}
-    validates_presence_of :payment_term
+    #validates_presence_of :payment_term
 
 
     def payment_total

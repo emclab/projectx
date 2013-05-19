@@ -8,13 +8,13 @@ module Projectx
       attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
-                      :customer_name_autocomplete, :sales_id, :status_id, :completion_percent, :project_date,
+                      :customer_name_autocomplete, :sales_id, :status_id, :completion_percent, :project_date, :contract_attributes,
                       :as => :role_new
                       
       attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, :contracts_attributes,
-                      :customer_name_autocomplete, :sales_id, :status_id, :completion_percent, :project_date,
+                      :customer_name_autocomplete, :sales_id, :status_id, :completion_percent, :project_date, :contract_attributes,
                       :as => :role_update
 
 
@@ -44,30 +44,11 @@ module Projectx
                        :uniqueness => {:case_sensitive => false, :message => 'Duplicate project name'}
       validates :project_num, :presence => true, 
                               :uniqueness => {:case_sensitive => false, :message => 'Duplicated project num'}
-      validates_presence_of :project_manager_id, :project_task_template_id, :start_date, :project_date
+      validates_presence_of :project_task_template_id, :start_date, :project_date
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}
       validates :sales_id, :presence => true,
-                           :numericality => {:greater_than => 0}
-
-
-      def sales_id
-        engine_config_prj_sales = find_config_const('project_has_sales', 'projectx')
-        if engine_config_prj_sales.nil? or engine_config_prj_sales == 'false'
-          sid = !customer.nil? ? (!customer.sales.nil? ? customer.sales.id : nil) : nil
-        else
-          sid = read_attribute(:sales_id)
-        end
-      end
-
-      def sales_id=(new_sales_id)
-        engine_config_prj_sales = find_config_const('project_has_sales', 'projectx')
-        if engine_config_prj_sales.nil? or engine_config_prj_sales == 'false'
-          customer.sales_id = new_sales_id
-        else
-          write_attribute(:sales_id, new_sales_id)
-        end
-      end
+                           :numericality => {:greater_than => 0} if Authentify::AuthentifyUtility.find_config_const('project_has_sales', 'projectx') == 'true'
 
       def default_init
         project_num_time_gen = find_config_const('project_num_time_gen', 'projectx')
