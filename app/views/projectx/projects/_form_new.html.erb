@@ -15,7 +15,7 @@
     <%= f.input :expedite, :label => t('Expedite'), :as => :boolean %>
     <%= f.input :customer_name_autocomplete,:input_html => { data: {autocomplete_source: customerx.autocomplete_customers_path}},
                 :label => t('Customer') %>
-    <%= f.input :sales_id, :label => t('Sales'), :collection => Authentify::UsersHelper::return_users('create', 'customerx_customers') %>
+    <%= f.input :sales_id, :label => t('Sales'), :collection => Authentify::UsersHelper::return_users('sales', 'projectx_projects') %>
 	<%= f.simple_fields_for :contract do |builder| %>     
     	<%= render('contract', :f => builder)%>
   	<% end %>

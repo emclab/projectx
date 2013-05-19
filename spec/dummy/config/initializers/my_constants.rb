@@ -1,14 +1,17 @@
-include Authentify::AuthentifyUtility
+#if Rails.env.production?
+  SUBURI = ''
+  #set session timeout minutes
+  SESSION_TIMEOUT_MINUTES = 90
+  SESSION_WIPEOUT_HOURS = 12
+
 
 # twitter buttons class
-BUTTONS_CLS = {'default' => Authentify::AuthentifyUtility.find_config_const('default-btn'),
-               'action'  => Authentify::AuthentifyUtility.find_config_const('action-btn'),
-               'info'    => Authentify::AuthentifyUtility.find_config_const('info-btn'),
-               'success' => Authentify::AuthentifyUtility.find_config_const('success-btn'),
-               'warning' => Authentify::AuthentifyUtility.find_config_const('warning-btn'),
-               'danger'  => Authentify::AuthentifyUtility.find_config_const('danger-btn'),
-               'inverse' => Authentify::AuthentifyUtility.find_config_const('inverse-btn'),
-               'link'    => Authentify::AuthentifyUtility.find_config_const('link-btn')
+BUTTONS_CLS = {'default' => 'btn btn-primary',
+               'action'  => 'btn btn-primary',
+               'info'    => 'btn btn-primary',
+               'success' => 'btn btn-primary',
+               'warning' => 'btn btn-primary',
+               'danger'  => 'btn btn-primary',
+               'inverse' => 'btn btn-primary',
+               'link'    => 'btn btn-primary'
               }
-
-

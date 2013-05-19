@@ -35,46 +35,46 @@ zh-CN:
   Signed By             : '签字人' 
   Contract Amount       : '合同总额'
   Other Charges         : '其他收费'
-  Payment Terms (Days)  : '账期'
+  Payment Terms (Days)  : '账期(天)'
   Payment Agreement     : '支付协定'
   Paid out              : '付清?'
   Contract on file      : '合同归档?'
   Customer              : '客户'
-  Projects              : 'Projects'
-  New Project           : 'New Project'
-  Edit Project          : 'Edit Project'
-  Project Info          : 'Project Info'
-  Project Search        : 'Project Search'
-  Project Search Results : 'Project Search Results'
-  Contracts             : 'Contracts' 
-  Edit Contract         : 'Edit Contract'
-  Contract Info         : 'Contract Info' 
-  Contract Search       : 'Contract Search'
-  Contract Search Results : 'Contract Search Results'
-  Payments              : 'Payments'
-  New Payment           : 'New Payment'
-  Edit Payment          : 'Edit Payment'
-  Payment Info          : 'Payment Info'
-  Payment Search        : 'Payment Search'
-  Payment Search Results : 'Payment Search Results'
+  Projects              : '项目'
+  New Project           : '新项目'
+  Edit Project          : '更改项目'
+  Project Info          : '项目内容'
+  Project Search        : '项目搜索'
+  Project Search Results : '项目搜索结果'
+  Contracts             : '合同' 
+  Edit Contract         : '更改合同'
+  Contract Info         : '合同内容' 
+  Contract Search       : '合同搜索'
+  Contract Search Results : '合同搜索结果'
+  Payments              : '收款'
+  New Payment           : '新收款'
+  Edit Payment          : '更改收款'
+  Payment Info          : '收款内容'
+  Payment Search        : '收款搜索'
+  Payment Search Results : '收款搜索结果s'
   Project Task Templates : '项目样板一览'
   New Project Task Template : '新项目样板'
   Edit Project Task Template : '更新项目样板'
   Project Task Template Info : '项目样板内容'
-  Task Definition       : 'Task Definition'
-  New Task Definition   : 'New Task Definition'
-  Edit Task Definition  : 'Edit Task Definition'
+  Task Definition       : '任务定义'
+  New Task Definition   : '新任务定义'
+  Edit Task Definition  : '更改任务定义'
   Task Requests         : '申请一览'
   New Task Request      : '输入新申请'
-  Edit Task Request     : '更新申请'
+  Edit Task Request     : '更改申请'
   Task Request Info     : '申请内容'
   Tasks                 : '项目任务一览'
   New Task              : '新项目任务'
-  Edit Task             : '更新任务'
+  Edit Task             : '更改任务'
   Task Info             : '项目任务内容'
   Type Definitions      : '项目类型一览'
   New Type Definition   : '新项目类型'
-  Edit Type Definition  : '更新项目类型'
+  Edit Type Definition  : '更改项目类型'
   Project Name          : '项目名称'
   Project Number        : '项目#'
   Project Type          : '项目类型'
@@ -117,7 +117,7 @@ zh-CN:
   Brief Note            : '简注'
   Ranking Order         : '序列#'
   New Project Status    : '新项目状态'
-  Contract Id           : '合同ID'
+  Contract Id           : '合同#'
   Paid Amount           : '已付款额'
   Payment Type          : '支付类型'
   Payment Id            : '支付ID'
@@ -138,206 +138,3 @@ zh-CN:
   Save                  : '保存'
   New Project Task Template  : '新项目任务模版'
 
-
-
-
-  
-  
-  date:
-    abbr_day_names:
-    - 日
-    - 一
-    - 二
-    - 三
-    - 四
-    - 五
-    - 六
-    abbr_month_names:
-    - 
-    - 1月
-    - 2月
-    - 3月
-    - 4月
-    - 5月
-    - 6月
-    - 7月
-    - 8月
-    - 9月
-    - 10月
-    - 11月
-    - 12月
-    day_names:
-    - 星期日
-    - 星期一
-    - 星期二
-    - 星期三
-    - 星期四
-    - 星期五
-    - 星期六
-    formats:
-      default: ! '%Y-%m-%d'
-      long: ! '%Y年%b%d日'
-      short: ! '%b%d日'
-    month_names:
-    - 
-    - 一月
-    - 二月
-    - 三月
-    - 四月
-    - 五月
-    - 六月
-    - 七月
-    - 八月
-    - 九月
-    - 十月
-    - 十一月
-    - 十二月
-    order:
-    - :year
-    - :month
-    - :day
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: 大约一小时
-        other: 大约 %{count} 小时
-      about_x_months:
-        one: 大约一个月
-        other: 大约 %{count} 个月
-      about_x_years:
-        one: 大约一年
-        other: 大约 %{count} 年
-      almost_x_years:
-        one: 接近一年
-        other: 接近 %{count} 年
-      half_a_minute: 半分钟
-      less_than_x_minutes:
-        one: 不到一分钟
-        other: 不到 %{count} 分钟
-      less_than_x_seconds:
-        one: 不到一秒
-        other: 不到 %{count} 秒
-      over_x_years:
-        one: 一年多
-        other: ! '%{count} 年多'
-      x_days:
-        one: 一天
-        other: ! '%{count} 天'
-      x_minutes:
-        one: 一分钟
-        other: ! '%{count} 分钟'
-      x_months:
-        one: 一个月
-        other: ! '%{count} 个月'
-      x_seconds:
-        one: 一秒
-        other: ! '%{count} 秒'
-    prompts:
-      day: 日
-      hour: 时
-      minute: 分
-      month: 月
-      second: 秒
-      year: 年
-  errors: &errors
-    format: ! '%{attribute} %{message}'
-    messages:
-      accepted: 必须是可被接受的
-      blank: 不能为空字符
-      confirmation: 与确认值不匹配
-      empty: 不能留空
-      equal_to: 必须等于 %{count}
-      even: 必须为双数
-      exclusion: 是保留关键字
-      greater_than: 必须大于 %{count}
-      greater_than_or_equal_to: 必须大于或等于 %{count}
-      inclusion: 不包含于列表中
-      invalid: 是无效的
-      less_than: 必须小于 %{count}
-      less_than_or_equal_to: 必须小于或等于 %{count}
-      not_a_number: 不是数字
-      not_an_integer: 必须是整数
-      odd: 必须为单数
-      record_invalid: ! '验证失败: %{errors}'
-      taken: 已经被使用
-      too_long: 过长（最长为 %{count} 个字符）
-      too_short: 过短（最短为 %{count} 个字符）
-      wrong_length: 长度非法（必须为 %{count} 个字符）
-    template:
-      body: 如下字段出现错误：
-      header:
-        one: 有 1 个错误发生导致「%{model}」无法被保存。
-        other: 有 %{count} 个错误发生导致「%{model}」无法被保存。
-  helpers:
-    select:
-      prompt: 请选择
-    submit:
-      create: 新增%{model}
-      submit: 储存%{model}
-      update: 更新%{model}
-  number:
-    currency:
-      format:
-        delimiter: ! ','
-        format: ! '%u %n'
-        precision: 2
-        separator: .
-        significant: false
-        strip_insignificant_zeros: false
-        unit: CN¥
-    format:
-      delimiter: ! ','
-      precision: 3
-      separator: .
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: ! '%n %u'
-        units:
-          billion: 十亿
-          million: 百万
-          quadrillion: 千兆
-          thousand: 千
-          trillion: 兆
-          unit: ''
-      format:
-        delimiter: ''
-        precision: 1
-        significant: false
-        strip_insignificant_zeros: false
-      storage_units:
-        format: ! '%n %u'
-        units:
-          byte:
-            one: Byte
-            other: Bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: ''
-    precision:
-      format:
-        delimiter: ''
-  support:
-    array:
-      last_word_connector: ! ', 和 '
-      two_words_connector: ! ' 和 '
-      words_connector: ! ', '
-  time:
-    am: 上午
-    formats:
-      default: ! '%Y年%b%d日 %A %H:%M:%S %Z'
-      long: ! '%Y年%b%d日 %H:%M'
-      short: ! '%b%d日 %H:%M'
-    pm: 下午
-  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
-  activemodel:
-    errors:
-      <<: *errors
-  activerecord:
-    errors:
-      <<: *errors  

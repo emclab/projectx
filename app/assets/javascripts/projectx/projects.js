@@ -17,5 +17,6 @@ $(function() {
 $(function() {
 	$( "#project_start_date" ).datepicker({dateFormat: 'yy-mm-dd'});
 	$( "#project_project_date" ).datepicker({dateFormat: 'yy-mm-dd'});
-	
+	$( "#project_estimated_delivery_date" ).datepicker({dateFormat: 'yy-mm-dd'});
+	$( "#project_contract_attributes_sign_date" ).datepicker({dateFormat: 'yy-mm-dd'});	
 });
