@@ -188,10 +188,10 @@ describe "Integrations" do
       page.body.should have_content("输入项目任务模版")
       visit type_definitions_path
       click_link("项目任务模版一览")
-      ##save_and_open_page
-      page.body.should have_content("Project Task Templates")
+      save_and_open_page
+      page.body.should have_content('项目样板一览') #("Project Task Templates")
       click_link(@proj_temp.id.to_s)
-      ##save_and_open_page
+      #save_and_open_page
       page.body.should have_content("项目模版内容")
       click_link('New Project Task Template')
       page.body.should have_content("输入项目任务模版")

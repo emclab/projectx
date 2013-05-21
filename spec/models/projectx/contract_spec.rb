@@ -17,9 +17,9 @@ module Projectx
       p.should_not be_valid
     end
     
-    it "should have payment term" do
-      p = FactoryGirl.build(:contract, :payment_term => nil)
-      p.should_not be_valid
-    end
+    #it "should have payment term" do
+     # p = FactoryGirl.build(:contract, :payment_term => nil)
+     # p.should_not be_valid
+    #end
   end
 end

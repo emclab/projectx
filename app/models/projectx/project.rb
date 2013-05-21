@@ -48,7 +48,7 @@ module Projectx
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}
       validates :sales_id, :presence => true,
-                           :numericality => {:greater_than => 0} if Authentify::AuthentifyUtility.find_config_const('project_has_sales', 'projectx') == 'true'
+                           :numericality => {:greater_than => 0} if :validate_sales
 
       def default_init
         project_num_time_gen = find_config_const('project_num_time_gen', 'projectx')
@@ -61,6 +61,10 @@ module Projectx
 
       def customer_name_autocomplete=(name)
         self.customer = Customerx::Customer.find_by_name(name) if name.present?
+      end
+      
+      def validate_sales
+        return find_config_const('project_has_sales', 'projectx') == 'true'
       end
 
   end
