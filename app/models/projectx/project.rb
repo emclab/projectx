@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 module Projectx
   class Project < ActiveRecord::Base
     include Authentify::AuthentifyUtility
@@ -48,7 +49,11 @@ module Projectx
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}
       validates :sales_id, :presence => true,
-                           :numericality => {:greater_than => 0} if Authentify::AuthentifyUtility.find_config_const('project_has_sales', 'projectx') == 'true'
+                           :numericality => {:greater_than => 0} if  :validate_sales
+
+      def validate_sales
+        return find_config_const('project_has_sales', 'projectx') == 'true'
+      end
 
       def default_init
         project_num_time_gen = find_config_const('project_num_time_gen', 'projectx')
