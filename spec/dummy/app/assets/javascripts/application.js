@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require authentify/application.js
+//= require customerx/application.js
 //= require bootstrap

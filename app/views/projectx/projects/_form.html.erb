@@ -3,7 +3,7 @@
     <%= f.input :name, :label => t('Project Name') %>
     <%= f.input :project_num, :label => t('Project Number'), :readonly => true %>
     <%= f.input :customer_name_autocomplete,:input_html => { data: {autocomplete_source: customerx.autocomplete_customers_path}},
-                :label => t('Customer'), :placeholder => "输入关键字" %>
+                :label => t('Customer'), :placeholder => "输入关键字", :required => true  %>
     <%= f.input :start_date, :label => t('Start Date'), :as => :string %>
     <%= f.input :project_date, :label => t('Project Date'), :as => :string %>
     <%= f.input :delivery_date, :label => t('Delivery Date'), :as => :string %>
