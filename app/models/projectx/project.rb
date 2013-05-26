@@ -45,7 +45,7 @@ module Projectx
                        :uniqueness => {:case_sensitive => false, :message => 'Duplicate project name'}
       validates :project_num, :presence => true, 
                               :uniqueness => {:case_sensitive => false, :message => 'Duplicated project num'}
-      validates_presence_of :project_task_template_id, :start_date, :project_date
+      validates_presence_of :project_task_template_id, :start_date  #, :project_date
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}
       validates :sales_id, :presence => true,

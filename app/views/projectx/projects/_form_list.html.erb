@@ -7,7 +7,6 @@
     <th><%= t('Project Number') %></th>
     <th><%= t('Status') %></th>
     <th><%= t('Start Date') %></th>
-    <th><%= t('Project Date') %></th>
     <th><%= t('Manager') %></th>
     <th><%= t('Contract') %></th>
     <th><%= t('Sales') %></th>
@@ -42,7 +41,6 @@
     <td><%= prt(prj, :project_num) %></td>
     <td><%= prt(prj, 'status.name') %></td>
     <td><%= prt(prj, :start_date) %></td>
-    <td><%= prt(prj, :project_date) %></td>
     <td><%= prt(prj, :project_manager_id) %></td>
     <% if has_action_right?('show','projectx_contracts', prj.contract) %>
         <td><%= link_to prj.contract.id, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_path(prj.contract, {:project_id => prj.id})}"  %></td>
