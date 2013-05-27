@@ -7,7 +7,7 @@
 	  <%= f.input :signed_s, :label => t('Signed') %>
       <%= f.input :signed_by_id_s, :collection => sales(), :label_method => :name, :value_method => :id, :prompt => t('Select Signer'),
                   :label => t('Signer') if has_action_right?('search', 'projectx_contracts') %>
-      <%= f.input :contract_date_s, :label => t('Contract Date') %>
+      <%#= f.input :contract_date_s, :label => t('Contract Date') %>
 
 	  <%= f.button :submit, t('Submit'), :class =>'btn btn-primary' %>
 	<% end %> 

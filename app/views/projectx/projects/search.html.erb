@@ -2,7 +2,7 @@
 <h4><%= t(@title) %></h4>
 
 <%= simple_form_for @project,  :method => :put, :url => search_results_projects_path  do |f| %>
-  <%= f.input :project_date_s, :label => t('Project Date'), :as => :string, :input_html => {:size => 40} %>
+  <%#= f.input :project_date_s, :label => t('Project Date'), :as => :string, :input_html => {:size => 40} %>
   <%= f.input :start_date_s, :label => t('Start Date'), :as => :string, :input_html => {:size => 40} %>
   <%= f.input :end_date_s, :label => t('End Date'), :as => :string, :input_html => {:size => 40} %>
   <%= f.input :status_s, :label => t('Status'), :collection => return_misc_definitions('project_status'), :label_method => :name, :value_method => :id,

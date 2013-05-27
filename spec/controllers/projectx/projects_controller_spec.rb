@@ -249,13 +249,36 @@ module Projectx
           cust3 = FactoryGirl.create(:customer, :active => true, :name => 'cust name3', :short_name => 'short name3', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
           cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
           cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
+          
+          @contract = FactoryGirl.attributes_for(:contract)
+          @contract_bad = FactoryGirl.attributes_for(:contract, :contract_amount => 0)
+          @proj = FactoryGirl.attributes_for(:project, :customer_id => cust3.id, 
+                              :sales_id => @individual_7_u.id, :contract_attributes => @contract)
+          @proj_bad = FactoryGirl.attributes_for(:project, :customer_id => cust3.id, :name => nil,
+                              :sales_id => @individual_7_u.id, :contract_attributes => @contract)                    
+          @proj_bad_child = FactoryGirl.attributes_for(:project, :customer_id => cust3.id, 
+                              :sales_id => @individual_7_u.id, :contract_attributes => @contract_bad)
         end
 
-        it "should allow to create project with proper right" do
+        it "should redirect after successful create" do
           session[:user_id] = @individual_7_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
-          get 'create' , {:use_route => :projectx}
-          response.should be_success
+          get 'create' , {:use_route => :projectx, :project => @proj}
+          response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Saved!")
+        end
+        
+        it "should render new for data error" do
+          session[:user_id] = @individual_7_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
+          get 'create' , {:use_route => :projectx, :project => @proj_bad}
+          response.should render_template('new')
+        end
+        
+        it "should render new for data error in contract object" do
+          session[:user_id] = @individual_7_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
+          get 'create' , {:use_route => :projectx, :project => @proj_bad_child}
+          response.should render_template('new')
         end
       end
     end
@@ -383,14 +406,40 @@ module Projectx
         @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :project_task_template_id => @project_task_template1.id )
         @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :project_task_template_id => @project_task_template1.id )
         @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id, :project_task_template_id => @project_task_template1.id )
+        
+        #data
+        @contract = FactoryGirl.build(:contract)
+        @proj = FactoryGirl.create(:project, :customer_id => cust3.id, 
+                              :sales_id => @individual_1_u.id, :contract => @contract)
       end
 
       context "Should be able to 'update' project with proper right" do
         it "should 'update' project with proper right" do
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
-          get 'update' , {:use_route => :projectx, :id => @prj1.id}
+          get 'update' , {:use_route => :projectx, :id => @proj.id, :project => {:name => 'a new name'}}
           response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Project Successfully Updated!")
+        end
+        
+        it "should redirect after successful update for contract data" do
+          session[:user_id] = @individual_1_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
+          get 'update' , {:use_route => :projectx, :id => @proj.id, :project => {:contract_attributes => {:contract_amount => 10023}}}
+          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Project Successfully Updated!")
+        end
+        
+        it "should render edit for data error" do
+          session[:user_id] = @individual_1_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
+          get 'update' , {:use_route => :projectx, :id => @proj.id, :project => {:start_date => nil}}
+          response.should render_template('edit')
+        end
+        
+        it "should render edit for contract data error" do
+          session[:user_id] = @individual_1_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
+          get 'update' , {:use_route => :projectx, :id => @proj.id, :project => {:contract_attributes => {:contract_amount => 0}}}
+          response.should render_template('edit')
         end
       end
 

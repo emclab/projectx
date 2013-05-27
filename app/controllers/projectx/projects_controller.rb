@@ -101,8 +101,8 @@ module Projectx
 
     def apply_pagination(projects)
       max_entries_page = find_config_const('pagination')
-      projects = projects.page(params[:page]).per_page(max_entries_page).order("expedite DESC, id DESC, start_date DESC")
-      projects.all()
+      projects = projects.order("expedite DESC, id DESC, start_date DESC").page(params[:page]).per_page(max_entries_page)
+      projects
     end
     
   end

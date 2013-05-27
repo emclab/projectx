@@ -11,5 +11,7 @@ FactoryGirl.define do
     sign_date "2013-02-25"
     contract_on_file false
     last_updated_by_id 1
+    payment_agreement 'some agreement'
+    signed_by_id '1'
   end
 end
