@@ -25,6 +25,8 @@ module Projectx
     end
   
     def new
+      session[:which_table] = @which_table
+      session[:subaction] = @which_table
       if @which_table == 'project' 
         if  @project
           @log = @project.logs.new()
@@ -49,18 +51,21 @@ module Projectx
     end
   
     def create
-      if params[:which_table] == 'project' && @project
+      session.delete(:subaction) #subaction used in check_access_right in authentify
+      if session[:which_table] == 'project' && @project
         @log = @project.logs.new(params[:log], :as => :role_new)
         data_save = true
-      elsif params[:which_table] == 'task' && @task
+      elsif session[:which_table] == 'task' && @task
         @log = @task.logs.new(params[:log], :as => :role_new)
         data_save = true
-      elsif params[:which_table] == 'task_request' && @task_request
+      elsif session[:which_table] == 'task_request' && @task_request
         @log = @task_request.logs.new(params[:log], :as => :role_new)
         data_save = true
       else
+        session.delete(:which_table)
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=NO parental object selected!")
       end
+      session.delete(:which_table)
       if data_save  #otherwise @log.save will be executed no matter what.
         @log.last_updated_by_id = session[:user_id]
         if @log.save

@@ -158,11 +158,13 @@ module Projectx
     end
   
     describe "GET 'create'" do
-      it "should create project log successfully" do
+      it "should crsession.delete(:subaction) #subaction used in check_access_right in authentifyeate project log successfully" do
         user_access = FactoryGirl.create(:user_access, :action => 'create_project', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
         :sql_code => "")
         session[:employee] = true
         session[:user_id] = @u.id
+        session[:which_table] = 'project'
+        session[:subaction] = 'project'
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         cust = FactoryGirl.create(:customer, :active => true, :last_updated_by_id => @u.id, :sales_id => @u.id + 1, 
                                   :zone_id => @z.id, :customer_status_category_id => @cate.id)
@@ -177,6 +179,8 @@ module Projectx
         :sql_code => "")
         session[:employee] = true
         session[:user_id] = @u.id
+        session[:which_table] = 'task'
+        session[:subaction] = 'task'
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         cust = FactoryGirl.create(:customer, :active => true, :last_updated_by_id => @u.id, :sales_id => @u.id + 1, 
                                   :zone_id => @z.id, :customer_status_category_id => @cate.id)
@@ -192,6 +196,8 @@ module Projectx
         :sql_code => "")
         session[:employee] = true
         session[:user_id] = @u.id
+        session[:which_table] = 'task_request'
+        session[:subaction] = 'task_request'
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         cust = FactoryGirl.create(:customer, :active => true, :last_updated_by_id => @u.id, :sales_id => @u.id + 1, 
                                   :zone_id => @z.id, :customer_status_category_id => @cate.id)

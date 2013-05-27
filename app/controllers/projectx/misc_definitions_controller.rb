@@ -44,11 +44,13 @@ module Projectx
     def edit
       @title = title('edit', @for_which)
       @misc_definition = Projectx::MiscDefinition.find(params[:id])
+      session[:subaction] = params[:subaction]
     end
   
     def update
       @misc_definition = Projectx::MiscDefinition.find(params[:id])
       @misc_definition.last_updated_by_id = session[:user_id]
+      session.delete(:subaction)
       if @misc_definition.update_attributes(params[:misc_definition], :as => :role_update)
         redirect_to misc_definitions_path(:for_which => @misc_definition.for_which), :notice => "Definition Updated!"
       else
