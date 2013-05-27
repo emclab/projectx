@@ -69,7 +69,7 @@ module Projectx
     def search_results
       @title = 'Contract Search Results'
       @contracts = apply_search_criteria(params[:projectx_contracts][:model_ar_r], params)
-      @contracts = apply_pagination(@contracts)
+      @contracts = @contracts.page(params[:page]).per_page(@max_pagination)
       @search_params = search_params()
     end
 
@@ -105,11 +105,11 @@ module Projectx
       contracts
     end
 
-    def apply_pagination(contracts)
-      max_entries_page = find_config_const('pagination')
-      contracts = contracts.page(params[:page]).per_page(max_entries_page)
-      contracts
-    end
+    #def apply_pagination(contracts)
+    #  max_entries_page = find_config_const('pagination')
+    #  contracts = contracts.page(params[:page]).per_page(max_entries_page)
+    #  contracts
+    #end
     
     def load_project
       @project = Projectx::Project.find_by_id(params[:project_id]) if params[:project_id].present? && params[:project_id].to_i > 0

@@ -9,9 +9,9 @@ module Projectx
     def index
       @title = 'Payments'
       if @contract
-        @payments = apply_pagination(@contract.payments)
+        @payments = @contract.payments.page(params[:page]).per_page(@max_pagination)
       else
-        @payments = apply_pagination(params[:projectx_payments][:model_ar_r])
+        @payments = params[:projectx_payments][:model_ar_r].page(params[:page]).per_page(@max_pagination)
       end
     end
 
@@ -65,7 +65,7 @@ module Projectx
     def search_results
       @title = 'Payment Search Results'
       @payments = apply_search_criteria(params[:projectx_payments][:model_ar_r], params)
-      @payments = apply_pagination(@payments)
+      @payments = @payments.page(params[:page]).per_page(@max_pagination)
       @search_params = search_params()
     end
 
@@ -103,11 +103,11 @@ module Projectx
       payments
     end
 
-    def apply_pagination(payments)
-      max_entries_page = find_config_const('pagination')
-      payments = payments.page(params[:page]).per_page(max_entries_page).order("received_date DESC")
-      payments.all()
-    end
+    #def apply_pagination(payments)
+    #  max_entries_page = find_config_const('pagination')
+     # payments = payments.page(params[:page]).per_page(max_entries_page).order("received_date DESC")
+    #  payments.all()
+    #end
     
     def load_contract
       @contract = Projectx::Contract.find_by_id(params[:contract_id]) if params[:contract_id].present? && params[:contract_id].to_i > 0

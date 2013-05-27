@@ -8,7 +8,7 @@ module Projectx
 
     def index
       @title = 'Projects'
-      @projects = apply_pagination(params[:projectx_projects][:model_ar_r])
+      @projects =  params[:projectx_projects][:model_ar_r].page(params[:page]).per_page(@max_pagination) 
     end
 
 
@@ -60,7 +60,7 @@ module Projectx
     def search_results
       @title = 'Project Search Results'
       @projects = apply_search_criteria(params[:projectx_projects][:model_ar_r], params)
-      @projects = apply_pagination(@projects)
+      @projects = @projects.page(params[:page]).per_page(@max_pagination)
       @search_params = search_params()
     end
 
@@ -99,11 +99,11 @@ module Projectx
       projects
     end
 
-    def apply_pagination(projects)
-      max_entries_page = find_config_const('pagination')
-      projects = projects.order("expedite DESC, id DESC, start_date DESC").page(params[:page]).per_page(max_entries_page)
-      projects
-    end
+    #def apply_pagination(projects)
+     # max_entries_page = find_config_const('pagination')
+    #  projects = projects.order("expedite DESC, id DESC, start_date DESC").page(params[:page]).per_page(max_entries_page)
+    #  projects
+    #end
     
   end
 
