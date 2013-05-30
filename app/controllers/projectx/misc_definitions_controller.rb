@@ -7,6 +7,8 @@ module Projectx
 
     before_filter :require_employee
     before_filter :require_for_which, :only => [:index, :new, :edit]  
+    before_filter :load_session_variable, :only => [:new, :edit]
+    after_filter :delete_session_variable, :only => [:create, :update] 
     
     helper_method 
     def index
@@ -22,16 +24,16 @@ module Projectx
     def new
       @title = title('new', @for_which)
       params[:misc_definition] = {}
-      session[:for_which] = @for_which
-      session[:subaction] = params[:subaction]
+      #session[:for_which] = @for_which
+      #session[:subaction] = params[:subaction]
       @misc_definition = Projectx::MiscDefinition.new()
     end
   
     def create
       @misc_definition = Projectx::MiscDefinition.new(params[:misc_definition], :as => :role_new)
       @misc_definition.for_which = session[:for_which] 
-      session.delete(:for_which)
-      session.delete(:subaction)
+      #session.delete(:for_which)
+      #session.delete(:subaction)
       @misc_definition.last_updated_by_id = session[:user_id]
       if @misc_definition.save
         redirect_to misc_definitions_path(:for_which => @misc_definition.for_which), :notice => "Definition Saved!"
@@ -44,13 +46,13 @@ module Projectx
     def edit
       @title = title('edit', @for_which)
       @misc_definition = Projectx::MiscDefinition.find(params[:id])
-      session[:subaction] = params[:subaction]
+      #session[:subaction] = params[:subaction]
     end
   
     def update
       @misc_definition = Projectx::MiscDefinition.find(params[:id])
       @misc_definition.last_updated_by_id = session[:user_id]
-      session.delete(:subaction)
+      #session.delete(:subaction)
       if @misc_definition.update_attributes(params[:misc_definition], :as => :role_update)
         redirect_to misc_definitions_path(:for_which => @misc_definition.for_which), :notice => "Definition Updated!"
       else
@@ -84,5 +86,6 @@ module Projectx
         return "更新项目任务状态" if for_which == 'task_status'
       end
     end
+    
   end
 end

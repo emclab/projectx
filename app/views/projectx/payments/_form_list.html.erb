@@ -50,7 +50,7 @@
     <td><%= prt(paymnt, 'contract.project.estimated_delivery_date') %></td>
     <td><%= prt(paymnt, 'contract.project.delivery_date') %></td>
 
-    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_payment_path(paymnt.contract, paymnt)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
+    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_contract_payment_path(paymnt.contract, paymnt)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', 'projectx_payments', paymnt ) %></td>
    </tr>
 <% end %>
 </table>
@@ -58,7 +58,7 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to t('Search Payment'), SUBURI + "/authentify/view_handler?index=1&url=#{search_payments_path}" %>
+    	<%= link_to t('Search Payment'), SUBURI + "/authentify/view_handler?index=1&url=#{search_payments_path}", :class => BUTTONS_CLS['action'] %>
     </th>
   </tr>
 </table>

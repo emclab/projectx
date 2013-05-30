@@ -156,4 +156,11 @@ zh-CN:
   RequestedBy           : '申请人'
   LastUpdatedBy         : '更改'
   EnteredBy             : '输入'
+  New Project Status    : '新项目状态'
+  New Task Status       : '新任务状态'
+  Log for Projects      : '项目LOG'  
+  Log for Task Requests : '任务申请LOG'
+  Log for Tasks         : '任务LOG'
+  
+  
 

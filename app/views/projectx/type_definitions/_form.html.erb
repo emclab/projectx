@@ -7,5 +7,5 @@
   <% else %>
     <%= f.input :active, :label => t('Active'), :collection => [['是', true], ['否', false]]%>
   <% end %>
-  <%= f.button :submit, t('Save'), :class =>'btn btn-primary' %>
+  <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>
 <% end %> 

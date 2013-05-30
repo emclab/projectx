@@ -48,14 +48,14 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to 'New Request', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_task_task_request_path(@task)}", :id => 'new_request_link' if @task.task_template.need_request %>
+    	<%= link_to 'New Request', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_task_task_request_path(@task)}", :id => 'new_request_link', :class => BUTTONS_CLS['action'] if @task.task_template.need_request %>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<%= link_to 'New Log', projectx.new_task_log_path(@task, :which_table => 'task', :format => :js), :remote => true, 
-                          :id => 'new_log_link' if has_action_right?('show_log_new', 'projectx_tasks') %>    	
+                          :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('show_log_new', 'projectx_tasks') %>    	
     </th>
   </tr>
 </table>
 
-<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>
 
 </div>

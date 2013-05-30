@@ -30,11 +30,11 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to t('New Payment'), projectx.new_contract_payment_path(@contract) %>
+    	<%= link_to t('New Payment'), projectx.new_contract_payment_path(@contract), :class => BUTTONS_CLS['action'] %>
     </th>
   </tr>
 </table>
 
-<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>
 
 </div>

@@ -1,5 +1,5 @@
 
-  <h4>Log for Tasks</h4>
+  <h4><%=t('Log for Tasks') %></h4>
   <div class="pigination"><%= will_paginate @logs %></div>
   <table class="table table-striped">
     <tr>
@@ -26,5 +26,5 @@
 
   </table>
 
-  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>
 

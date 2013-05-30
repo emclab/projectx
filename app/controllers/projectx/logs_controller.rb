@@ -8,6 +8,8 @@ module Projectx
     before_filter :load_task
     before_filter :load_task_request
     before_filter :require_which_table, :only => [:index, :new, :create] 
+    before_filter :load_session_variable, :only => [:new, :edit]
+    after_filter :delete_session_variable, :only => [:create, :update] 
     
     def index
       if @project
@@ -25,8 +27,8 @@ module Projectx
     end
   
     def new
-      session[:which_table] = @which_table
-      session[:subaction] = @which_table
+      #session[:which_table] = @which_table
+      #session[:subaction] = @which_table
       if @which_table == 'project' 
         if  @project
           @log = @project.logs.new()
@@ -51,7 +53,7 @@ module Projectx
     end
   
     def create
-      session.delete(:subaction) #subaction used in check_access_right in authentify
+      #session.delete(:subaction) #subaction used in check_access_right in authentify
       if session[:which_table] == 'project' && @project
         @log = @project.logs.new(params[:log], :as => :role_new)
         data_save = true
@@ -62,10 +64,10 @@ module Projectx
         @log = @task_request.logs.new(params[:log], :as => :role_new)
         data_save = true
       else
-        session.delete(:which_table)
+        #session.delete(:which_table)
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=NO parental object selected!")
       end
-      session.delete(:which_table)
+      #session.delete(:which_table)
       if data_save  #otherwise @log.save will be executed no matter what.
         @log.last_updated_by_id = session[:user_id]
         if @log.save

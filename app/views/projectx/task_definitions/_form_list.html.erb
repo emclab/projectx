@@ -18,7 +18,7 @@
 			<td><%= t(prt(defi, :active).to_s) %></td>
 			<td><%= prt(defi, 'last_updated_by.name') %></td>    
 			<td><%= prt(defi, :ranking_order) %></td>
-			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_task_definition_path(defi)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
+			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_task_definition_path(defi)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', 'projectx_task_definitions', defi) %></td>
 		  </tr>
 		<% end %>
 	</table>
@@ -27,8 +27,8 @@
 	  <tr>
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    	<%= link_to t('New Task Definition'), SUBURI + "/authentify/view_handler?index=1&url=#{new_task_definition_path}" if has_action_right?('create','projectx_task_definitions') %>
+	    	<%= link_to t('New Task Definition'), SUBURI + "/authentify/view_handler?index=1&url=#{new_task_definition_path}", :class => BUTTONS_CLS['action'] if has_action_right?('create','projectx_task_definitions') %>
 	    </th>
 	  </tr>
 	</table>
-	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0" %>
+	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>

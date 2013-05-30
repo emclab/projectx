@@ -26,10 +26,10 @@
   	<td><%= prt(r, 'request_status.name') %></td>       
     <td><%= t(prt(r, :completed).to_s) %></td>
     <td><%= prt(r, 'requested_by.name') %></td>  
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_task_task_request_path(r.task, r)}", :class => 'btn btn-mini btn-primary'  if has_action_right?('update', 'projectx_task_requests', r) %> </td>
+    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_task_task_request_path(r.task, r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', 'projectx_task_requests', r) %> </td>
 
   </tr>
 <% end %>
 </table>
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
 </div>

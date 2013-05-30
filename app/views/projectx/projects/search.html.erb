@@ -18,8 +18,8 @@
   <%= f.input :customer_id_s, :collection => return_customers(), :label_method => :name, :value_method => :id, :prompt => t('Choose Customer'),
                   :label => t('Customer') if has_action_right?("search", "projectx_projects")  %>
 
-  <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %>
+  <%= f.button :submit, t('Submit') , :class => BUTTONS_CLS['action'] %>
 <% end %> 
-<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0" %>
+<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
 
 </div>

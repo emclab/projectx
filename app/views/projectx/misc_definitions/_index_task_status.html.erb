@@ -1,5 +1,5 @@
 
-  <h4>Task Status</h4>
+  <h4><%=t('Task Status') %></h4>
   <table class="table table-striped">
     <tr>
       <th>#</th>
@@ -20,7 +20,7 @@
           <td><%= qs.ranking_order %></td>
           <td><%= qs.last_updated_by.name %></td>
           <td><%= link_to t('Edit'), edit_misc_definition_path(qs, :subaction => 'task_status', :format => :js), 
-                  :remote => true, :class =>'btn btn-primary' if has_action_right?('update_task_status', 'projectx_misc_definitions', qs) %></td>
+                  :remote => true, :class => BUTTONS_CLS['action'] if has_action_right?('update_task_status', 'projectx_misc_definitions', qs) %></td>
         </tr>
     <% end %>
 
@@ -31,8 +31,8 @@
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<%= link_to t('New Project Status'), new_misc_definition_path(:for_which => 'project_status', :subaction => 'project_status', :format => :js), :remote => true, 
-               :id => 'new_log_link', :class =>'btn btn-primary' if has_action_right?('create_project_status', 'projectx_misc_definitions') %>   
+               :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_project_status', 'projectx_misc_definitions') %>   
 		</th>
 	  </tr>
 	</table>
-  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close' %>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>

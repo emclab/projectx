@@ -58,9 +58,9 @@
     <td><%= prt(prj, :estimated_delivery_date) %></td>
     <td><%= prt(prj, :delivery_date) %></td>
 
-    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" , :class => 'btn btn-mini btn-primary'   if has_action_right?('update', 'projectx_projects', prj )  %></td>
-    <td><%= link_to t('Tasks'), SUBURI + "/authentify/view_handler?index=1&url=#{project_tasks_path(prj)}", :class => 'btn btn-mini'  if has_action_right?('index_task', 'projectx_projects', prj ) %></td>
-    <td><%= link_to t('Payments'), SUBURI + "/authentify/view_handler?index=1&url=#{contract_payments_path(prj.contract)}", :class => 'btn btn-mini'  if has_action_right?('index_payment', 'projectx_projects', prj.contract ) %></td>
+    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_path(prj)}" , :class => BUTTONS_CLS['action']   if has_action_right?('update', 'projectx_projects', prj )  %></td>
+    <td><%= link_to t('Tasks'), SUBURI + "/authentify/view_handler?index=1&url=#{project_tasks_path(prj)}", :class => BUTTONS_CLS['action']  if has_action_right?('index_task', 'projectx_projects', prj ) %></td>
+    <td><%= link_to t('Payments'), SUBURI + "/authentify/view_handler?index=1&url=#{contract_payments_path(prj.contract)}", :class => BUTTONS_CLS['action']  if has_action_right?('index_payment', 'projectx_projects', prj.contract ) %></td>
   </tr>
 <% end %>
 </table>

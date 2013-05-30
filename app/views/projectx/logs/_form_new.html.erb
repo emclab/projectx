@@ -1,5 +1,5 @@
 <%= simple_form_for([parent_obj, @log]) do |f| %>    
  
   <%= f.input :log, :label => t('Log'), :input_html => {:rows => 2} %> 
-  <%= f.button :submit, t('Submit'), :class =>'btn btn-primary' %>  
+  <%= f.button :submit, t('Submit'), :class => BUTTONS_CLS['action'] %>  
 <% end %> 

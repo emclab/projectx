@@ -9,8 +9,8 @@
                   :label => t('Signer') if has_action_right?('search', 'projectx_contracts') %>
       <%#= f.input :contract_date_s, :label => t('Contract Date') %>
 
-	  <%= f.button :submit, t('Submit'), :class =>'btn btn-primary' %>
+	  <%= f.button :submit, t('Submit'), :class => BUTTONS_CLS['action'] %>
 	<% end %> 
-	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0" %>
+	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
 
 </div>
