@@ -87,5 +87,17 @@ module Projectx
       end
     end
     
+    def load_session_variable
+      session[:for_which] = @for_which if @for_which.present?
+      session[:which_table] = @which_table if @which_table.present?
+      session[:subaction] = params[:subaction] if params[:subaction].present?
+    end
+    
+    def delete_session_variable
+      session.delete(:which_table) if session[:which_table].present?
+      session.delete(:for_which) if session[:for_which].present?
+      session.delete(:subaction) if session[:subaction].present?
+    end
+    
   end
 end
