@@ -30,8 +30,8 @@
 	  <tr>
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<%= link_to t('New Project Status'), new_misc_definition_path(:for_which => 'project_status', :subaction => 'project_status', :format => :js), :remote => true, 
-               :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_project_status', 'projectx_misc_definitions') %>   
+			<%= link_to t('New Task Status'), new_misc_definition_path(:for_which => 'task_status', :subaction => 'task_status', :format => :js), :remote => true, 
+               :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_task_status', 'projectx_misc_definitions') %>   
 		</th>
 	  </tr>
 	</table>
