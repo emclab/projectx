@@ -103,7 +103,8 @@ module Projectx
     def load_task_request
       @task_request = Projectx::TaskRequest.find_by_id(params[:task_request_id]) if params[:task_request_id].present? &&                                                                                    params[:task_request_id].to_i > 0
     end
-    
+ 
+=begin    
     def load_session_variable
       session[:for_which] = @for_which if @for_which.present?
       session[:which_table] = @which_table if @which_table.present?
@@ -115,6 +116,7 @@ module Projectx
       session.delete(:for_which) if session[:for_which].present?
       session.delete(:subaction) if session[:subaction].present?
     end
+=end
     
   end
 end
