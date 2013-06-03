@@ -54,7 +54,7 @@
   	<% else %>
 	    <td><%= prt(prj, 'contract.payment_percent') %></td>
   	<% end %>
-    <td><%= prt(prj, :expedite) %></td>
+    <td><%= t(prt(prj, :expedite).to_s) %></td>
     <td><%= prt(prj, :estimated_delivery_date) %></td>
     <td><%= prt(prj, :delivery_date) %></td>
 
