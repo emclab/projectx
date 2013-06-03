@@ -29,7 +29,9 @@ zh-CN:
   zone: '区域'
   Email: '电邮'
   true: '是'
+  True: '是'
   false: '否'
+  False: '否'
   
   #Projectx
   Signed                : '已签字？'
