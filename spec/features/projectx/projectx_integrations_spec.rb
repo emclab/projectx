@@ -142,10 +142,10 @@ describe "Integrations" do
     it "should visit project index page and its links" do
       #visit user_menus_path
       visit projects_path
-      ##save_and_open_page
+      save_and_open_page
       page.body.should have_content("Projects")
       click_link('Tasks')
-      ##save_and_open_page
+      save_and_open_page
       page.body.should have_content("项目任务一览")
       visit projects_path
       click_link('Edit')

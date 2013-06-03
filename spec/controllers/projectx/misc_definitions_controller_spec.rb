@@ -111,7 +111,7 @@ module Projectx
         session[:for_which] = 'project_status'
         qs = FactoryGirl.attributes_for(:misc_definition)
         get 'create', {:use_route => :projectx, :misc_definition => qs, :subaction => 'project_status'}
-        response.should redirect_to misc_definitions_path(:for_which => 'project_status')
+        response.should redirect_to misc_definitions_path(:for_which => 'project_status', :subaction => 'project_status')
       end
       
       it "should save for task_status with create right" do
@@ -123,7 +123,7 @@ module Projectx
         session[:for_which] = 'task_status'
         qs = FactoryGirl.attributes_for(:misc_definition)
         get 'create', {:use_route => :projectx, :misc_definition => qs, :subaction => 'task_status'}
-        response.should redirect_to misc_definitions_path(:for_which => 'task_status')
+        response.should redirect_to misc_definitions_path(:for_which => 'task_status', :subaction => 'task_status')
       end
       
       it "should render new with data error" do
@@ -193,7 +193,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         qs = FactoryGirl.create(:misc_definition, :for_which => 'project_status')
         get 'update', {:use_route => :projectx, :id => qs.id, :misc_definition => {:name => 'newnew name'}, :for_which => 'project_status', :subaction => 'project_status'}
-        response.should redirect_to misc_definitions_path(:for_which => 'project_status')
+        response.should redirect_to misc_definitions_path(:for_which => 'project_status', :subaction => 'project_status')
       end
       
       it "should update task_status with update right" do
@@ -204,7 +204,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         qs = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
         get 'update', {:use_route => :projectx, :id => qs.id, :misc_definition => {:name => 'newnew name'}, :for_which => 'task_status', :subaction => 'task_status'}
-        response.should redirect_to misc_definitions_path(:for_which => 'task_status')
+        response.should redirect_to misc_definitions_path(:for_which => 'task_status', :subaction => 'task_status')
       end
       
       it "shoudl render edit with data error" do
