@@ -6,7 +6,7 @@
   <%= f.fields_for :task_templates, @project_task_template.task_templates.first do |builder| %>
     <p><%= render('first_task_templates', :f => builder) %></p>  
   <% end %> 
-  <%= f.fields_for :task_templates, @project_task_template.task_templates.offset(1).each do |builder| %> 
+  <%= f.fields_for :task_templates, Projectx::TaskTemplate.where(:project_task_template_id => @project_task_template.id).offset(1) do |builder| %> 
     <p><%= render('task_templates', :f => builder) %></p> 
   <% end if @project_task_template.task_templates.size > 1 %> 
   <p><%= link_to_add_fields "加选任务", f, :task_templates %></p>

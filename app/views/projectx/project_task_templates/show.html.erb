@@ -20,7 +20,7 @@
 <p>
   <b>所属任务：</b>
   <% @project_task_template.task_templates.order("execution_order, execution_sub_order").each do |t| %>
-    <p>任务#：<%= t.execution_order %>.<%= t.execution_sub_order if t.execution_sub_order.present? %></p>
+    <p><b>任务#：<%= t.execution_order %>.<%= t.execution_sub_order if t.execution_sub_order.present? %></b></p>
     <p>名称：<%= t.task_definition.name %></p>
     <p>简注：<%= t.brief_note %></p>
     <p>前任务完成后方可开始：<%= t.start_before_previous_completed ? '是' : '否' %></p>
