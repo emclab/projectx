@@ -164,10 +164,10 @@ describe "Integrations" do
       click_link('Back')
       visit project_tasks_path(@proj)
       click_link(@task.id.to_s)
-      save_and_open_page
+      #save_and_open_page
       page.body.should have_content("任务内容")
       click_link('New Log')
-      save_and_open_page
+      #save_and_open_page
       page.body.should have_content("新Log")
     end
     

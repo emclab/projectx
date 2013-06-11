@@ -4,11 +4,11 @@
 <table class="table table-striped">
   <tr>
     <th>#</th>
-    <th><%=t('Project') %></th>
-    <th><%=t('StartDate') %></th>
-    <th><%=t('FinishDate') %></th>
     <th><%=t('TaskName') %></th>
-    <th><%=t('TaskStatus') %></th>   
+    <th><%=t('Project') %></th>
+    <th><%=t('TaskStatus') %></th> 
+    <th><%=t('StartDate') %></th>
+    <th><%=t('FinishDate') %></th>     
     <th><%=t('Completed') %></th>
     <th><%=t('LastUpdatedBy') %></th>
     <th></th>
@@ -19,11 +19,11 @@
   <tr>
   	
   	<td><%= link_to r.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_task_path(r.project,r)}" %></td>
-  	<td><%= prt(r, 'project.name') %></td>
-  	<td><%= r.start_date.strftime("%Y/%m/%d") %></td>
-  	<td><%= r.finish_date.strftime("%Y/%m/%d") %></td>
   	<td><%= prt(r, 'project.project_task_template.type_definition.name' ) %></td>
-    <td><%= prt(r, 'task_status_definition.name') %></td>       
+  	<td><%= prt(r, 'project.name') %></td>
+  	<td><%= prt(r, 'task_status_definition.name') %></td>
+  	<td><%= r.start_date.strftime("%Y/%m/%d") %></td>
+  	<td><%= r.finish_date.strftime("%Y/%m/%d") %></td>  	           
     <td><%= prt(r, :completed) %></td>
     <td><%= prt(r, 'last_updated_by.name') %></td>  
     <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_project_task_path(r.project, r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', 'projectx_tasks', r) %> </td>
