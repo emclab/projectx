@@ -7,7 +7,7 @@
     <%= f.input :start_date, :label => t('Start Date'), :as => :string %>
     <%#= f.input :project_date, :label => t('Project Date'), :as => :string %>
     <%= f.input :estimated_delivery_date, :label => t('Estimated End Date'), :as => :string %>
-    <%= f.input :project_task_template_id, :label => t('Project Type'), :collection => return_project_types, :label_method => :name, :value_method => :id, 
+    <%= f.input :project_task_template_id, :label => t('Project Task Template'), :collection => return_project_task_templates, :label_method => :name, :value_method => :id, 
                         :include_blank => true  %> 
     <%= f.input :project_desp, :label => t('Project Description') %>
     <%= f.input :project_instruction, :label => t('Project Instruction'), :input_html => { :rows => 4} %>
