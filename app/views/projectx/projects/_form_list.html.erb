@@ -8,6 +8,7 @@
     <th><%= t('Status') %></th>
     <th><%= t('Start Date') %></th>
     <th><%= t('Manager') %></th>
+    <th><%= t('ProjectTaskTemplate') %></th>
     <th><%= t('Contract') %></th>
     <th><%= t('Sales') %></th>
     <th><%= t('Completion %') %></th>
@@ -39,9 +40,10 @@
         <td><%= prt(prj, :name) %></td>
   	<% end %>
     <td><%= prt(prj, :project_num) %></td>
-    <td><%= prt(prj, 'status.name') %></td>
+    <td><%= prt(prj, 'status.name') if prj.status_id.present? %></td>
     <td><%= prt(prj, :start_date) %></td>
     <td><%= prt(prj, 'project_manager.name') %></td>
+    <td><%= prt(prj, 'project_task_template.name') %></td>
     <% if has_action_right?('show','projectx_contracts', prj.contract) %>
         <td><%= link_to prj.contract.id, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.contract_path(prj.contract, {:project_id => prj.id})}"  %></td>
     <% else %>

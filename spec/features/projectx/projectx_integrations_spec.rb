@@ -78,6 +78,8 @@ describe "Integrations" do
            :sql_code => "Projectx::Log.scoped")
       ua41 = FactoryGirl.create(:user_access, :action => 'create_project', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
                                 :sql_code => "")
+      ua41 = FactoryGirl.create(:user_access, :action => 'create_task', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
+                                :sql_code => "")                          
       ua42 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "Projectx::Contract.scoped")
       ua42 = FactoryGirl.create(:user_access, :action => 'update', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
@@ -142,10 +144,10 @@ describe "Integrations" do
     it "should visit project index page and its links" do
       #visit user_menus_path
       visit projects_path
-      save_and_open_page
+      #save_and_open_page
       page.body.should have_content("Projects")
       click_link('Tasks')
-      save_and_open_page
+      #save_and_open_page
       page.body.should have_content("项目任务一览")
       visit projects_path
       click_link('Edit')
@@ -162,10 +164,10 @@ describe "Integrations" do
       click_link('Back')
       visit project_tasks_path(@proj)
       click_link(@task.id.to_s)
-      ##save_and_open_page
+      save_and_open_page
       page.body.should have_content("任务内容")
       click_link('New Log')
-      ##save_and_open_page
+      save_and_open_page
       page.body.should have_content("新Log")
     end
     
