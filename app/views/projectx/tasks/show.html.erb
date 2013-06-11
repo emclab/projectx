@@ -40,7 +40,7 @@
 <p>
   <b>LOG：</b>
   <% @task.logs.order("created_at DESC").each do |t| %>
-    <li><%= t.created_at.strftime("%Y/%m/%d") %>, <%= t.last_updated_by.name %>, <%= t.log %> </li>
+    <li><%= t.created_at.strftime("%Y/%m/%d") %>,&nbsp; <%= t.last_updated_by.name %>,&nbsp; <%= t.log %> </li>
   <% end %>
 </p>
 
@@ -50,7 +50,7 @@
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     	<%= link_to 'New Request', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_task_task_request_path(@task)}", :id => 'new_request_link', :class => BUTTONS_CLS['action'] if @task.task_template.need_request %>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<%= link_to 'New Log', projectx.new_task_log_path(@task, :which_table => 'task', :format => :js), :remote => true, 
+		<%= link_to 'New Log', projectx.new_task_log_path(@task, :which_table => 'task', :subaction => 'task', :format => :js), :remote => true, 
                           :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('show_log_new', 'projectx_tasks') %>    	
     </th>
   </tr>

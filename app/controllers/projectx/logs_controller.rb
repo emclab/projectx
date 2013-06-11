@@ -84,7 +84,8 @@ module Projectx
     protected
     
     def require_which_table
-      @which_table = params[:which_table]
+      @which_table = params[:which_table] if params[:which_table].present?
+      @which_table = session[:which_table] if session[:which_table].present?
       unless @which_table == 'project' || @which_table == 'task' || @which_table == 'task_request'
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Initial Params Error!") 
       end

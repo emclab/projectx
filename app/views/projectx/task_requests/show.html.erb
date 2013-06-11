@@ -41,9 +41,7 @@
 <p>
   <b>LOG：</b>
   <% @task_request.logs.order("created_at DESC").each do |t| %>
-    <p><%= t.created_at.strftime("%Y/%m/%d") %></p>
-    <p><%= t.last_updated_by.name %></p>
-    <p><%= t.log %></p>
+    <li><%= t.created_at.strftime("%Y/%m/%d") %>, &nbsp;<%= t.last_updated_by.name %>, &nbsp; <%= t.log %></li>
   <% end %>
 </p>
 
@@ -51,7 +49,7 @@
 	  <tr>
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    	<%= link_to 'New Log', projectx.new_task_request_log_path(@task_request, :which_table => 'task_request', :format => :js), :remote => true, 
+	    	<%= link_to 'New Log', projectx.new_task_request_log_path(@task_request, :which_table => 'task_request', :subaction => 'task_request', :format => :js), :remote => true, 
 	                  :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_task_request', 'projectx_logs') %>
 	    </th>
 	  </tr>

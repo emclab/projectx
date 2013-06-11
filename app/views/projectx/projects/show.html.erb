@@ -70,9 +70,7 @@
 <p>
   <b><%= t('LOG：') %></b>
   <% @project.logs.order("created_at DESC").each do |t| %>
-    <p><%= t.created_at.strftime("%Y/%m/%d") %></p>
-    <p><%= t.last_updated_by.name %></p>
-    <p><%= t.log %></p>
+    <li><%= t.created_at.strftime("%Y/%m/%d") %>,&nbsp; <%= t.last_updated_by.name %>,&nbsp; <%= t.log %></li>
   <% end %>
 </p>
 
@@ -80,7 +78,7 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to t('New Log'), projectx.new_project_log_path(@project, :which_table => 'project', :format => :js), :remote => true, 
+    	<%= link_to t('New Log'), projectx.new_project_log_path(@project, :which_table => 'project', :subaction => 'project', :format => :js), :remote => true, 
                   :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_project', 'projectx_logs') %>
     </th>
   </tr>
