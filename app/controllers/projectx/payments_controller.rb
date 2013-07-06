@@ -56,7 +56,7 @@ module Projectx
       @payment = Projectx::Payment.find_by_id(params[:id])
     end
 
-
+=begin
     def search
       @title = 'Payment Search'
       @payment = Projectx::Payment.new()
@@ -68,7 +68,7 @@ module Projectx
       @payments = @payments.page(params[:page]).per_page(@max_pagination)
       @search_params = search_params()
     end
-
+=end
 
     def autocomplete
       @payments = Projectx::Payment.where("active = ?", true).order(:name).where("name like ?", "%#{params[:term]}%")
@@ -79,7 +79,7 @@ module Projectx
     protected
     
     
-
+=begin
     def search_params
       search_params = 'Search Parameters:'
       search_params += ', Contract Id:' + params[:contract_id_s] if params[:contract_id_s].present?
@@ -102,6 +102,7 @@ module Projectx
       payments = payments.where(:payment_type => params[:payment_type_s]) if params[:payment_type_s].present?
       payments
     end
+=end
 
     #def apply_pagination(payments)
     #  max_entries_page = find_config_const('pagination')

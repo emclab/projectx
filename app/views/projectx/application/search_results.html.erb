@@ -1,0 +1,13 @@
+<div id="main_body">
+  <h4><%= t(@s_s_results_details.title) %></h4>
+
+  <p>&nbsp;&nbsp;<b><%= t('Search Parameters:') %></b>&nbsp;&nbsp;<%= @s_s_results_details.search_params %><p>
+  <% if @s_s_results_details.search_option == 'Stats' %>
+      <%= render 'form_stats', :locals => { :models => @models} %>
+  <% else %>
+      <% @projects = @s_s_results_details.models %>
+      <%= render partial: 'form_list', locals: {models: @s_s_results_details.models } %>
+  <% end %>
+
+  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['link'] %>
+</div>

@@ -9,10 +9,10 @@ gemspec
 gem "jquery-rails"
 gem 'will_paginate'
 
-#gem 'authentify', :path => '../authentify'  #for rspec test
-#gem 'customerx', :path => '../customerx'
-gem 'authentify', :git => 'http://github.com/emclab/authentify.git'
-gem 'customerx', :git => 'http://github.com/emclab/customerx.git'
+gem 'authentify', :path => '../authentify'  #for rspec test
+gem 'customerx', :path => '../customerx'
+#gem 'authentify', :git => 'http://github.com/emclab/authentify.git'
+#gem 'customerx', :git => 'http://github.com/emclab/customerx.git'
 
 
 # Declare any dependencies that are still in development here instead of in

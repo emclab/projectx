@@ -1,4 +1,4 @@
-<div class="pagination"><%= will_paginate @contracts %></div>
+<div class="pagination"><%= will_paginate models %></div>
   <table class="table table-striped">
     <tr>
       <th>#</th>
@@ -17,7 +17,7 @@
       <th></th>
     </tr>
 
-    <% @contracts.each do |contr| %>
+    <% models.each do |contr| %>
       <tr>
           <% if has_action_right?('show','projectx_contracts', contr ) %>
               <td><%= link_to contr.id, SUBURI + "/authentify/view_handler?index=1&url=#{project_contract_path(contr.project, contr)}"  %></td>
