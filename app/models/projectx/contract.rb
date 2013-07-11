@@ -10,10 +10,10 @@ module Projectx
                     :as => :role_update
 
     attr_accessor :project_id_s, :zone_id_s, :paid_out_s, :payment_term_s, :payment_agreement_s,
-                  :signed_s, :signed_by_id_s, :sign_date_s, :contract_on_file_s
+                  :signed_s, :signed_by_id_s, :sign_date_s, :contract_on_file_s, :search_option_s
 
     attr_accessible :project_id_s, :zone_id_s, :paid_out_s, :payment_term_s, :payment_agreement_s,
-                  :signed_s, :signed_by_id_s, :sign_date_s, :contract_on_file_s,
+                  :signed_s, :signed_by_id_s, :sign_date_s, :contract_on_file_s, :search_option_s,
                   :as => :role_search_stats
 
     belongs_to :project, :class_name => 'Projectx::Project'

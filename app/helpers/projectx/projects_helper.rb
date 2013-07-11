@@ -7,13 +7,13 @@ module Projectx
     def return_customers
       access_rights, model, model_ar_r = access_right_finder('index', 'customerx/customers')
       return [] if access_rights.blank?
-      return instance_eval(access_rights.sql_code).present?
+      return instance_eval(access_rights.sql_code) #.present?
     end
 
     def sales()
       access_rights, model, model_ar_r = access_right_finder('index', 'authentify/users')
       return [] if access_rights.blank?
-      return instance_eval(access_rights.sql_code).present?
+      return instance_eval(access_rights.sql_code) #.present?
     end
 =begin
       sales = ''

@@ -2,8 +2,30 @@ require 'spec_helper'
 
 module Projectx
   describe PaymentsController do
-
     before(:each) do
+      #define 2 constants
+      mini_btn = 'btn btn-mini '
+      btn_cls =
+          {'default' => 'btn',
+           'mini-default' => mini_btn + 'btn',
+           'action'       => 'btn btn-primary',
+           'mini-action'  => mini_btn + 'btn btn-primary',
+           'info'         => 'btn btn-info',
+           'mini-info'    => mini_btn + 'btn btn-info',
+           'success'      => 'btn btn-success',
+           'mini-success' => mini_btn + 'btn btn-success',
+           'warning'      => 'btn btn-warning',
+           'mini-warning' => mini_btn + 'btn btn-warning',
+           'danger'       => 'btn btn-danger',
+           'mini-danger'  => mini_btn + 'btn btn-danger',
+           'inverse'      => 'btn btn-inverse',
+           'mini-inverse' => mini_btn + 'btn btn-inverse',
+           'link'         => 'btn btn-link',
+           'mini-link'    => mini_btn +  'btn btn-link'
+          }
+      stub_const("ActionView::CompiledTemplates::BUTTONS_CLS", btn_cls)
+      stub_const("Authentify::AuthentifyUtility::SEARCH_STAT_INFO", {'projectx_payments' => FactoryGirl.create(:payment_search_stat_config)})
+
       controller.should_receive(:require_signin)
       controller.should_receive(:require_employee)
 
@@ -12,6 +34,7 @@ module Projectx
       @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => '0,10, 15, 30, 60, 75, 90')
       @payment_type = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_type', :argument_value => 'Cash, Check, Coupon, Credit Card, Credit Letter')
+      @search_stats_max_period_year = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'search_stats_max_period_year', :argument_value => '3')
 
       @type_of_user = FactoryGirl.create(:group_type, :name => 'employee')
       @project_type1 = FactoryGirl.create(:type_definition, :name => 'type1', :active=> true, :brief_note => 'looking for a new type')
@@ -652,15 +675,15 @@ module Projectx
         it "returns projects list for this individual user" do
           session[:user_id] = @individual_3_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_3_u)
-          get 'search_results' , {:use_route => :projectx, :zone_id_s => @z3.id.to_s, :sales_id_s => @individual_3_u.id.to_s, :customer_id_s => @cust3.id.to_s}
-          assigns(:payments).should =~ [@paymnt3]
+          get 'search_results' , {:use_route => :projectx, :payment => {:zone_id_s => @z3.id.to_s, :sales_id_s => @individual_3_u.id.to_s, :customer_id_s => @cust3.id.to_s, :search_option_s => 'Search'} }
+          assigns(:s_s_results_details).models.should =~ [@paymnt3]
         end
 
         it "returns projects search results list for this individual user" do
           session[:user_id] = @individual_2_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_2_u)
-          get 'search_results' , {:use_route => :projectx, :zone_id_s => @z2.id.to_s, :sales_id_s => @individual_2_u.id.to_s, :customer_id_s => @cust2.id.to_s}
-          assigns(:payments).should =~ [@paymnt2, @paymnt5]
+          get 'search_results' , {:use_route => :projectx, :payment => {:zone_id_s => @z2.id.to_s, :sales_id_s => @individual_2_u.id.to_s, :customer_id_s => @cust2.id.to_s, :search_option_s => 'Search'}}
+          assigns(:s_s_results_details).models.should =~ [@paymnt2, @paymnt5]
         end
       end
 
@@ -684,8 +707,8 @@ module Projectx
         it "returns payments list " do
           session[:user_id] = @ceo_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@ceo_u)
-          get 'search_results' , {:use_route => :projectx, :zone_id_s => @z1.id.to_s, :sales_id_s => @ceo_u.id.to_s, :customer_id_s => @cust3.id.to_s}
-          assigns(:payments).should =~ [@paymnt1, @paymnt2, @paymnt3, @paymnt4, @paymnt5]
+          get 'search_results' , {:use_route => :projectx, :payment => {:zone_id_s => @z1.id.to_s, :sales_id_s => @ceo_u.id.to_s, :customer_id_s => @cust3.id.to_s, :search_option_s => 'Search'}}
+          assigns(:s_s_results_details).models.should =~ [@paymnt1, @paymnt2, @paymnt3, @paymnt4, @paymnt5]
         end
       end
 
@@ -707,8 +730,8 @@ module Projectx
         it "returns projects list " do
           session[:user_id] = @manager_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@manager_u)
-          get 'search_results' , {:use_route => :projectx, :zone_id_s => @z2.id.to_s, :sales_id_s => @manager_u.id.to_s, :customer_id_s => @cust2.id.to_s}
-          assigns(:payments).should =~ [@paymnt2, @paymnt5]
+          get 'search_results' , {:use_route => :projectx, :payment => {:zone_id_s => @z2.id.to_s, :sales_id_s => @manager_u.id.to_s, :customer_id_s => @cust2.id.to_s, :search_option_s => 'Search'}}
+          assigns(:s_s_results_details).models.should =~ [@paymnt2, @paymnt5]
         end
       end
 
@@ -727,7 +750,7 @@ module Projectx
         it "returns an empty list " do
           session[:user_id] = @individual_6_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_6_u)
-          get 'search_results' , {:use_route => :projectx}
+          get 'search_results' , {:use_route => :projectx, :payment => {:search_option_s => 'Search'}}
           assigns(:payments).should be_blank
           response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Access Right! for action=search_results and resource=projectx/payments")
         end

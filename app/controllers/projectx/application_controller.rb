@@ -15,11 +15,18 @@ module Projectx
     before_filter :max_pagination   
     before_filter :check_access_right
 
-    protected
-  
-    def max_pagination
-      @max_pagination = find_config_const('pagination')
+
+    def search
+      @title, @model, @search_stat = Authentify::AuthentifyUtility.search(params)
     end
-    
+
+    def search_results
+      @s_s_results_details =  Authentify::AuthentifyUtility.search_results(params, @max_pagination)
+    end
+
+    def max_pagination
+      @max_pagination = find_config_const('pagination').to_i
+    end
+
   end
 end

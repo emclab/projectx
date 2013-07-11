@@ -16,8 +16,3 @@
 //= require_tree .
 //= require bootstrap
 
-$(function() {
-	$( "#project_start_date" ).datepicker({dateFormat: 'yy-mm-dd'});
-	$( "#project_project_date" ).datepicker({dateFormat: 'yy-mm-dd'});
-	
-});

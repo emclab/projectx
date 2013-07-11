@@ -29,7 +29,7 @@ module Projectx
     def new
       #session[:which_table] = @which_table
       #session[:subaction] = @which_table
-      if @which_table == 'project' 
+      if @which_table == 'project'
         if  @project
           @log = @project.logs.new()
         else
