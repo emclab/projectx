@@ -59,7 +59,7 @@
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     	<%= link_to t('Search Payment'), SUBURI + "/authentify/view_handler?index=1&url=#{search_payments_path}", :class => BUTTONS_CLS['action'] %>
-    	<%= link_to t('New Payment'), SUBURI + "/authentify/view_handler?index=1&url=#{new_payment_path}", :class => BUTTONS_CLS['action'] %>
+    	<%= link_to t('New Payment'), SUBURI + "/authentify/view_handler?index=1&url=#{new_payment_path(:subaction => 'new_payment')}", :class => BUTTONS_CLS['action'] %>
     </th>
   </tr>
 </table>

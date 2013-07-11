@@ -1,6 +1,19 @@
-GIT
-  remote: http://github.com/emclab/authentify.git
-  revision: d0bb9b2d33907d8854bef2d3a590a6a3ebf6d698
+PATH
+  remote: .
+  specs:
+    projectx (0.0.1)
+      coffee-rails (~> 3.2.1)
+      database_cleaner
+      execjs
+      jquery-rails
+      rails (= 3.2.12)
+      sass-rails (~> 3.2.3)
+      simple_form
+      uglifier
+      will_paginate
+
+PATH
+  remote: ../authentify
   specs:
     authentify (0.0.1)
       bcrypt-ruby
@@ -17,25 +30,10 @@ GIT
       will_paginate (~> 3.0)
       yajl-ruby
 
-GIT
-  remote: http://github.com/emclab/customerx
-  revision: 0b9dc0249ec313c56c068fa20e1fec5a563568f7
+PATH
+  remote: ../customerx
   specs:
     customerx (0.0.1)
-      coffee-rails (~> 3.2.1)
-      database_cleaner
-      execjs
-      jquery-rails
-      rails (= 3.2.12)
-      sass-rails (~> 3.2.3)
-      simple_form
-      uglifier
-      will_paginate
-
-PATH
-  remote: .
-  specs:
-    projectx (0.0.1)
       coffee-rails (~> 3.2.1)
       database_cleaner
       execjs
