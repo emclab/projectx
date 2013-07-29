@@ -7,7 +7,7 @@ module Projectx
     before_filter :load_project
     before_filter :load_task
     before_filter :load_task_request
-    before_filter :load_which_table, :only => [:index, :new, :create] 
+    before_filter :load_which_table, :only => [:index, :new] 
     before_filter :load_session_variable, :only => [:new, :edit]  #for subaction in check_access_right
     after_filter :delete_session_variable, :only => [:create, :update] #for subaction in check_access_right
     
