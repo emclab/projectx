@@ -333,6 +333,7 @@ describe "Integrations" do
       page.body.should have_content("Contract Info")
 
       visit contract_path(@contract1, {:project_id =>@proj.id})
+      #save_and_open_page
       click_link('New Payment')
       #save_and_open_page
       page.body.should have_content("New Payment")
@@ -343,6 +344,7 @@ describe "Integrations" do
       visit payments_path
       #save_and_open_page
       page.body.should have_content("Payments")
+      page.body.should_not have_content('New Payment')  #without @contract passed in.
 
       visit payments_path
       click_link('Edit')
@@ -364,7 +366,12 @@ describe "Integrations" do
       click_link(@paymnt1.contract.project.name)
       #save_and_open_page
       page.body.should have_content("Project Info")
-
+      
+      #new payment link if @contract loaded
+      visit contract_payments_path(@contract1)
+      #save_and_open_page
+      click_link('New Payment')
+      page.body.should have_content('New Payment')
     end
 
     it "should visit payment show page and all its links" do

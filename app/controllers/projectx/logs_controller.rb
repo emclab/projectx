@@ -7,9 +7,9 @@ module Projectx
     before_filter :load_project
     before_filter :load_task
     before_filter :load_task_request
-    before_filter :require_which_table, :only => [:index, :new, :create] 
-    before_filter :load_session_variable, :only => [:new, :edit]
-    after_filter :delete_session_variable, :only => [:create, :update] 
+    before_filter :load_which_table, :only => [:index, :new, :create] 
+    before_filter :load_session_variable, :only => [:new, :edit]  #for subaction in check_access_right
+    after_filter :delete_session_variable, :only => [:create, :update] #for subaction in check_access_right
     
     def index
       if @project
@@ -27,8 +27,6 @@ module Projectx
     end
   
     def new
-      #session[:which_table] = @which_table
-      #session[:subaction] = @which_table
       if @which_table == 'project'
         if  @project
           @log = @project.logs.new()
@@ -53,21 +51,18 @@ module Projectx
     end
   
     def create
-      #session.delete(:subaction) #subaction used in check_access_right in authentify
-      if session[:which_table] == 'project' && @project
+      if params[:log][:which_table] == 'project' && @project
         @log = @project.logs.new(params[:log], :as => :role_new)
         data_save = true
-      elsif session[:which_table] == 'task' && @task
+      elsif params[:log][:which_table] == 'task' && @task
         @log = @task.logs.new(params[:log], :as => :role_new)
         data_save = true
-      elsif session[:which_table] == 'task_request' && @task_request
+      elsif params[:log][:which_table] == 'task_request' && @task_request
         @log = @task_request.logs.new(params[:log], :as => :role_new)
         data_save = true
       else
-        #session.delete(:which_table)
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=NO parental object selected!")
       end
-      #session.delete(:which_table)
       if data_save  #otherwise @log.save will be executed no matter what.
         @log.last_updated_by_id = session[:user_id]
         if @log.save
@@ -83,8 +78,7 @@ module Projectx
     
     protected
     
-    def require_which_table
-      @which_table = session[:which_table] if session[:which_table].present?
+    def load_which_table
       @which_table = params[:which_table] if params[:which_table].present?  #should be after session     
       unless @which_table == 'project' || @which_table == 'task' || @which_table == 'task_request'
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Initial Params Error!") 

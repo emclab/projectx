@@ -108,9 +108,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        session[:for_which] = 'project_status'
-        qs = FactoryGirl.attributes_for(:misc_definition)
-        get 'create', {:use_route => :projectx, :misc_definition => qs, :subaction => 'project_status'}
+        session[:subaction] = 'project_status'
+        qs = FactoryGirl.attributes_for(:misc_definition, :for_which => 'project_status')
+        get 'create', {:use_route => :projectx, :misc_definition => qs}   #:subaction => 'project_status' handled by session variable.
         response.should redirect_to misc_definitions_path(:for_which => 'project_status', :subaction => 'project_status')
       end
       
@@ -120,9 +120,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        session[:for_which] = 'task_status'
-        qs = FactoryGirl.attributes_for(:misc_definition)
-        get 'create', {:use_route => :projectx, :misc_definition => qs, :subaction => 'task_status'}
+        session[:subaction] = 'task_status'
+        qs = FactoryGirl.attributes_for(:misc_definition, :for_which => 'task_status')
+        get 'create', {:use_route => :projectx, :misc_definition => qs}  # :subaction => 'task_status'}
         response.should redirect_to misc_definitions_path(:for_which => 'task_status', :subaction => 'task_status')
       end
       
@@ -132,8 +132,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
+        session[:subaction] = 'project_status'
         qs = FactoryGirl.attributes_for(:misc_definition, :name => nil, :for_which => 'project_status')
-        get 'create', {:use_route => :projectx, :misc_definition => qs, :for_which => 'project_status', :subaction => 'project_status'}
+        get 'create', {:use_route => :projectx, :misc_definition => qs, :for_which => 'project_status'} # :subaction => 'project_status'}
         response.should render_template('new')
       end
       
@@ -143,8 +144,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
+        session[:subaction] = 'project_type'
         qs = FactoryGirl.attributes_for(:misc_definition)
-        get 'create', {:use_route => :projectx, :misc_definition => qs, :for_which => 'project_type', :subaction => 'project_type'}
+        get 'create', {:use_route => :projectx, :misc_definition => qs, :for_which => 'project_type'} # :subaction => 'project_type'}
         response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Access Right! for action=create and resource=projectx/misc_definitions")
       end
     end
@@ -191,8 +193,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
+        session[:subaction] = 'project_status'
         qs = FactoryGirl.create(:misc_definition, :for_which => 'project_status')
-        get 'update', {:use_route => :projectx, :id => qs.id, :misc_definition => {:name => 'newnew name'}, :for_which => 'project_status', :subaction => 'project_status'}
+        get 'update', {:use_route => :projectx, :id => qs.id, :misc_definition => {:name => 'newnew name'}, :for_which => 'project_status'} # :subaction => 'project_status'}
         response.should redirect_to misc_definitions_path(:for_which => 'project_status', :subaction => 'project_status')
       end
       
@@ -202,8 +205,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
+        session[:subaction] = 'task_status'
         qs = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
-        get 'update', {:use_route => :projectx, :id => qs.id, :misc_definition => {:name => 'newnew name'}, :for_which => 'task_status', :subaction => 'task_status'}
+        get 'update', {:use_route => :projectx, :id => qs.id, :misc_definition => {:name => 'newnew name'}, :for_which => 'task_status'} # :subaction => 'task_status'}
         response.should redirect_to misc_definitions_path(:for_which => 'task_status', :subaction => 'task_status')
       end
       
@@ -213,8 +217,9 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
+        session[:subaction] = 'task_status'
         qs = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
-        get 'update', {:use_route => :projectx, :id => qs.id, :misc_definition => {:name => ''}, :for_which => 'task_status', :subaction => 'task_status'}
+        get 'update', {:use_route => :projectx, :id => qs.id, :misc_definition => {:name => ''}, :for_which => 'task_status'} # :subaction => 'task_status'}
         response.should render_template('edit')
       end
     end

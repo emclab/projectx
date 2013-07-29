@@ -1,11 +1,11 @@
 <%= simple_form_for([@contract, @payment]) do |f| %>
     <%= f.input :project_name, :label => t('Project Name'), :readonly => true, :input_html => {:value => @contract.project.name} %>
     <%= f.input :contract_id, :label => t('Contract Id'), :readonly => true %>
-    <%= f.input :paid_amount, :label => t('Payment Amount') %>
-    <%= f.input :received_by_id, :label => t('Received By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_payments') %>
-    <%= f.input :payment_desc,:label => t('Payment Description') %>
     <%= f.input :received_date, :label => t('Received Date'), :as => :string %>
-	<%= f.input :payment_type, :label => t('Payment Type'), :collection => find_config_const('payment_type', 'projectx').split(",") %>
+    <%= f.input :paid_amount, :label => t('Payment Amount') %>
+    <%= f.input :payment_type, :label => t('Payment Type'), :collection => find_config_const('payment_type', 'projectx').split(",") %>
+    <%= f.input :received_by_id, :label => t('Received By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_payments') %>
+    <%= f.input :payment_desc,:label => t('Payment Description'), :input_html => {:rows => 4} %>
 
     <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>
 <% end %>

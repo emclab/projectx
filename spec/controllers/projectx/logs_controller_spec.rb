@@ -163,14 +163,13 @@ module Projectx
         :sql_code => "")
         session[:employee] = true
         session[:user_id] = @u.id
-        session[:which_table] = 'project'
         session[:subaction] = 'project'
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         cust = FactoryGirl.create(:customer, :active => true, :last_updated_by_id => @u.id, :sales_id => @u.id + 1, 
                                   :zone_id => @z.id, :customer_status_category_id => @cate.id)
         lead = FactoryGirl.create(:project, :customer_id => cust.id)
-        log = FactoryGirl.attributes_for(:log, :project_id => lead.id, :task_id => nil, :task_request_id => nil)
-        get 'create', {:use_route => :projectx, :log => log, :project_id => lead.id, :which_table => 'project', :subaction => 'project'}
+        log = FactoryGirl.attributes_for(:log, :project_id => lead.id, :task_id => nil, :task_request_id => nil, :which_table => 'project')
+        get 'create', {:use_route => :projectx, :log => log, :project_id => lead.id, :which_table => 'project'} #:subaction => 'project'}
         response.should redirect_to project_path(lead) #URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Log Saved!")
       end
       
@@ -179,15 +178,14 @@ module Projectx
         :sql_code => "")
         session[:employee] = true
         session[:user_id] = @u.id
-        session[:which_table] = 'task'
         session[:subaction] = 'task'
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         cust = FactoryGirl.create(:customer, :active => true, :last_updated_by_id => @u.id, :sales_id => @u.id + 1, 
                                   :zone_id => @z.id, :customer_status_category_id => @cate.id)
         lead = FactoryGirl.create(:project, :customer_id => cust.id)
         task = FactoryGirl.create(:task, :project_id => lead.id)
-        log = FactoryGirl.attributes_for(:log, :project_id => nil, :task_id => task.id, :task_request_id => nil)
-        get 'create', {:use_route => :projectx, :log => log, :task_id => task.id, :which_table => 'task', :subaction => 'task'}
+        log = FactoryGirl.attributes_for(:log, :project_id => nil, :task_id => task.id, :task_request_id => nil, :which_table => 'task')
+        get 'create', {:use_route => :projectx, :log => log, :task_id => task.id, :which_table => 'task'} # :subaction => 'task'}
         response.should redirect_to project_task_path(task.project, task)  #URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Log Saved!")
       end
       
@@ -196,7 +194,6 @@ module Projectx
         :sql_code => "")
         session[:employee] = true
         session[:user_id] = @u.id
-        session[:which_table] = 'task_request'
         session[:subaction] = 'task_request'
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         cust = FactoryGirl.create(:customer, :active => true, :last_updated_by_id => @u.id, :sales_id => @u.id + 1, 
@@ -204,8 +201,8 @@ module Projectx
         lead = FactoryGirl.create(:project, :customer_id => cust.id)
         task = FactoryGirl.create(:task, :project_id => lead.id)
         t_req = FactoryGirl.create(:task_request, :task_id => task.id)
-        log = FactoryGirl.attributes_for(:log, :project_id => nil, :task_id => nil, :task_request_id => t_req.id)
-        get 'create', {:use_route => :projectx, :log => log, :task_request_id => t_req.id, :which_table => 'task_request', :subaction => 'task_request'}
+        log = FactoryGirl.attributes_for(:log, :project_id => nil, :task_id => nil, :task_request_id => t_req.id, :which_table => 'task_request')
+        get 'create', {:use_route => :projectx, :log => log, :task_request_id => t_req.id, :which_table => 'task_request'} # :subaction => 'task_request'}
         response.should redirect_to task_task_request_path(t_req.task, t_req)  #URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Log Saved!")
       end
     end
