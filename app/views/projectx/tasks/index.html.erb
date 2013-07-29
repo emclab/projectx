@@ -19,7 +19,7 @@
   <tr>
   	
   	<td><%= link_to r.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_task_path(r.project,r)}" %></td>
-  	<td><%= prt(r, 'project.project_task_template.type_definition.name' ) %></td>
+  	<td><%= prt(r, 'task_template.task_definition.name' ) %></td>
   	<td><%= prt(r, 'project.name') %></td>
   	<td><%= prt(r, 'task_status_definition.name') %></td>
   	<td><%= r.start_date.strftime("%Y/%m/%d") %></td>
