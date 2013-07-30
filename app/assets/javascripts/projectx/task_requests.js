@@ -8,12 +8,19 @@ $(function() {
 });
 //hide/show for need_delivery
 $(function(){
+	$("#task_request_delivery_info").hide();
+	
+});
+$(function(){
    $("#task_request_need_delivery").change(function() {
-   	 var rpt = $('#task_request_need_delivery').val();
-   	 if ( rpt == 'true') {
-   	    $("#task_request_delivery").show(); 
+   	 var rpt = $('#task_request_need_delivery').is(":checked")  //val();
+   	 //alert(rpt);
+   	 if (rpt) {
+   	 	//alert('if');
+   	 	$("#task_request_delivery_info").show();  	    
    	 } else {
-   	 	$("#task_request_delivery").hide(); 
+   	 	//alert('else');
+   	 	$("#task_request_delivery_info").hide();  	 	
    	 }
    }); 
 });

@@ -14,6 +14,10 @@
   <%= @task_request.requested_by.name %>
 </p> 
 <p>
+  <b>申请状态:</b>
+  <%= @task_request.request_status.name %>
+</p> 
+<p>
   <b>申请日期:</b>
   <%= @task_request.request_date.strftime("%Y/%m/%d") %>
 </p> 
@@ -49,11 +53,11 @@
 	  <tr>
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    	<%= link_to 'New Log', projectx.new_task_request_log_path(@task_request, :which_table => 'task_request', :subaction => 'task_request', :format => :js), :remote => true, 
+	    	<%= link_to t('New Log'), projectx.new_task_request_log_path(@task_request, :which_table => 'task_request', :subaction => 'task_request', :format => :js), :remote => true, 
 	                  :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_task_request', 'projectx_logs') %>
 	    </th>
 	  </tr>
 	</table>
 
-	<%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action']%>
+	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action']%>
 </div>

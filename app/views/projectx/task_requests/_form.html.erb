@@ -9,9 +9,9 @@
   <%= f.input :request_status_id, :label => '申请状态：', :collection => return_task_status() %> 
   <%= f.input :expedite, :label => '加急：', :as => :boolean %>
   <%= f.input :need_delivery, :label => '需要寄送：', :as => :boolean %>
-  <div id="task_request_delivery">
-  <%= f.input :what_to_deliver, :label => '结束日期', :input_html => {:rows => 4} %>
-  <%= f.input :delivery_instruction, :label => '结束日期', :input_html => {:rows => 4} %>
+  <div id="task_request_delivery_info">
+  <%= f.input :what_to_deliver, :label => '寄送内容:', :input_html => {:rows => 4} %>
+  <%= f.input :delivery_instruction, :label => '寄送指示:', :input_html => {:rows => 4} %>
   </div>
   <%= f.input :cancelled, :label => '取消：', :as => :boolean %>
   <%= f.input :completed, :label => '完成：', :as => :boolean %>
