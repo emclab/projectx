@@ -2,13 +2,13 @@
 <h4>新Log</h4>
 <% if @which_table == 'project' %>
   <%= render :partial => 'form_new', :locals => {:parent_obj => @project} %>
-  <%= link_to 'Back', project_path(@project) %>
+  <%= link_to t('Back'), project_path(@project), :class => BUTTONS_CLS['action'] %>
 <% elsif @which_table == 'task' %>
   <%= render :partial => 'form_new', :locals => {:parent_obj => @task} %>
-  <%= link_to 'Back', project_task_path(@task.project, @task) %>
+  <%= link_to t('Back'), project_task_path(@task.project, @task), :class => BUTTONS_CLS['action'] %>
 <% elsif @which_table == 'task_request' %>
   <%= render :partial => 'form_new', :locals => {:parent_obj => @task_request} %>
-  <%= link_to 'Back', task_task_request_path(@task_request.task, @task_request) %>
+  <%= link_to t('Back'), task_task_request_path(@task_request.task, @task_request), :class => BUTTONS_CLS['action'] %>
 <% else %>
   <h2>Parent object name NOT correct!</h2>
 <% end %>
