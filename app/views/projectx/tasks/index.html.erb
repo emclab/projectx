@@ -26,7 +26,7 @@
   	<td><%= r.finish_date.strftime("%Y/%m/%d") %></td>  	           
     <td><%= prt(r, :completed) %></td>
     <td><%= prt(r, 'last_updated_by.name') %></td>  
-    <td><%= link_to 'Edit', SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_project_task_path(r.project, r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', 'projectx_tasks', r) %> </td>
+    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_project_task_path(r.project, r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', 'projectx_tasks', r) %> </td>
 
   </tr>
 <% end %>
