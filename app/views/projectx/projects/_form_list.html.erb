@@ -28,7 +28,7 @@
         <td><%= prj.id %></td>
     <% end %>
   	<% if has_action_right?('show','customerx_customers', prj.customer ) %>
-  	  <td><%= link_to prj.customer.short_name, SUBURI + "/authentify/view_handler?index=1&url=#{customerx.customer_path(prj.customer_id)}"  %></td>
+  	  <td><%= link_to prj.customer.short_name, SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + customerx.customer_path(prj.customer_id)}"  %></td>
   	<% else %>
   	  <td><%= prt(prj, 'customer.short_name') %></td>
   	<% end %>
