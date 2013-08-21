@@ -53,7 +53,7 @@
 	  <tr>
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    	<%= link_to t('New Log'), commonx.new_task_request_log_path(:resource_id => @task_request.id, :resource_name => params[:controller], :subaction => 'task_request', :format => :js), :remote => true, 
+	    	<%= link_to t('New Log'), SUBURI + commonx.new_task_request_log_path(:resource_id => @task_request.id, :resource_name => params[:controller], :subaction => 'task_request', :format => :js), :remote => true, 
 	                  :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_task_request', 'commonx_logs') %>
 	    </th>
 	  </tr>
