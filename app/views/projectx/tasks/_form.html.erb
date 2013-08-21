@@ -16,7 +16,7 @@
   <%= f.input :cancelled, :label => '取消：', :as => :boolean %>
   <%= f.input :skipped, :label => '跳过：', :as => :boolean %>
   <%= f.input :completed, :label => '完成：', :as => :boolean %>
-  <%= f.input :task_status_definition_id, :label => '任务状态：', :collection => return_task_status() %>
+  <%= f.input :task_status_definition_id, :label => '任务状态：', :collection => return_misc_definitions('task_status') %>
   
   <%= f.button :submit, '保存', :class => BUTTONS_CLS['action'] %>  
 <% end %> 

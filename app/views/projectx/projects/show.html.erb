@@ -16,7 +16,7 @@
 </p>
 <p>
   <b><%= t('Status') %></b>
-  <%= @project.status.name if @project.status_id.present? %>
+  <%= @project.status.try(:name) if @project.status_id.present? %>
 </p>
 <p>
   <b><%= t('Project Task Template') %></b>
@@ -50,14 +50,7 @@
     <b><%= t('Instruction') %></b>
     <%= @project.project_instruction %>
 </p>
-<p>
-    <b><%= t('Completion %') %></b>
-    <%= @project.completion_percent %>
-</p>
-<p>
-    <b><%= t('Instruction') %></b>
-    <%= @project.completion_percent %>
-</p>
+
 <p>
     <b><%= t('Project Manager') %></b>
     <%= @project.project_manager.name if @project.project_manager_id.present? %>
@@ -69,7 +62,7 @@
 
 <p>
   <b><%= t('LOG：') %></b>
-  <% @project.logs.order("created_at DESC").each do |t| %>
+  <% return_logs(params[:controller].sub('/', '_'), @project.id).order("created_at DESC").each do |t| %>
     <li><%= t.created_at.strftime("%Y/%m/%d") %>,&nbsp; <%= t.last_updated_by.name %>,&nbsp; <%= t.log %></li>
   <% end %>
 </p>
@@ -78,8 +71,8 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<%= link_to t('New Log'), projectx.new_project_log_path(@project, :which_table => 'project', :subaction => 'project', :format => :js), :remote => true, 
-                  :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_project', 'projectx_logs') %>
+    	<%= link_to t('New Log'), commonx.new_log_path(:resource_id => @project.id, :resource_name => params[:controller], :subaction => 'project',
+    	     :format => :js), :remote => true, :id => 'new_log_link' , :class => BUTTONS_CLS['action'] if has_action_right?('create_project', 'commonx_logs') %>
     </th>
   </tr>
 </table>

@@ -16,5 +16,9 @@ class CreateProjectxTasks < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index :projectx_tasks, :project_id
+    add_index :projectx_tasks, :task_template_id
+    add_index :projectx_tasks, :assigned_to_id
   end
 end

@@ -12,8 +12,8 @@ module Projectx
     belongs_to :task, :class_name => 'Projectx::Task'
     belongs_to :last_updated_by, :class_name => 'Authentify::User'
     belongs_to :requested_by, :class_name => 'Authentify::User'
-    belongs_to :request_status, :class_name => 'Projectx::MiscDefinition'
-    has_many :logs, :class_name => 'Projectx::Log'
+    belongs_to :request_status, :class_name => 'Commonx::MiscDefinition'
+    #has_many :logs, :class_name => 'Projectx::Log'
     
     validates_presence_of :request_date, :expected_finish_date
     validates :request_content, :presence => true

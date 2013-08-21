@@ -6,8 +6,9 @@ module Projectx
     before_filter :require_employee
     
     def index
-    @title = 'Type Definitions'  
-      @type_definitions = params[:projectx_type_definitions][:model_ar_r].page(params[:page]).per_page(@max_pagination)     
+      @title = 'Type Definitions'  
+      @type_definitions = params[:projectx_type_definitions][:model_ar_r].page(params[:page]).per_page(@max_pagination)  
+      @erb_code = find_config_const('type_definition_index_view', 'projectx')   
     end
   
     def new

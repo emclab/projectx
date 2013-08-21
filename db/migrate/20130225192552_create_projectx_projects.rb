@@ -22,5 +22,11 @@ class CreateProjectxProjects < ActiveRecord::Migration
       t.date :project_date
       t.timestamps
     end
+    
+    add_index :projectx_projects, :customer_id
+    add_index :projectx_projects, :sales_id
+    add_index :projectx_projects, :status_id
+    add_index :projectx_projects, :project_manager_id
+    add_index :projectx_projects, :project_task_template_id
   end
 end

@@ -12,10 +12,10 @@ module Projectx
     belongs_to :project, :class_name => 'Projectx::Project'
     belongs_to :last_updated_by, :class_name => 'Authentify::User'
     belongs_to :task_template, :class_name => 'Projectx::TaskTemplate'
-    belongs_to :task_status_definition, :class_name => 'Projectx::MiscDefinition'
+    belongs_to :task_status_definition, :class_name => 'Commonx::MiscDefinition'
     belongs_to :assigned_to, :class_name => 'Authentify::User' 
     has_many :task_requests, :class_name => 'Projectx::TaskRequest'   
-    has_many :logs, :class_name => 'Projectx::Log'
+    #has_many :logs, :class_name => 'Projectx::Log'
     
     validates :project_id, :presence => true,
                            :numericality => {:greater_than => 0} 

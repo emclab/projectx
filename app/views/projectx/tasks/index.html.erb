@@ -1,36 +1,5 @@
 <div id="main_body">
 <h4>项目任务一览</h4>
 <div class="pagination"><%= will_paginate @tasks %></div>
-<table class="table table-striped">
-  <tr>
-    <th>#</th>
-    <th><%=t('TaskName') %></th>
-    <th><%=t('Project') %></th>
-    <th><%=t('TaskStatus') %></th> 
-    <th><%=t('StartDate') %></th>
-    <th><%=t('FinishDate') %></th>     
-    <th><%=t('Completed') %></th>
-    <th><%=t('LastUpdatedBy') %></th>
-    <th></th>
-    
-  </tr>
-
-<% @tasks.each do |r| %>
-  <tr>
-  	
-  	<td><%= link_to r.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{projectx.project_task_path(r.project,r)}" %></td>
-  	<td><%= prt(r, 'task_template.task_definition.name' ) %></td>
-  	<td><%= prt(r, 'project.name') %></td>
-  	<td><%= prt(r, 'task_status_definition.name') %></td>
-  	<td><%= r.start_date.strftime("%Y/%m/%d") %></td>
-  	<td><%= r.finish_date.strftime("%Y/%m/%d") %></td>  	           
-    <td><%= prt(r, :completed) %></td>
-    <td><%= prt(r, 'last_updated_by.name') %></td>  
-    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_project_task_path(r.project, r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', 'projectx_tasks', r) %> </td>
-
-  </tr>
-<% end %>
-</table>
-  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>&nbsp;
-  <%= link_to t('New Task'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_project_task_path(@project)}", :class => BUTTONS_CLS['action'] if @project && has_action_right?('create', 'projectx_tasks', @project) %>
+<%= render inline: ERB.new(@erb_code).result(binding)%>
 </div>

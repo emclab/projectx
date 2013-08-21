@@ -13,7 +13,8 @@ module Projectx
        @project_has_sales_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_has_sales', :argument_value => 'true')
        @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
        @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => 'Cash,Check,Visa, MasterCard')
-
+       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_request_index_view', 
+                              :argument_value => "This is a view") 
        z = FactoryGirl.create(:zone, :zone_name => 'hq')
        type = FactoryGirl.create(:group_type, :name => 'employee')
        ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
@@ -42,7 +43,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task.id, :request_status_id => status.id)
         qs1 = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task1.id, :request_status_id => status.id)
         get 'index' , {:use_route => :projectx}
@@ -55,7 +56,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task.id, :request_status_id => status.id)
         qs1 = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task1.id, :request_status_id => status.id)
         get 'index' , {:use_route => :projectx, :task_id => @task1.id}
@@ -68,7 +69,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task.id, :request_status_id => status.id)
         qs1 = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task1.id, :request_status_id => status.id)
         get 'index' , {:use_route => :projectx, :task_id => @task1.id}
@@ -83,7 +84,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         get 'new' , {:use_route => :projectx, :task_id => @task1.id}
         response.should be_success
       end
@@ -94,7 +95,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         get 'new' , {:use_route => :projectx, :task_id => @task.id}
         response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Access Right! for action=new and resource=projectx/task_requests")
       end
@@ -107,7 +108,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.attributes_for(:task_request, :last_updated_by_id => @u.id,  :request_status_id => status.id)
         get 'create' , {:use_route => :projectx, :task_request => qs, :task_id => @task1.id}
         response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=申请已保存!") 
@@ -119,7 +120,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.attributes_for(:task_request, :last_updated_by_id => @u.id,  :request_status_id => status.id, :name => nil)
         get 'create' , {:use_route => :projectx, :task_request => qs, :task_id => @task1.id}
         response.should render_template("new")
@@ -133,7 +134,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id,  :request_status_id => status.id)
         get 'edit' , {:use_route => :projectx, :task_id => @task1.id, :id => qs.id}
         response.should be_success
@@ -147,7 +148,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id,  :request_status_id => status.id)
         get 'update' , {:use_route => :projectx, :id => qs.id, :task_id => @task1.id, :task_request => {:name => 'new new'}}
         response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=申请已更新!") 
@@ -159,7 +160,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id,  :request_status_id => status.id)
         get 'update' , {:use_route => :projectx, :id => qs.id, :task_id => @task1.id, :task_request => {:name => ''}}
         response.should render_template("edit")
@@ -173,7 +174,7 @@ module Projectx
         session[:employee] = true
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
-        status = FactoryGirl.create(:misc_definition, :for_which => 'task_status')
+        status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id,  :request_status_id => status.id)
         get 'show' , {:use_route => :projectx, :id => qs.id, :task_id => @task1.id}
         response.should

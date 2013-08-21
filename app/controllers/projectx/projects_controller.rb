@@ -8,7 +8,8 @@ module Projectx
 
     def index
       @title = 'Projects'
-      @projects =  params[:projectx_projects][:model_ar_r].page(params[:page]).per_page(@max_pagination) 
+      @projects =  params[:projectx_projects][:model_ar_r].page(params[:page]).per_page(@max_pagination)
+      @erb_code = find_config_const('project_index_view', 'projectx')
     end
 
     def new

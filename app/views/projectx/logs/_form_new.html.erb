@@ -1,6 +1,0 @@
-<%= simple_form_for([parent_obj, @log]) do |f| %>    
- 
-  <%= f.input :log, :label => t('Log'), :input_html => {:rows => 2} %> 
-  <%= f.input :which_table, :input_html => {:value => @which_table}, :as => :hidden %>
-  <%= f.button :submit, t('Submit'), :class => BUTTONS_CLS['action'] %>  
-<% end %> 

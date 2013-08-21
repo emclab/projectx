@@ -36,15 +36,100 @@ describe "Integrations" do
       @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => 'Cash,Check,Visa, MasterCard')
       @payment_type = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_type', :argument_value => 'Cash, Check, Coupon, Credit Card, Credit Letter')
-
-      qs = Customerx::MiscDefinition.new({:name => 'ISO9000', :for_which => 'customer_quality_system'}, :as => :role_new)
+      
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_log_index_view', 
+                              :argument_value => "<tr> " +     
+      "<th><%= t('Project Name') %></th>" +
+      "<th><%= t('Date') %></th>" +
+      "<th><%= t('Log') %></th>" +
+      "<th><%= t('Entered By') %></th> "+
+    "</tr> " +
+    " <% @logs.each do |r| %> " +
+       " <tr> " +
+        "  <td><%= Projectx::Project.find_by_id(r.resource_id).name %></td> " +
+        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
+        "  <td><%= prt(r, :log) %></td> " +
+       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
+       " </tr> " +
+   " <% end %>")
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_log_index_view', 
+                              :argument_value => "<tr> " +  
+                              "<th><%= t('Date') %></th>" +
+      "<th><%=  t('Project Name') %></th>" +
+      " <th><%= t('Task Name') %></th>" +
+      "<th><%= t('Log') %></th>" +
+      "<th><%= t('Entered By') %></th> "+
+    "</tr> " +
+    " <% @logs.each do |r| %> " +
+       " <tr> " +
+        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
+        "  <td><%= Projectx::Project.find_by_id(r.resource_id).name %></td> " +
+        " <td><%= Projectx::Task.find_by_id(r.resource_id).task_template.task_definition.name %></td> " +
+        "  <td><%= prt(r, :log) %></td> " +
+       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
+       " </tr> " +
+   " <% end %>") 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_request_log_index_view', 
+                              :argument_value => "<tr> " +  
+                              "<th><%= t('Date') %></th>" +
+      "<th><%=  t('Project Name') %></th>" +
+      " <th><%= t('Task Name') %></th>" +
+      "<th><%= t('Task Request Name') %></th> " +
+      "<th><%= t('Log') %></th>" +
+      "<th><%= t('Entered By') %></th> "+
+    "</tr> " +
+    " <% @logs.each do |r| %> " +
+       " <tr> " +
+        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
+        "  <td><%= Projectx::TaskRequest.find_by_id(r.resource_id).task.project.name %></td> " +
+        " <td><%= Projectx::TaskRequest.find_by_id(r.resource_id).task.task_template.task_definition.name %></td> " +
+        "<td><%= Projectx::TaskRequest.find_by_id(r.resource_id).name %></td> " +
+        "  <td><%= prt(r, :log) %></td> " +
+       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
+       " </tr> " +
+   " <% end %>") 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'customerx', :engine_version => nil, :argument_name => 'customer_comm_record_log_index_view', 
+                              :argument_value => "<tr> " + 
+                              "<th><%=t('CustomerName') %></th> " +  
+                              "<th><%= t('Date') %></th>" +
+      "<th><%=  t('RecordSubject') %></th>" +
+      "<th><%= t('Log') %></th>" +
+      "<th><%= t('Entered By') %></th> "+
+    "</tr> " +
+    " <% @logs.each do |r| %> " +
+       " <tr> " +
+        " <td><%= Customerx::CustomerCommRecord.find_by_id(r.resource_id).customer.short_name %></td> " +
+        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
+        "  <td><%=  Customerx::CustomerCommRecord.find_by_id(r.resource_id).subject %></td> " +
+        "   <td><%= prt(r, :log) %></td> " +
+       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
+       " </tr> " +
+   " <% end %>") 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'customerx', :engine_version => nil, :argument_name => 'sales_lead_log_index_view', 
+                              :argument_value => "<tr> " +  
+                              "<th><%= t('Date') %></th>" +
+      "<th><%=  t('CustomerName') %></th>" +
+      " <th><%= t('LeadSubject') %></th>" +
+      "<th><%= t('Log') %></th>" +
+      "<th><%= t('Entered By') %></th> "+
+    "</tr> " +
+    " <% @logs.each do |r| %> " +
+       " <tr> " +
+        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
+        "  <td><%= Customerx::SalesLead.find_by_id(r.resource_id).customer.short_name %></td> " +
+        " <td><%= Customerx::SalesLead.find_by_id(r.resource_id).subject %></td> " +
+        "  <td><%= prt(r, :log) %></td> " +
+       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
+       " </tr> " +
+   " <% end %>") 
+      qs = Commonx::MiscDefinition.new({:name => 'ISO9000', :for_which => 'customer_quality_system'}, :as => :role_new)
       add = FactoryGirl.create(:address)
       #cate = FactoryGirl.create(:misc_definition, :for_which => 'customer_status', :name => 'order category')
       z = FactoryGirl.create(:zone, :zone_name => 'hq')
       type = FactoryGirl.create(:group_type, :name => 'employee')
       ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
       @role = FactoryGirl.create(:role_definition)
-
+      
       ua1 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "Projectx::Project.scoped")
       ua1 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_projects', :role_definition_id => @role.id, :rank => 1,
@@ -83,8 +168,6 @@ describe "Integrations" do
            :sql_code => "")
       ua41 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_type_definitions', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "")
-      ua41 = FactoryGirl.create(:user_access, :action => 'index_new_project_task_template', :resource => 'projectx_type_definitions', :role_definition_id => @role.id, :rank => 1,
-           :sql_code => "")
       ua41 = FactoryGirl.create(:user_access, :action => 'index_project_task_template_index', :resource => 'projectx_type_definitions', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "")
       ua41 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_task_definitions', :role_definition_id => @role.id, :rank => 1,
@@ -99,13 +182,13 @@ describe "Integrations" do
            :sql_code => "")
       ua41 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_project_task_templates', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "Projectx::ProjectTaskTemplate.where(:active => true).order('type_definition_id')")
-      ua41 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
+      ua41 = FactoryGirl.create(:user_access, :action => 'create', :resource => 'commonx_logs', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "")
-      ua41 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
-           :sql_code => "Projectx::Log.scoped")
-      ua41 = FactoryGirl.create(:user_access, :action => 'create_project', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
+      ua41 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'commonx_logs', :role_definition_id => @role.id, :rank => 1,
+           :sql_code => "Commonx::Log.scoped")
+      ua41 = FactoryGirl.create(:user_access, :action => 'create_project', :resource => 'commonx_logs', :role_definition_id => @role.id, :rank => 1,
                                 :sql_code => "")
-      ua41 = FactoryGirl.create(:user_access, :action => 'create_task', :resource => 'projectx_logs', :role_definition_id => @role.id, :rank => 1,
+      ua41 = FactoryGirl.create(:user_access, :action => 'create_task', :resource => 'commonx_logs', :role_definition_id => @role.id, :rank => 1,
                                 :sql_code => "")                          
       ua42 = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_contracts', :role_definition_id => @role.id, :rank => 1,
            :sql_code => "Projectx::Contract.scoped")
@@ -138,9 +221,9 @@ describe "Integrations" do
       ul = FactoryGirl.build(:user_level, :sys_user_group_id => ug.id)
       @u = FactoryGirl.create(:user, :user_levels => [ul], :user_roles => [ur], :login => 'thistest', :password => 'password', :password_confirmation => 'password')
       @engine_config1 = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
-      @proj_status = FactoryGirl.create(:misc_definition, :for_which => 'project_status')
-      @task_status = FactoryGirl.create(:misc_definition, :for_which => 'task_status', :name => 'newnew cate', :last_updated_by_id => @u.id)
-      @cate = FactoryGirl.create(:customerx_misc_definition, :for_which => 'customer_status', :name => 'order category')
+      @proj_status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'project_status')
+      @task_status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status', :name => 'newnew cate', :last_updated_by_id => @u.id)
+      @cate = FactoryGirl.create(:commonx_misc_definition, :for_which => 'customer_status', :name => 'order category')
       @cust = FactoryGirl.create(:customer, :short_name => "Customer1", :zone_id => z.id, :sales_id => @u.id, :last_updated_by_id => @u.id,
                                  :quality_system_id => qs.id, :address => add, :customer_status_category_id => @cate.id)
       proj_type = FactoryGirl.create(:type_definition)
@@ -153,13 +236,23 @@ describe "Integrations" do
       @proj = FactoryGirl.create(:project, :last_updated_by_id => @u.id, :customer_id => @cust.id, :sales_id => @u.id,
                                  :project_task_template_id => @proj_temp.id, :status_id => @proj_status.id, :contract => @contract1,
                                  :name => "water inspection")
-      proj_log = FactoryGirl.create(:log, :project_id => @proj.id, :task_id => nil, :task_request_id => nil)
+      proj_log = FactoryGirl.create(:commonx_log, :resource_id => @proj.id, :resource_name => 'projectx_projects')
       @task = FactoryGirl.create(:task, :last_updated_by_id => @u.id, :project_id => @proj.id, :task_template_id => @task_temp.id)
-      task_log = FactoryGirl.create(:log, :task_id => @task.id, :project_id => nil, :task_request_id => nil)
+      task_log = FactoryGirl.create(:commonx_log, :resource_id => @task.id, :resource_name => 'projectx_tasks')
       @task_request = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id, :task_id => @task.id, :request_status_id => @task_status.id)
-      task_req_log = FactoryGirl.create(:log, :task_request_id => @task_request.id, :project_id => nil, :task_id => nil)
+      task_req_log = FactoryGirl.create(:commonx_log, :resource_id => @task_request.id, :resource_name => 'projectx_task_requests')
       @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @u.id, :payment_type => 'Check', :received_date => '2013/04/25', :last_updated_by_id => @u.id)
-
+      
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_index_view', 
+                              :argument_value => "This is a view") 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_index_view', 
+                              :argument_value => "This is a view <td> <%= link_to t('Tasks'), SUBURI + '/authentify/view_handler?index=1&url=#{project_tasks_path(@proj)}', :class => BUTTONS_CLS['mini-action']  if has_action_right?('index_task', 'projectx_projects', prj ) %></td> ")                        
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_request_index_view', 
+                              :argument_value => "This is a view") 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_index_view', 
+                              :argument_value => "This is a view") 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'type_definition_index_view', 
+                              :argument_value => "This is a view") 
 
       visit '/'
       ##save_and_open_page
@@ -171,7 +264,7 @@ describe "Integrations" do
     it "should visit project index page and its links" do
       #visit user_menus_path
       visit projects_path
-      #save_and_open_page
+      save_and_open_page
       page.body.should have_content("Projects")
       click_link('Tasks')
       #save_and_open_page

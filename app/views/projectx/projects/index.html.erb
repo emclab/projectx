@@ -2,5 +2,5 @@
 	<h4><%= t(@title) %></h4>
 	  <%= render partial: 'form_list', locals: {models: @projects } %>
 	
-	<%#= link_to 'Back', SUBURI + "/authentify/view_handler?index=0" %>
+	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
 </div>

@@ -15,7 +15,7 @@
 </p> 
 <p>
   <b>申请状态:</b>
-  <%= @task_request.request_status.name %>
+  <%= @task_request.request_status.try(:name) if @task_request.request_status_id.present? %>
 </p> 
 <p>
   <b>申请日期:</b>
@@ -44,7 +44,7 @@
 </p>
 <p>
   <b>LOG：</b>
-  <% @task_request.logs.order("created_at DESC").each do |t| %>
+  <% Commonx::Log.where('resource_id = ? AND resource_name = ?', @task_request.id, params[:controller].sub('/', '_')).order("created_at DESC").each do |t| %>
     <li><%= t.created_at.strftime("%Y/%m/%d") %>, &nbsp;<%= t.last_updated_by.name %>, &nbsp; <%= t.log %></li>
   <% end %>
 </p>
@@ -53,8 +53,8 @@
 	  <tr>
 	    <th>
 	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    	<%= link_to t('New Log'), projectx.new_task_request_log_path(@task_request, :which_table => 'task_request', :subaction => 'task_request', :format => :js), :remote => true, 
-	                  :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_task_request', 'projectx_logs') %>
+	    	<%= link_to t('New Log'), commonx.new_task_request_log_path(:resource_id => @task_request.id, :resource_name => params[:controller], :subaction => 'task_request', :format => :js), :remote => true, 
+	                  :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_task_request', 'commonx_logs') %>
 	    </th>
 	  </tr>
 	</table>

@@ -9,7 +9,7 @@
   <%= f.input :expedite, :label => '加急：', :as => :boolean %>
   <%= f.input :start_date, :label => '开始日期：', :as => :string %>
   <%= f.input :finish_date, :label => '结束日期', :as => :string %>
-  <%= f.input :task_status_definition_id, :label => '任务状态：', :collection => return_task_status(), :include_blank => true %>
+  <%= f.input :task_status_definition_id, :label => '任务状态：', :collection => return_misc_definitions('task_status'), :include_blank => true %>
   
   <%= f.button :submit, '保存', :class => BUTTONS_CLS['action'] %>  
 <% end %> 

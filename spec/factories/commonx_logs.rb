@@ -1,12 +1,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :log, :class => 'Projectx::Log' do
-    task_id 1
-    task_request_id nil
-    project_id nil
+  factory :commonx_log, :class => 'Commonx::Log' do
     log "MyText"
+    resource_id 1
+    resource_name "MyString"
     last_updated_by_id 1
-   
   end
 end

@@ -1,46 +1,6 @@
-
+  <div class="pagination"><%= will_paginate @type_definitions %></div>
   <h4>项目类型一览</h4>
-  <table class="table table-striped">
-    <tr>
-      <th>#</th>
-      <th><%= t('Create Date') %></th>
-      <th><%= t('Name') %></th>
-      <th><%= t('Brief Note') %></th>
-      <th><%= t('Ranking Order') %></th>
-      <th><%= t('Active') %></th>
-      <th><%= t('Entered By') %></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-
-    <% @type_definitions.each do |cate| %>
-        <tr>
-          <td><%= cate.id %></td>
-          <td><%= (cate.created_at + 8.hours).strftime("%Y/%m/%d")%></td>
-          <td><%= cate.name %></td>
-          <td><%= cate.brief_note %></td>
-          <td><%= cate.ranking_order %></td>
-          <td><%= cate.active ? '是' : '否' %></td>
-          <td><%= cate.last_updated_by.name %></td>
-          <td><%= link_to t('Edit'), edit_type_definition_path(cate, :format => :js), 
-                           :remote => true, :class => BUTTONS_CLS['action'] if has_action_right?('update', 'projectx_type_definitions', cate) %></td>
-          <td><%= link_to '新项目任务模版', new_type_definition_project_task_template_path(cate), :class => BUTTONS_CLS['action'] if has_action_right?('index_new_project_task_template', 'projectx_type_definitions') %></td>
-          <td><%= link_to '项目任务模版一览', type_definition_project_task_templates_path(cate), :class => BUTTONS_CLS['action'] if has_action_right?('index_project_task_template_index', 'projectx_type_definitions') %></td>
-        </tr>
-    <% end %>
-
-  </table>
-
-	<table class="table table-striped">
-	  <tr>
-	    <th>
-	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    	<%= link_to "新项目类型", new_type_definition_path( :format => :js), :remote => true, 
-               :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create', 'projectx_type_definitions') %>
-	    </th>
-	  </tr>
-	</table>
-
-  <%= link_to 'Back', SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>&nbsp;&nbsp;
+  
+  <%= render inline: ERB.new(@erb_code).result(binding) %>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>&nbsp;&nbsp;
 

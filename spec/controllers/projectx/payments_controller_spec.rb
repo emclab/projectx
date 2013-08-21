@@ -35,11 +35,12 @@ module Projectx
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => '0,10, 15, 30, 60, 75, 90')
       @payment_type = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_type', :argument_value => 'Cash, Check, Coupon, Credit Card, Credit Letter')
       @search_stats_max_period_year = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'search_stats_max_period_year', :argument_value => '3')
-
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_index_view', 
+                              :argument_value => "This is a view") 
       @type_of_user = FactoryGirl.create(:group_type, :name => 'employee')
       @project_type1 = FactoryGirl.create(:type_definition, :name => 'type1', :active=> true, :brief_note => 'looking for a new type')
       @project_task_template1 = FactoryGirl.create(:project_task_template, :name => 'template1', :type_definition_id => @project_type1.id )
-      @project_status1 = FactoryGirl.create(:misc_definition, :name => 'started', :for_which => 'project_status' )
+      @project_status1 = FactoryGirl.create(:commonx_misc_definition, :name => 'started', :for_which => 'project_status' )
 
       @z1 = FactoryGirl.create(:zone, :zone_name => 'zone1: hq')
       @z2 = FactoryGirl.create(:zone, :zone_name => 'zone2: regional')
@@ -515,7 +516,7 @@ module Projectx
         @cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z4.id, :last_updated_by_id => @individual_4_u.id)
         @cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z5.id, :last_updated_by_id => @individual_5_u.id)
 
-        @status_prj = FactoryGirl.create(:misc_definition, :name => 'started', :active => true, :for_which => 'project')
+        @status_prj = FactoryGirl.create(:commonx_misc_definition, :name => 'started', :active => true, :for_which => 'project')
 
         @contract1 = FactoryGirl.build(:contract)
         @contract2 = FactoryGirl.build(:contract)
@@ -563,7 +564,7 @@ module Projectx
       end
 
     end
-
+=begin
     describe "GET search" do
       context "Has no access right for 'search' project " do
         before :each do
@@ -609,10 +610,12 @@ module Projectx
         end
       end
     end
-
-
+=end
+=begin
     describe "GET 'search_results'" do
       before :each do
+        @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_index_view', 
+                              :argument_value => "This is a view") 
         sales_group_1 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
         sales_group_2 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z2.id)
         sales_group_3 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z3.id)
@@ -757,7 +760,7 @@ module Projectx
       end
 
     end
-
+=end
 
   end
 end

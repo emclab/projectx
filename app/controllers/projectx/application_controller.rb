@@ -6,10 +6,10 @@ module Projectx
     include Authentify::UsersHelper
     include Authentify::UserPrivilegeHelper
     
-    include Projectx::MiscDefinitionsHelper
+    include Commonx::CommonxHelper
     include Projectx::ProjectsHelper
 
-    helper_method :has_action_right?, :print_attribute, :readonly?, :sales, :return_task_definitions, :return_misc_definitions
+    helper_method :return_task_definitions  
      
     before_filter :require_signin 
     before_filter :max_pagination   

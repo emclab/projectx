@@ -10,5 +10,8 @@ class CreateProjectxPayments < ActiveRecord::Migration
       t.integer :last_updated_by_id
       t.timestamps
     end
+    
+    add_index :projectx_payments, :contract_id
+    add_index :projectx_payments, :received_by_id
   end
 end

@@ -29,14 +29,14 @@ module Projectx
                     :as => :role_search_stats
 
                     
-      belongs_to :status, :class_name => 'Projectx::MiscDefinition'
+      belongs_to :status, :class_name => 'Commonx::MiscDefinition'
       belongs_to :customer, :class_name => 'Customerx::Customer'
       #belongs_to :zone, :class_name => 'Authentify::Zone'
       belongs_to :sales, :class_name => 'Authentify::User'
       belongs_to :last_updated_by, :class_name => 'Authentify::User'
       belongs_to :project_manager, :class_name => 'Authentify::User'
       belongs_to :project_task_template, :class_name => 'Projectx::ProjectTaskTemplate'
-      has_many :logs, :class_name => 'Projectx::Log'
+      #has_many :logs, :class_name => 'Projectx::Log'
       has_many :tasks, :class_name => 'Projectx::Task'
       has_one :contract, :class_name => 'Projectx::Contract'
       accepts_nested_attributes_for :contract  #, :allow_destroy => true

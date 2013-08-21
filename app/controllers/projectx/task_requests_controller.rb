@@ -13,6 +13,7 @@ module Projectx
       else
         @task_requests = params[:projectx_task_requests][:model_ar_r].page(params[:page]).per_page(@max_pagination) 
       end
+      @erb_code = find_config_const('task_request_index_view', 'projectx')
     end
   
     def new

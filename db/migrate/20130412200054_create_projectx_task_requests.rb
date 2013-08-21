@@ -18,5 +18,8 @@ class CreateProjectxTaskRequests < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index :projectx_task_requests, :task_id
+    add_index :projectx_task_requests, :requested_by_id
   end
 end

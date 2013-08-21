@@ -31,7 +31,21 @@ PATH
       yajl-ruby
 
 PATH
-  remote: ../customerx
+  remote: ../commonx
+  specs:
+    commonx (0.0.1)
+      coffee-rails (~> 3.2.1)
+      database_cleaner
+      execjs
+      jquery-rails
+      rails (= 3.2.12)
+      sass-rails (~> 3.2.3)
+      simple_form
+      uglifier
+      will_paginate
+
+PATH
+  remote: ../customerx_common
   specs:
     customerx (0.0.1)
       coffee-rails (~> 3.2.1)
@@ -201,6 +215,7 @@ PLATFORMS
 DEPENDENCIES
   authentify!
   capybara
+  commonx!
   customerx!
   factory_girl_rails
   jquery-rails

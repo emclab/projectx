@@ -1,12 +1,12 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :customerx_misc_definition, :class => 'Customerx::MiscDefinition' do
+  factory :commonx_misc_definition, :class => 'Commonx::MiscDefinition' do
     name "MyString"
+    active false
+    for_which "task"
     brief_note "MyText"
-    #active true
-    ranking_order 1
     last_updated_by_id 1
-    for_which "My which"
+    ranking_index 1
   end
 end

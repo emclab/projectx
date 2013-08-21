@@ -170,6 +170,7 @@ zh-CN:
   Log for Projects      : '项目LOG'  
   Log for Task Requests : '任务申请LOG'
   Log for Tasks         : '任务LOG'
-  
-  
+  Delivered Date  : '完成日期'
+  Estimated Delivered Date  : '预期完成日期'
+  Instruction : '指令'
 

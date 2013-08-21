@@ -40,7 +40,7 @@ module Projectx
       @type_of_user = FactoryGirl.create(:group_type, :name => 'employee')
       @project_type1 = FactoryGirl.create(:type_definition, :name => 'type1', :active=> true, :brief_note => 'looking for a new type')
       @project_task_template1 = FactoryGirl.create(:project_task_template, :name => 'template1', :type_definition_id => @project_type1.id )
-      @project_status1 = FactoryGirl.create(:misc_definition, :name => 'started', :for_which => 'project_status' )
+      @project_status1 = FactoryGirl.create(:commonx_misc_definition, :name => 'started', :for_which => 'project_status' )
 
       @z1 = FactoryGirl.create(:zone, :zone_name => 'zone1: hq')
       @z2 = FactoryGirl.create(:zone, :zone_name => 'zone2: regional')

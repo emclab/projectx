@@ -6,7 +6,7 @@
   <%= f.input :requested_by_name, :label => '申请人：', :readonly => true, :input_html => {:value => @task_request.requested_by.name} %>
   <%= f.input :request_content, :label => '任务内容：', :input_html => {:rows => 3} %>
   <%= f.input :expected_finish_date, :label => '完成日期：', :as => :string %> 
-  <%= f.input :request_status_id, :label => '申请状态：', :collection => return_task_status() %> 
+  <%= f.input :request_status_id, :label => '申请状态：', :collection => return_misc_definitions('task_status') %> 
   <%= f.input :expedite, :label => '加急：', :as => :boolean %>
   <%= f.input :need_delivery, :label => '需要寄送：', :as => :boolean %>
   <div id="task_request_delivery_info">
