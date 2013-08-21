@@ -1,7 +1,6 @@
     <table class="table table-striped">
 		<tr>
-			<th>#</th>
-			<th><%= t('Name') %></th>
+			<th><%= t('Task Name') %></th>
 			<th><%= t('Description') %></th>
 			<th><%= t('Instructions') %></th>
 			<th><%= t('Active') %></th>
@@ -11,8 +10,7 @@
 		</tr>
 		<% @task_definitions.each do |defi| %>
 		  <tr>
-		  	<td><%= defi.id %></td>
-			<td><%= defi.name %></td>
+		  	<td><%= defi.name %></td>
 			<td><%= prt(defi, :task_desp) %></td>
 			<td><%= prt(defi, :task_instruction) %></td>
 			<td><%= t(prt(defi, :active).to_s) %></td>
