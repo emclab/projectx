@@ -21,5 +21,7 @@ class CreateProjectxTaskRequests < ActiveRecord::Migration
     
     add_index :projectx_task_requests, :task_id
     add_index :projectx_task_requests, :requested_by_id
+    add_index :projectx_task_requests, :name
+    add_index :projectx_task_requests, :request_date
   end
 end

@@ -13,5 +13,7 @@ class CreateProjectxPayments < ActiveRecord::Migration
     
     add_index :projectx_payments, :contract_id
     add_index :projectx_payments, :received_by_id
+    add_index :projectx_payments, :payment_type
+    add_index :projectx_payments, :received_date
   end
 end

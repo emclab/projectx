@@ -13,5 +13,6 @@ class CreateProjectxProjectTaskTemplates < ActiveRecord::Migration
     
     add_index :projectx_project_task_templates, :type_definition_id
     add_index :projectx_project_task_templates, :active
+    #add_index :projectx_project_task_templates, :name
   end
 end

@@ -23,6 +23,8 @@ class CreateProjectxProjects < ActiveRecord::Migration
       t.timestamps
     end
     
+    add_index :projectx_projects, :name
+    add_index :projectx_projects, :start_date
     add_index :projectx_projects, :customer_id
     add_index :projectx_projects, :sales_id
     add_index :projectx_projects, :status_id
