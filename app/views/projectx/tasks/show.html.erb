@@ -53,13 +53,13 @@
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     	<%= link_to t('New Request'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_task_task_request_path(@task)}", :id => 'new_request_link', 
-    	              :class => BUTTONS_CLS['action'] if @task.task_template.need_request && has_action_right?('create', 'projectx_task_requests') %>
+    	              :class => BUTTONS_CLS['action'] if @task.task_template.need_request && has_action_right?('create', 'projectx/task_requests') %>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     	<%= link_to t('Task Requests'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.task_task_requests_path(@task)}", :id => 'task_request_link', 
-    	              :class => BUTTONS_CLS['action'] if @task.task_template.need_request && has_action_right?('index', 'projectx_task_requests') %>
+    	              :class => BUTTONS_CLS['action'] if @task.task_template.need_request && has_action_right?('index', 'projectx/task_requests') %>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<%= link_to t('New Log'), SUBURI + commonx.new_log_path(:resource_id => @task.id, :resource_name => params[:controller], :subaction => 'task', :format => :js), :remote => true, 
-                          :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_task', 'commonx_logs') %>    	
+                          :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_task', 'commonx/logs') %>    	
     </th>
   </tr>
 </table>
