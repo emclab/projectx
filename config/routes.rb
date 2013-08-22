@@ -1,8 +1,8 @@
 Projectx::Engine.routes.draw do
 
-  resources :misc_definitions
+  #resources :misc_definitions
   resources :task_definitions  
-  resources :logs, :only => [:index]
+  #resources :logs, :only => [:index]
   resources :contracts, :only => [:index]  
   resources :projects do
     resources :contracts, :only => [:index, :edit, :update, :show]
@@ -35,12 +35,12 @@ Projectx::Engine.routes.draw do
   resources :task_requests, :only => [:index]
   resources :tasks do
     resources :task_requests
-    resources :logs
+    #resources :logs
   end
   
-  resources :task_requests do
-    resources :logs
-  end
+  #resources :task_requests do
+  #  resources :logs
+  #end
   
   resources :project_task_templates, :only => [:index]
   resources :type_definitions do
