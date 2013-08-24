@@ -38,90 +38,11 @@ describe "Integrations" do
       @payment_type = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_type', :argument_value => 'Cash, Check, Coupon, Credit Card, Credit Letter')
       
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_log_index_view', 
-                              :argument_value => "<tr> " +     
-      "<th><%= t('Project Name') %></th>" +
-      "<th><%= t('Date') %></th>" +
-      "<th><%= t('Log') %></th>" +
-      "<th><%= t('Entered By') %></th> "+
-    "</tr> " +
-    " <% @logs.each do |r| %> " +
-       " <tr> " +
-        "  <td><%= Projectx::Project.find_by_id(r.resource_id).name %></td> " +
-        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
-        "  <td><%= prt(r, :log) %></td> " +
-       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
-       " </tr> " +
-   " <% end %>")
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('project_log_index_view', 'projectx'))
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_log_index_view', 
-                              :argument_value => "<tr> " +  
-                              "<th><%= t('Date') %></th>" +
-      "<th><%=  t('Project Name') %></th>" +
-      " <th><%= t('Task Name') %></th>" +
-      "<th><%= t('Log') %></th>" +
-      "<th><%= t('Entered By') %></th> "+
-    "</tr> " +
-    " <% @logs.each do |r| %> " +
-       " <tr> " +
-        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
-        "  <td><%= Projectx::Project.find_by_id(r.resource_id).name %></td> " +
-        " <td><%= Projectx::Task.find_by_id(r.resource_id).task_template.task_definition.name %></td> " +
-        "  <td><%= prt(r, :log) %></td> " +
-       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
-       " </tr> " +
-   " <% end %>") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('task_log_index_view', 'projectx')) 
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_request_log_index_view', 
-                              :argument_value => "<tr> " +  
-                              "<th><%= t('Date') %></th>" +
-      "<th><%=  t('Project Name') %></th>" +
-      " <th><%= t('Task Name') %></th>" +
-      "<th><%= t('Task Request Name') %></th> " +
-      "<th><%= t('Log') %></th>" +
-      "<th><%= t('Entered By') %></th> "+
-    "</tr> " +
-    " <% @logs.each do |r| %> " +
-       " <tr> " +
-        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
-        "  <td><%= Projectx::TaskRequest.find_by_id(r.resource_id).task.project.name %></td> " +
-        " <td><%= Projectx::TaskRequest.find_by_id(r.resource_id).task.task_template.task_definition.name %></td> " +
-        "<td><%= Projectx::TaskRequest.find_by_id(r.resource_id).name %></td> " +
-        "  <td><%= prt(r, :log) %></td> " +
-       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
-       " </tr> " +
-   " <% end %>") 
-      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'customerx', :engine_version => nil, :argument_name => 'customer_comm_record_log_index_view', 
-                              :argument_value => "<tr> " + 
-                              "<th><%=t('CustomerName') %></th> " +  
-                              "<th><%= t('Date') %></th>" +
-      "<th><%=  t('RecordSubject') %></th>" +
-      "<th><%= t('Log') %></th>" +
-      "<th><%= t('Entered By') %></th> "+
-    "</tr> " +
-    " <% @logs.each do |r| %> " +
-       " <tr> " +
-        " <td><%= Customerx::CustomerCommRecord.find_by_id(r.resource_id).customer.short_name %></td> " +
-        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
-        "  <td><%=  Customerx::CustomerCommRecord.find_by_id(r.resource_id).subject %></td> " +
-        "   <td><%= prt(r, :log) %></td> " +
-       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
-       " </tr> " +
-   " <% end %>") 
-      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'customerx', :engine_version => nil, :argument_name => 'sales_lead_log_index_view', 
-                              :argument_value => "<tr> " +  
-                              "<th><%= t('Date') %></th>" +
-      "<th><%=  t('CustomerName') %></th>" +
-      " <th><%= t('LeadSubject') %></th>" +
-      "<th><%= t('Log') %></th>" +
-      "<th><%= t('Entered By') %></th> "+
-    "</tr> " +
-    " <% @logs.each do |r| %> " +
-       " <tr> " +
-        "  <td><%= (r.created_at + 8.hours).strftime('%Y/%m/%d')%></td> " +
-        "  <td><%= Customerx::SalesLead.find_by_id(r.resource_id).customer.short_name %></td> " +
-        " <td><%= Customerx::SalesLead.find_by_id(r.resource_id).subject %></td> " +
-        "  <td><%= prt(r, :log) %></td> " +
-       "   <td><%= prt(r, 'last_updated_by.name') %></td> " +         
-       " </tr> " +
-   " <% end %>") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('task_request_log_index_view', 'projectx')) 
       qs = Commonx::MiscDefinition.new({:name => 'ISO9000', :for_which => 'customer_quality_system'}, :as => :role_new)
       add = FactoryGirl.create(:address)
       #cate = FactoryGirl.create(:misc_definition, :for_which => 'customer_status', :name => 'order category')
@@ -244,15 +165,24 @@ describe "Integrations" do
       @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @u.id, :payment_type => 'Check', :received_date => '2013/04/25', :last_updated_by_id => @u.id)
       
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_index_view', 
-                              :argument_value => "This is a view") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('task_index_view', 'projectx')) 
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_index_view', 
-                              :argument_value => "This is a view <td> <%= link_to t('Tasks'), SUBURI + '/authentify/view_handler?index=1&url=#{project_tasks_path(@proj)}', :class => BUTTONS_CLS['mini-action']  if has_action_right?('index_task', 'projectx_projects', prj ) %></td> ")                        
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('project_index_view', 'projectx'))                        
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_request_index_view', 
-                              :argument_value => "This is a view") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('task_request_index_view', 'projectx')) 
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_index_view', 
-                              :argument_value => "This is a view") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_index_view', 'projectx')) 
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'type_definition_index_view', 
-                              :argument_value => "This is a view") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('type_definition_index_view', 'projectx')) 
+      
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('task_show_view', 'projectx')) 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('project_show_view', 'projectx'))                        
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_request_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('task_request_show_view', 'projectx')) 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_show_view', 'projectx')) 
 
       visit '/'
       ##save_and_open_page
