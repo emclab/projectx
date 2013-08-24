@@ -54,6 +54,7 @@ module Projectx
     def show
       @title = 'Task Request Info'
       @task_request = Projectx::TaskRequest.find_by_id(params[:id])
+      @erb_code = find_config_const('task_request_show_view', 'projectx')
     end
     
     protected

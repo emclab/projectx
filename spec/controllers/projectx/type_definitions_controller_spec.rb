@@ -19,7 +19,7 @@ module Projectx
       ul = FactoryGirl.build(:user_level, :sys_user_group_id => ug.id)
       @u = FactoryGirl.create(:user, :user_levels => [ul], :user_roles => [ur])
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'type_definition_index_view', 
-                              :argument_value => "This is a view") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('type_definition_index_view', 'projectx'))  
     end
     
     describe "GET 'index'" do

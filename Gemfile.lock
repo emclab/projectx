@@ -45,7 +45,7 @@ PATH
       will_paginate
 
 PATH
-  remote: ../customerx_common
+  remote: ../customerx
   specs:
     customerx (0.0.1)
       coffee-rails (~> 3.2.1)

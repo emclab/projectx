@@ -16,7 +16,10 @@ module Projectx
         ug = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type.id, :zone_id => z.id)
         @role = FactoryGirl.create(:role_definition)
         @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_index_view', 
-                              :argument_value => "This is a view") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('task_index_view', 'projectx')) 
+        @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('task_show_view', 'projectx')) 
+      
         #user_access = FactoryGirl.create(:user_access, :action => 'index', :resource => 'projectx_misc_definitions', :role_definition_id => role.id, :rank => 1,
         #:sql_code => "Projectx::MiscDefinition.where(:active => true).order('ranking_order')")
         ur = FactoryGirl.create(:user_role, :role_definition_id => @role.id)

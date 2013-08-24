@@ -55,6 +55,7 @@ module Projectx
     def show
       @title = 'Payment Info'
       @payment = Projectx::Payment.find_by_id(params[:id])
+      @erb_code = find_config_const('payment_show_view', 'projectx')
     end
 
 =begin
