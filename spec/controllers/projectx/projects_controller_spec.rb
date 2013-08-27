@@ -292,7 +292,7 @@ module Projectx
           session[:user_id] = @individual_7_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
           get 'create' , {:use_route => :projectx, :project => @proj}
-          response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Saved!")
+          response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
         end
         
         it "should render new for data error" do
@@ -446,14 +446,14 @@ module Projectx
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
           get 'update' , {:use_route => :projectx, :id => @proj.id, :project => {:name => 'a new name'}}
-          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Project Successfully Updated!")
+          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Successfully Updated!")
         end
         
         it "should redirect after successful update for contract data" do
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
           get 'update' , {:use_route => :projectx, :id => @proj.id, :project => {:contract_attributes => {:contract_amount => 10023}}}
-          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Project Successfully Updated!")
+          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Successfully Updated!")
         end
         
         it "should render edit for data error" do

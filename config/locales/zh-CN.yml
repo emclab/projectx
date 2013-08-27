@@ -34,6 +34,10 @@ zh-CN:
   False: '否'
   
   #Projectx
+  Successfully Saved! : '已保存！'
+  uccessfully Updated! : '已更新！'
+  'Data Error. Not Saved!' : '数据错误。无法保存！'
+  'Data Error. Not Updated!' : '数据错误。无法更新！'
   Signed                : '已签字？'
   Signed Date           : '签字日期'
   Signed By             : '签字人' 

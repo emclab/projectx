@@ -11,52 +11,7 @@ module Projectx
     render_views
 
     describe "GET 'index'" do
-=begin
-      before :each do
-        type_of_user = FactoryGirl.create(:group_type, :name => 'employee')
-        z1 = FactoryGirl.create(:zone, :zone_name => 'hq')
-        z2 = FactoryGirl.create(:zone, :zone_name => 'regional')
-        z3 = FactoryGirl.create(:zone, :zone_name => 'another regional')
 
-        ceo_group = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => type_of_user.id, :zone_id => z1.id)
-        regional_group = FactoryGirl.create(:sys_user_group, :user_group_name => 'regional_manager', :group_type_id => type_of_user.id, :zone_id => z2.id)
-        sales_group_1 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => type_of_user.id, :zone_id => z1.id)
-        sales_group_2 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => type_of_user.id, :zone_id => z2.id)
-        sales_group_3 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => type_of_user.id, :zone_id => z3.id)
-        sales_group_4 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => type_of_user.id, :zone_id => z3.id)
-
-        global_access_right = FactoryGirl.create(:sys_action_on_table, :table_name => 'projectx_task_definitions', :action => 'index')
-        regional_access_right = FactoryGirl.create(:sys_action_on_table, :table_name => 'projectx_task_definitions', :action => 'index')
-        individual_access_right = FactoryGirl.create(:sys_action_on_table, :table_name => 'projectx_task_definitions', :action => 'index')
-        no_individual_access_right = FactoryGirl.create(:sys_action_on_table, :table_name => 'projectx_task_definitions', :action => 'xxxxx')
-
-        ceo_ur = FactoryGirl.create(:sys_user_right, :sys_user_group_id => ceo_group.id, :sys_action_on_table_id => global_access_right.id)
-        regional_ur = FactoryGirl.create(:sys_user_right, :sys_user_group_id => regional_group.id, :sys_action_on_table_id => regional_access_right.id)
-        sales_1_ur = FactoryGirl.create(:sys_user_right, :sys_user_group_id => sales_group_1.id, :sys_action_on_table_id => individual_access_right.id)
-        sales_2_ur = FactoryGirl.create(:sys_user_right, :sys_user_group_id => sales_group_2.id, :sys_action_on_table_id => individual_access_right.id)
-        sales_3_ur = FactoryGirl.create(:sys_user_right, :sys_user_group_id => sales_group_3.id, :sys_action_on_table_id => individual_access_right.id)
-        sales_4_ur = FactoryGirl.create(:sys_user_right, :sys_user_group_id => sales_group_4.id, :sys_action_on_table_id => no_individual_access_right.id)
-
-        @ceo_ul       = FactoryGirl.build(:user_level, :sys_user_group_id => ceo_group.id)
-        @regional_ul  = FactoryGirl.build(:user_level, :sys_user_group_id => regional_group.id)
-        @sales_1_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_2.id)
-        @sales_2_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_2.id)
-        @sales_3_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_3.id)
-        @sales_4_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_4.id)
-
-        @ceo_u = FactoryGirl.create(:user, :name => 'ceo', :login => 'ceo111', :email => 'ceo@a.com', :user_levels => [@ceo_ul])
-        @regional_u = FactoryGirl.create(:user, :name => 'regional', :login => 'regional', :email => 'regional@a.com', :user_levels => [@regional_ul])
-        @individual_1_u = FactoryGirl.create(:user, :name => 'name1', :login => 'login1', :email => 'name1@a.com', :user_levels => [@sales_1_ul])
-        @individual_2_u = FactoryGirl.create(:user, :name => 'name2', :login => 'login2', :email => 'name2@a.com', :user_levels => [@sales_2_ul])
-        @individual_3_u = FactoryGirl.create(:user, :name => 'name3', :login => 'login3', :email => 'name3@a.com', :user_levels => [@sales_3_ul])
-        @individual_4_u = FactoryGirl.create(:user, :name => 'name4', :login => 'login4', :email => 'name4@a.com', :user_levels => [@sales_4_ul])
-
-        @task_def_1 = FactoryGirl.create(:task_definition, :name => 'Task_Def_1')
-        @task_def_2 = FactoryGirl.create(:task_definition, :name => 'Task_Def_2')
-        @task_def_3 = FactoryGirl.create(:task_definition, :name => 'Task_Def_3')
-
-      end
-=end
       it "should index for all definition for manager" do
         z = FactoryGirl.create(:zone, :zone_name => 'hq')
         type = FactoryGirl.create(:group_type, :name => 'employee')
@@ -168,7 +123,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(u.id)
         ls = FactoryGirl.attributes_for(:task_definition, :active => true, :last_updated_by_id => u.id)
         get 'create' , {:use_route => :projectx, :task_definition => ls}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=New Task Definition Saved!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       end
       
       it "should display render templdate new if data error" do
@@ -244,7 +199,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(u.id)
         ls = FactoryGirl.create(:task_definition, :active => true, :last_updated_by_id => u.id)
         get 'update' , {:use_route => :projectx, :id => ls.id, :task_definition => {:name => 'new new'}}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Task Definition Updated!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       end
       
       it "should render templdate new if data error" do

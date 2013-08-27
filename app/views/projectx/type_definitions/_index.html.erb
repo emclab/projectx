@@ -2,5 +2,5 @@
   <h4>项目类型一览</h4>
   
   <%= render inline: ERB.new(@erb_code).result(binding) %>
-  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>&nbsp;&nbsp;
+  <%#= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] if session[:page_step] != Authentify::AuthentifyUtility.find_config_const('hide_back_btn_for_page_step').to_i %>&nbsp;&nbsp;
 

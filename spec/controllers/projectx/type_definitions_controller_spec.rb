@@ -59,7 +59,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         ls = FactoryGirl.attributes_for(:type_definition, :active => true, :last_updated_by_id => @u.id)
         get 'create' , {:use_route => :projectx, :type_definition => ls}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=New Type Definition Saved!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       end
       
       it "should render 'new' for data error" do
@@ -96,7 +96,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         ls = FactoryGirl.create(:type_definition, :active => true, :last_updated_by_id => @u.id)
         get 'update' , {:use_route => :projectx, :id => ls.id, :type_definition => {:name => 'newnewone'}}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Type Definition Updated!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       end
       
       it "should render 'edit' with data error" do

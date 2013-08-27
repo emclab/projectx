@@ -452,7 +452,7 @@ module Projectx
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
           get 'update' , {:use_route => :projectx, :id => @contract1.id}
-          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Payment Successfully Updated!")
+          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Successfully Updated!")
         end
       end
 

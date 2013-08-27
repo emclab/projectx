@@ -20,7 +20,7 @@ module Projectx
       @type_definition = Projectx::TypeDefinition.new(params[:type_definition], :as => :role_new)
       @type_definition.last_updated_by_id = session[:user_id]
       if @type_definition.save
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=New Type Definition Saved!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
         flash.now[:error] = 'Data Error. Not Saved!'
         render 'new'
@@ -36,7 +36,7 @@ module Projectx
       @type_definition = Projectx::TypeDefinition.find_by_id(params[:id])
       @type_definition.last_updated_by_id = session[:user_id]
       if @type_definition.update_attributes(params[:type_definition], :as => :role_update)
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Type Definition Updated!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
         flash.now[:error] = 'Data Error. Not Updated!'
         render 'edit'
