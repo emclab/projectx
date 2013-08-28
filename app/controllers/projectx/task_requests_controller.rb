@@ -27,7 +27,7 @@ module Projectx
       @task_request.requested_by_id = session[:user_id]
       @task_request.last_updated_by_id = session[:user_id]  #clean up fields
       if @task_request.save
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=申请已保存!") 
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!") 
       else
         flash.now[:error] = 'Data Error. Not Saved!'
         render 'new'
@@ -44,7 +44,7 @@ module Projectx
       @task_request = Projectx::TaskRequest.find_by_id(params[:id])
       @task_request.last_updated_by_id = session[:user_id]
       if @task_request.update_attributes(params[:task_request], :as => :role_update)
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=申请已更新!") 
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!") 
       else
         flash.now[:error] = 'Data Error. Not Updated!'
         render 'edit'

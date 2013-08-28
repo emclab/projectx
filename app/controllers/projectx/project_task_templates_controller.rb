@@ -27,7 +27,7 @@ module Projectx
       @project_task_template = @type_definition.project_task_templates.new(params[:project_task_template], :as => :role_new)
       @project_task_template.last_updated_by_id = session[:user_id]
       if @project_task_template.save
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=项目样板已保存!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
         flash.now[:error] = 'Data Error. Not Saved!'
         render 'new'
@@ -43,7 +43,7 @@ module Projectx
       @project_task_template = Projectx::ProjectTaskTemplate.find_by_id(params[:id])
       @project_task_template.last_updated_by_id = session[:user_id]
       if @project_task_template.update_attributes(params[:project_task_template], :as => :role_update)
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=项目样板已更新!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
         flash.now[:error] = 'Data Error. Not Updated!'
         render 'edit'
