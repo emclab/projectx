@@ -11,6 +11,6 @@ module Projectx
     has_many :project_task_templates, :class_name => 'Projectx::ProjectTaskTemplate'
     
     validates :name, :presence => true,
-                     :uniqueness => {:case_sensitive => false, :message => '重名！'}
+                     :uniqueness => {:case_sensitive => false, :message => I18n.t('Duplicate Name!')}
   end
 end

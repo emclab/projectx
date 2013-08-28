@@ -42,9 +42,9 @@ module Projectx
       accepts_nested_attributes_for :contract  #, :allow_destroy => true
     
       validates :name, :presence => true,
-                       :uniqueness => {:case_sensitive => false, :message => 'Duplicate project name'}
+                       :uniqueness => {:case_sensitive => false, :message => I18n.t('Duplicate Name!')}
       validates :project_num, :presence => true, 
-                              :uniqueness => {:case_sensitive => false, :message => 'Duplicated project num'}
+                              :uniqueness => {:case_sensitive => false, :message => I18n.t('Duplicate Project Number')}
       validates_presence_of :project_task_template_id, :start_date  #, :project_date
       validates :customer_id, :presence => true,
                               :numericality => {:greater_than => 0}

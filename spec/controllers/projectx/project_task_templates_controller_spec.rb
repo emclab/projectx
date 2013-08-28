@@ -113,7 +113,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         qs = FactoryGirl.attributes_for(:project_task_template)
         get 'create' , {:use_route => :projectx, :type_definition_id => @proj_type.id, :project_task_template => qs}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=项目样板已保存!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       end
       
       it "should render 'new' if data error" do
@@ -183,7 +183,7 @@ module Projectx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         qs = FactoryGirl.create(:project_task_template)
         get 'update' , {:use_route => :projectx, :type_definition_id => @proj_type.id, :id => qs.id, :project_task_template => {:name => 'newnew'}}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=项目样板已更新!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       end
       
       it "should render 'new' if data error" do

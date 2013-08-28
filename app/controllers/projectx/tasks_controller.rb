@@ -41,7 +41,7 @@ module Projectx
       @task = Projectx::Task.find_by_id(params[:id])
       @task.last_updated_by_id = session[:user_id]
       if @task.update_attributes(params[:task], :as => :role_update)
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
         flash.now[:error] = 'Data Error. Not Updated!'
         render 'edit'

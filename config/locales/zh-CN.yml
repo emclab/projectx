@@ -182,4 +182,9 @@ zh-CN:
   Delivered Date  : '完成日期'
   Estimated Delivered Date  : '预期完成日期'
   Instruction : '指令'
-
+  Duplicate Name! : '名字重复！'
+  Duplicate Project Number  : '项目码重复！'
+  'Must > 0'  : '必须>0'
+  Duplicate Project Task Template!  : '项目任务模板重复！'
+  Duplicate Project!  : '项目重复！'
+  

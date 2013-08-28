@@ -114,7 +114,7 @@ module Projectx
         status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.attributes_for(:task_request, :last_updated_by_id => @u.id,  :request_status_id => status.id)
         get 'create' , {:use_route => :projectx, :task_request => qs, :task_id => @task1.id}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=申请已保存!") 
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!") 
       end
       
       it "should render 'new' for data error" do
@@ -154,7 +154,7 @@ module Projectx
         status = FactoryGirl.create(:commonx_misc_definition, :for_which => 'task_status')
         qs = FactoryGirl.create(:task_request, :last_updated_by_id => @u.id,  :request_status_id => status.id)
         get 'update' , {:use_route => :projectx, :id => qs.id, :task_id => @task1.id, :task_request => {:name => 'new new'}}
-        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=申请已更新!") 
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!") 
       end
       
       it "should render 'edit' for data error" do

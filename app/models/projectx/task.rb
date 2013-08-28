@@ -21,7 +21,7 @@ module Projectx
                            :numericality => {:greater_than => 0} 
     validates :task_template_id, :presence => true,
                                    :numericality => {:greater_than => 0},
-                                   :uniqueness => {:scope => :project_id, :message => '任务重复!'}
+                                   :uniqueness => {:scope => :project_id, :message => I18n.t('Duplicate Project!')}
     validates_presence_of :start_date, :finish_date
   end
 end

@@ -15,10 +15,10 @@ module Projectx
     #validates :project_task_template_id, :presence => true,
       #                                   :numericality => {:greater_than => 0, :message => '必须 > 0'}
     validates :execution_order, :presence => true,
-                                :numericality => {:greater_than => 0, :message => '必须 > 0'}
+                                :numericality => {:greater_than => 0, :message => I18n.t('Must > 0')}
     validates :task_definition_id, :presence => true,
                                    :numericality => {:greater_than => 0},
-                                   :uniqueness => {:scope => :project_task_template_id, :message => '项目任务重复！'}
+                                   :uniqueness => {:scope => :project_task_template_id, :message => I18n.t('Duplicate Project Task Template!')}
     
   end
 end

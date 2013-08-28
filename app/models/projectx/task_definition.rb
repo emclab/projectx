@@ -12,7 +12,7 @@ module Projectx
     has_many :tasks, :class_name => 'Projectx::Task'
     
     validates_presence_of :name
-    validates :name, :uniqueness => {:case_sensitive => false, :message => 'Duplicate name found!'}
+    validates :name, :uniqueness => {:case_sensitive => false, :message => I18n.t('Duplicate Name!')}
     validates :last_updated_by_id, :presence => true,
                                    :numericality => {:greater_than => 0}
 
