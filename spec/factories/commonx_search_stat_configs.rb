@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :payment_search_stat_config, :class => 'Authentify::SearchStatConfig' do
+  factory :payment_search_stat_config, :class => 'Commonx::SearchStatConfig' do
     resource_name   'projectx_payments'
     stat_function   "models.all(:select => 'projectx_payments.created_at as Dates, sum(projectx_payments.paid_amount) as payments', :group => 'strftime('%Y/%W', projectx_payments.created_at)')"
     include_stats   false
@@ -26,7 +26,7 @@ FactoryGirl.define do
     search_results_period_limit " Proc.new { models.where('projectx_payments.created_at > ?', search_stats_max_period_year.years.ago) }"
   end
 
-  factory :project_search_stat_config, :class => 'Authentify::SearchStatConfig' do
+  factory :project_search_stat_config, :class => 'Commonx::SearchStatConfig' do
     resource_name   'projectx_projects'
     stat_function   "models.joins(:contract => :payments).all(:select => 'projectx_projects.created_at as Dates, sum(projectx_payments.paid_amount) as payments', :group => 'strftime('%Y/%W', projectx_projects.created_at)')"
     include_stats   false
@@ -59,7 +59,7 @@ FactoryGirl.define do
     search_results_period_limit " Proc.new { models.where('projectx_projects.created_at > ?', search_stats_max_period_year.years.ago) }"
   end
 
-  factory :contract_search_stat_config, :class => 'Authentify::SearchStatConfig' do
+  factory :contract_search_stat_config, :class => 'Commonx::SearchStatConfig' do
     resource_name   'projectx_contracts'
     stat_function   "models.joins(:contract => :payments).all(:select => 'projectx_projects.created_at as Dates, sum(projectx_payments.paid_amount) as payments', :group => 'strftime('%Y/%W', projectx_projects.created_at)')"
     include_stats   false

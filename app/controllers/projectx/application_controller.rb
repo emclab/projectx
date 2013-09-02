@@ -17,11 +17,13 @@ module Projectx
 
 
     def search
-      @title, @model, @search_stat = Authentify::AuthentifyUtility.search(params)
+      @title, @model, @search_stat = Commonx::CommonxHelper.search(params)
+      @erb_code = find_config_const(params[:controller].camelize.demodulize.singularize.downcase + '_search_view', 'projectx')
     end
 
     def search_results
-      @s_s_results_details =  Authentify::AuthentifyUtility.search_results(params, @max_pagination)
+      @s_s_results_details =  Commonx::CommonxHelper.search_results(params, @max_pagination)
+      @erb_code = find_config_const('project_index_view', 'projectx')
     end
 
     def max_pagination
