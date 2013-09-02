@@ -34,6 +34,10 @@ zh-CN:
   False: '否'
   
   #Projectx
+  Successfully Saved! : '已保存！'
+  uccessfully Updated! : '已更新！'
+  'Data Error. Not Saved!' : '数据错误。无法保存！'
+  'Data Error. Not Updated!' : '数据错误。无法更新！'
   Signed                : '已签字？'
   Signed Date           : '签字日期'
   Signed By             : '签字人' 
@@ -83,6 +87,7 @@ zh-CN:
   Edit Task Request     : '更改申请'
   Task Request Info     : '申请内容'
   Tasks                 : '项目任务一览'
+  Task                 : '项目任务'
   New Task              : '新项目任务'
   Edit Task             : '更改任务'
   Task Info             : '项目任务内容'
@@ -178,4 +183,9 @@ zh-CN:
   Delivered Date  : '完成日期'
   Estimated Delivered Date  : '预期完成日期'
   Instruction : '指令'
-
+  Duplicate Name! : '名字重复！'
+  Duplicate Project Number  : '项目码重复！'
+  'Must > 0'  : '必须>0'
+  Duplicate Project Task Template!  : '项目任务模板重复！'
+  Duplicate Project!  : '项目重复！'
+  

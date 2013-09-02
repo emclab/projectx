@@ -29,9 +29,9 @@ module Projectx
       @payment = @contract.payments.new(params[:payment], :as => :role_new)
       @payment.last_updated_by_id = session[:user_id]
       if @payment.save
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Payment Successfully Saved!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
-        flash[:notice] = 'Data error. Payment Not Saved!'
+        flash[:notice] = 'Data Error. Not Saved!'
         render 'new'
       end
     end
@@ -45,9 +45,9 @@ module Projectx
       @payment = Projectx::Payment.find_by_id(params[:id])
       @payment.last_updated_by_id = session[:user_id]
       if @payment.update_attributes(params[:payment], :as => :role_update)
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Payment Successfully Updated!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
-        flash[:notice] = 'Data error. Payment No Saved!'
+        flash[:notice] = 'Data Error. No Updated!'
         render 'edit'
       end
     end
@@ -55,6 +55,7 @@ module Projectx
     def show
       @title = 'Payment Info'
       @payment = Projectx::Payment.find_by_id(params[:id])
+      @erb_code = find_config_const('payment_show_view', 'projectx')
     end
 
 =begin

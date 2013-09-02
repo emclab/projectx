@@ -34,7 +34,10 @@ module Projectx
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => 'Cash,Check,Visa, MasterCard')
       @search_stats_max_period_year = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'search_stats_max_period_year', :argument_value => '3')
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_index_view', 
-                              :argument_value => "This is a view") 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('project_index_view', 'projectx')) 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('project_show_view', 'projectx')) 
+                              
       @type_of_user = FactoryGirl.create(:group_type, :name => 'employee')
       @project_type1 = FactoryGirl.create(:type_definition, :name => 'type1', :active=> true, :brief_note => 'looking for a new type')
       @project_task_template1 = FactoryGirl.create(:project_task_template, :name => 'template1', :type_definition_id => @project_type1.id )
@@ -154,6 +157,9 @@ module Projectx
           @manager_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => manager_group.id)
           @manager_user_role = FactoryGirl.create(:user_role, :role_definition_id => manager_role_def.id)
           @manager_u = FactoryGirl.create(:user, :name => 'manager', :login => 'manager', :email => 'manager@a.com', :user_levels => [@manager_ul], :user_roles => [@manager_user_role])
+          @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('project_show_view', 'projectx'))                        
+      
         end
 
         it "returns projects list " do
@@ -286,7 +292,7 @@ module Projectx
           session[:user_id] = @individual_7_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
           get 'create' , {:use_route => :projectx, :project => @proj}
-          response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Saved!")
+          response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
         end
         
         it "should render new for data error" do
@@ -440,14 +446,14 @@ module Projectx
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
           get 'update' , {:use_route => :projectx, :id => @proj.id, :project => {:name => 'a new name'}}
-          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Project Successfully Updated!")
+          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Successfully Updated!")
         end
         
         it "should redirect after successful update for contract data" do
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
           get 'update' , {:use_route => :projectx, :id => @proj.id, :project => {:contract_attributes => {:contract_amount => 10023}}}
-          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Project Successfully Updated!")
+          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Successfully Updated!")
         end
         
         it "should render edit for data error" do
@@ -532,6 +538,9 @@ module Projectx
         @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => cust3.id, :status_id => @project_status1.id )
         @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => cust4.id, :status_id => @project_status1.id )
         @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => cust5.id, :status_id => @project_status1.id )
+        @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('project_show_view', 'projectx')) 
+       
       end
 
       context "should show projects for user with proper right" do

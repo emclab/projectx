@@ -24,10 +24,10 @@
     <td><%= prt(r, :active) %></td>
     <td><%= prt(r, 'last_updated_by.name') %></td> 
     <td><%= prt(r, :ranking_order) %></td> 
-    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_type_definition_project_task_template_path(r.type_definition, r)}", :class => BUTTONS_CLS['action'] if has_action_right?('update', 'projectx_project_task_templates', r) %> </td>
+    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.edit_type_definition_project_task_template_path(r.type_definition, r)}", :class => BUTTONS_CLS['action'] if has_action_right?('update', params[:controller], r) %> </td>
 
   </tr>
 <% end %>
 </table>
-  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action']  %>
 </div>

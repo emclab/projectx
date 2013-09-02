@@ -30,5 +30,5 @@
 
 
 <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
-  &nbsp;&nbsp;<%= link_to t('New Project Task Template'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_type_definition_project_task_template_path(@type_definition)}", :class => BUTTONS_CLS['action'] if has_action_right?('create', 'projectx_project_task_templates') %>
+  &nbsp;&nbsp;<%= link_to t('New Project Task Template'), SUBURI + "/authentify/view_handler?index=1&url=#{projectx.new_type_definition_project_task_template_path(@type_definition)}", :class => BUTTONS_CLS['action'] if has_action_right?('create', params[:controller]) %>
 </div>

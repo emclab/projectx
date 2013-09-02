@@ -19,12 +19,12 @@
 
     <% models.each do |contr| %>
       <tr>
-          <% if has_action_right?('show','projectx_contracts', contr ) %>
+          <% if has_action_right?('show', params[:controller], contr ) %>
               <td><%= link_to contr.id, SUBURI + "/authentify/view_handler?index=1&url=#{project_contract_path(contr.project, contr)}"  %></td>
           <% else %>
               <td><%= prt(contr, :id) %></td>
           <% end %>
-          <% if has_action_right?('show_project','projectx_contracts', contr ) %>
+          <% if has_action_right?('show_project', params[:controller], contr ) %>
               <td><%= link_to contr.project.name, SUBURI + "/authentify/view_handler?index=1&url=#{project_path(contr.project_id)}"  %></td>
           <% else %>
               <td><%= prt(contr, 'project.name') %></td>
@@ -39,8 +39,8 @@
           <td><%= prt(contr, :paid_out) %></td>
           <td><%= prt(contr, :signed) %></td>
           <td><%= prt(contr, :contract_on_file) %></td>
-          <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_contract_path(contr.project, contr)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', 'projectx_contracts', contr ) %></td>
-		  <td><%= link_to t('Payments'), SUBURI + "/authentify/view_handler?index=1&url=#{contract_payments_path(contr)}", :class => BUTTONS_CLS['action']  if has_action_right?('index_payment', 'projectx_contracts', contr) %></td>
+          <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_project_contract_path(contr.project, contr)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], contr ) %></td>
+		  <td><%= link_to t('Payments'), SUBURI + "/authentify/view_handler?index=1&url=#{contract_payments_path(contr)}", :class => BUTTONS_CLS['action']  if has_action_right?('index_payment', params[:controller], contr) %></td>
         </tr>
     <% end %>
   </table>

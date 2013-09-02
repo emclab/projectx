@@ -35,8 +35,10 @@ module Projectx
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_terms', :argument_value => '0,10, 15, 30, 60, 75, 90')
       @payment_type = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_type', :argument_value => 'Cash, Check, Coupon, Credit Card, Credit Letter')
       @search_stats_max_period_year = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'search_stats_max_period_year', :argument_value => '3')
-      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_index_view', 
-                              :argument_value => "This is a view") 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_index_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_index_view', 'projectx')) 
+      @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_index_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_show_view', 'projectx')) 
       @type_of_user = FactoryGirl.create(:group_type, :name => 'employee')
       @project_type1 = FactoryGirl.create(:type_definition, :name => 'type1', :active=> true, :brief_note => 'looking for a new type')
       @project_task_template1 = FactoryGirl.create(:project_task_template, :name => 'template1', :type_definition_id => @project_type1.id )
@@ -450,7 +452,7 @@ module Projectx
           session[:user_id] = @individual_1_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u.id)
           get 'update' , {:use_route => :projectx, :id => @contract1.id}
-          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Payment Successfully Updated!")
+          response.should redirect_to URI.escape("/authentify/view_handler?index=0&msg=Successfully Updated!")
         end
       end
 
@@ -531,7 +533,11 @@ module Projectx
         @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_5_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust5.id, :status_id => @status_prj.id, :contract => @contract5 )
 
         @paymnt1 = FactoryGirl.create(:payment, :contract_id => @contract1.id, :paid_amount => 101.10, :received_by_id => @individual_1_u.id, :payment_type => 'Check', :received_date => '2013/04/25', :last_updated_by_id => @individual_1_u.id)
-
+        @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_index_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_index_view', 'projectx'))
+        @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_show_view', 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_show_view', 'projectx'))                        
+       
       end
 
       context "should show projects for user with proper right" do

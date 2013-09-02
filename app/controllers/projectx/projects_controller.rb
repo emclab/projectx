@@ -23,9 +23,9 @@ module Projectx
       @project = Projectx::Project.new(params[:project], :as => :role_new)
       @project.last_updated_by_id = session[:user_id]
       if @project.save
-        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Saved!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
-        flash[:notice] = 'Data error. Project Not Saved!'
+        flash[:notice] = 'Data Error. Not Saved!'
         render 'new'
       end
     end
@@ -39,9 +39,9 @@ module Projectx
         @project = Projectx::Project.find_by_id(params[:id])
         @project.last_updated_by_id = session[:user_id]
         if @project.update_attributes(params[:project], :as => :role_update)
-          redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Project Successfully Updated!")
+          redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
         else
-          flash[:notice] = 'Data error. Project No Saved!'
+          flash[:notice] = 'Data Error. Not Updated!'
           render 'edit'
         end
     end
@@ -49,6 +49,7 @@ module Projectx
     def show
       @title = 'Project Info'
       @project = Projectx::Project.find_by_id(params[:id])
+      @erb_code = find_config_const('project_show_view', 'projectx')
     end
 
 
