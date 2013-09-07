@@ -16,6 +16,7 @@ module Projectx
       @title = 'New Project'
       @project = Projectx::Project.new
       @project.build_contract
+      @erb_code = find_config_const('project_create_view', 'projectx')
     end
 
 
@@ -33,6 +34,7 @@ module Projectx
     def edit
       @title = 'Edit Project'
       @project = Projectx::Project.find_by_id(params[:id])
+      @erb_code = find_config_const('project_update_view', 'projectx')
     end
 
     def update

@@ -5,6 +5,8 @@ module Projectx
     include Authentify::AuthentifyUtility
 
       after_initialize :default_init, :if => :new_record?
+      
+      attr_accessor :sales_name, :last_updated_by_name, :project_manager_name, :status_name
 
       attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,

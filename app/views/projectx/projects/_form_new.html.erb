@@ -1,5 +1,7 @@
 <%= simple_form_for @project do |f| %>
 
+    <%#= render inline: ERB.new(@erb_code).result(binding) %>
+    <%%>
     <%= f.input :name, :label => t('Project Name') %>
     <%= f.input :project_num, :label => t('Project Number'), :readonly => true %>
     <%= f.input :customer_name_autocomplete,:input_html => { data: {autocomplete_source: SUBURI + customerx.autocomplete_customers_path}},
@@ -7,21 +9,19 @@
     <%= f.input :start_date, :label => t('Start Date'), :as => :string %>
     <%#= f.input :project_date, :label => t('Project Date'), :as => :string %>
     <%= f.input :estimated_delivery_date, :label => t('Estimated End Date'), :as => :string %>
-    <%= f.input :project_task_template_id, :label => t('Project Task Template'), :collection => return_project_task_templates, :label_method => :name, :value_method => :id, 
-                        :include_blank => true  %> 
+    <%= f.input :project_task_template_id, :label => t('Project Task Template'), :collection => return_project_task_templates, :label_method => :name, :value_method => :id,
+                        :include_blank => true %>
     <%= f.input :project_desp, :label => t('Project Description'), :input_html => { :rows => 4} %>
     <%= f.input :project_instruction, :label => t('Project Instruction'), :input_html => { :rows => 4} %>
     <%= f.input :status_id, :label => t('Status'), :collection => return_misc_definitions('project_status'), :label_method => :name, :value_method => :id,
-                        :include_blank => true  %>
+                        :include_blank => true %>
     <%#= f.input :project_manager_id, :label => t('Manager'), :collection => Authentify::UsersHelper.return_users('manage', 'projectx_projects') %>
     <%= f.input :expedite, :label => t('Expedite'), :as => :boolean %>
-   <%= f.input :sales_id, :label => t('Sales'), :collection => Authentify::UsersHelper::return_users('sales', 'projectx_projects'), :label_method => :name, :value_method => :id %>
-	<%= f.simple_fields_for :contract do |builder| %>     
-    	<%= render('contract', :f => builder)%>
-  	<% end %>
-
-
-
+   <%= f.input :sales_id, :label => t('Sales'), :collection => Authentify::UsersHelper::return_users('sales', 'projectx_projects'), :label_method => :name, :value_method => :id,
+                :include_blank => true %>
+   <%= f.simple_fields_for :contract do |builder| %>
+     <%= render('contract', :f => builder)%>
+   <% end %>
 
     <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>
 <% end %>
