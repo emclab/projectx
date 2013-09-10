@@ -23,7 +23,7 @@ module Projectx
 
     def search_results
       @s_s_results_details =  Commonx::CommonxHelper.search_results(params, @max_pagination)
-      @erb_code = find_config_const('project_index_view', 'projectx')
+      @erb_code = find_config_const(params[:controller].camelize.demodulize.singularize.downcase + '_index_view', 'projectx')
     end
 
     def max_pagination
