@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :payment_search_stat_config, :class => 'Commonx::SearchStatConfig' do
     resource_name   'projectx_payments'
-    stat_function   "models.all(:select => 'projectx_payments.created_at as Dates, sum(projectx_payments.paid_amount) as payments', :group => 'strftime('%Y/%W', projectx_payments.created_at)')"
-    include_stats   false
+    stat_function   "models.joins(:contract => :payments).all(:select => 'projectx_projects.created_at as Dates, sum(projectx_payments.paid_amount) as payments')"
+    include_stats   true
     labels_and_fields "{
                         :contract_id_s => { :label => t('Contract Id') },
                         :payment_id_s => { :label => t('Payment Id') },
@@ -28,8 +28,9 @@ FactoryGirl.define do
 
   factory :project_search_stat_config, :class => 'Commonx::SearchStatConfig' do
     resource_name   'projectx_projects'
-    stat_function   "models.joins(:contract => :payments).all(:select => 'projectx_projects.created_at as Dates, sum(projectx_payments.paid_amount) as payments', :group => 'strftime('%Y/%W', projectx_projects.created_at)')"
-    include_stats   false
+    stat_function   " models.joins(:contract => :payments).all(:select => 'projectx_projects.created_at as Dates, sum(projectx_payments.paid_amount) as payments', :group => 'projectx_payments.received_date'         )  "
+    stat_summary_function  "models.joins(:contract => :payments).all(:select => 'sum(projectx_payments.paid_amount) as payments ') "
+    include_stats   true
     labels_and_fields "{
                         :start_date_s => { :label => t('Start Date'), :as => :string, :input_html => {:size => 40}},
                         :end_date_s => { :label => t('End Date'), :as => :string, :input_html => {:size => 40}},
@@ -48,8 +49,8 @@ FactoryGirl.define do
       search_where   "{
                         :project_id_s => Proc.new { models.where('projectx_projects.id = ?', params[:project][:project_id_s])},
                         :keyword    => Proc.new { models.where('projectx_projects.name like ? ', '{params[:project][:keyword]}')},
-                        :start_date_s => Proc.new { models.where('projectx_projects.created_at > ?', params[:project][:start_date_s])},
-                        :end_date_s   => Proc.new { models.where('projectx_projects.created_at < ?', params[:project][:end_date_s])},
+                        :start_date_s => Proc.new { models.where('projectx_projects.start_date > ?', params[:project][:start_date_s])},
+                        :end_date_s   => Proc.new { models.where('projectx_projects.start_date < ?', params[:project][:end_date_s])},
                         :customer_id_s  => Proc.new { models.where('projectx_projects.customer_id' => params[:project][:customer_id_s] )},
                         :expedite_s   => Proc.new { models.where('projectx_projects.expedite' => params[:project][:expedite_s])},
                         :completion_percent_s => Proc.new { models.where('projectx_projects.completion_percent' => params[:project][:completion_percent_s])},
@@ -62,7 +63,7 @@ FactoryGirl.define do
   factory :contract_search_stat_config, :class => 'Commonx::SearchStatConfig' do
     resource_name   'projectx_contracts'
     stat_function   "models.joins(:contract => :payments).all(:select => 'projectx_projects.created_at as Dates, sum(projectx_payments.paid_amount) as payments', :group => 'strftime('%Y/%W', projectx_projects.created_at)')"
-    include_stats   false
+    include_stats   true
     labels_and_fields "{
                         :project_id_s => { :label => t('Project Id') },
                         :paid_out_s => { :label => t('Paid out') },

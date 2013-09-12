@@ -182,9 +182,30 @@ describe "Integrations" do
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'task_request_show_view', 
                               :argument_value => Authentify::AuthentifyUtility.find_config_const('task_request_show_view', 'projectx')) 
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_show_view', 
-                              :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_show_view', 'projectx')) 
+                              :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_show_view', 'projectx'))
 
-      visit '/'
+      @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
+              <p>
+              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
+              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
+          <% else %>
+              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
+              <% end %>
+              </p>
+          <% lf = eval(@search_stat.labels_and_fields) %>
+          <p>
+          <% lf.each do |field, layouts| %>
+              <% if layouts[:if].nil?  or  layouts[:if]%>
+                  <% layouts.delete(:if) %>
+                  <%= f.input field.to_sym, layouts %>
+              <% end %>
+          <% end %>
+          </p>
+              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
+
+
+
+    visit '/'
       ##save_and_open_page
       fill_in "login", :with => @u.login
       fill_in "password", :with => 'password'
