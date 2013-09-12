@@ -235,6 +235,7 @@ module Projectx
         it "should allow for new project with proper right" do
           session[:user_id] = @individual_7_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
+          @virtual_path = true
           get 'new' , {:use_route => :projectx}
           response.should be_success
         end
