@@ -4,9 +4,11 @@ module Projectx
     attr_accessor :project_name, :customer_name, :project_task_template_name, :skipped_noupdate, :cancelled_noupdate, :completed_noupdate, :expedite_noupdate
     attr_accessible :assigned_to_id, :brief_note, :cancelled, :completed, :expedite, :finish_date, :last_updated_by_id,
                     :project_id, :skipped, :start_date, :task_template_id, :task_status_definition_id,
+                    :project_name, :customer_name, :project_task_template_name, :skipped_noupdate, :cancelled_noupdate, :completed_noupdate, :expedite_noupdate,
                     :as => :role_new
     attr_accessible :assigned_to_id, :brief_note, :cancelled, :completed, :expedite, :finish_date, :last_updated_by_id,
                     :project_id, :skipped, :start_date, :task_template_id, :task_status_definition_id,
+                    :project_name, :customer_name, :project_task_template_name, :skipped_noupdate, :cancelled_noupdate, :completed_noupdate, :expedite_noupdate,
                     :as => :role_update
                     
     belongs_to :project, :class_name => 'Projectx::Project'

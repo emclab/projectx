@@ -22,7 +22,7 @@ module Projectx
       if @type_definition.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
-        flash.now[:error] = 'Data Error. Not Saved!'
+        flash.now[:error] = t('Data Error. Not Saved!')
         render 'new'
       end
     end
@@ -38,7 +38,7 @@ module Projectx
       if @type_definition.update_attributes(params[:type_definition], :as => :role_update)
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
-        flash.now[:error] = 'Data Error. Not Updated!'
+        flash.now[:error] = t('Data Error. Not Updated!')
         render 'edit'
       end
     end

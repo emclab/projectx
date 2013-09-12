@@ -26,7 +26,7 @@ module Projectx
       if @project.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
-        flash[:notice] = 'Data Error. Not Saved!'
+        flash[:notice] = t('Data Error. Not Saved!')
         render 'new'
       end
     end
@@ -43,7 +43,7 @@ module Projectx
         if @project.update_attributes(params[:project], :as => :role_update)
           redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
         else
-          flash[:notice] = 'Data Error. Not Updated!'
+          flash[:notice] = t('Data Error. Not Updated!')
           render 'edit'
         end
     end

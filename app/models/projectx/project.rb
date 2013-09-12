@@ -12,12 +12,14 @@ module Projectx
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite, 
                       :customer_name_autocomplete, :sales_id, :status_id, :completion_percent, :contract_attributes,
+                      :sales_name, :last_updated_by_name, :project_manager_name, :status_name, 
                       :as => :role_new
                       
       attr_accessible :name, :project_num, :customer_id, :project_task_template_id, :project_desp, :start_date,
                       :end_date, :delivery_date, :estimated_delivery_date, :project_instruction, :project_manager_id,
                       :cancelled, :completed, :last_updated_by_id, :expedite,
                       :customer_name_autocomplete, :sales_id, :status_id, :completion_percent, :contract_attributes,
+                      :sales_name, :last_updated_by_name, :project_manager_name, :status_name, 
                       :as => :role_update
 
 

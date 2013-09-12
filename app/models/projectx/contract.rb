@@ -1,12 +1,18 @@
 module Projectx
   class Contract < ActiveRecord::Base
-    attr_accessor :project_name, :payment_percent, :payment_total
+    attr_accessor :project_name, :payment_percent, :payment_total, :signed_by_name, :contract_on_file_noupdate, :paid_out_noupdate,
+                    :signed_noupdate
+                    
     attr_accessible :contract_on_file, :signed, :contract_amount, :other_charge, :paid_out, :payment_term, :project_id,
                     :payment_agreement, :sign_date, :signed_by_id, :last_updated_by_id,
+                    :project_name, :payment_percent, :payment_total, :signed_by_name, :contract_on_file_noupdate, :paid_out_noupdate,
+                    :signed_noupdate,
                     :as => :role_new
 
     attr_accessible :contract_on_file, :signed, :contract_amount, :other_charge, :paid_out, :payment_term, :project_id,
                     :payment_agreement, :sign_date, :signed_by_id, :last_updated_by_id, 
+                    :project_name, :payment_percent, :payment_total, :signed_by_name, :contract_on_file_noupdate, :paid_out_noupdate,
+                    :signed_noupdate, 
                     :as => :role_update
 
     attr_accessor :project_id_s, :zone_id_s, :paid_out_s, :payment_term_s, :payment_agreement_s,

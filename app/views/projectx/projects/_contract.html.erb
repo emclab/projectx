@@ -1,11 +1,30 @@
-  
-  <%= f.input :signed, :label => t('Signed'), :as => :boolean %>
-  <%= f.input :sign_date, :label => t('Signed Date'), :as => :string %>
-  <%= f.input :signed_by_id, :label => t('Signed By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
-  <%= f.input :contract_amount, :label => t('Contract Amount') %>
-  <%= f.input :other_charge, :label => t('Other Charges') %>
-  <%= f.input :payment_term, :label => t('Payment Terms (Days)'), :collection => find_config_const('payment_terms', 'projectx').split(",") %>
-  <%= f.input :payment_agreement, :label => t('Payment Agreement'), :input_html => { :rows => 4} %>
-  <%= f.input :paid_out, :label => t('Paid out'), :as => :boolean %>
-  <%= f.input :contract_on_file, :label => t('Contract on file'), :as => :boolean %>
+  <% if readonly?(@project, 'signed') %>
+    <%= f.input :signed_noupdate, :label => t('Signed'), :input_html => {:value => @project.contract.signed ? t('Yes') : t('No')}, :readonly => true  %>
+  <% else %>
+    <%= f.input :signed, :label => t('Signed'), :as => :boolean %>
+  <% end %>
+  <%= f.input :sign_date, :label => t('Signed Date'), :as => :string, :readonly => readonly?(@project, 'sign_date') %>
+  <% if readonly?(@project, 'signed_by_id') %>
+    <%= f.input :signed_by_name, :label => t('Signed By'), :readonly => true, :input_html => {:value => @project.contract.signed_by.name} if @project.contract.signed_by_id.present? %>
+  <% else %>
+    <%= f.input :signed_by_id, :label => t('Signed By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_contracts') %>        
+  <% end %>
+  <%= f.input :contract_amount, :label => t('Contract Amount'), :readonly => readonly?(@project, 'contract_amount') %>
+  <%= f.input :other_charge, :label => t('Other Charges'), :readonly => readonly?(@project, 'other_charge') %>
+  <% if readonly?(@project, 'payment_term') %>
+    <%= f.input :payment_term, :label => t('Payment Terms (Days)'), :readonly => true, :input_html => {:value => @project.contract.payment_term} %>
+  <% else %>
+    <%= f.input :payment_term, :label => t('Payment Terms (Days)'), :collection => find_config_const('payment_terms', 'projectx').split(",") %>
+  <% end %>
+  <%= f.input :payment_agreement, :label => t('Payment Agreement'), :input_html => { :rows => 4}, :readonly => readonly?(@project, 'payment_agreement') %>
+  <% if readonly?(@project, 'paid_out')%>
+    <%= f.input :paid_out_noupdate, :label => t('Paid out'), :input_html => {:value => @project.contract.paid_out ? t('Yes') : t('No')}, :readonly => true %>
+  <% else %>
+    <%= f.input :paid_out, :label => t('Paid out'), :as => :boolean %>
+  <% end %>
+  <% if readonly?(@project, 'contract_on_file') %>
+    <%= f.input :contract_on_file_noupdate, :label => t('Contract on file'), :input_html => {:value => @project.contract.contract_on_file ? t('Yes') : t('No')}, :readonly => true, :as => :string %>
+  <% else %>
+    <%= f.input :contract_on_file, :label => t('Contract on file'), :as => :boolean %>
+  <% end %>
 

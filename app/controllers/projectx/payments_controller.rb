@@ -31,7 +31,7 @@ module Projectx
       if @payment.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
-        flash[:notice] = 'Data Error. Not Saved!'
+        flash[:notice] = t('Data Error. Not Saved!')
         render 'new'
       end
     end
@@ -47,7 +47,7 @@ module Projectx
       if @payment.update_attributes(params[:payment], :as => :role_update)
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
-        flash[:notice] = 'Data Error. No Updated!'
+        flash[:notice] = t('Data Error. No Updated!')
         render 'edit'
       end
     end
@@ -57,20 +57,6 @@ module Projectx
       @payment = Projectx::Payment.find_by_id(params[:id])
       @erb_code = find_config_const('payment_show_view', 'projectx')
     end
-
-=begin
-    def search
-      @title = 'Payment Search'
-      @payment = Projectx::Payment.new()
-    end
-
-    def search_results
-      @title = 'Payment Search Results'
-      @payments = apply_search_criteria(params[:projectx_payments][:model_ar_r], params)
-      @payments = @payments.page(params[:page]).per_page(@max_pagination)
-      @search_params = search_params()
-    end
-=end
 
     def autocomplete
       @payments = Projectx::Payment.where("active = ?", true).order(:name).where("name like ?", "%#{params[:term]}%")
