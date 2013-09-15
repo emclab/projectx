@@ -16,6 +16,7 @@ module Projectx
       @title = 'New Project'
       @project = Projectx::Project.new
       @project.build_contract
+      @erb_code = find_config_const('project_new_view', 'projectx')
     end
 
 
@@ -25,7 +26,7 @@ module Projectx
       if @project.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
-        flash[:notice] = 'Data Error. Not Saved!'
+        flash[:notice] = t('Data Error. Not Saved!')
         render 'new'
       end
     end
@@ -33,6 +34,7 @@ module Projectx
     def edit
       @title = 'Edit Project'
       @project = Projectx::Project.find_by_id(params[:id])
+      @erb_code = find_config_const('project_edit_view', 'projectx')
     end
 
     def update
@@ -41,7 +43,7 @@ module Projectx
         if @project.update_attributes(params[:project], :as => :role_update)
           redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
         else
-          flash[:notice] = 'Data Error. Not Updated!'
+          flash[:notice] = t('Data Error. Not Updated!')
           render 'edit'
         end
     end

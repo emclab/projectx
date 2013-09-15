@@ -28,7 +28,7 @@ module Projectx
       if @contract.update_attributes(params[:contract], :as => :role_update)
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Contract Successfully Updated!")
       else
-        flash.now[:error] = 'Data Error. Contract Not Updated!'
+        flash.now[:error] = t('Data Error. Contract Not Updated!')
         render 'edit'
       end
     end

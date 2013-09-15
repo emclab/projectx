@@ -3,7 +3,7 @@
     <%= f.input :contract_id, :label => t('Contract Id'), :readonly => true %>
     <%= f.input :paid_amount, :label => t('Payment Amount') %>
     <%= f.input :received_by_id, :label => t('Received By'), :collection => Authentify::UsersHelper.return_users('create', 'projectx_payments') %>
-    <%= f.input :payment_desc,:label => t('Payment Description') %>
+    <%= f.input :payment_desc,:label => t('Payment Description'), :input_html => {:rows => 4} %>
     <%= f.input :received_date, :label => t('Received Date'), :as => :string %>
 	<%= f.input :payment_type, :label => t('Payment Type'), :collection => find_config_const('payment_type', 'projectx').split(",") %>
 
