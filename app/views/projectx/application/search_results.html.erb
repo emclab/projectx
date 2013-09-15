@@ -5,7 +5,6 @@
   <% if @s_s_results_details.search_option == 'Stats' %>
       <%= render 'form_stats', :locals => { :models => @models} %>
   <% else %>
-      <% @projects = @s_s_results_details.models %>
       <%= render partial: 'form_list', locals: {models: @s_s_results_details.models } %>
   <% end %>
 
