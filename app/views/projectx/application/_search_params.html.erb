@@ -1,0 +1,9 @@
+<% lf = eval(@search_stat.labels_and_fields) %>
+<p>
+<% lf.each do |field, layouts| %>
+  <% if layouts[:if].nil?  or  layouts[:if]%>
+	 <% layouts.delete(:if) %>
+	 <%= f.input field.to_sym, layouts %>
+  <% end %>
+<% end %>
+</p>

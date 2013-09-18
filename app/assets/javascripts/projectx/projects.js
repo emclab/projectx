@@ -22,5 +22,5 @@ $(function() {
 	$( "#project_contract_attributes_sign_date" ).datepicker({dateFormat: 'yy-mm-dd'});
 	$( "#project_start_date_s" ).datepicker({dateFormat: 'yy-mm-dd'});
 	$( "#project_end_date_s" ).datepicker({dateFormat: 'yy-mm-dd'});
-	$( "#project_start_date_s" ).datepicker({dateFormat: 'yy-mm-dd'});
+
 });

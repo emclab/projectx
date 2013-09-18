@@ -183,7 +183,61 @@ describe "Integrations" do
                               :argument_value => Authentify::AuthentifyUtility.find_config_const('task_request_show_view', 'projectx')) 
       @payment_terms_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'payment_show_view', 
                               :argument_value => Authentify::AuthentifyUtility.find_config_const('payment_show_view', 'projectx'))
+      @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_edit_view', :argument_value => "<%= f.input :name, :label => t('Project Name') %>
+    <%= f.input :project_num, :label => t('Project Number'), :readonly => true %>
+    <%= f.input :customer_name_autocomplete,:input_html => { data: {autocomplete_source: SUBURI + customerx.autocomplete_customers_path}},
+                :label => t('Customer'), :placeholder => '输入关键字选择客户', :required => true %>
+    <%= f.input :start_date, :label => t('Start Date'), :as => :string %>
+    <%= f.input :delivery_date, :label => t('Delivery Date'), :as => :string %>
+    <%= f.input :estimated_delivery_date, :label => t('Estimated End Date'), :as => :string %>
+    <%= f.input :project_task_template_id, :label => t('Project Type'), :collection => return_project_types, :label_method => :name, :value_method => :id,
+                        :include_blank => true %>
+    <%= f.input :project_desp, :label => t('Project Description'), :input_html => { :rows => 4} %>
+    <%= f.input :project_instruction, :label => t('Project Instruction'), :input_html => { :rows => 4} %>
+    <% if readonly?(@project, 'status_id') %>
+      <%= f.input :status_name, :label => t('Project Status'), :readonly => true, :input_html => {:value => @project.status.name} %>
+    <% else %>
+      <%= f.input :status_id, :label => t('Project Status'), :collection => return_misc_definitions('project_status'), :label_method => :name, :value_method => :id,
+                        :include_blank => true %>
+    <% end %>
+    <% if readonly?(@project, 'project_manager_id') %>
+      <%= f.input :project_manager_name, :label => t('Projet Manager'), :readonly => true, :input_html => {:value => @project.project_manager.name} if @project.project_manager_id.present? %>
+    <% else %>
+      <%= f.input :project_manager_id, :label => t('Project Manager'), :collection => Authentify::UsersHelper.return_users('manage', 'projectx_projects'), :label_method => :name, :value_method => :id, 
+                  :include_blank => true %>
+    <% end %>
+    <%= f.input :expedite, :label => t('Expedite'), :as => :boolean %>
+    <% if readonly?(@project, 'sales_id') %>
+      <%= f.input :sales_name, :label => t('Sales'), :readonly => true, :input_html => {:value => @project.sales.name} %>
+    <% else %>
+      <%= f.input :sales_id, :label => t('Sales'), :collection => Authentify::UsersHelper::return_users('sales', 'projectx_projects'), :label_method => :name, :value_method => :id,
+                  :include_blank => true %>
+    <% end %>
+    <%= f.input :last_updated_by_name, :label => t('Last Updated By'), :input_html => {:value => @project.last_updated_by.name}, :readonly => true %>
+    <%= f.simple_fields_for(:contract)  {|builder| render('contract', :f => builder)}  %>
+     
 
+    <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>")
+      @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_new_view', :argument_value => "<%= f.input :name, :label => t('Project Name') %>
+    <%= f.input :project_num, :label => t('Project Number'), :readonly => true %>
+    <%= f.input :customer_name_autocomplete,:input_html => { data: {autocomplete_source: SUBURI + customerx.autocomplete_customers_path}},
+                :label => t('Customer'), :placeholder => '输入关键字选择客户', :required => true %>
+    <%= f.input :start_date, :label => t('Start Date'), :as => :string %>
+    <%#= f.input :project_date, :label => t('Project Date'), :as => :string %>
+    <%= f.input :estimated_delivery_date, :label => t('Estimated End Date'), :as => :string %>
+    <%= f.input :project_task_template_id, :label => t('Project Task Template'), :collection => return_project_task_templates, :label_method => :name, :value_method => :id,
+                        :include_blank => true %>
+    <%= f.input :project_desp, :label => t('Project Description'), :input_html => { :rows => 4} %>
+    <%= f.input :project_instruction, :label => t('Project Instruction'), :input_html => { :rows => 4} %>
+    <%= f.input :status_id, :label => t('Status'), :collection => return_misc_definitions('project_status'), :label_method => :name, :value_method => :id,
+                        :include_blank => true %>
+    <%#= f.input :project_manager_id, :label => t('Manager'), :collection => Authentify::UsersHelper.return_users('manage', 'projectx_projects') %>
+    <%= f.input :expedite, :label => t('Expedite'), :as => :boolean %>
+   <%= f.input :sales_id, :label => t('Sales'), :collection => Authentify::UsersHelper::return_users('sales', 'projectx_projects'), :label_method => :name, :value_method => :id,
+                :include_blank => true %>
+   <%= f.simple_fields_for(:contract)  {|builder| render('contract', :f => builder)}  %>
+
+    <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>")
       @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
               <p>
               <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
@@ -219,16 +273,17 @@ describe "Integrations" do
       page.body.should have_content("Projects")
       click_link('Tasks')
       #save_and_open_page
-      page.body.should have_content("项目任务一览")
+      page.body.should have_content("TaskName")
       visit projects_path
+      #save_and_open_page
       click_link('Edit')
       page.body.should have_content("Edit Project")
     end
     
     it "should visit task index page and its links" do
       visit project_tasks_path(@proj)
-      ##save_and_open_page
-      page.body.should have_content("一览")
+      #save_and_open_page
+      page.body.should have_content("TaskName")
       click_link('Edit')
       ##save_and_open_page
       page.body.should have_content("更新项目任务")
@@ -287,7 +342,7 @@ describe "Integrations" do
 
       click_link('Tasks')
       #save_and_open_page
-      page.body.should have_content("项目任务一览")
+      page.body.should have_content("TaskName")
 
       visit projects_path
       click_link('Edit')
@@ -295,6 +350,7 @@ describe "Integrations" do
       page.body.should have_content("Edit Project")
 
       visit projects_path
+      #save_and_open_page
       click_link('New Project')
       #save_and_open_page
       page.body.should have_content("New Project")
@@ -365,9 +421,9 @@ describe "Integrations" do
       page.body.should have_content(@proj.name)
 
       visit contracts_path
-      click_link('Search')
+      #click_link('Search')
       #save_and_open_page
-      page.body.should have_content("Contract Search")
+      #page.body.should have_content("Contract Search")
     end
 
 
