@@ -24,12 +24,11 @@ module Projectx
 
 
       attr_accessor :project_id_s, :keyword, :start_date_s, :end_date_s, :customer_id_s, :status_s, :expedite_s,
-                    :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s, :completion_percent,
-                    :project_task_template_id_s, :time_frame_s
+                    :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s, :project_task_template_id_s, 
+                    :time_frame_s
 
       attr_accessible :project_id_s, :keyword, :start_date_s, :end_date_s, :customer_id_s, :status_s, :expedite_s,
-                    :completion_percent_s, :zone_id_s, :sales_id_s, :payment_percent_s, :project_task_template_id_s,
-                    :time_frame_s,
+                    :zone_id_s, :sales_id_s, :payment_percent_s, :project_task_template_id_s, :time_frame_s,
                     :as => :role_search_stats
 
                     
