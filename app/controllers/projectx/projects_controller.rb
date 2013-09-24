@@ -27,6 +27,7 @@ module Projectx
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
         flash[:notice] = t('Data Error. Not Saved!')
+        @erb_code = find_config_const('project_new_view', 'projectx')
         render 'new'
       end
     end
@@ -44,6 +45,7 @@ module Projectx
           redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
         else
           flash[:notice] = t('Data Error. Not Updated!')
+          @erb_code = find_config_const('project_edit_view', 'projectx')
           render 'edit'
         end
     end

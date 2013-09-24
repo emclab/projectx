@@ -24,10 +24,12 @@ module Projectx
            'mini-link'    => mini_btn +  'btn btn-link'
           }
       stub_const("ActionView::CompiledTemplates::BUTTONS_CLS", btn_cls)
-      stub_const("Commonx::CommonxHelper::SEARCH_STAT_INFO", {'projectx_projects' => FactoryGirl.create(:project_search_stat_config)})
+      #stub_const("Commonx::CommonxHelper::SEARCH_STAT_INFO", {'projectx_projects' => FactoryGirl.create(:project_search_stat_config)})
 
       controller.should_receive(:require_signin)
       controller.should_receive(:require_employee)
+      ActionView::Template.any_instance.stub(:refresh)
+      
       @project_num_time_gen = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_num_time_gen', :argument_value => ' Projectx::Project.last.nil? ? (Time.now.strftime("%Y%m%d") + "-"  + 112233.to_s + "-" + rand(100..999).to_s) :  (Time.now.strftime("%Y%m%d") + "-"  + (Projectx::Project.last.project_num.split("-")[-2].to_i + 555).to_s + "-" + rand(100..999).to_s)')
       @project_has_sales_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_has_sales', :argument_value => 'true')
       @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)
@@ -576,35 +578,13 @@ module Projectx
     end
 
     describe "GET search" do
-      context "Has no access right for 'search' project " do
         before :each do
-          @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-          <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
-
-
+          stats_config = FactoryGirl.create(:commonx_search_stat_config)
           sales_group_6 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z5.id)
           @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
-
-          sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
-
-          @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
+          
+          @sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
+          @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def2.id)
           @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
         end
 
@@ -615,53 +595,20 @@ module Projectx
           assigns(:projects).should be_blank
           response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Access Right! for action=search and resource=projectx/projects")
         end
-      end
-
-      context "Has access right for 'search' project" do
-        before :each do
-          sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-          sales_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => sales_role_def.id, :resource =>'projectx_projects',:rank => 1 )
-
-          sales_group_3 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z3.id)
-          @sales_3_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_3.id)
-          @sales_user_role3 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-          @individual_7_u = FactoryGirl.create(:user, :name => 'name7', :login => 'login7', :email => 'name7@a.com', :user_levels => [@sales_3_ul], :user_roles => [@sales_user_role3])
-
-          cust3 = FactoryGirl.create(:customer, :active => true, :name => 'cust name3', :short_name => 'short name3', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
-          cust4 = FactoryGirl.create(:customer, :active => true, :name => 'cust name4', :short_name => 'short name4', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
-          cust5 = FactoryGirl.create(:customer, :active => true, :name => 'cust name5', :short_name => 'short name5', :zone_id => @z3.id, :last_updated_by_id => @individual_7_u.id)
-
-          @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
-        end
-
+      
         it "should allow for search with proper right" do
-          session[:user_id] = @individual_7_u.id
-          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_7_u.id)
+          sales_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => @sales_role_def2.id, 
+                :resource =>'projectx_projects',:rank => 1 )
+          session[:user_id] = @individual_6_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_6_u.id)
           get 'search' , {:use_route => :projectx, :zone_id_s => 'zone3', :sales_id_s => 'name3', :customer_id_s => 'cust name3'}
           response.should be_success
         end
 
-      end
+      #end
     end
 
-    describe "GET 'search_results' for 'search' option " do
+    describe "GET 'search_results' " do
       before :each do
         sales_group_1 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
         sales_group_2 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z2.id)
@@ -675,19 +622,14 @@ module Projectx
         @sales_4_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_4.id)
         @sales_5_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_5.id)
 
-        sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-        sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'search', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-        sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'search', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-        sales_access_right3 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right5 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects',:rank => 1 )
-        sales_access_right6 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
-
-        @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-        @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-        @sales_user_role3 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-        @sales_user_role4 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-        @sales_user_role5 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
+        @sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
+        stats_config = FactoryGirl.create(:commonx_search_stat_config)
+        
+        @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
+        @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
+        @sales_user_role3 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
+        @sales_user_role4 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
+        @sales_user_role5 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
 
         @individual_1_u = FactoryGirl.create(:user, :name => 'name1', :login => 'login1', :email => 'name1@a.com', :user_levels => [@sales_1_ul], :user_roles => [@sales_user_role1])
         @individual_2_u = FactoryGirl.create(:user, :name => 'name2', :login => 'login2', :email => 'name2@a.com', :user_levels => [@sales_2_ul], :user_roles => [@sales_user_role2])
@@ -706,84 +648,46 @@ module Projectx
         @prj3 = FactoryGirl.create(:project, :name => 'project3', :project_desp => 'project3', :sales_id => @individual_3_u.id,:last_updated_by_id => @individual_3_u.id, :customer_id => @cust3.id, :project_task_template_id => @project_task_template1.id )
         @prj4 = FactoryGirl.create(:project, :name => 'project4', :project_desp => 'project4', :sales_id => @individual_4_u.id,:last_updated_by_id => @individual_4_u.id, :customer_id => @cust4.id, :project_task_template_id => @project_task_template1.id )
         @prj5 = FactoryGirl.create(:project, :name => 'project5', :project_desp => 'project5', :sales_id => @individual_2_u.id,:last_updated_by_id => @individual_5_u.id, :customer_id => @cust2.id, :project_task_template_id => @project_task_template1.id )
-
-        @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
+        
       end
 
-      context "Has individual 'search_results' access right " do
-
-        it "returns projects list for this individual user" do
+       it "returns projects list for this individual user" do
+          sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => @sales_role_def.id, :action => 'search', 
+          :resource =>'projectx_projects',:sql_code => '', :masked_attrs => '', :rank => 1 )      
           session[:user_id] = @individual_3_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_3_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:zone_id_s => @z3.id.to_s, :sales_id_s => @individual_3_u.id.to_s, :customer_id_s => @cust3.id.to_s, :search_option_s => 'Search'} }
+          get 'search_results' , {:use_route => :projectx, :project => {:zone_id_s => @z3.id.to_s, :sales_id_s => @individual_3_u.id.to_s, :customer_id_s => @cust3.id.to_s} }
           assigns(:s_s_results_details).models.should =~ [@prj3]
         end
 
         it "returns projects search results list for this individual user based on search criteria" do
+          sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => @sales_role_def.id, :action => 'search', 
+          :resource =>'projectx_projects',:sql_code => '', :masked_attrs => '', :rank => 1 )  
           session[:user_id] = @individual_2_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_2_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:zone_id_s => @z2.id.to_s, :sales_id_s => @individual_2_u.id.to_s, :customer_id_s => @cust2.id.to_s, :search_option_s => 'Search'} }
+          get 'search_results' , {:use_route => :projectx, :project => {:zone_id_s => @z2.id.to_s, :sales_id_s => @individual_2_u.id.to_s, :customer_id_s => @cust2.id.to_s} }
           assigns(:s_s_results_details).models.should =~ [@prj2, @prj5]
         end
 
-        it "returns sub set of projects search results list for this individual because of access rights eventhough there are no search criteria" do
+        it "returns all projects for this individual because of access rights even though there are no search criteria" do
+          sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => @sales_role_def.id, :action => 'search', 
+          :resource =>'projectx_projects',:sql_code => '', :masked_attrs => '', :rank => 1 )  
           session[:user_id] = @individual_2_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_2_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:search_option_s => 'Search'} }
-          assigns(:s_s_results_details).models.should =~ [@prj2, @prj5]
+          get 'search_results' , {:use_route => :projectx, :project => {} }
+          assigns(:s_s_results_details).models.should =~ [@prj1, @prj2, @prj3, @prj4, @prj5]
         end
-      end
-
-      context "Has global 'search_results' access right " do
+      
         before :each do
           ceo_group     = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
           ceo_role_def = FactoryGirl.create(:role_definition, :name => "ceo", :brief_note => "ceo role")
 
           ceo_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
-          ceo_access_right2 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
-          ceo_access_right3 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
-          ceo_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers' )
-          ceo_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_projects' )
-
+          
           @ceo_ul       = FactoryGirl.build(:user_level, :sys_user_group_id => ceo_group.id)
           @ceo_user_role = FactoryGirl.create(:user_role, :role_definition_id => ceo_role_def.id)
           @ceo_u = FactoryGirl.create(:user, :name => 'ceo', :login => 'ceo111', :email => 'ceo@a.com', :user_levels => [@ceo_ul], :user_roles => [@ceo_user_role])
 
-          @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
         end
 
         it "returns projects list based on search criteria" do
@@ -800,41 +704,19 @@ module Projectx
           assigns(:s_s_results_details).models.should =~ [@prj1, @prj2, @prj3, @prj4, @prj5]
         end
 
-      end
-
+      
       context "Has only records 'search_results' access right " do
         before :each do
           manager_group = FactoryGirl.create(:sys_user_group, :user_group_name => 'regional_manager', :group_type_id => @type_of_user.id, :zone_id => @z2.id)
           manager_role_def = FactoryGirl.create(:role_definition, :name => 'manager', :brief_note => "manager role")
           manager_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
           manager_access_right2 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-          manager_access_right3 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-          manager_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-          manager_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:rank => 1 )
-          manager_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
-
+          
           @manager_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => manager_group.id)
           @manager_user_role = FactoryGirl.create(:user_role, :role_definition_id => manager_role_def.id)
           @manager_u = FactoryGirl.create(:user, :name => 'manager', :login => 'manager', :email => 'manager@a.com', :user_levels => [@manager_ul], :user_roles => [@manager_user_role])
 
-          @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
+          
         end
 
         it "returns projects list " do
@@ -874,7 +756,7 @@ module Projectx
       end
     end
 
-    describe "GET 'search_results' for 'stat' option " do
+    describe "GET 'stats & stats_results' " do
       before :each do
         sales_group_1 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
         sales_group_2 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z2.id)
@@ -888,19 +770,14 @@ module Projectx
         @sales_4_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_4.id)
         @sales_5_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_5.id)
 
-        sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
-        sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'search', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-        sales_access_right2 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'search', :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-        sales_access_right3 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'update',:resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right4 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-        sales_access_right5 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'create',:resource =>'projectx_projects',:rank => 1 )
-        sales_access_right6 = FactoryGirl.create(:user_access, :role_definition_id => sales_role_def.id, :action => 'show',  :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
-
-        @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-        @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-        @sales_user_role3 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-        @sales_user_role4 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
-        @sales_user_role5 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def.id)
+        @sales_role_def = FactoryGirl.create(:role_definition, :name => 'sales', :brief_note => "sales role")
+        stats_config = FactoryGirl.create(:commonx_search_stat_config)
+        
+        @sales_user_role1 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
+        @sales_user_role2 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
+        @sales_user_role3 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
+        @sales_user_role4 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
+        @sales_user_role5 = FactoryGirl.create(:user_role, :role_definition_id => @sales_role_def.id)
 
         @individual_1_u = FactoryGirl.create(:user, :name => 'name1', :login => 'login1', :email => 'name1@a.com', :user_levels => [@sales_1_ul], :user_roles => [@sales_user_role1])
         @individual_2_u = FactoryGirl.create(:user, :name => 'name2', :login => 'login2', :email => 'name2@a.com', :user_levels => [@sales_2_ul], :user_roles => [@sales_user_role2])
@@ -936,210 +813,77 @@ module Projectx
         @paymnt6 = FactoryGirl.create(:payment, :contract_id => @contract6.id, :paid_amount => 701.10, :received_by_id => @individual_2_u.id, :payment_type => 'Check', :received_date => '2013/12/25')
 
 
-        @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
       end
 
-      context "Has individual 'search_results for stat option' access right " do
-
-        it "returns stats results and stats summary result for this individual user for a given project" do
+      context "Has stats and stats_results " do
+        
+        it "should return stats page" do
+          sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => @sales_role_def.id, :action => 'stats', :resource =>'projectx_projects', 
+               :sql_code => '', :rank => 2 )
           session[:user_id] = @individual_3_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_3_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:zone_id_s => @z3.id.to_s, :sales_id_s => @individual_3_u.id.to_s, :customer_id_s => @cust3.id.to_s, :search_option_s => 'Stats'} }
-          assigns(:s_s_results_details).models.should =~ [@prj3]
-          assigns(:s_s_results_details).search_stat_result.length.should eq 2
-          assigns(:s_s_results_details).search_stat_result[0].payments.should eq 301.1
-          assigns(:s_s_results_details).search_stat_result[1].payments.should eq 401.1
-          #assigns(:s_s_results_details).stat_summary_result.length.should eq 1
-          #assigns(:s_s_results_details).stat_summary_result[0].payments.round(2).should eq 702.2
+          get 'stats', {:use_route => :projectx}
+          response.should be_success
         end
-
-        it "returns stats and stats summary results for this individual user based on search criteria" do
-          session[:user_id] = @individual_2_u.id
-          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_2_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:zone_id_s => @z2.id.to_s, :sales_id_s => @individual_2_u.id.to_s, :customer_id_s => @cust2.id.to_s, :search_option_s => 'Stats', :start_date_s => '2013-02-01'  } }
-          assigns(:s_s_results_details).models.should =~ [@prj2, @prj5]
-          assigns(:s_s_results_details).search_stat_result.length.should eq 2
-          assigns(:s_s_results_details).search_stat_result[0].payments.should eq 201.1
-          assigns(:s_s_results_details).search_stat_result[1].payments.should eq 601.1
-          #assigns(:s_s_results_details).stat_summary_result.length.should eq 1
-          #assigns(:s_s_results_details).stat_summary_result[0].payments.round(2).should eq 802.2
-        end
-
-        it "returns sub set of projects search results list for this individual because of access rights eventhough there are no search criteria" do
-          session[:user_id] = @individual_2_u.id
-          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_2_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:search_option_s => 'Stats'} }
-          assigns(:s_s_results_details).models.should =~ [@prj2, @prj5, @prj6]
-          assigns(:s_s_results_details).search_stat_result.length.should eq 3
-          assigns(:s_s_results_details).search_stat_result[0].payments.should eq 201.1
-          assigns(:s_s_results_details).search_stat_result[1].payments.should eq 601.1
-          assigns(:s_s_results_details).search_stat_result[2].payments.should eq 701.1
-          #assigns(:s_s_results_details).stat_summary_result.length.should eq 1
-          #assigns(:s_s_results_details).stat_summary_result[0].payments.round(2).should eq 1503.3
-        end
-
-
-      end
-
-      context "Has global 'search_results' access right " do
-        before :each do
-          ceo_group     = FactoryGirl.create(:sys_user_group, :user_group_name => 'ceo', :group_type_id => @type_of_user.id, :zone_id => @z1.id)
-          ceo_role_def = FactoryGirl.create(:role_definition, :name => "ceo", :brief_note => "ceo role")
-
-          ceo_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
-          ceo_access_right2 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
-          ceo_access_right3 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource => 'projectx_projects' )
-          ceo_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => ceo_role_def.id, :resource =>'customerx_customers' )
-          ceo_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => ceo_role_def.id, :resource =>'projectx_projects' )
-
-          @ceo_ul       = FactoryGirl.build(:user_level, :sys_user_group_id => ceo_group.id)
-          @ceo_user_role = FactoryGirl.create(:user_role, :role_definition_id => ceo_role_def.id)
-          @ceo_u = FactoryGirl.create(:user, :name => 'ceo', :login => 'ceo111', :email => 'ceo@a.com', :user_levels => [@ceo_ul], :user_roles => [@ceo_user_role])
-
-          @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
-        end
-
-        it "returns projects list based on search criteria" do
-          session[:user_id] = @ceo_u.id
-          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@ceo_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:search_option_s => 'Stats', :zone_id_s => @z3.id.to_s, :sales_id_s => @cust3.sales_id.to_s, :customer_id_s => @cust3.id.to_s} }
-          assigns(:s_s_results_details).models.should =~ [@prj3]
-        end
-
-        it "returns all projects as there is no search criteria to restricts the result set" do
-          session[:user_id] = @ceo_u.id
-          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@ceo_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:search_option_s => 'Stats'} }
-          assigns(:s_s_results_details).models.should =~ [@prj1, @prj2, @prj3, @prj4, @prj5, @prj6]
-        end
-
-      end
-
-      context "Has only records 'search_results' access right " do
-        before :each do
-          manager_group = FactoryGirl.create(:sys_user_group, :user_group_name => 'regional_manager', :group_type_id => @type_of_user.id, :zone_id => @z2.id)
-          manager_role_def = FactoryGirl.create(:role_definition, :name => 'manager', :brief_note => "manager role")
-          manager_access_right1 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 2 )
-          manager_access_right2 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :masked_attrs => 'project_num,=project_desp', :rank => 1 )
-          manager_access_right3 = FactoryGirl.create(:user_access, :action => 'update', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-          manager_access_right4 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:sql_code => 'record.sales_id  == session[:user_id]', :rank => 1 )
-          manager_access_right5 = FactoryGirl.create(:user_access, :action => 'create', :role_definition_id => manager_role_def.id, :resource =>'projectx_projects',:rank => 1 )
-          manager_access_right6 = FactoryGirl.create(:user_access, :action => 'show', :role_definition_id => manager_role_def.id, :resource =>'customerx_customers',:sql_code => 'record.sales_id  == session[:user_id]' )
-
-          @manager_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => manager_group.id)
-          @manager_user_role = FactoryGirl.create(:user_role, :role_definition_id => manager_role_def.id)
-          @manager_u = FactoryGirl.create(:user, :name => 'manager', :login => 'manager', :email => 'manager@a.com', :user_levels => [@manager_ul], :user_roles => [@manager_user_role])
-
-          @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
-        end
-
-        it "returns projects list " do
-          session[:user_id] = @manager_u.id
-          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@manager_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:search_option_s => 'Stats', :zone_id_s => @z2.id.to_s, :sales_id_s => @cust2.sales.id.to_s, :customer_id_s => @cust2.id.to_s} }
-          assigns(:s_s_results_details).models.should =~ [@prj2, @prj5, @prj6]
-        end
-
-        it "returns empty projects list (no match) " do
-          session[:user_id] = @manager_u.id
-          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@manager_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:search_option_s => 'Stats', :zone_id_s => @z2.id.to_s, :sales_id_s => @cust1.sales.id.to_s, :customer_id_s => @cust1.id.to_s} }
-          assigns(:s_s_results_details).models.should =~ []
-        end
-      end
-
-      context "Has no 'search_results' access right " do
-        before :each do
-          sales_group_6 = FactoryGirl.create(:sys_user_group, :user_group_name => 'sales', :group_type_id => @type_of_user.id, :zone_id => @z5.id)
-          @sales_6_ul   = FactoryGirl.build(:user_level, :sys_user_group_id => sales_group_6.id)
-
-          sales_role_def2 = FactoryGirl.create(:role_definition, :name => 'sales2', :brief_note => "sales role")
-          sales_access_right6 = FactoryGirl.create(:user_access, :action => 'search', :role_definition_id => sales_role_def2.id, :resource =>'customerx_customers',:sql_code => 'Projectx::Project.joins(:customer).where(:customerx_customers => {:zone_id => session[:user_privilege].user_zone_ids})', :rank => 1 )
-
-          @sales_user_role6 = FactoryGirl.create(:user_role, :role_definition_id => sales_role_def2.id)
-          @individual_6_u = FactoryGirl.create(:user, :name => 'name6', :login => 'login6', :email => 'name6@a.com', :user_levels => [@sales_6_ul], :user_roles => [@sales_user_role6])
-
-          @project_search_stat_view_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_search_view', :argument_value => "
-              <p>
-              <% if @search_stat.stat_function.present? and @search_stat.include_stats %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search'), t('Stats')], :selected => t('Search')  %></p>
-          <% else %>
-              <p><%= f.input :search_option_s, :label => t('Search Option'), :collection => [t('Search')], :selected => t('Search')  %></p>
-              <% end %>
-              </p>
-          <% lf = eval(@search_stat.labels_and_fields) %>
-          <p>
-          <% lf.each do |field, layouts| %>
-              <% if layouts[:if].nil?  or  layouts[:if]%>
-                  <% layouts.delete(:if) %>
-                  <%= f.input field.to_sym, layouts %>
-              <% end %>
-          <% end %>
-          </p>
-              <%= f.button :submit, t('Submit') , :class =>'btn btn-primary' %> " )
-        end
-
+        
         it "returns no 'search_results' access right " do
-          session[:user_id] = @individual_6_u.id
-          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_6_u)
-          get 'search_results' , {:use_route => :projectx, :project => {:search_option_s => 'Stats'} }
+          session[:user_id] = @individual_5_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_5_u)
+          get 'search_results' , {:use_route => :projectx, :project => {:time_frame_s => 'week'} }
           assigns(:s_s_results_details).nil?
           response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Insufficient Access Right! for action=search_results and resource=projectx/projects")
         end
-      end
-    end
 
+        it "returns stats results and stats summary result for this individual user for a given project" do
+          sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => @sales_role_def.id, :action => 'stats', :resource =>'projectx_projects', 
+               :sql_code => '', :rank => 2 )
+          session[:user_id] = @individual_3_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_3_u)
+          get 'stats_results' , {:use_route => :projectx, :project => {:zone_id_s => @z3.id.to_s, :sales_id_s => @individual_3_u.id.to_s,
+                   :customer_id_s => @cust3.id.to_s, :time_frame_s => 'week'} }
+          assigns(:s_s_results_details).models.should =~ [@prj3]
+          assigns(:s_s_results_details).search_stat_result.length.should eq 1
+          assigns(:s_s_results_details).search_stat_result[0].Payments.should eq 702.2  #2 payments for @prj3.
+          
+        end
+
+        it "returns stats and stats summary results for this individual user based on search criteria" do
+          sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => @sales_role_def.id, :action => 'stats', :resource =>'projectx_projects', 
+               :sql_code => '', :rank => 2 )
+          session[:user_id] = @individual_2_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_2_u)
+          get 'stats_results' , {:use_route => :projectx, :project => {:zone_id_s => @z2.id.to_s, :sales_id_s => @individual_2_u.id.to_s, 
+                       :customer_id_s => @cust2.id.to_s, :start_date_s => '2013-02-01', :time_frame_s => 'week'  } }
+          assigns(:s_s_results_details).models.should =~ [@prj2,  @prj5]  #@prj6 not in because it was started earlier than 2/1.
+          assigns(:s_s_results_details).search_stat_result.length.should eq 1
+          assigns(:s_s_results_details).search_stat_result[0].Payments.should eq 802.2  
+          
+        end
+
+        it "returns sub set of projects search results list for this individual because of access rights eventhough there are no search criteria" do
+          sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => @sales_role_def.id, :action => 'stats', :resource =>'projectx_projects', 
+               :sql_code => '', :rank => 2 )
+          session[:user_id] = @individual_2_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_2_u)
+          get 'stats_results' , {:use_route => :projectx, :project => {:time_frame_s => 'week'} }
+          assigns(:s_s_results_details).models.should =~ [@prj1,@prj2, @prj3, @prj4, @prj5, @prj6]
+          assigns(:s_s_results_details).search_stat_result.length.should eq 1   #all proj created at same time.
+          assigns(:s_s_results_details).search_stat_result[0].Payments.should eq 2306.6
+          
+        end
+        
+        it "stats should be based on the data set returned after checking user access and have no record" do
+          sales_access_right1 = FactoryGirl.create(:user_access, :role_definition_id => @sales_role_def.id, :action => 'stats', :resource =>'projectx_projects', 
+               :sql_code => 'Projectx::Project.where(:sales_id => session[:user_id])', :rank => 2 )
+          session[:user_id] = @individual_1_u.id
+          session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_1_u)
+          get 'stats_results' , {:use_route => :projectx, :project => {:time_frame_s => 'week'} }
+          assigns(:s_s_results_details).models.should =~ [@prj1]
+        end
+
+      end
+      
+    end
 
   end
 end

@@ -24,8 +24,7 @@ module Projectx
            'mini-link'    => mini_btn +  'btn btn-link'
           }
       stub_const("ActionView::CompiledTemplates::BUTTONS_CLS", btn_cls)
-      stub_const("Authentify::AuthentifyUtility::SEARCH_STAT_INFO", {'projectx_payments' => FactoryGirl.create(:payment_search_stat_config)})
-
+      
       controller.should_receive(:require_signin)
       controller.should_receive(:require_employee)
 

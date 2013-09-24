@@ -22,15 +22,16 @@ describe "Integrations" do
          'link'         => 'btn btn-link',
          'mini-link'    => mini_btn +  'btn btn-link'
         }
-    @project_search_stats = FactoryGirl.create(:project_search_stat_config)
-    Authentify::AuthentifyUtility::SEARCH_STAT_INFO = {}
-    Authentify::AuthentifyUtility::SEARCH_STAT_INFO['projectx_projects'] = @project_search_stats
-    @contract_search_stats = FactoryGirl.create(:contract_search_stat_config)
-    Authentify::AuthentifyUtility::SEARCH_STAT_INFO['projectx_contracts'] = @contract_search_stats
+    #@project_search_stats = FactoryGirl.create(:commonx_search_stat_config)
+    #Authentify::AuthentifyUtility::SEARCH_STAT_INFO = {}
+    #Authentify::AuthentifyUtility::SEARCH_STAT_INFO['projectx_projects'] = @project_search_stats
+    #@contract_search_stats = FactoryGirl.create(:contract_search_stat_config)
+    #Authentify::AuthentifyUtility::SEARCH_STAT_INFO['projectx_contracts'] = @contract_search_stats
 
 
 
     before(:each) do
+      stats_config = FactoryGirl.create(:commonx_search_stat_config)
       @project_num_time_gen = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_num_time_gen', :argument_value => ' Projectx::Project.last.nil? ? (Time.now.strftime("%Y%m%d") + "-"  + 112233.to_s + "-" + rand(100..999).to_s) :  (Time.now.strftime("%Y%m%d") + "-"  + (Projectx::Project.last.project_num.split("-")[-2].to_i + 555).to_s + "-" + rand(100..999).to_s)')
       @project_has_sales_config = FactoryGirl.create(:engine_config, :engine_name => 'projectx', :engine_version => nil, :argument_name => 'project_has_sales', :argument_value => 'true')
       @pagination_config = FactoryGirl.create(:engine_config, :engine_name => nil, :engine_version => nil, :argument_name => 'pagination', :argument_value => 30)

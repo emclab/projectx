@@ -29,5 +29,5 @@ BUTTONS_CLS = {'default' => Authentify::AuthentifyUtility.find_config_const('def
                'mini-link'    => mini_btn + Authentify::AuthentifyUtility.find_config_const('link-btn').split(' ')[1]
               }
 
-SEARCH_STAT_INFO = Commonx::CommonxHelper.load_search_stats_config_const
+#SEARCH_STAT_INFO = Commonx::CommonxHelper.load_search_stats_config_const
 
