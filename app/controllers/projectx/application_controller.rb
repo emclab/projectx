@@ -7,7 +7,7 @@ module Projectx
     include Authentify::UserPrivilegeHelper
     
     include Commonx::CommonxHelper
-    include Projectx::ProjectsHelper
+    include Projectx::ProjectxHelper
 
     helper_method :return_task_definitions  
      

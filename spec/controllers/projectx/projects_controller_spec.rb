@@ -601,7 +601,7 @@ module Projectx
                 :resource =>'projectx_projects',:rank => 1 )
           session[:user_id] = @individual_6_u.id
           session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@individual_6_u.id)
-          get 'search' , {:use_route => :projectx, :zone_id_s => 'zone3', :sales_id_s => 'name3', :customer_id_s => 'cust name3'}
+          get 'search' , {:use_route => :projectx} #, :zone_id_s => 'zone3', :sales_id_s => @individual_6_u.id}
           response.should be_success
         end
 

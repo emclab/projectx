@@ -44,7 +44,7 @@ FactoryGirl.define do
                         :include_blank => true }, 
             :project_task_template_id_s => { :label => t('Project Type'), :collection => return_project_task_templates, :label_method => :name, :value_method => :id, 
                         :include_blank => true }, 
-            :keyword => { :label => t('Keyword')},
+            :keyword_s => { :label => t('Keyword')},
             :zone_id_s => { :label => t('Zone'), :collection => Authentify::Zone.where(:active => true).order('ranking_order'),
               :label_method => :zone_name, :value_method => :id, :if => has_action_right?('search', 'projectx_projects')},
             :sales_id_s => {:collection => Authentify::UsersHelper::return_users('sales', 'projectx_projects'), :label_method => :name, :value_method => :id, :prompt => t('Select Sales'),
@@ -53,7 +53,7 @@ FactoryGirl.define do
                   :label => t('Customer'), :if => has_action_right?("search", "projectx_projects") }   } &
       search_where   "{
                         :project_id_s => Proc.new { models.where('projectx_projects.id = ?', params[:project][:project_id_s])},
-                        :keyword    => Proc.new { models.where('projectx_projects.name like ? ', '{params[:project][:keyword]}')},
+                        :keyword_s    => Proc.new { models.where('projectx_projects.name like ? ', '{params[:project][:keyword]}')},
                         :start_date_s => Proc.new { models.where('projectx_projects.start_date > ?', params[:project][:start_date_s])},
                         :end_date_s   => Proc.new { models.where('projectx_projects.start_date < ?', params[:project][:end_date_s])},
                         :customer_id_s  => Proc.new { models.where('projectx_projects.customer_id' => params[:project][:customer_id_s] )},
@@ -64,6 +64,7 @@ FactoryGirl.define do
     search_results_period_limit " Proc.new { models.where('projectx_projects.created_at > ?', search_stats_max_period_year.years.ago) }"
     search_list_form 'form_list'
     stat_header 'Dates, Payment Total'
+    search_params "{}"
   end
 =begin
   factory :contract_search_stat_config, :class => 'Commonx::SearchStatConfig' do
