@@ -13,8 +13,7 @@ Projectx::Engine.routes.draw do
       get :search
       put :search_results
       get :stats
-      put :stats_results
-      get :autocomplete
+      put :stats_results    
     end
   end
   resources :payments, :only => [:index] 

@@ -5,6 +5,7 @@ module Projectx
     include Authentify::AuthentifyUtility
     include Authentify::UsersHelper
     include Authentify::UserPrivilegeHelper
+    include Searchx::SearchHelper
     
     include Commonx::CommonxHelper
     include Projectx::ProjectxHelper
@@ -17,7 +18,7 @@ module Projectx
     before_filter :load_session_variable, :only => [:new, :edit]  #for parent_record_id & parent_resource in check_access_right
     after_filter :delete_session_variable, :only => [:create, :update]   #for parent_record_id & parent_resource in check_access_right
 
-
+=begin
     def search
       @title = params[:controller].camelize.demodulize.tableize.singularize.capitalize + ' Search'  
       @model, @search_stat = Commonx::CommonxHelper.search(params)
@@ -44,7 +45,7 @@ module Projectx
       @time_frame = eval(@s_s_results_details.time_frame)
       @erb_code = find_config_const(params[:controller].camelize.demodulize.tableize.singularize.downcase + '_index_view', params[:controller].camelize.deconstantize.tableize.singularize.downcase)
     end
-
+=end
     def max_pagination
       @max_pagination = find_config_const('pagination').to_i
     end

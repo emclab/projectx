@@ -12,6 +12,7 @@ gem 'will_paginate'
 gem 'authentify', :path => '../authentify'  #for rspec test
 gem 'customerx', :path => '../customerx'
 gem 'commonx', :path => '../commonx'
+gem 'searchx', :path => '../searchx'
 #gem 'authentify', :git => 'http://github.com/emclab/authentify.git'
 #gem 'customerx', :git => 'http://github.com/emclab/customerx.git'
 

@@ -65,6 +65,7 @@ FactoryGirl.define do
     search_list_form 'form_list'
     stat_header 'Dates, Payment Total'
     search_params "{}"
+    search_summary_function ""
   end
 =begin
   factory :contract_search_stat_config, :class => 'Commonx::SearchStatConfig' do
